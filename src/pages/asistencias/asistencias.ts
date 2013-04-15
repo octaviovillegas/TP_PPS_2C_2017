@@ -39,6 +39,10 @@ profesores;
 materias;
 comisiones;  
 arrayAsistencia : Array<asistencia> = [];
+dia = this.today.getDay();
+DiaSem = "";
+
+
 
 
  
@@ -74,10 +78,41 @@ public alertCtrl: AlertController) {
 ionViewDidLoad() {
 
   console.log('ionViewDidLoad Asistencias');
+  
 }
 
+DiaSemana () {
 
-
+let today:Date = new Date();
+let dia = today.getDay();
+console.log('dia',dia);
+  
+  switch (dia) {
+    case 0:
+      this.DiaSem = 'Domingo';
+      break;  
+    case 1:
+      this.DiaSem = 'Lunes';        
+      break;
+    case 2:
+      this.DiaSem = 'Martes';        
+      break;
+    case 3:
+      this.DiaSem = 'Miercoles';        
+      break;
+    case 4:
+      this.DiaSem = 'Jueves';        
+      break;
+    case 5:
+      this.DiaSem = 'viernes';        
+      break;
+    case 6:
+      this.DiaSem = 'Sabado';        
+      break;
+                
+  }
+  
+}
 
 
 

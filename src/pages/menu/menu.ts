@@ -65,6 +65,7 @@ export class MenuPage {
       spinner:"bubbles"
     });
     loading.present();
+    
     this.navCtrl.push("ProfesoresFormPage");
   }
 
