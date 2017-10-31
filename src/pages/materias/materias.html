@@ -1,18 +1,69 @@
-<!--
-  Generated template for the MateriasPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>Materias</ion-title>
-  </ion-navbar>
-
+  <ion-toolbar>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="back();">
+       <ion-icon name="md-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{estado}}</ion-title>
+    <ion-buttons end *ngIf="modifica">
+      <button ion-button icon-only (click)="presentActionSheet()">
+        <ion-icon name="md-more"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end *ngIf="!modifica">
+      <button ion-button icon-only (click)="guardar()">
+        <ion-icon name="md-checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
 
-<ion-content padding>
 
+<ion-content padding>
+  <!-- <form [formGroup]="formPersonaAM">formAgregar -->
+  <form [formGroup]="formAgregar">
+    <ion-list>     
+       <ion-item>
+        <ion-label floating>materia</ion-label>
+        <ion-input [(ngModel)]="nombreMateria"  disabled="{{modifica}}" formControlName="nombreMateria"  required  type="text"></ion-input>
+      </ion-item>
+      <ion-item>        
+        <ion-label floating>Dia</ion-label>
+        <ion-select [(ngModel)]="numDia" formControlName="numDia" disabled="{{modifica}}" required >
+          <ion-option value="1">Lunes</ion-option>
+          <ion-option value="2">Martes</ion-option>
+          <ion-option value="3">Miercoles</ion-option>
+          <ion-option value="4">Jueves</ion-option>
+          <ion-option value="4">Viernes</ion-option>
+          <ion-option value="4">Sabado</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Aula</ion-label>
+
+        <ion-input [(ngModel)]="numAula"  disabled="{{modifica}}"  formControlName="numAula"  required  type="number"></ion-input>
+      </ion-item>
+
+      <ion-item>        
+         <ion-label floating>Cuatrimestre</ion-label>
+        <ion-select [(ngModel)]="Cuatrimestre" formControlName="Cuatrimestre" disabled="{{modifica}}" required >
+          <ion-option value="1">Primer</ion-option>
+          <ion-option value="2">Segundo</ion-option>          
+        </ion-select>
+      </ion-item>
+      <ion-item>
+      <ion-label floating>division</ion-label>
+
+      <ion-input  [(ngModel)]="division"  disabled="{{modifica}}" formControlName="division"  required  type="text"></ion-input>
+    </ion-item>
+  
+
+    </ion-list>
+
+  </form>
 </ion-content>
+
+
+
