@@ -15,10 +15,13 @@
           <ion-label color="primary" floating>Contraseña</ion-label>
           <ion-input type="password"></ion-input>
         </ion-item>
-      <button ion-button color="primary" block (click)="login()" class="login">{{ 'LOGIN' | translate }}</button>
-      <button ion-button block (click)="registro()" class="register">{{ 'SIGNUP' | translate }}</button>
+      <button ion-button color="primary" block (click)="doLogin()" class="login">{{ 'LOGIN' | translate }}</button>
+      <button ion-button block (click)="registro()" class="login">{{ 'SIGNUP' | translate }}</button>
     </div>
     <div style="text-align:center">
+
+      <h3>O iniciar sesión usando:</h3>
+      
         <button ion-button icon-start style="background-color:#3b5998">
           <ion-icon name="logo-facebook"> </ion-icon>Facebook</button>
         <button ion-button icon-start style="background-color:#c71610">
