@@ -15,8 +15,8 @@ TP Final de la practica profesional supervisada
   - Maquetado
  
  Cynthia Terán:
-  - Crear proyecto
-  - Login
+  - <strike>Crear proyecto</strike>
+  - <strike>Login</strike>
   - Estilos
   - Maquetado
 
