@@ -9,6 +9,7 @@ TP Final de la practica profesional supervisada
 # Responsabilidades del 28/10 al 04/11
 
  Matías Gutiérrez:
+  - ABM de Usuarios
   - Carga de datos CSV a JSON
   - Generación de JSON a CSV
   - Maquetado
