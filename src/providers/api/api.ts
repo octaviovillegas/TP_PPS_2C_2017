@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
  */
 @Injectable()
 export class Api {
-  url: string = 'https://example.com/api/v1';
+  url: string = 'https://parcial2-72284.firebaseio.com/';
 
   constructor(public http: HttpClient) {
   }
