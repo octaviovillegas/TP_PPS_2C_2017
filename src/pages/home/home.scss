@@ -1,21 +1,30 @@
 ion-content{
-    background-image: url("../assets/imgs/fondo.jpg");
+    background-image: url("../assets/imgs/fondo2.jpg");
+}
+
+ion-title{
+    text-align: center;
+    //margin-right: 25%;
+}
+
+.menu{
+   
 }
 
 .cerrarSesion{
-        width:60px;
-        height:60px;
+        width:32px;
+        height:32px;
         border-radius:100%;
         background:#F44336;
         left:0;
         bottom:0;
         position:absolute;
-        margin-left:16px;
-        margin-bottom:16px;
+        margin-left:305px;
+        margin-bottom:14px;
         border:none;
         outline:none;
         color:#FFF;
-        font-size:36px;
+        font-size:19px;
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
         transition:.5s;  
 }

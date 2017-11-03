@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+import { AdministradorPage } from '../pages/administrador/administrador';
 
 @Component({
   templateUrl: 'app.html'
@@ -16,14 +17,26 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
+  user: string = "Alumno";
+
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
-    ];
+    if (this.user == "Alumno") {
+      this.pages = [
+        { title: 'Home', component: HomePage },
+        { title: 'List', component: ListPage }
+      ];
+    }
+
+    if (this.user == "Administrador") {
+      this.pages = [
+        { title: 'Home', component: HomePage },
+        { title: 'List', component: ListPage },
+        { title: 'Administrador', component: AdministradorPage }
+     ];
+   }  
 
   }
 
