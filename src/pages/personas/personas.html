@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="back();">
+         <ion-icon name="md-arrow-back"></ion-icon>
+        </button>
+    </ion-buttons>
+    <ion-navbar>
+      <ion-title>Personas</ion-title>
+    </ion-navbar>
+
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+  <ion-list inset>
+    <button ion-item *ngFor="let item of listadoPersonas" (click)="modificar(item)">         
+      <ion-avatar item-start> 
+        <img *ngIf="item.imagen==''" src="assets/imgs/user.png">
+        <img  *ngIf="item.imagen!=''" src="{{item.imagen}}">
+      </ion-avatar>
+      <h2> {{ item.nomap }}</h2>   
+  </button>
+  </ion-list>
+  <ion-fab right bottom>
+    <button ion-fab mini (click)="add()"><ion-icon name="md-person-add" ></ion-icon></button>
+  </ion-fab>
+</ion-content>

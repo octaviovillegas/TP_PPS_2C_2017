@@ -9,7 +9,9 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { MateriasPage } from '../pages/materias/materias';
 import { MateriaPrincipalPage } from '../pages/materia-principal/materia-principal';
-
+import { PersonasPage } from '../pages/personas/personas';
+import { PersonasabmPage } from '../pages/personasabm/personasabm';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 ////////SERVICIOS
 import { ServMateriaProvider } from '../providers/serv-materia/serv-materia';
@@ -19,6 +21,12 @@ import { HttpModule } from '@angular/http';
 //DB
 import { AngularFireModule } from 'angularfire2';
 import{AngularFireDatabaseModule} from 'angularfire2/database'
+import { ServpersonaProvider } from '../providers/servpersona/servpersona';
+
+//PLUGINS
+import { Camera } from '@ionic-native/camera';
+import { PersonasServiceProvider } from '../providers/personas-service/personas-service';
+
 
 var firebaseAuth  = {
   apiKey: "AIzaSyBjrQu2x_3cZjv1Tdvw_TIYxBMAJ2VQU_M",
@@ -35,7 +43,10 @@ var firebaseAuth  = {
     HomePage,
     LoginPage,
     MateriasPage,
-    MateriaPrincipalPage
+    MateriaPrincipalPage,
+    PersonasPage,
+    PersonasabmPage
+
   ],
   imports: [
     BrowserModule,
@@ -52,13 +63,17 @@ var firebaseAuth  = {
     HomePage,
     LoginPage,
     MateriasPage,
-    MateriaPrincipalPage
+    MateriaPrincipalPage,
+    PersonasPage,
+    PersonasabmPage
   ],
   providers: [
-    StatusBar,
+    StatusBar,    Camera,    
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ServMateriaProvider
+    ServMateriaProvider,
+    ServpersonaProvider,
+    PersonasServiceProvider
   ]
 })
 export class AppModule {}
