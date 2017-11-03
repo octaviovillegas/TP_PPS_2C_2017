@@ -12,6 +12,7 @@ Branch:
 
 # Fernando Saibene
 Módulos a desarrollar:
+Pantalla de Login con usuarios por mail
 
 Fecha inicio:
 
