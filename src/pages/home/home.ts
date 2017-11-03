@@ -11,4 +11,9 @@ export class HomePage {
 
   }
 
+  goAdministrador()
+  {
+    this.navCtrl.push('AdministradorPage');
+  }
+
 }

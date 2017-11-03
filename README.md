@@ -3,6 +3,16 @@ TP Final de la practica profesional supervisada
 
 # Mauro Ezequiel Zampini
 Módulos a desarrollar:
+• Diseño de estilos
+
+Fecha inicio: 03/11/2017
+
+Fecha fin:
+
+Branch:
+
+Módulos a desarrollar:
+• ABM Profesor y Administrativo
 
 Fecha inicio:
 
@@ -10,9 +20,10 @@ Fecha fin:
 
 Branch:
 
-# Fernando Saibene
+
+# Fernando Martin Saibene
 Módulos a desarrollar:
-Pantalla de Login con usuarios por mail
+• Pantalla de Login con usuarios por mail
 
 Fecha inicio:
 
