@@ -16,4 +16,9 @@ export class HomePage {
     this.navCtrl.push('AdministradorPage');
   }
 
+  cerrarSesion()
+  {
+    this.navCtrl.push('HomePage');
+  }
+
 }

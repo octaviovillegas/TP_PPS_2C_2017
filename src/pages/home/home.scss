@@ -8,7 +8,8 @@ ion-title{
 }
 
 .menu{
-   
+   position: absolute;
+   text-align: center;
 }
 
 .cerrarSesion{
@@ -19,12 +20,13 @@ ion-title{
         left:0;
         bottom:0;
         position:absolute;
-        margin-left:305px;
+        margin-left:80%;
         margin-bottom:14px;
         border:none;
         outline:none;
         color:#FFF;
         font-size:19px;
+        text-align: right;
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
         transition:.5s;  
 }

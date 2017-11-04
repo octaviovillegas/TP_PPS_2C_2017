@@ -17,7 +17,7 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  user: string = "Alumno";
+  user: string = "Administrador";
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
@@ -25,14 +25,28 @@ export class MyApp {
     // used for an example of ngFor and navigation
     if (this.user == "Alumno") {
       this.pages = [
-        { title: 'Home', component: HomePage },
+        { title: 'Inicio', component: HomePage },
+        { title: 'List', component: ListPage }
+      ];
+    }
+
+    if (this.user == "Profesor") {
+      this.pages = [
+        { title: 'Inicio', component: HomePage },
+        { title: 'List', component: ListPage }
+      ];
+    }
+
+    if (this.user == "Administrativo") {
+      this.pages = [
+        { title: 'Inicio', component: HomePage },
         { title: 'List', component: ListPage }
       ];
     }
 
     if (this.user == "Administrador") {
       this.pages = [
-        { title: 'Home', component: HomePage },
+        { title: 'Inicio', component: HomePage },
         { title: 'List', component: ListPage },
         { title: 'Administrador', component: AdministradorPage }
      ];

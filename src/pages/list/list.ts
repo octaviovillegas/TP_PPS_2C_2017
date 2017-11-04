@@ -34,4 +34,9 @@ export class ListPage {
       item: item
     });
   }
+
+  cerrarSesion()
+  {
+    this.navCtrl.push('AdministradorPage');
+  }
 }
