@@ -44,7 +44,7 @@ export class PersonasabmPage {
     private alertCtrl: AlertController, public toastCtrl: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform,
     private camera: Camera, private storage: Storage,public database: AngularFireDatabase,private AngularAuth: AngularFireAuth) {
 
-    //this.user = this.database.list('/usuarios');
+    this.user = this.database.list('/usuarios');
     //this.user = database.list('usuarios').valueChanges();
 
     this.storage.get('userInfo').then((val) => {

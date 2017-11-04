@@ -15,12 +15,7 @@ export class MenuPage {
   ) {}
 
   ionViewDidLoad() {
-    let datos:Usuario = this.navParams.data;
-    let alerta = this.alertCtrl.create({
-      subTitle: datos["nombre"],
-      title: datos["correo"]
-    });
-    alerta.present();
+    let datos:{} = JSON.parse(this.navParams.data);
   }
 
 }

@@ -13,6 +13,8 @@ import { PersonasPage } from '../pages/personas/personas';
 import { PersonasabmPage } from '../pages/personasabm/personasabm';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { PerfilPage } from "../pages/perfil/perfil";
+
 ////////SERVICIOS
 import { ServMateriaProvider } from '../providers/serv-materia/serv-materia';
 import { HttpModule } from '@angular/http';
@@ -47,7 +49,8 @@ var firebaseAuth  = {
     MateriasPage,
     MateriaPrincipalPage,
     PersonasPage,
-    PersonasabmPage
+    PersonasabmPage,
+    PerfilPage
 
   ],
   imports: [
@@ -68,7 +71,8 @@ var firebaseAuth  = {
     MateriasPage,
     MateriaPrincipalPage,
     PersonasPage,
-    PersonasabmPage
+    PersonasabmPage,
+    PerfilPage
   ],
   providers: [
     StatusBar,
