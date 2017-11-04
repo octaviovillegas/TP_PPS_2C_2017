@@ -33,9 +33,10 @@ Branch:
 
 # Juan Manuel Barreda Fafasuli
 Módulos a desarrollar:
+• ABM de Alumnos
 
 Fecha inicio:
 
 Fecha fin:
 
-Branch:
+Branch: ABMAlumnos
