@@ -3,21 +3,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-administrador',
-  templateUrl: 'administrador.html',
+  selector: 'page-abm-alumno',
+  templateUrl: 'abmAlumno.html',
 })
-export class AdministradorPage {
+export class AbmAlumno {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AdministradorPage');
-  }
-
-  goAbmAlumno()
+  goAdministrador()
   {
-    this.navCtrl.push('AbmAlumno');
+    this.navCtrl.push('AdministradorPage');
   }
 
 }
