@@ -27,6 +27,8 @@ export class AbmAlumnoPage {
     }
 
     logForm(){
+      let prompt = this.alertCtrl.create({ title: 'Alumno agregado', buttons: [{ text: 'Ok',}] });
+      prompt.present();
       this.alumnos.push(this.todo.value);
     }
   
