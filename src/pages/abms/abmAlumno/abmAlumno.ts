@@ -30,6 +30,7 @@ export class AbmAlumnoPage {
       let prompt = this.alertCtrl.create({ title: 'Alumno agregado', buttons: [{ text: 'Ok',}] });
       prompt.present();
       this.alumnos.push(this.todo.value);
+      this.todo.reset();
     }
   
     /*addSong(){
