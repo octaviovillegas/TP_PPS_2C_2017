@@ -11,11 +11,13 @@ import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 export class AbmAlumnoPage {
 
   alumnos: FirebaseListObservable<any>;
+  songs: FirebaseListObservable<any>;
   todo = FormGroup;
   
     constructor(public navCtrl: NavController, public alertCtrl: AlertController, public af: AngularFireDatabase,
       public actionSheetCtrl: ActionSheetController, private formBuilder: FormBuilder) {
       this.alumnos = af.list('/alumnos');
+      this.songs = af.list('/songs');
       this.todo = this.formBuilder.group({
         nombre: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
         apellido: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
