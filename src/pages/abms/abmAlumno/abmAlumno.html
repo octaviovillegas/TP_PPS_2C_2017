@@ -1,12 +1,28 @@
 <ion-header>
+  <ion-navbar>
+    <ion-title>ABM Alumno</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="todo" (ngSubmit)="logForm()">
+    <ion-item>
+      <ion-label>Nombre</ion-label>
+      <ion-input type="text" formControlName="nombre"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Apellido</ion-label>
+      <ion-input type="text" formControlName="apellido"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Legajo</ion-label>
+      <ion-input type="text" formControlName="legajo"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Curso</ion-label>
+      <ion-input type="text" formControlName="curso"></ion-input>
+    </ion-item>
     
-      <ion-navbar>
-        <ion-title>ABM Alumno</ion-title>
-      </ion-navbar>
-    
-    </ion-header>
-    
-    <ion-content padding>
-        <button ion-button>ABM Alumno</button>
-        <button ion-button>ABM Profesor</button>
-    </ion-content>
+    <button ion-button type="submit" [disabled]="!todo.valid">Submit</button>
+  </form>
+</ion-content>
