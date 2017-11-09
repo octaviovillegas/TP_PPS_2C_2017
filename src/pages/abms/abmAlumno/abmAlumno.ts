@@ -23,7 +23,8 @@ export class AbmAlumnoPage {
         nombre: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
         apellido: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
         legajo: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern("[-+]?[0-9]*\.?[0-9]*")])],
-        curso: ['', Validators.compose([Validators.required])]
+        anio: ['', Validators.compose([Validators.required])],
+        curso: ['', Validators.compose([Validators.required])],
       });
     }
 
