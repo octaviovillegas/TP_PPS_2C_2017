@@ -1,54 +1,75 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Alumnos</ion-title>
-  </ion-navbar>
-  <ion-toolbar>
-    <ion-segment [(ngModel)]="tab" color="primary">
-      <ion-segment-button value="lista">
-        Lista
-      </ion-segment-button>
-      <ion-segment-button value="agregar">
-        Agregar 
-      </ion-segment-button>
-      <ion-segment-button value="agregarLista">
-        Agregar Lista
-      </ion-segment-button>
-    </ion-segment>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content padding>
-
-  <ion-content *ngIf="tab == 'lista'">
-
-  </ion-content>
-
-
-  <ion-content *ngIf="tab == 'agregar'">
-      <form [formGroup]="formAlta" (ngSubmit)="logForm()">
-          <ion-item>
-            <ion-label>Nombre</ion-label>
-            <ion-input type="text" formControlName="nombre"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label>Apellido</ion-label>
-            <ion-input type="text" formControlName="apellido"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label>Legajo</ion-label>
-            <ion-input type="text" formControlName="legajo"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label>Curso</ion-label>
-            <ion-input type="text" formControlName="curso"></ion-input>
-          </ion-item>
-          
-          <button ion-button type="submit" [disabled]="!formAlta.valid">Agregar</button>
-        </form>
-  </ion-content>
-
-  <ion-content *ngIf="tab == 'agregarLista'">
-      Macri Gato
-  </ion-content>
+    <ion-navbar>
+      <ion-title>Alumnos</ion-title>
+    </ion-navbar>
+    <ion-toolbar>
+      <ion-segment [(ngModel)]="tab" color="primary">
+        <ion-segment-button value="lista">
+          Lista
+        </ion-segment-button>
+        <ion-segment-button value="agregar">
+          Agregar 
+        </ion-segment-button>
+        <ion-segment-button value="agregarLista">
+          Agregar Lista
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+  </ion-header>
   
-</ion-content>
+  <ion-content padding>
+
+    <ion-content *ngIf="tab == 'lista'">
+      <h1>Lista de alumnos</h1>
+      <ion-card>
+      <ion-item>
+        <h2>Juan Barreda</h2>
+        <p>L: <b>1234</b> | <b>3ro C</b></p>
+      </ion-item>
+      <ion-row>
+        <ion-col>
+          <button ion-button icon-left clear small>
+            <ion-icon name="md-close"></ion-icon>
+            <div>Eliminar</div>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-left clear small>
+            <ion-icon name="md-build"></ion-icon>
+            <div>Editar</div>
+          </button>
+        </ion-col>
+      </ion-row>
+      </ion-card>      
+    </ion-content>
+  
+  
+    <ion-content *ngIf="tab == 'agregar'">
+        <form [formGroup]="formAlta" (ngSubmit)="logForm()">
+            <ion-item>
+              <ion-label>Nombre</ion-label>
+              <ion-input type="text" formControlName="nombre"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Apellido</ion-label>
+              <ion-input type="text" formControlName="apellido"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Legajo</ion-label>
+              <ion-input type="text" formControlName="legajo"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Curso</ion-label>
+              <ion-input type="text" formControlName="curso"></ion-input>
+            </ion-item>
+            
+            <button ion-button type="submit" [disabled]="!formAlta.valid">Agregar</button>
+          </form>
+    </ion-content>
+  
+    <ion-content *ngIf="tab == 'agregarLista'">
+        
+  
+    </ion-content>
+    
+  </ion-content>
