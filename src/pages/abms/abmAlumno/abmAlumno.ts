@@ -28,6 +28,26 @@ export class AbmAlumnoPage {
       });
     }
 
+    //LISTA DE ALUMNOS
+    eliminarAlumno(alumnoId: string){
+      let prompt = this.alertCtrl.create({
+        title: 'Desea eliminar al alumno?',
+        buttons: [
+          {
+            text: 'Si',
+            handler: data => { this.alumnos.remove(alumnoId); }
+          },
+          {
+            text: 'No',
+            handler: data => { }
+          }
+        ]
+      });
+      prompt.present();
+      
+    }
+
+    //AGREGAR ALUMNO
     logForm(){
       let prompt = this.alertCtrl.create({ title: 'Alumno agregado', buttons: [{ text: 'Ok',}] });
       prompt.present();
@@ -99,10 +119,7 @@ export class AbmAlumnoPage {
       });
       actionSheet.present();
     }
-  
-    removeSong(songId: string){
-      this.songs.remove(songId);
-    }
+
   
     updateSong(songId, songTitle){
       let prompt = this.alertCtrl.create({
