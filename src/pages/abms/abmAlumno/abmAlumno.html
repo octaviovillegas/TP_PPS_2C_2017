@@ -21,10 +21,13 @@
 
     <ion-content *ngIf="tab == 'lista'">
       <h1>Lista de alumnos</h1>
+      <ion-searchbar
+        [(ngModel)]="myInput">
+    </ion-searchbar>
       <ion-card>
       <ion-item>
         <h2>Juan Barreda</h2>
-        <p>L: <b>1234</b> | <b>3ro C</b></p>
+        <p>Legajo: <b>1234</b> | Curso: <b>3ro C</b></p>
       </ion-item>
       <ion-row>
         <ion-col>

@@ -33,6 +33,11 @@ export class AbmAlumnoPage {
       this.alumnos.push(this.formAlta.value);
       this.formAlta.reset();
     }
+
+    /*
+            (ionInput)="onInput($event)"
+        (ionCancel)="onCancel($event)">
+    */
   
     /*addSong(){
       this.songs.push({
