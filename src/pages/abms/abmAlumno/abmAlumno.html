@@ -8,13 +8,22 @@
         Lista
       </ion-segment-button>
       <ion-segment-button value="agregar">
-        Agregar
+        Agregar 
+      </ion-segment-button>
+      <ion-segment-button value="agregarLista">
+        Agregar Lista
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+
+  <ion-content *ngIf="tab == 'lista'">
+
+  </ion-content>
+
+
   <ion-content *ngIf="tab == 'agregar'">
       <form [formGroup]="formAlta" (ngSubmit)="logForm()">
           <ion-item>
@@ -36,6 +45,10 @@
           
           <button ion-button type="submit" [disabled]="!formAlta.valid">Agregar</button>
         </form>
+  </ion-content>
+
+  <ion-content *ngIf="tab == 'agregarLista'">
+      Macri Gato
   </ion-content>
   
 </ion-content>
