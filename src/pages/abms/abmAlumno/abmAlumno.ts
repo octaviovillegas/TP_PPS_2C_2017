@@ -9,14 +9,17 @@ import {Validators, FormBuilder, FormGroup } from '@angular/forms';
   templateUrl: 'abmAlumno.html',
 })
 export class AbmAlumnoPage {
+  
+  private alumnos: FirebaseListObservable<any>;
+  private tab;
+  public formAlta = FormGroup;
 
-  alumnos: FirebaseListObservable<any>;
-  todo = FormGroup;
   
     constructor(public navCtrl: NavController, public alertCtrl: AlertController, public af: AngularFireDatabase,
       public actionSheetCtrl: ActionSheetController, private formBuilder: FormBuilder) {
+      this.tab = "lista";
       this.alumnos = af.list('/alumnos');
-      this.todo = this.formBuilder.group({
+      this.formAlta = this.formBuilder.group({
         nombre: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
         apellido: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
         legajo: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern("[-+]?[0-9]*\.?[0-9]*")])],
@@ -27,8 +30,8 @@ export class AbmAlumnoPage {
     logForm(){
       let prompt = this.alertCtrl.create({ title: 'Alumno agregado', buttons: [{ text: 'Ok',}] });
       prompt.present();
-      this.alumnos.push(this.todo.value);
-      this.todo.reset();
+      this.alumnos.push(this.formAlta.value);
+      this.formAlta.reset();
     }
   
     /*addSong(){
