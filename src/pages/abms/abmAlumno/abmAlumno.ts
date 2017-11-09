@@ -45,6 +45,9 @@ export class AbmAlumnoPage {
         ]
       });
       prompt.present();
+    }
+
+    modificarAlumno(alumnoId: string, apellido: string){
       
     }
 
