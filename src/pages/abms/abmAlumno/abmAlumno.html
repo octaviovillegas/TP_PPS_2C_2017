@@ -19,35 +19,34 @@
   
 <ion-content padding>
 
-    <ion-content *ngIf="tab == 'lista'">
+  <ion-content *ngIf="tab == 'lista'">
       <h1>Lista de alumnos</h1>
       <ion-searchbar
         [(ngModel)]="myInput">
-    </ion-searchbar>
+      </ion-searchbar>
       <ion-card>
-      <ion-item>
-        <h2>Juan Barreda</h2>
-        <p>Legajo: <b>1234</b> | Curso: <b>3ro C</b></p>
-      </ion-item>
-      <ion-row>
-        <ion-col>
-          <button ion-button icon-left clear small>
-            <ion-icon name="md-close"></ion-icon>
-            <div>Eliminar</div>
-          </button>
-        </ion-col>
-        <ion-col>
-          <button ion-button icon-left clear small>
-            <ion-icon name="md-build"></ion-icon>
-            <div>Editar</div>
-          </button>
-        </ion-col>
-      </ion-row>
+        <ion-item>
+          <h2>Juan Barreda</h2>
+          <p>Legajo: <b>1234</b> | Curso: <b>3ro C</b></p>
+        </ion-item>
+        <ion-row>
+          <ion-col>
+            <button ion-button icon-left clear small>
+              <ion-icon name="md-close"></ion-icon>
+              <div>Eliminar</div>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button icon-left clear small>
+              <ion-icon name="md-build"></ion-icon>
+              <div>Editar</div>
+            </button>
+          </ion-col>
+        </ion-row>
       </ion-card>      
-    </ion-content>
+  </ion-content>
   
-  
-    <ion-content *ngIf="tab == 'agregar'">
+  <ion-content *ngIf="tab == 'agregar'">
       <h1>Agregar alumno</h1>
       <form [formGroup]="formAlta" (ngSubmit)="logForm()">
         <ion-item>
@@ -72,20 +71,16 @@
                   <ion-option>5</ion-option>
               </ion-select>
               <ion-select formControlName="curso">
-                  <ion-option>1</ion-option>
-                  <ion-option>2</ion-option>
-                  <ion-option>3</ion-option>
-                  <ion-option>4</ion-option>
-                  <ion-option>5</ion-option>
+                  <ion-option>A</ion-option>
+                  <ion-option>B</ion-option>
+                  <ion-option>C</ion-option>
               </ion-select>
             </ion-item>
           <button ion-button type="submit" [disabled]="!formAlta.valid">Agregar</button>
       </form>
-    </ion-content>
+  </ion-content>
   
-    <ion-content *ngIf="tab == 'agregarLista'">
-        
-  
+  <ion-content *ngIf="tab == 'agregarLista'">
   </ion-content>
     
 </ion-content>
