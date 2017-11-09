@@ -29,9 +29,10 @@ export class AbmAlumnoPage {
     }
 
     //LISTA DE ALUMNOS
-    eliminarAlumno(alumnoId: string){
+    eliminarAlumno(alumnoId: string, apellido: string){
       let prompt = this.alertCtrl.create({
-        title: 'Desea eliminar al alumno?',
+        title: 'Confirmar',
+        message: "Seguro que queres eliminar al alumno " + apellido + "?",
         buttons: [
           {
             text: 'Si',
