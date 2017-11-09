@@ -24,10 +24,10 @@
       <ion-searchbar
         [(ngModel)]="myInput">
       </ion-searchbar>
-      <ion-card>
+      <ion-card *ngFor="let alumno of alumnos | async">
         <ion-item>
-          <h2>Juan Barreda</h2>
-          <p>Legajo: <b>1234</b> | Curso: <b>3ro C</b></p>
+          <h2>{{alumno.apellido}}, {{alumno.nombre}}</h2>
+          <p>Legajo: <b>{{alumno.legajo}}</b> | Curso: <b>{{alumno.anio}}{{alumno.curso}}</b></p>
         </ion-item>
         <ion-row>
           <ion-col>
