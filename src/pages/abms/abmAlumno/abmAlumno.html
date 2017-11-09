@@ -1,7 +1,17 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Agregar alumno</ion-title>
+    <ion-title>Alumnos</ion-title>
   </ion-navbar>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="icons" color="primary">
+      <ion-segment-button value="lista">
+        Lista
+      </ion-segment-button>
+      <ion-segment-button value="agregar">
+        Agregar
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
@@ -25,8 +35,4 @@
     
     <button ion-button type="submit" [disabled]="!todo.valid">Agregar</button>
   </form>
-  <br>
-  <ion-item>
-    Cantidad de alumnos: {{alumnos.length}}
-  </ion-item>
 </ion-content>
