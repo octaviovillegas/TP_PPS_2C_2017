@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 
-import { User } from '../../providers/providers';
-import { MainPage, SignupPage } from '../pages';
+
+//import { MainPage, SignupPage } from '../pages'; #Estas páginas ya no existen
 
 @IonicPage()
 @Component({
@@ -11,9 +11,6 @@ import { MainPage, SignupPage } from '../pages';
   templateUrl: 'login.html'
 })
 export class LoginPage {
-  // The account fields for the login form.
-  // If you're using the username field with or without email, make
-  // sure to add it to the type
   account: { email: string, password: string } = {
     email: '',
     password: ''
@@ -23,7 +20,7 @@ export class LoginPage {
   private loginErrorString: string;
 
   constructor(public navCtrl: NavController,
-    public user: User,
+    public user: any,
     public toastCtrl: ToastController,
     public translateService: TranslateService) {
 
@@ -35,12 +32,12 @@ export class LoginPage {
 
   registro()
     {
-      this.navCtrl.push(SignupPage);
+      //this.navCtrl.push(SignupPage);
     }
   // Attempt to login in through our User service
   doLogin() {
     this.user.login(this.account).subscribe((resp) => {
-      this.navCtrl.push(MainPage);
+      //this.navCtrl.push(MainPage);
     }, (err) => {
       //this.navCtrl.push(MainPage);
       // Unable to log in
