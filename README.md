@@ -21,5 +21,5 @@ TP Final de la practica profesional supervisada
   - Maquetado
 
  Vanesa Montecinos:
-  - Encuesta de una sola pregunta con estadísticas de los resultados
-  - Realizar gráficas de las estadísticas obtenidas
+  - <strike>Encuesta de una sola pregunta con estadísticas de los resultados</strike>
+  - <strike>Realizar gráficas de las estadísticas obtenidas</strike>
