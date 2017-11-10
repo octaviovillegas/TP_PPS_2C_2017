@@ -17,6 +17,7 @@ export class HomePage {
     public alertCtrl : AlertController,
      public afDB: AngularFireDatabase, public actionSheetCtrl: ActionSheetController, private pictureUtils: PictureUtils) {
      this.refreshPicture(); 
+     
   }
   cerrarSesion(){
     this.auth.logout();
@@ -29,6 +30,7 @@ refreshPicture() {
     this.afDB.list('Cosas_Lindas/', { preserveSnapshot: true }).subscribe((snapshots: any) => {
       snapshots.forEach((snapshot, index) => {
         this.userAvatarPicture[index] = snapshot.val();
+        console.log(this.userAvatarPicture[index].foto);
       });
     });
   }

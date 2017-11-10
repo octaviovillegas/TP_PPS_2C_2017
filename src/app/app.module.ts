@@ -36,15 +36,22 @@ export const firebaseConfig = {
   databaseURL: "https://fotos-b4b3b.firebaseio.com",
   projectId: "fotos-b4b3b",
   storageBucket: "fotos-b4b3b.appspot.com",
-  messagingSenderId: "985180049979"*/
+  messagingSenderId: "985180049979"
   apiKey: "AIzaSyCBEBdO_UKIxYs65nUg_jkgV0npAabjdbQ",
   authDomain: "pp2017-5a648.firebaseapp.com",
   databaseURL: "https://pp2017-5a648.firebaseio.com",
   projectId: "pp2017-5a648",
   storageBucket: "",
-  messagingSenderId: "332599085925"
+  messagingSenderId: "332599085925"*/
 
-
+  
+    apiKey: "AIzaSyAI6GG0LLsvrzPlu871VyAdDgbglonPelM",
+    authDomain: "pps2017-75f93.firebaseapp.com",
+    databaseURL: "https://pps2017-75f93.firebaseio.com",
+    projectId: "pps2017-75f93",
+    storageBucket: "pps2017-75f93.appspot.com",
+    messagingSenderId: "96386419757"
+  
 };
 
 @NgModule({
