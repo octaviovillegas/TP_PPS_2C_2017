@@ -39,14 +39,14 @@ export class PersonasabmPage {
   rol: string;
   //user: FirebaseListObservable<any>;
   user: Observable<any[]>;
-  
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, private PersonaService: ServpersonaProvider,
     private alertCtrl: AlertController, public toastCtrl: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform,
     private camera: Camera, private storage: Storage,public database: AngularFireDatabase,private AngularAuth: AngularFireAuth) {
-    
-    //this.user = this.database.list('/usuarios');
-    this.user = database.list('usuarios').valueChanges();
-    
+
+    this.user = this.database.list('/usuarios');
+    //this.user = database.list('usuarios').valueChanges();
+
     this.storage.get('userInfo').then((val) => {
       this.rol = val.idRol;
     })
@@ -101,15 +101,15 @@ export class PersonasabmPage {
           console.log('ERROR: ' + error);
         });
     } else {
-      if(this.desde=='login'){        
+      if(this.desde=='login'){
         this.formPersonaAM.value.rolasignado="3";
         this.rolasignado=3;
-      }            
+      }
       this.modifica = false;
     }
     console.log('ionViewDidLoad PersonasamPage');
   }
-  create() {    
+  create() {
     this.modifica = false;
   }
   ErrorForm() {
@@ -170,10 +170,10 @@ export class PersonasabmPage {
       }
     }
     if (this.email != '') {
-      if (pasa == 1) {        
+      if (pasa == 1) {
         this.PersonaService.VerificarEmail(this.email).then(
           data => {
-            
+
             if (data['_body'] != "false") {
               this.ErrorEnUso('Email', this.email);
               this.email = '';
@@ -192,7 +192,7 @@ export class PersonasabmPage {
         pasa = 0;
       }
     }
-    // if(this.dni !=''){   
+    // if(this.dni !=''){
     if (pasa == 1) {
       this.PersonaService.VerificarDni(this.dni).then(
         data => {
@@ -208,7 +208,7 @@ export class PersonasabmPage {
     }
   }
   verificarLegajo() {
-    //if(this.legajo!=''){ 
+    //if(this.legajo!=''){
     var pasa = 1;
     if (this.estado != 'Alta') {
       if (this.legajo == this.legajo2) {
@@ -242,11 +242,11 @@ export class PersonasabmPage {
       }
     }
   }
-  guardar() { 
-        if(this.desde=='login'){        
+  guardar() {
+        if(this.desde=='login'){
           this.formPersonaAM.value.rolasignado="3";
           this.rolasignado=3;
-        }     
+        }
     var array = [{
       "nombre": this.nombre, "apellido": this.apellido, "email": this.email, "password": this.password,
       "rol": this.rolasignado, "dni": this.dni, "legajo": this.legajo, "id": this.id, "img": this.img
@@ -260,7 +260,7 @@ export class PersonasabmPage {
           data => {
             if (data['_body'] == "true") {
               const result = this.AngularAuth.auth.createUserWithEmailAndPassword(this.email,this.password);
-              
+
               if(this.desde!='login'){
                 this.navCtrl.setRoot(PersonasPage);
               }else{

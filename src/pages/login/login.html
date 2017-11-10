@@ -7,12 +7,46 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Login</ion-title>
+    <ion-title text-center>Login</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+
+    <ion-list inset>
+        <ion-item color="primary">
+          <ion-label color="dark">Seleccionar Usuario</ion-label>
+          <ion-select color="primary" (ionChange)="writePassw()"  [(ngModel)]="correo" cancelText="Cancelar" okText="Elegir" interface="alert">
+            <ion-option value="admin@admin.com">Administrador</ion-option>
+            <ion-option value="alumno@alumno.com">Alumno</ion-option>
+            <ion-option value="profesor@profesor.com">Profesor</ion-option>
+            <ion-option value="administrativo@administrativo.com">Administrativo</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <br><br>
+
+        <ion-item color="primary2">
+          <ion-label floating>Correo</ion-label>
+          <ion-input color="input1" type="text" [(ngModel)]="correo" text-capitalize></ion-input>
+        </ion-item>
+
+        <ion-item color="primary2">
+          <ion-label floating>Password</ion-label>
+          <ion-input color="input1" type="password" (ionChange)="validarCantDigitos($event)" (keypress)="validarNum($event)" [(ngModel)]="passw"></ion-input>
+        </ion-item>
+
+      </ion-list>
+
+      <button ion-button round color="secondary" (click)="login()">
+          Ingresar <br>
+          <ion-icon name="arrow-dropright"></ion-icon>
+        </button>
+
+        <button ion-button round outline (click)="salir()" color="danger">
+          Salir
+        </button>
 
 </ion-content>
