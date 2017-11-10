@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ActionSheetController } from 'ionic-angular';
+import { IonicPage, NavController, AlertController, ActionSheetController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 
@@ -29,7 +29,7 @@ export class AbmAlumnoPage {
     }
 
     //LISTA DE ALUMNOS
-    eliminarAlumno(alumnoId: string, apellido: string){
+eliminarAlumno(alumnoId: string, apellido: string): void {
       let prompt = this.alertCtrl.create({
         title: 'Confirmar',
         message: "Seguro que queres eliminar al alumno " + apellido + "?",
@@ -49,12 +49,12 @@ export class AbmAlumnoPage {
       prompt.present();
     }
 
-    modificarAlumno(alumnoId: string, apellido: string){
+    modificarAlumno(alumnoId: string, apellido: string): void {
       
     }
 
     //AGREGAR ALUMNO
-    logForm(){
+    public agregarAlumno(): void{
       let prompt = this.alertCtrl.create({ title: 'Alumno agregado', buttons: [{ text: 'Ok',}] });
       prompt.present();
       this.alumnos.push(this.formAlta.value);

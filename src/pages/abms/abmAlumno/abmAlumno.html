@@ -48,7 +48,7 @@
   
   <ion-content *ngIf="tab == 'agregar'">
       <h1>Agregar alumno</h1>
-      <form [formGroup]="formAlta" (ngSubmit)="logForm()">
+      <form [formGroup]="formAlta" (ngSubmit)="agregarAlumno()">
         <ion-item>
           <ion-label>Nombre</ion-label>
             <ion-input type="text" formControlName="nombre"></ion-input>
