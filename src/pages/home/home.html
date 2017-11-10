@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+     Listado de FOTOS
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <!--button ion-button icon-right color="dark" (click)="changePicture()">
+    Subir Foto
+    <ion-icon name="images"></ion-icon>
+  </button>
+  <button ion-button icon-right color="secondary" (click)="refreshPicture()">
+    Obtener Listado
+    <ion-icon name="cloud-download"></ion-icon>
+  </button>
+  
+    <button ion-button (click)="cerrarSesion()">Cerrar Sesión</butto--n>
+  
+  <Useless ^^ -->
+  <div *ngIf="userAvatarPicture[0]">
+    <!--Loop trough picture array here we use preserveSnapshot:true but I think we can also use async pipe with FirebaseListObservable-->
+   <ion-list>
+      <ion-spinner></ion-spinner>
+    <ion-item *ngFor="let picture of userAvatarPicture;let i = index;">   
+        <!--p [hidden]='i+1'></p>
+        <div *ngIf="i % 2 >0">
+      {{picture}}
+        </div-->
+       Foto de Aula {{picture.usuario}}
+       <br><br>
+      <img src="{{picture.foto}}" />
+
+    </ion-item>
+  </ion-list>
+    
+
+  </div>
+</ion-content>
