@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, AlertController, ActionSheetController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
@@ -15,7 +14,10 @@ export class AbmAlumnoPage {
   
   private tab;
   private alumnos: Observable<any>;
+  //Lista
   private searchValue: string;
+  private filterType: string;
+  //Alta
   private formAlta = FormGroup;
 
   constructor(public navCtrl: NavController, 
@@ -23,6 +25,10 @@ export class AbmAlumnoPage {
     public af: AngularFireDatabase,
     public actionSheetCtrl: ActionSheetController, 
     private formBuilder: FormBuilder) {
+        this.tab = "lista";
+        //Lista
+        this.filterType = "Apellido";
+        //Alta
         this.filterAlumno();
         this.formAlta = this.formBuilder.group({
           nombre: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
@@ -31,7 +37,6 @@ export class AbmAlumnoPage {
           anio: ['', Validators.compose([Validators.required])],
           curso: ['', Validators.compose([Validators.required])],
         });
-        this.tab = "lista";
     }
 
     //LISTA DE ALUMNOS
@@ -73,9 +78,14 @@ public eliminarAlumno(alumnoId: string, apellido: string): void {
 
     private filterAlumno(): boolean {
       this.alumnos = this.af.list('/alumnos').map(alumno => alumno.filter(alumno => {
-        console.log(this.searchValue);
-        if(this.searchValue != "") {
-          return alumno.nombre.indexOf(this.searchValue) > 0;
+        if(this.searchValue != "" && this.searchValue != undefined) {
+          if(this.filterType == "Nombre"){
+            return alumno.nombre.indexOf(this.searchValue) > 0;
+          } else if(this.filterType == "Apellido"){
+            return alumno.apellido.indexOf(this.searchValue) > 0;
+          } else if(this.filterType == "Legajo"){
+            return alumno.legajo.indexOf(this.searchValue) > 0;
+          }
         }
         return true;
       }));
