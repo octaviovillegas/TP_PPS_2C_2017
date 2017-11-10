@@ -1,18 +1,30 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
 
-/*
-  Generated class for the PersonasServiceProvider provider.
 
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
+
+import { Usuario } from '../../clases/usuario';
+
+
 @Injectable()
 export class PersonasServiceProvider {
 
-  constructor(public http: Http) {
-    console.log('Hello PersonasServiceProvider Provider');
+  private usuarios:FirebaseListObservable<Usuario[]>;
+
+  constructor(private db:AngularFireDatabase
+
+  ) {}
+
+
+
+  getUsuariosLista(){
+    this.usuarios = this.db.list('/usuarios') as FirebaseListObservable<Usuario[]>;
+    return this.usuarios;
   }
+
+
+
+
 
 }

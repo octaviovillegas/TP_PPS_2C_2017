@@ -13,6 +13,8 @@ import { PersonasPage } from '../pages/personas/personas';
 import { PersonasabmPage } from '../pages/personasabm/personasabm';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { PerfilPage } from "../pages/perfil/perfil";
+
 ////////SERVICIOS
 import { ServMateriaProvider } from '../providers/serv-materia/serv-materia';
 import { HttpModule } from '@angular/http';
@@ -22,10 +24,12 @@ import { HttpModule } from '@angular/http';
 import { AngularFireModule } from 'angularfire2';
 import{AngularFireDatabaseModule} from 'angularfire2/database'
 import { ServpersonaProvider } from '../providers/servpersona/servpersona';
+import { AngularFireAuthModule }  from 'angularfire2/auth';
 
 //PLUGINS
 import { Camera } from '@ionic-native/camera';
 import { PersonasServiceProvider } from '../providers/personas-service/personas-service';
+import { LoginServiceProvider } from '../providers/login-service/login-service';
 
 
 var firebaseAuth  = {
@@ -45,7 +49,8 @@ var firebaseAuth  = {
     MateriasPage,
     MateriaPrincipalPage,
     PersonasPage,
-    PersonasabmPage
+    PersonasabmPage,
+    PerfilPage
 
   ],
   imports: [
@@ -54,6 +59,7 @@ var firebaseAuth  = {
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseAuth),
      AngularFireDatabaseModule,
+     AngularFireAuthModule,
      FormsModule,
      ReactiveFormsModule
   ],
@@ -65,15 +71,18 @@ var firebaseAuth  = {
     MateriasPage,
     MateriaPrincipalPage,
     PersonasPage,
-    PersonasabmPage
+    PersonasabmPage,
+    PerfilPage
   ],
   providers: [
-    StatusBar,    Camera,    
+    StatusBar,
+    Camera,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ServMateriaProvider,
     ServpersonaProvider,
-    PersonasServiceProvider
+    PersonasServiceProvider,
+    LoginServiceProvider
   ]
 })
 export class AppModule {}
