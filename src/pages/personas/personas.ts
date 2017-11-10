@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import{ServpersonaProvider} from '../../providers/servpersona/servpersona';//AGREGO SERVICIO
+import { PersonasabmPage } from '../personasabm/personasabm';
 
 
 
@@ -37,11 +38,11 @@ export class PersonasPage {
   }
   modificar(x){    
      this.estado='Modificar';     
-     this.navCtrl.push(HomePage, { estado: this.estado,id:x['idUsuario'],desde:'persona' });
+     this.navCtrl.push(PersonasabmPage, { estado: this.estado,id:x['idUsuario'],desde:'persona' });
   }
   add(){
     this.estado='Alta';
-    this.navCtrl.push(HomePage, { estado: this.estado,desde:'persona' });
+    this.navCtrl.push(PersonasabmPage, { estado: this.estado,desde:'persona' });
   }
   
   initializeItems() {

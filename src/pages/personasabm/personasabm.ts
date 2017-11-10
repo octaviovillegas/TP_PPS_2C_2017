@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ToastController, ActionSheetController, Platform  } from 'ionic-angular';
 import { AngularFireAuth } from "angularfire2/auth";
-import {/* FirebaseListObservable*/ AngularFireDatabase } from 'angularfire2/database';
+import { FirebaseListObservable, AngularFireDatabase } from 'angularfire2/database';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { personas } from './persona';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -37,15 +37,21 @@ export class PersonasabmPage {
   formPersonaAM: FormGroup;
   desde:string;
   rol: string;
-  //user: FirebaseListObservable<any>;
-  user: Observable<any[]>;
+  user: FirebaseListObservable<any>;
+  //user: Observable<any[]>;
   
-  constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, private PersonaService: ServpersonaProvider,
-    private alertCtrl: AlertController, public toastCtrl: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform,
-    private camera: Camera, private storage: Storage,public database: AngularFireDatabase,private AngularAuth: AngularFireAuth) {
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams,
+     public formBuilder: FormBuilder,
+      private PersonaService: ServpersonaProvider,
+    private alertCtrl: AlertController,
+     public toastCtrl: ToastController,
+      public actionSheetCtrl: ActionSheetController, public platform: Platform,
+    private camera: Camera, private storage: Storage,public database: AngularFireDatabase,
+    private AngularAuth: AngularFireAuth) {
     
-    //this.user = this.database.list('/usuarios');
-    this.user = database.list('usuarios').valueChanges();
+    this.user = this.database.list('/usuarios');
+    //this.user = database.list('usuarios').valueChanges();
     
     this.storage.get('userInfo').then((val) => {
       this.rol = val.idRol;
