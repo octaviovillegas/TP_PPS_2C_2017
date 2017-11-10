@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, AlertController, ActionSheetController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import {Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 @IonicPage()
 @Component({
@@ -10,28 +13,31 @@ import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 })
 export class AbmAlumnoPage {
   
-  private alumnos: FirebaseListObservable<any>;
   private tab;
-  public formAlta = FormGroup;
+  private alumnos: Observable<any>;
+  private searchValue: string;
+  private formAlta = FormGroup;
 
-  
-    constructor(public navCtrl: NavController, public alertCtrl: AlertController, public af: AngularFireDatabase,
-      public actionSheetCtrl: ActionSheetController, private formBuilder: FormBuilder) {
-      this.tab = "lista";
-      this.alumnos = af.list('/alumnos');
-      this.formAlta = this.formBuilder.group({
-        nombre: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
-        apellido: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
-        legajo: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern("[-+]?[0-9]*\.?[0-9]*")])],
-        anio: ['', Validators.compose([Validators.required])],
-        curso: ['', Validators.compose([Validators.required])],
-      });
+  constructor(public navCtrl: NavController, 
+    public alertCtrl: AlertController, 
+    public af: AngularFireDatabase,
+    public actionSheetCtrl: ActionSheetController, 
+    private formBuilder: FormBuilder) {
+        this.filterAlumno();
+        this.formAlta = this.formBuilder.group({
+          nombre: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
+          apellido: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
+          legajo: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern("[-+]?[0-9]*\.?[0-9]*")])],
+          anio: ['', Validators.compose([Validators.required])],
+          curso: ['', Validators.compose([Validators.required])],
+        });
+        this.tab = "lista";
     }
 
     //LISTA DE ALUMNOS
-eliminarAlumno(alumnoId: string, apellido: string): void {
-      let prompt = this.alertCtrl.create({
-        title: 'Confirmar',
+public eliminarAlumno(alumnoId: string, apellido: string): void {
+  let prompt = this.alertCtrl.create({
+    title: 'Confirmar',
         message: "Seguro que queres eliminar al alumno " + apellido + "?",
         buttons: [
           {
@@ -57,13 +63,22 @@ eliminarAlumno(alumnoId: string, apellido: string): void {
     public agregarAlumno(): void{
       let prompt = this.alertCtrl.create({ title: 'Alumno agregado', buttons: [{ text: 'Ok',}] });
       prompt.present();
-      this.alumnos.push(this.formAlta.value);
+      this.af.list('/alumnos').push(this.formAlta.value);
       this.formAlta.reset();
     }
 
-    /*
-        (ionInput)="onInput($event)"
-        (ionCancel)="onCancel($event)">
-    */
-  
+    public onInput($event): void {
+      this.filterAlumno();
+    }
+
+    private filterAlumno(): boolean {
+      this.alumnos = this.af.list('/alumnos').map(alumno => alumno.filter(alumno => {
+        console.log(this.searchValue);
+        if(this.searchValue != "") {
+          return alumno.nombre.indexOf(this.searchValue) > 0;
+        }
+        return true;
+      }));
+    }
+
 }

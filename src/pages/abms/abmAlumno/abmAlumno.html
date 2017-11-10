@@ -22,8 +22,9 @@
   <ion-content *ngIf="tab == 'lista'">
       <h1>Lista de alumnos</h1>
       <ion-searchbar
-        [(ngModel)]="myInput">
-      </ion-searchbar>
+      [(ngModel)]="searchValue"
+      (ionInput)="onInput($event)">
+    </ion-searchbar>
       <ion-card *ngFor="let alumno of alumnos | async">
         <ion-item>
           <h2>{{alumno.apellido}}, {{alumno.nombre}}</h2>
