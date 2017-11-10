@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+//import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 
 
@@ -11,22 +11,17 @@ import { IonicPage, NavController, ToastController } from 'ionic-angular';
   templateUrl: 'login.html'
 })
 export class LoginPage {
-  account: { email: string, password: string } = {
-    email: '',
-    password: ''
-  };
+  
+    user= { email : '', password : ''};
 
   // Our translated text strings
   private loginErrorString: string;
 
   constructor(public navCtrl: NavController,
-    public user: any,
-    public toastCtrl: ToastController,
-    public translateService: TranslateService) {
+    
+    public toastCtrl: ToastController) {
 
-    this.translateService.get('LOGIN_ERROR').subscribe((value) => {
-      this.loginErrorString = value;
-    })
+  
   }
 
 
@@ -35,7 +30,7 @@ export class LoginPage {
       //this.navCtrl.push(SignupPage);
     }
   // Attempt to login in through our User service
-  doLogin() {
+  login() {/*
     this.user.login(this.account).subscribe((resp) => {
       //this.navCtrl.push(MainPage);
     }, (err) => {
@@ -47,6 +42,20 @@ export class LoginPage {
         position: 'top'
       });
       toast.present();
-    });
+    });*/
   }
+
+  administrador(){
+    this.user.email='admin@admin.com';
+    this.user.password='111111';
+  }
+  invitado(){
+    this.user.email='invitado@invitado.com';
+    this.user.password='222222';
+  }
+  usuario(){
+    this.user.email='usuario@usuario.com';
+    this.user.password='333333';
+  }
+
 }
