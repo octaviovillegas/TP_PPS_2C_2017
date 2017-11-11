@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { AngularFireDatabase } from 'angularfire2/database';
+import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -16,6 +18,7 @@ import { FIREBASE_CONFIG } from './app.firebase.config';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AdministradorPage } from '../pages/administrador/administrador';
+import { AbmAlumnoPage } from '../pages/abms/abmAlumno/abmAlumno';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,9 @@ import { AdministradorPage } from '../pages/administrador/administrador';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AngularFireDatabase,
+    FormBuilder
   ]
 })
 export class AppModule {}

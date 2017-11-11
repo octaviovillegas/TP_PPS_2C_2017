@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { ListPage } from '../pages/list/list';
 import { AdministradorPage } from '../pages/administrador/administrador';
+import { AbmAlumnoPage } from '../pages/abms/abmalumno/abmalumno';
 
 @Component({
   templateUrl: 'app.html'
@@ -24,9 +25,11 @@ export class MyApp {
     this.initializeApp();
 
     if (this.user == "Alumno") {
+      console.log("alumno");
       this.pages = [
         { title: 'Inicio', component: HomePage },
-        { title: 'List', component: ListPage }
+        { title: 'List', component: ListPage },
+        {title: 'ABM Alumno', component: AbmAlumnoPage },
       ];
     }
 
@@ -48,7 +51,8 @@ export class MyApp {
       this.pages = [
         { title: 'Inicio', component: HomePage },
         { title: 'List', component: ListPage },
-        { title: 'Administrador', component: AdministradorPage }
+        { title: 'Administrador', component: AdministradorPage },
+        {title: 'ABM Alumno', component: AbmAlumnoPage },
      ];
    }  
 
