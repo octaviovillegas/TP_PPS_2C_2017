@@ -15,4 +15,9 @@ export class AdministradorPage {
     console.log('ionViewDidLoad AdministradorPage');
   }
 
+  goAbmAlumno()
+  {
+    this.navCtrl.push('AbmAlumnoPage');
+  }
+
 }
