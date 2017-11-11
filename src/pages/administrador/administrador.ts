@@ -20,4 +20,9 @@ export class AdministradorPage {
     this.navCtrl.push('AbmAlumnoPage');
   }
 
+  goAbmProfesor()
+  {
+    this.navCtrl.push('AbmProfesorPage');
+  }
+
 }

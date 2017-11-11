@@ -14,18 +14,18 @@ Branch:
 Módulos a desarrollar:
 • ABM Profesor y Administrativo
 
-Fecha inicio:
+Fecha inicio: 03/11/2017
 
 Fecha fin:
 
-Branch:
+Branch: AbmProfesor
 
 
 # Fernando Martin Saibene
 Módulos a desarrollar:
 • Pantalla de Login con usuarios por mail
 
-Fecha inicio:
+Fecha inicio: 03/11/2017
 
 Fecha fin:
 
@@ -35,8 +35,8 @@ Branch:
 Módulos a desarrollar:
 • ABM de Alumnos
 
-Fecha inicio:
+Fecha inicio: 09/11/2017
 
-Fecha fin:
+Fecha fin: 11/11/2017
 
 Branch: ABMAlumnos
