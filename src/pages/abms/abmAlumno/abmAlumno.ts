@@ -76,6 +76,7 @@ export class AbmAlumnoPage {
       let prompt = this.alertCtrl.create({ title: 'Alumno agregado', buttons: [{ text: 'Ok',}] });
       prompt.present();
       this.af.list('/alumnos').push(this.formAlta.value);
+      this.modifId = "";
     } else {
       this.alumnos.update(this.modifId, {
         nombre: this.formAlta.controls['nombre'].value,

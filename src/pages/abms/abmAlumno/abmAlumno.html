@@ -84,7 +84,7 @@
                   <ion-option>C</ion-option>
               </ion-select>
             </ion-item>
-          <button ion-button type="submit" [disabled]="!formAlta.valid">Agregar</button>
+          <button ion-button type="submit" [disabled]="!formAlta.valid">{{modifId == "" ? "Agregar" : "Modificar"}}</button>
       </form>
   </ion-content>
   
