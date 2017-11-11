@@ -85,6 +85,8 @@ export class AbmAlumnoPage {
         curso: this.formAlta.controls['curso'].value
       });
       let prompt = this.alertCtrl.create({ title: 'Alumno modificado', buttons: [{ text: 'Ok',}] });
+      prompt.present();
+      this.modifId = "";
     }
     this.formAlta.reset();
   }
