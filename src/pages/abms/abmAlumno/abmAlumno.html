@@ -4,13 +4,13 @@
     </ion-navbar>
     <ion-toolbar>
       <ion-segment [(ngModel)]="tab" color="primary">
-        <ion-segment-button value="lista">
+        <ion-segment-button value="lista" (click)="cambiarDeTab()">
           Lista
         </ion-segment-button>
-        <ion-segment-button value="agregar">
+        <ion-segment-button value="agregar" (click)="cambiarDeTab()">
           Agregar 
         </ion-segment-button>
-        <ion-segment-button value="agregarLista">
+        <ion-segment-button value="agregarLista" (click)="cambiarDeTab()">
           Agregar Lista
         </ion-segment-button>
       </ion-segment>
