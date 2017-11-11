@@ -1,0 +1,72 @@
+
+<ion-header>
+    
+      <ion-navbar>
+        <ion-title>Crear Encuesta</ion-title>
+      </ion-navbar>
+    
+    </ion-header>
+    
+    
+    <ion-content padding>
+        <form>
+            <p></p>
+            <h2 class="royal"> Cargar Pregunta</h2> 
+              <ion-item>
+                  
+            
+              <ion-input 
+                [(ngModel)]="encuesta" 
+                name="encuesta" 
+                type="text" 
+                autocapitalize="off" 
+                required
+              >
+              </ion-input>
+            </ion-item>
+          </form>
+      
+            <ion-list radio-group >   
+                <!--p [hidden]='i+1'></p>
+                <div *ngIf="i % 2 >0">
+              {{picture}}
+                </div-->
+               <div>
+                  <p></p>
+                        <!--ion-list-header>
+                          
+                            {{i+1}}
+                            {{algo.nombre}}
+                          </ion-list-header-->
+                        <h2 class="royal"> Seleccione posibles respuestas</h2> 
+                        <ion-item>
+                          
+                            <ion-label>Muy Bueno / Bueno / Regular / Malo</ion-label>
+                            <!--ion-checkbox color="dark"  (ionChange)="datachanged($event)" ></ion-checkbox-->
+                    <ion-radio  value="opcion1"></ion-radio>
+                  </ion-item>
+                    <ion-item>
+                        <ion-label>Si / No / Puede ser</ion-label>
+                    <ion-radio  value="opcion2"></ion-radio>
+                  </ion-item>
+                </div>
+              
+                
+                <!--ion-checkbox [(ngModel)]="presente" (ionChange)="AgregarPresente()"></ion-checkbox>
+        
+            </ion-item-->
+          </ion-list>
+      
+          <button 
+          ion-button 
+          (click)="guardarEncuesta()" 
+          type="submit" 
+          color="primary" 
+          block
+      >
+        Guardar Encuesta
+       </button>
+       
+      
+      </ion-content>
+      

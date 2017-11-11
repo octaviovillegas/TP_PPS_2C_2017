@@ -15,10 +15,12 @@ import { AuthProvider } from '../providers/auth/auth';
 import { RealizarEncuestaPage } from '../pages/realizar-encuesta/realizar-encuesta';
 
 
+
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { MiPerfilPage } from '../pages/mi-perfil/mi-perfil';
+
 
 
 import { PictureUtils } from '../services/pictureUtils.service';
@@ -29,7 +31,6 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 //csv
 import { ListadoAlumnosPage } from '../pages/listado-alumnos/listado-alumnos';
-
 
 
 // Must export the config
@@ -71,6 +72,7 @@ export const firebaseConfig = {
     CrearEncuestaPage,
     RealizarEncuestaPage,
     ListadoAlumnosPage
+    RealizarEncuestaPage
   ],
   imports: [
     BrowserModule,
@@ -92,7 +94,8 @@ export const firebaseConfig = {
     MiPerfilPage,
     CrearEncuestaPage,
     RealizarEncuestaPage,
-    ListadoAlumnosPage
+    ListadoAlumnosPage,
+    RealizarEncuestaPage
     
   ],
   providers: [
