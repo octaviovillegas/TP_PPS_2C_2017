@@ -76,7 +76,6 @@ export class AbmAlumnoPage {
       let prompt = this.alertCtrl.create({ title: 'Alumno agregado', buttons: [{ text: 'Ok',}] });
       prompt.present();
       this.af.list('/alumnos').push(this.formAlta.value);
-      this.modifId = "";
     } else {
       this.alumnos.update(this.modifId, {
         nombre: this.formAlta.controls['nombre'].value,
@@ -85,7 +84,9 @@ export class AbmAlumnoPage {
         anio: this.formAlta.controls['anio'].value,
         curso: this.formAlta.controls['curso'].value
       });
+      this.modifId = "";
       let prompt = this.alertCtrl.create({ title: 'Alumno modificado', buttons: [{ text: 'Ok',}] });
+      prompt.present();
     }
     this.formAlta.reset();
   }
