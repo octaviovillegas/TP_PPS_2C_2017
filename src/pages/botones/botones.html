@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Principal
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+    
+      
+     
+        
+
+
+        
+        <ion-spinner></ion-spinner>
+        <button  ion-button  block width="100px"  height="80" 
+        (click)=Miperfil() >
+        <ion-icon name="person"></ion-icon>
+        
+         . Mi perfil
+            
+        </button>
+            <button color="royal" ion-button  block width="100px"  height="80" 
+            (click)=TomarLista() *ngIf="this.usuario=='admin@admin.com'">
+              Tomar Lista
+                
+            </button>
+          <button   ion-button block width="80px" 
+          (click)=Subir_foto() *ngIf="this.usuario=='admin@admin.com'">
+            Subir Foto
+            </button>
+            <button    ion-button block width="80px" 
+            (click)=Listado_Fotos() *ngIf="this.usuario=='admin@admin.com'">
+              Fotos Tomadas
+              </button>
+
+              <button  ion-button block width="80px" 
+              (click)=CrearEncuesta() *ngIf="this.usuario=='usuario@usuario.com'">
+               Cargar Cuestionario
+                </button>
+                <button  ion-button block width="80px" 
+                (click)=nada() *ngIf="this.usuario=='usuario@usuario.com'">
+                  Ver Estadisticas
+                  </button>
+                  <button  ion-button block width="80px" 
+                  (click)=RealizarEncuesta() *ngIf="this.usuario=='invitado@invitado.com'">
+                    Realizar Encuesta 
+                    </button>
+                    <button   ion-button block width="80px" 
+                    (click)=LectorQR() *ngIf="this.usuario=='invitado@invitado.com'">
+                      Leer QR
+                      </button>
+                      <button   ion-button block width="80px" 
+                      (click)=LectorQR() *ngIf="this.usuario=='usuario@usuario.com'">
+                        Leer QR
+                        </button>
+  
+  
+      
+        <button ion-button block (click)="cerrarSesion()" color="danger">Cerrar Sesión</button>
+      </ion-content>
+     
+  

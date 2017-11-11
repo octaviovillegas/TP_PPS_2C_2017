@@ -1,33 +1,110 @@
-<ion-content scroll="true">
-    <div class="splash-bg"></div>
-    <div class="splash-info">
-      <div class="splash-logo"></div>
-      <div class="splash-intro">
-        Portal Universitario
-      </div>
-    </div>
-    <div>
-        <ion-item>
-          <ion-label color="primary" floating>Correo</ion-label>
-          <ion-input type="email"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label color="primary" floating>Contraseña</ion-label>
-          <ion-input type="password"></ion-input>
-        </ion-item>
-      <button ion-button color="primary" block (click)="doLogin()" class="login">{{ 'LOGIN' | translate }}</button>
-      <button ion-button block (click)="registro()" class="login">{{ 'SIGNUP' | translate }}</button>
-    </div>
-    <div style="text-align:center">
+<!--
+  Generated template for the LoginPage page.
 
-      <h3>O iniciar sesión usando:</h3>
-      
-        <button ion-button icon-start style="background-color:#3b5998">
-          <ion-icon name="logo-facebook"> </ion-icon>Facebook</button>
-        <button ion-button icon-start style="background-color:#c71610">
-          <ion-icon name="logo-google"> </ion-icon>Google</button>
-        <button ion-button icon-start style="background-color:#282a36">
-          <ion-icon name="logo-github"> </ion-icon>GitHub</button>
-    </div>
-  </ion-content>
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
   
+    <ion-navbar>
+      <ion-title>login</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  <ion-content>
+      <div class="splash-bg"></div>
+      <div class="splash-info">
+        <div class="splash-logo"></div>
+        <div class="splash-intro" >
+          <p class="royal">Portal Universitario</p>
+        </div>
+      </div>
+      
+    
+  <ion-list>
+
+      <form>
+        <ion-item>
+          <ion-label floating>Email</ion-label>
+          <ion-input 
+            [(ngModel)]="user.email" 
+            name="email" 
+            type="text" 
+            autocapitalize="off" 
+            required
+          >
+          </ion-input>
+        </ion-item>
+       
+        <ion-item>
+          <ion-label floating>Contraseña</ion-label>
+          <ion-input 
+            [(ngModel)]="user.password" 
+            name="password" 
+            type="password" 
+            required
+          >
+          </ion-input>
+        </ion-item>
+        <div padding>
+          <button 
+              ion-button 
+              (click)="login()" 
+              type="submit" 
+              color="primary" 
+              block
+          >
+            Login
+          </button> 
+      
+          <button 
+            ion-button 
+            (click)="signin()" 
+            type="submit" 
+            color="secondary" 
+            block
+          >
+            Dar de alta
+          </button>
+          <button 
+          ion-button icon-rigth color="dark" round
+          (click)="administrador()" 
+          type="submit" 
+        >
+        <ion-icon name="person"></ion-icon>
+          ..administrador
+        </button>
+
+
+        <button 
+        ion-button icon-rigth color="dark" round
+        (click)="usuario()" 
+        type="submit" 
+      >
+      <ion-icon name="person"></ion-icon>
+         ..Profesor
+      </button>
+      <button 
+      ion-button icon-rigth color="dark" round
+      (click)="invitado()" 
+      type="submit" 
+    >
+    <ion-icon name="person"></ion-icon>
+      ..Alumno
+    </button>
+        </div>
+      </form>
+      <div style="text-align:center">
+        
+              <h3  class="royal">O iniciar sesión usando:</h3>
+              
+                <button ion-button icon-start style="background-color:#3b5998">
+                  <ion-icon name="logo-facebook"> </ion-icon>Facebook</button>
+                <button ion-button icon-start style="background-color:#c71610">
+                  <ion-icon name="logo-google"> </ion-icon>Google</button>
+                <button ion-button icon-start style="background-color:#282a36">
+                  <ion-icon name="logo-github"> </ion-icon>GitHub</button>
+            </div>
+    </ion-list>
+  </ion-content>

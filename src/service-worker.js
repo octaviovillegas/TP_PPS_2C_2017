@@ -1,5 +1,5 @@
 /**
- * Check out https://googlechrome.github.io/sw-toolbox/ for
+ * Check out https://googlechrome.github.io/sw-toolbox/docs/master/index.html for
  * more info on how to use sw-toolbox to custom configure your service worker.
  */
 
@@ -15,7 +15,6 @@ self.toolbox.options.cache = {
 self.toolbox.precache(
   [
     './build/main.js',
-    './build/vendor.js',
     './build/main.css',
     './build/polyfills.js',
     'index.html',

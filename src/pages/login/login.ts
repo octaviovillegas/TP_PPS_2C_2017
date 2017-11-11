@@ -1,52 +1,76 @@
+
 import { Component } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,AlertController  } from 'ionic-angular';
+import { AuthProvider } from '../../providers/auth/auth';
 
-
-//import { MainPage, SignupPage } from '../pages'; #Estas páginas ya no existen
+/**
+ * Generated class for the LoginPage page.
+ *
+ * See http://ionicframework.com/docs/components/#navigation for more info
+ * on Ionic pages and navigation.
+ */
 
 @IonicPage()
 @Component({
   selector: 'page-login',
-  templateUrl: 'login.html'
+  templateUrl: 'login.html',
 })
 export class LoginPage {
-  account: { email: string, password: string } = {
-    email: '',
-    password: ''
-  };
 
-  // Our translated text strings
-  private loginErrorString: string;
+  user= { email : '', password : ''};
 
-  constructor(public navCtrl: NavController,
-    public user: any,
-    public toastCtrl: ToastController,
-    public translateService: TranslateService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public auth : AuthProvider,
+    public alertCtrl : AlertController) {
+  
+  }
 
-    this.translateService.get('LOGIN_ERROR').subscribe((value) => {
-      this.loginErrorString = value;
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad LoginPage');
+  }
+
+  signin(){
+    this.auth.registerUser(this.user.email,this.user.password)
+    .then((user) => {
+      // El usuario se ha creado correctamente
     })
-  }
-
-
-  registro()
-    {
-      //this.navCtrl.push(SignupPage);
-    }
-  // Attempt to login in through our User service
-  doLogin() {
-    this.user.login(this.account).subscribe((resp) => {
-      //this.navCtrl.push(MainPage);
-    }, (err) => {
-      //this.navCtrl.push(MainPage);
-      // Unable to log in
-      let toast = this.toastCtrl.create({
-        message: this.loginErrorString,
-        duration: 3000,
-        position: 'top'
+    .catch(err=>{
+      let alert = this.alertCtrl.create({
+        title: 'Error',
+        subTitle: err.message,
+        buttons: ['Aceptar']
       });
-      toast.present();
-    });
+      alert.present();
+    })
+
   }
+
+  login() 
+  {
+    console.log("algo");
+      this.auth.loginUser(this.user.email,this.user.password ).then((user) => {
+        console.log("algo2"); }
+      )
+       .catch(err=>{
+        let alert = this.alertCtrl.create({
+          title: 'Error',
+          subTitle: err.message,
+          buttons: ['Aceptar']
+        });
+        alert.present();
+      })
+    }
+
+    administrador(){
+      this.user.email='admin@admin.com';
+      this.user.password='111111';
+    }
+    invitado(){
+      this.user.email='invitado@invitado.com';
+      this.user.password='222222';
+    }
+    usuario(){
+      this.user.email='usuario@usuario.com';
+      this.user.password='333333';
+    }
+
 }

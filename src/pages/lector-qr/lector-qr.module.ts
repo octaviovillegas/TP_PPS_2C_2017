@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { LoginPage } from './login';
+import { LectorQrPage } from './lector-qr';
 
 @NgModule({
   declarations: [
-    LoginPage,
+    LectorQrPage,
   ],
   imports: [
-    IonicPageModule.forChild(LoginPage),
+    IonicPageModule.forChild(LectorQrPage),
   ],
 })
-export class LoginPageModule {}
+export class LectorQrPageModule {}

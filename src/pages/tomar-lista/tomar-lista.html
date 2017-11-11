@@ -1,0 +1,62 @@
+<!--
+  Generated template for the TomarListaPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>TomarLista</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  
+    
+  
+        <ion-list radio-group *ngFor="let algo of lista;let i = index;" (ionChange)="datachanged(algo.nombre,$event)">   
+            <!--p [hidden]='i+1'></p>
+            <div *ngIf="i % 2 >0">
+          {{picture}}
+            </div-->
+           <div>
+                    <!--ion-list-header>
+                      
+                        {{i+1}}
+                        {{algo.nombre}}
+                      </ion-list-header-->
+                    <h1 class="colorBlanco"> {{i+1}} - 
+                      {{algo.nombre}}</h1> 
+                    <ion-item>
+                      
+                        <ion-label>Presente</ion-label>
+                        <!--ion-checkbox color="dark"  (ionChange)="datachanged($event)" ></ion-checkbox-->
+                <ion-radio  value="presente"></ion-radio>
+              </ion-item>
+                <ion-item>
+                    <ion-label>Ausente</ion-label>
+                <ion-radio  value="ausente"></ion-radio>
+              </ion-item>
+            </div>
+          
+            
+            <!--ion-checkbox [(ngModel)]="presente" (ionChange)="AgregarPresente()"></ion-checkbox>
+    
+        </ion-item-->
+      </ion-list>
+  
+      <button 
+      ion-button 
+      (click)="guardarDatos()" 
+      type="submit" 
+      color="primary" 
+      block
+  >
+    Guardar Datos
+  </button> 
+  
+  </ion-content>
+  

@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar >
+    <ion-title>Lector QR</ion-title>
+    <ion-buttons end>
+        <button ion-button style="color: red;" (click)="logout()"><ion-icon name="exit"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div style="width:12em; margin: 0 auto">
+    <button ion-button large round outline (click)="leerCodigo()">
+      Escanear codigo <br>
+      <ion-icon name="qr-scanner"></ion-icon>
+    </button>
+  </div>
+  <ion-card>
+  <ul>
+    <li *ngIf="this.mostrarInfo">
+      {{ this.aula }}
+      {{ this.materia }}
+      {{ this.info }}
+    
+    </li>
+  </ul>
+</ion-card>
+</ion-content>
