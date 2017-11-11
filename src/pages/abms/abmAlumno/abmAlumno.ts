@@ -17,6 +17,7 @@ export class AbmAlumnoPage {
   //Lista
   private searchValue: string;
   private filterType: string;
+  private modifId: string;
   //Alta
   private formAlta = FormGroup;
 
@@ -28,6 +29,7 @@ export class AbmAlumnoPage {
       this.tab = "lista";
       //Lista
       this.filterType = "Apellido";
+      this.modifId = "";
       //Alta
       this.filterAlumno();
       this.formAlta = this.formBuilder.group({
@@ -58,15 +60,32 @@ export class AbmAlumnoPage {
     prompt.present();
   }
 
-  public modificarAlumno(alumnoId: string, apellido: string): void {
-      
+  public modificarAlumno(alumno: any): void {
+       this.formAlta.controls['nombre'].setValue(alumno.nombre);
+       this.formAlta.controls['apellido'].setValue(alumno.apellido);
+       this.formAlta.controls['legajo'].setValue(alumno.legajo);
+       this.formAlta.controls['anio'].setValue(alumno.anio);
+       this.formAlta.controls['curso'].setValue(alumno.curso);
+       this.modifId = alumno.$key;
+       this.tab = "agregar";
   }
 
   //AGREGAR ALUMNO
   public agregarAlumno(): void{
-    let prompt = this.alertCtrl.create({ title: 'Alumno agregado', buttons: [{ text: 'Ok',}] });
-    prompt.present();
-    this.af.list('/alumnos').push(this.formAlta.value);
+    if(this.modifId == "") {
+      let prompt = this.alertCtrl.create({ title: 'Alumno agregado', buttons: [{ text: 'Ok',}] });
+      prompt.present();
+      this.af.list('/alumnos').push(this.formAlta.value);
+    } else {
+      this.alumnos.update(this.modifId, {
+        nombre: this.formAlta.controls['nombre'].value,
+        apellido: this.formAlta.controls['apellido'].value,
+        legajo: this.formAlta.controls['legajo'].value,
+        anio: this.formAlta.controls['anio'].value,
+        curso: this.formAlta.controls['curso'].value
+      });
+      let prompt = this.alertCtrl.create({ title: 'Alumno modificado', buttons: [{ text: 'Ok',}] });
+    }
     this.formAlta.reset();
   }
 
@@ -88,4 +107,29 @@ export class AbmAlumnoPage {
       return true;
     }));
   }
+
+  public cambiarDeTab() {
+    if(this.modifId != "" && this.tab != "agregar") {
+      let prompt = this.alertCtrl.create({
+        title: 'Confirmar',
+        message: "Seguro que perder las modificaciones ?",
+        buttons: [{
+          text: 'Si',
+          handler: data => { 
+            this.modifId = "";
+            this.formAlta.reset();
+          }
+        },
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: data => { 
+            this.tab = "agregar"
+          }
+        }]
+      });
+      prompt.present();
+    }
+  }
+
 }
