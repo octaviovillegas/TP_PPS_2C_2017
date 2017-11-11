@@ -2,5 +2,7 @@
   "name": "TP_PPS_2C_2017",
   "app_id": "",
   "type": "ionic-angular",
-  "integrations": {}
+  "integrations": {
+    "cordova": {}
+  }
 }
