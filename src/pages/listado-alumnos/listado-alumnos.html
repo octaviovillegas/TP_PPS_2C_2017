@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Lista de alumnos 4B
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="downloadCSV()">
+          <ion-icon name="download"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+ 
+<ion-content padding>
+  <ion-scroll scrollX="true" scrollY="true" class="data-scroll">
+    <table border="1" class="data-table">
+      <tr>
+        <td *ngFor="let header of headerRow" text-center><b>{{ header }}</b></td>
+      </tr>
+      <tr *ngFor="let row of csvData; let i = index">
+        <td *ngFor="let data of row; let j = index; trackBy: trackByFn">
+          <ion-input type="text" [(ngModel)]="csvData[i][j]"></ion-input>
+        </td>
+      </tr>
+    </table>
+  </ion-scroll>
+</ion-content>
