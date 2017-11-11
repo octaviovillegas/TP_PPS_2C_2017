@@ -1,0 +1,95 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>Profesores</ion-title>
+    </ion-navbar>
+    <ion-toolbar>
+      <ion-segment [(ngModel)]="tab" color="primary">
+        <ion-segment-button value="lista" (click)="cambiarDeTab()">
+          Lista
+        </ion-segment-button>
+        <ion-segment-button value="agregar" (click)="cambiarDeTab()">
+          Agregar 
+        </ion-segment-button>
+        <ion-segment-button value="agregarLista" (click)="cambiarDeTab()">
+          Agregar Lista
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+  </ion-header>
+  
+<ion-content padding>
+
+  <ion-content *ngIf="tab == 'lista'">
+      <h1>Lista de profesores</h1>
+      <ion-searchbar
+        [(ngModel)]="searchValue"
+        (ionInput)="onInput($event)">
+      </ion-searchbar>
+      <ion-item>
+        <ion-select [(ngModel)]="filterType">
+          <ion-option>Nombre</ion-option>
+          <ion-option>Apellido</ion-option>
+          <ion-option>Legajo</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-card *ngFor="let profesor of profesores | async">
+        <ion-item>
+          <h2>{{profesor.apellido}}, {{profesor.nombre}}</h2>
+          <p>Legajo: <b>{{profesor.legajo}}</b> | Curso: <b>{{profesor.anio}}{{profesor.curso}}</b></p>
+        </ion-item>
+        <ion-row>
+          <ion-col>
+            <button ion-button icon-left clear small (click)="eliminarProfesor(profesor.$key, profesor.apellido)">
+              <ion-icon name="md-close"></ion-icon>
+              <div>Eliminar</div>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button icon-left clear small (click)="modificarProfesor(profesor)">
+              <ion-icon name="md-build"></ion-icon>
+              <div>Editar</div>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-card>      
+  </ion-content>
+  
+  <ion-content *ngIf="tab == 'agregar'">
+      <h1>Agregar profesor</h1>
+      <form [formGroup]="formAlta" (ngSubmit)="agregarProfesor()">
+        <ion-item>
+          <ion-label>Nombre</ion-label>
+            <ion-input type="text" formControlName="nombre"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Apellido</ion-label>
+              <ion-input type="text" formControlName="apellido"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Legajo (4 dígitos)</ion-label>
+              <ion-input type="text" formControlName="legajo" maxlength="4"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Año y curso asignado</ion-label>
+              <ion-select formControlName="anio">
+                  <ion-option>1</ion-option>
+                  <ion-option>2</ion-option>
+                  <ion-option>3</ion-option>
+                  <ion-option>4</ion-option>
+                  <ion-option>5</ion-option>
+              </ion-select>
+              <ion-select formControlName="curso">
+                  <ion-option>A</ion-option>
+                  <ion-option>B</ion-option>
+                  <ion-option>C</ion-option>
+              </ion-select>
+            </ion-item>
+          <button ion-button type="submit" [disabled]="!formAlta.valid">Agregar</button>
+      </form>
+  </ion-content>
+  
+  <ion-content *ngIf="tab == 'agregarLista'">
+    <h1>Lista</h1>
+  </ion-content>
+    
+</ion-content>
