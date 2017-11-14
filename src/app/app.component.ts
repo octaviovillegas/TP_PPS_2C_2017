@@ -7,7 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { ListPage } from '../pages/list/list';
 import { AdministradorPage } from '../pages/administrador/administrador';
-import { AbmAlumnoPage } from '../pages/abms/abmalumno/abmalumno';
+import { AbmAlumnoPage } from '../pages/adminUsuarios/abms/abmalumno/abmalumno';
 
 @Component({
   templateUrl: 'app.html'
@@ -25,7 +25,6 @@ export class MyApp {
     this.initializeApp();
 
     if (this.user == "Alumno") {
-      console.log("alumno");
       this.pages = [
         { title: 'Inicio', component: HomePage },
         { title: 'List', component: ListPage },

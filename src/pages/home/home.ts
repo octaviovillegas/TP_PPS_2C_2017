@@ -5,7 +5,7 @@ export enum NavRoutes {
   TomarAsistencia,
   Encuestas,
   EnviarAviso,
-  AdminUsuario,
+  AdminUsuarios,
   MiPerfil,
   Configuracion
 }
