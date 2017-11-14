@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-export enum NavAbms {
-  Alumno,
-  Profesor,
-  Administrativo
-}
-
 @IonicPage()
 @Component({
   selector: 'page-adminUsuarios',
