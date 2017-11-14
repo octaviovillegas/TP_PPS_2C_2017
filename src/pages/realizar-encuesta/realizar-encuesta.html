@@ -14,55 +14,83 @@
 
 
 <ion-content padding>
+  <div *ngIf="mostrarTodas">
     <ion-list *ngFor="let item of unaLista;let i = index;">   
         <!--p [hidden]='i+1'></p>
         <div *ngIf="i % 2 >0">
       {{picture}}
         </div-->
-        <h1 class="royal"> ¿{{item.Pregunta}}?</h1>
-        <div *ngIf="item.opcion=='uno'">
-            <ion-list radio-group >   
-
-               <div>
-                  <p></p>
-                        
-                
-                      <ion-item>
-                         <ion-label>Muy Bueno </ion-label> 
-                    <ion-radio  value="MB"></ion-radio>
-                  </ion-item>
-                  <ion-item>
-                      <ion-label>Bueno </ion-label> 
-                 <ion-radio  value="B"></ion-radio>
-               </ion-item>
-               <ion-item>
-                  <ion-label>Regular </ion-label> 
-             <ion-radio  value="R"></ion-radio>
-           </ion-item>
-           <ion-item>
-              <ion-label>Malo </ion-label> 
-         <ion-radio  value="M"></ion-radio>
-       </ion-item>
-                    
-                </div>
-              
-                <button 
-                ion-button 
-                (click)="guardarRespuesta()" 
-                type="submit" 
-                color="primary" 
-                block
-            >
-              Guardar Respuesta
-             </button> 
-          
-          </ion-list>
-      
-       
-
- 
-    </div>
+        <ion-item>
+        <div>
+            <h1 > {{item.titulo}}</h1>
+            <button 
+            ion-button 
+            (click)="Seleccionar(item.titulo,item.pregunta,item.opcion)" 
+            type="submit" 
+            color="primary" 
+            block
+        >
+          Seleccionar Encuesta
+         </button> 
+        </div>
+      </ion-item>
   </ion-list>
+</div>
+<div *ngIf="mostrarEncuesta">
+  <div>
+      <h1 class="royal">{{this.preguntaSeleccionada}}
+        </h1>
+</div>
+<div *ngIf="opcionSeleccionada=='uno'">
+    <ion-list radio-group (ionChange)="guardarRespuesta($event)">   
+       <div>
+          <p></p>
+              <ion-item>
+                 <ion-label>Muy Bueno </ion-label> 
+            <ion-radio  value="MB"></ion-radio>
+          </ion-item>
+          <ion-item>
+              <ion-label>Bueno </ion-label> 
+         <ion-radio  value="B"></ion-radio>
+       </ion-item>
+       <ion-item>
+          <ion-label>Regular </ion-label> 
+     <ion-radio  value="R"></ion-radio>
+   </ion-item>
+   <ion-item>
+      <ion-label>Malo </ion-label> 
+ <ion-radio  value="M"></ion-radio>
+</ion-item>       
+        </div>          
+  </ion-list>
+</div>
+
+<div *ngIf="opcionSeleccionada=='dos'">
+    <ion-list radio-group (ionChange)="guardarRespuesta($event)">   
+       <div>
+          <p></p>
+              <ion-item>
+                 <ion-label>Si </ion-label> 
+            <ion-radio  value="SI"></ion-radio>
+          </ion-item>
+          <ion-item>
+              <ion-label>NO </ion-label> 
+         <ion-radio  value="NO"></ion-radio>
+       </ion-item>
+       <ion-item>
+          <ion-label>Puede Ser </ion-label> 
+     <ion-radio  value="PuedeSer"></ion-radio>
+   </ion-item>    
+        </div>          
+  </ion-list>
+</div>
+
+
+
+
+
+
+</div>
 
 
 </ion-content>

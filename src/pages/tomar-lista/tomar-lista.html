@@ -17,35 +17,30 @@
   
     
   
-        <ion-list radio-group *ngFor="let algo of lista;let i = index;" (ionChange)="datachanged(algo.nombre,$event)">   
-            <!--p [hidden]='i+1'></p>
+        <!--ion-list radio-group *ngFor="let algo of lista;let i = index;" (ionChange)="datachanged(algo.nombre,$event)">   
+            <p [hidden]='i+1'></p>
             <div *ngIf="i % 2 >0">
           {{picture}}
-            </div-->
+            </div>
            <div>
-                    <!--ion-list-header>
+                    <ion-list-header>
                       
                         {{i+1}}
                         {{algo.nombre}}
                       </ion-list-header-->
-                    <h1 class="colorBlanco"> {{i+1}} - 
+                    <!--h1 class="colorBlanco"> {{i+1}} - 
                       {{algo.nombre}}</h1> 
                     <ion-item>
                       
                         <ion-label>Presente</ion-label>
-                        <!--ion-checkbox color="dark"  (ionChange)="datachanged($event)" ></ion-checkbox-->
-                <ion-radio  value="presente"></ion-radio>
+                        <ion-checkbox color="dark"  (ionChange)="datachanged($event)" ></ion-checkbox-->
+                <!--ion-radio  value="presente"></ion-radio>
               </ion-item>
                 <ion-item>
                     <ion-label>Ausente</ion-label>
                 <ion-radio  value="ausente"></ion-radio>
               </ion-item>
             </div>
-          
-            
-            <!--ion-checkbox [(ngModel)]="presente" (ionChange)="AgregarPresente()"></ion-checkbox>
-    
-        </ion-item-->
       </ion-list>
   
       <button 
@@ -56,7 +51,92 @@
       block
   >
     Guardar Datos
-  </button> 
+  </button--> 
+<div *ngIf="MostrarBotones">
+  <button 
+  ion-button 
+  (click)="PorMateria()" 
+  type="submit" 
+  color="primary" 
+  block>
+Materia
+</button> 
+<button 
+ion-button 
+(click)="PorDivision()" 
+type="submit" 
+color="primary" 
+block>
+Division
+</button> 
+</div>
+<div *ngIf="MostrarBotones==false">
+  <div class="colorBlanco">
+    MATERIA : {{this.materia}}
   
+   DIVISION : {{this.division}}
+   AULA : {{this.aula}}
+   <br/>
+   <br/>
+  </div>
+   <ion-list *ngIf="ocultarMateria==false" radio-group (ionChange)="MateriaSeleccionada($event)">   
+            
+                    <ion-list-header>      
+                        Seleccione Materia
+                      </ion-list-header>
+                 <ion-item>
+                    <ion-label>Metodologia</ion-label> 
+                    <ion-radio  value="Metodologia" ></ion-radio>
+              </ion-item>
+                <ion-item>
+                    <ion-label>Base de datos</ion-label>
+                <ion-radio  value="BaseDeDatos"></ion-radio>
+              </ion-item>
+              <ion-item>
+                  <ion-label>Laboratorio IV</ion-label>
+              <ion-radio  value="LaboratorioIV"></ion-radio>
+            </ion-item>
+      </ion-list>
+
+
+<div >
+    <ion-list *ngIf="ocultarDivision==false" radio-group (ionChange)="DivisionSeleccionada($event)">   
+     
+              <ion-list-header>      
+                  Seleccione Division
+                </ion-list-header>
+           <ion-item>
+              <ion-label>4 A</ion-label> 
+              <ion-radio  value="4A" ></ion-radio>
+        </ion-item>
+          <ion-item>
+              <ion-label>4 B</ion-label>
+          <ion-radio  value="4B"></ion-radio>
+        </ion-item>
+</ion-list>
+</div>
+
+
+
+<div  *ngIf="mostrarListado">
+
+<ion-list>
+  <div>  <h1 class="colorBlanco">LISTADO DE ALUMNOS</h1></div>
+  <ion-item *ngFor="let student of listaEstudiantes;let i = index;">
+    <ion-label text-wrap >{{student.lastname}} , {{student.firstname}}</ion-label>
+    <ion-checkbox color="dark" [(ngModel)]="student.present"></ion-checkbox>
+  </ion-item>
+</ion-list>
+<button ion-button icon-right color="dark" (click)="changePicture()">
+    Tomar Foto
+    <ion-icon name="images"></ion-icon>
+  </button>
+<button ion-button  color="secondary" (click)="GuardarPresente(listaEstudiantes)" [disabled]="noStudents">
+  Guardar</button>
+
+</div>
+
+</div>
+
   </ion-content>
   

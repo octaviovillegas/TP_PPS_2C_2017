@@ -22,11 +22,16 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { MiPerfilPage } from '../pages/mi-perfil/mi-perfil';
 
 
+
 import { PictureUtils } from '../services/pictureUtils.service';
 import { Encuesta } from '../services/encuesta.service';
 import { PictureUtils2 } from '../services/pictureUtils2.service';
 import { Camera } from '@ionic-native/camera';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+
+//csv
+import { ListadoAlumnosPage } from '../pages/listado-alumnos/listado-alumnos';
+
 
 // Must export the config
 export const firebaseConfig = {
@@ -65,6 +70,8 @@ export const firebaseConfig = {
     TomarListaPage,
     MiPerfilPage,
     CrearEncuestaPage,
+    RealizarEncuestaPage,
+    ListadoAlumnosPage, 
     RealizarEncuestaPage
   ],
   imports: [
@@ -86,6 +93,8 @@ export const firebaseConfig = {
     TomarListaPage,
     MiPerfilPage,
     CrearEncuestaPage,
+    RealizarEncuestaPage,
+    ListadoAlumnosPage,
     RealizarEncuestaPage
     
   ],

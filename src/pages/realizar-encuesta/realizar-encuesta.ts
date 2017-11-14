@@ -21,6 +21,16 @@ import { BotonesPage } from '../botones/botones';
 })
 export class RealizarEncuestaPage {
   unaLista: Array<any> = new Array;
+  preguntaSeleccionada:string;
+  tituloSeleccionado:string;
+  opcionSeleccionada:string;
+  mostrarEncuesta:boolean;
+  mostrarTodas:boolean;
+  respuesta:string;
+  Unalista:FirebaseListObservable<any>;
+
+
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public platform: Platform,public auth : AuthProvider,
     public alertCtrl : AlertController,
@@ -28,6 +38,8 @@ export class RealizarEncuestaPage {
      public actionSheetCtrl: ActionSheetController,
       private pictureUtils: Encuesta){
       this.ObtenerLista();
+      this.mostrarEncuesta=false;
+      this.mostrarTodas=true;
   }
 
   ionViewDidLoad() {
@@ -40,10 +52,30 @@ export class RealizarEncuestaPage {
       });
     });
   }
-  guardarRespuesta(){
+  guardarRespuesta(value:string){
     console.log("guardar respuesta");
+    console.log(value);
+    this.respuesta=value;
     alert("respuesta Guardada");
+    this.Unalista=this.afDB.list('Respuestas/'+this.tituloSeleccionado+'/'+this.respuesta);
+    this.Unalista.push(1);
+    this.Unalista=this.afDB.list('Respuestas/'+this.tituloSeleccionado+'/total');
+    this.Unalista.push(1);
+
+
+
     this.navCtrl.push(BotonesPage);
+  }
+  Seleccionar(titulo:string,pregunta:string,opcion:string){
+this.tituloSeleccionado=titulo;
+console.log(pregunta);
+console.log(titulo);
+this.preguntaSeleccionada=pregunta;
+this.opcionSeleccionada=opcion;
+this.mostrarTodas=false;
+
+this.mostrarEncuesta=true;
+
   }
 
 }

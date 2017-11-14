@@ -26,10 +26,13 @@
               Tomar Lista
                 
             </button>
-          <button   ion-button block width="80px" 
-          (click)=Subir_foto() *ngIf="this.usuario=='admin@admin.com'">
-            Subir Foto
-            </button>
+          
+          <button color="royal" ion-button  block width="100px"  height="80" 
+          (click)=Lista() *ngIf="this.usuario=='admin@admin.com'">
+             Lista
+              
+          </button>
+      
             <button    ion-button block width="80px" 
             (click)=Listado_Fotos() *ngIf="this.usuario=='admin@admin.com'">
               Fotos Tomadas

@@ -23,11 +23,11 @@ export class HomePage {
     this.auth.logout();
 }
 listado(){
- this.items = this.afDB.list ('Cosas_Lindas');
+ this.items = this.afDB.list ('Fotos');
 
 }
 refreshPicture() {
-    this.afDB.list('Cosas_Lindas/', { preserveSnapshot: true }).subscribe((snapshots: any) => {
+    this.afDB.list('Fotos/', { preserveSnapshot: true }).subscribe((snapshots: any) => {
       snapshots.forEach((snapshot, index) => {
         this.userAvatarPicture[index] = snapshot.val();
         console.log(this.userAvatarPicture[index].foto);

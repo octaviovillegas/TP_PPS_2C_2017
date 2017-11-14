@@ -7,6 +7,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 import { TomarListaPage } from '../tomar-lista/tomar-lista';
 import { CrearEncuestaPage } from '../crear-encuesta/crear-encuesta';
 import { RealizarEncuestaPage } from '../realizar-encuesta/realizar-encuesta';
+import { ListadoAlumnosPage } from '../listado-alumnos/listado-alumnos';
 
 import { IonicPage,NavController, NavParams,AlertController } from 'ionic-angular';
 import { AuthService } from '../../services/auth.service';
@@ -48,6 +49,10 @@ usuario:string;
   TomarLista(){
     console.log('lsita');
     this.navCtrl.push(TomarListaPage);
+  }
+  Lista(){
+    console.log('lsita');
+    this.navCtrl.push(ListadoAlumnosPage);
   }
   RealizarEncuesta(){
     console.log('lsita');
