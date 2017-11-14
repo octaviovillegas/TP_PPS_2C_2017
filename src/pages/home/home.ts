@@ -14,7 +14,6 @@ export class HomePage {
   constructor(public navCtrl: NavController) {
     var pagesService = new PagesService();
     this.pages = pagesService.getByUserType(this.user);
-    console.log(this.pages);
   }
 
   public navigate(route: string): void{
