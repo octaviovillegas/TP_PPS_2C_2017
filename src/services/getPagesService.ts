@@ -16,7 +16,7 @@ export enum PageType {
 
 export class GetPagesService{
 
-    public static getAllPagesByUserType(usrType: string): Array<any>{
+    public getAllPagesByUserType(usrType: string): Array<any>{
         if (usrType == "Alumno") {
             return [ 
                 this.inicioPage, 
@@ -40,79 +40,86 @@ export class GetPagesService{
 
         if (usrType == "Administrador") {
             return [
-                this.inicioPage,
                 this.listPage,
-                this.adminUsuariosPage,
-                this.abmAlumnoPage,
-                this.configuracionPage,
+                this.inicioPage,
+                this.tomarAsistenciaPage,
                 this.encuestasPage,
                 this.enviarAvisoPage,
+                this.adminUsuariosPage,
+                this.abmAlumnoPage,
                 this.miPerfilPage,
-                this.tomarAsistenciaPage
+                this.configuracionPage
             ];
         }
     }
 
-    public static inicioPage = { 
+    public inicioPage = { 
         title: 'Inicio', 
         component: HomePage, 
-        route: 'HomePage', 
-        type: PageType.NotListable 
-    };
-
-    public static listPage = { 
-        title: 'List', 
-        component: ListPage, 
-        route: 'ListPage', 
-        type: PageType.NotListable 
-    };
-
-    public static adminUsuariosPage = { 
-        title: 'Administrar Usuarios', 
-        component: AdminUsuariosPage,
-        route: 'AdminUsuariosPage',
-        type: PageType.Listable
-    };
-
-    public static abmAlumnoPage = { 
-        title: 'ABM Alumno', 
-        component: AbmAlumnoPage,
-        route: 'AbmAlumnoPage',
+        route: 'Home', 
         type: PageType.NotListable
     };
 
-    public static configuracionPage = { 
+    public listPage = { 
+        title: 'List', 
+        component: ListPage, 
+        route: 'List', 
+        type: PageType.NotListable
+    };
+
+    public adminUsuariosPage = { 
+        title: 'Administrar Usuarios', 
+        component: AdminUsuariosPage,
+        route: 'AdminUsuarios',
+        type: PageType.Listable,
+        icon: "md-people"
+    };
+
+    public abmAlumnoPage = { 
+        title: 'ABM Alumno', 
+        component: AbmAlumnoPage,
+        route: 'AbmAlumno',
+        type: PageType.NotListable,
+        icon: ""
+    };
+
+    public configuracionPage = { 
         title: 'Configuracion', 
         component: ConfiguracionPage,
-        route: 'ConfiguracionPage',
-        type: PageType.Listable
+        route: 'Configuracion',
+        type: PageType.Listable,
+        icon: "md-settings"
     };
 
-    public static encuestasPage = { 
+    public encuestasPage = { 
         title: 'Encuestas', 
         component: EncuestasPage,
-        route: 'EncuestasPage',
-        type: PageType.Listable
+        route: 'Encuestas',
+        type: PageType.Listable,
+        icon: "md-podium"
     };
 
-    public static enviarAvisoPage = { 
+    public enviarAvisoPage = { 
         title: 'Enviar Aviso', 
         component: EnviarAvisoPage,
-        route: 'EnviarAvisoPage',
-        type: PageType.Listable
+        route: 'EnviarAviso',
+        type: PageType.Listable,
+        icon: "md-notifications"
     };
 
-    public static miPerfilPage = { 
+    public miPerfilPage = { 
         title: 'Mi Perfil', 
         component: MiPerfilPage,
-        route: 'MiPerfilPage',
-        type: PageType.Listable
+        route: 'MiPerfil',
+        type: PageType.Listable,
+        icon: "md-person"
     };
 
-    public static tomarAsistenciaPage = { 
+    public tomarAsistenciaPage = { 
         title: 'Tomar Asistencia', 
         component: TomarAsistenciaPage,
-        route: 'TomarAsistenciaPage',
-        type: PageType.Listable
+        route: 'TomarAsistencia',
+        type: PageType.Listable,
+        icon: "md-hand"
     };
 }

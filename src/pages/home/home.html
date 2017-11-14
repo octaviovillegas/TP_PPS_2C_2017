@@ -14,40 +14,15 @@
     <ion-card-header>
       Acciones
     </ion-card-header>
-
     <ion-list>
-      <button ion-item (click)="navigate('TomarAsistencia')">
-        <ion-icon name="md-hand" item-start></ion-icon>
-        Tomar asistencia
-      </button>
-    
-      <button ion-item (click)="navigate('Encuestas')">
-        <ion-icon name="md-podium" item-start></ion-icon>
-        Encuestas
-      </button>
-    
-      <button ion-item (click)="navigate('EnviarAviso')">
-        <ion-icon name="md-notifications" item-start></ion-icon>
-        Enviar aviso
-      </button>
-    
-      <button ion-item (click)="navigate('AdminUsuarios')">
-        <ion-icon name="md-people" item-start></ion-icon>
-        Administrar usuarios
-      </button>
-    
-      <button ion-item (click)="navigate('MiPerfil')">
-        <ion-icon name="md-person" item-start></ion-icon>
-        Mi perfil
-      </button>
-
-      <button ion-item (click)="navigate('Configuracion')">
-        <ion-icon name="md-settings" item-start></ion-icon>
-        Configuración
-      </button>
-      </ion-list>
-      
-    </ion-card>
+      <ng-template ngFor let-p [ngForOf]="pages">
+        <button ion-item *ngIf="isListable(p.type)" (click)="navigate(p.route)">
+          <ion-icon name="{{p.icon}}" item-start></ion-icon>
+            {{p.title}}
+        </button>
+      </ng-template>
+    </ion-list>
+  </ion-card>
 
     <br>
 
@@ -56,20 +31,3 @@
         <ion-icon style="margin-left: 5px;" name="md-log-out" item-start></ion-icon>
     </button>
 </ion-content>
-
-<!-- <ion-menu [content]="content">
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Menu</ion-title>
-      </ion-toolbar>
-    </ion-header>
-  
-    <ion-content>
-      <ion-list>
-        <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-          {{p.title}}
-        </button>
-      </ion-list>
-    </ion-content>
-  
-  </ion-menu> -->

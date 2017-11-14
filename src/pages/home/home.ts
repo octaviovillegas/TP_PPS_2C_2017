@@ -10,13 +10,19 @@ export class HomePage {
 
   user: string = "Administrador";
   public pages: Array<any>;
-
+  
   constructor(public navCtrl: NavController) {
-    this.pages = GetPagesService.getAllPagesByUserType(this.user);
+    var pepe = new GetPagesService();
+    this.pages = pepe.getAllPagesByUserType(this.user);
+    console.log(this.pages);
   }
 
   public navigate(route: string): void{
     this.navCtrl.push(route + "Page");
+  }
+
+  public isListable(type: PageType){
+    return type == PageType.Listable;
   }
 
   public cerrarSesion(): void
