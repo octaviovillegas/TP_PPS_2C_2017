@@ -4,9 +4,6 @@
       <ion-icon class="menu" name="menu"></ion-icon>
     </button>
     <ion-title>Inicio</ion-title>
-    <button class="cerrarSesion" (click)="cerrarSesion()">
-        <ion-icon name="log-out"></ion-icon>
-    </button> 
   </ion-navbar>
 </ion-header>
 
@@ -54,8 +51,8 @@
 
     <br>
 
-    <button ion-button color="danger" outline>
+    <button ion-button color="danger" outline block (click)="cerrarSesion()">
         Cerrar Sesión   
-        <ion-icon name="md-log-out" item-start> </ion-icon>
+        <ion-icon style="margin-left: 5px;" name="md-log-out" item-start></ion-icon>
     </button>
 </ion-content>
