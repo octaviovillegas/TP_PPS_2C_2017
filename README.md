@@ -40,6 +40,8 @@ Fecha fin: 11/11/2017
 
 Branch: ABMAlumnos
 
+-------------------
+
 Módulos a desarrollar: • Navegación y estilos
 • Toma de lista
 
@@ -48,6 +50,8 @@ Fecha inicio: 13/11/2017
 Fecha fin: 13/11/2017
 
 Branch: NavegacionEnAPP
+
+-------------------
 
 Módulos a desarrollar: • Toma de lista
 Fecha inicio: 14/11/2017
