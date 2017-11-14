@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { GetPagesService, PageType } from '../../services/getPagesService';
 
 @Component({
   selector: 'page-home',
@@ -7,18 +8,26 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
+  user: string = "Administrador";
+  public pages: Array<any>;
+  
   constructor(public navCtrl: NavController) {
-
+    var pepe = new GetPagesService();
+    this.pages = pepe.getAllPagesByUserType(this.user);
+    console.log(this.pages);
   }
 
-  goAdministrador()
-  {
-    this.navCtrl.push('AdministradorPage');
+  public navigate(route: string): void{
+    this.navCtrl.push(route + "Page");
   }
 
-  cerrarSesion()
+  public isListable(type: PageType){
+    return type == PageType.Listable;
+  }
+
+  public cerrarSesion(): void
   {
-    this.navCtrl.push('HomePage');
+    alert('HACER LOGOUT');
   }
 
 }
