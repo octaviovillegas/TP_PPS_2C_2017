@@ -14,9 +14,9 @@ export enum PageType {
     NotListable
 }
 
-export class GetPagesService{
+export class PagesService{
 
-    public getAllPagesByUserType(usrType: string): Array<any>{
+    public getByUserType(usrType: string): Array<any>{
         if (usrType == "Alumno") {
             return [ 
                 this.inicioPage, 

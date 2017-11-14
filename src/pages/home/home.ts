@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { GetPagesService, PageType } from '../../services/getPagesService';
+import { PagesService, PageType } from '../../services/pages.service';
 
 @Component({
   selector: 'page-home',
@@ -12,8 +12,8 @@ export class HomePage {
   public pages: Array<any>;
   
   constructor(public navCtrl: NavController) {
-    var pepe = new GetPagesService();
-    this.pages = pepe.getAllPagesByUserType(this.user);
+    var pagesService = new PagesService();
+    this.pages = pagesService.getByUserType(this.user);
     console.log(this.pages);
   }
 
