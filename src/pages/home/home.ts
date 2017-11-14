@@ -11,11 +11,11 @@ export class HomePage {
 
   }
 
-  navigate(route: string){
+  public navigate(route: string): void{
     this.navCtrl.push(route + "Page");
   }
 
-  cerrarSesion()
+  public cerrarSesion(): void
   {
     alert('HACER LOGOUT');
   }
