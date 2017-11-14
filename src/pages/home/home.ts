@@ -1,15 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-export enum NavRoutes {
-  TomarAsistencia,
-  Encuestas,
-  EnviarAviso,
-  AdminUsuarios,
-  MiPerfil,
-  Configuracion
-}
-
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -20,8 +11,8 @@ export class HomePage {
 
   }
 
-  navigate(route: NavRoutes){
-    this.navCtrl.push("AdminUsuariosPage");
+  navigate(route: string){
+    this.navCtrl.push(route + "Page");
   }
 
   cerrarSesion()
