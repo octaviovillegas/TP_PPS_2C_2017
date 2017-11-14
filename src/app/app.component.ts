@@ -8,6 +8,11 @@ import { LoginPage } from '../pages/login/login';
 import { ListPage } from '../pages/list/list';
 import { AdminUsuariosPage } from '../pages/adminUsuarios/adminUsuarios';
 import { AbmAlumnoPage } from '../pages/adminUsuarios/abms/abmalumno/abmalumno';
+import { ConfiguracionPage } from '../pages/configuracion/configuracion';
+import { EncuestasPage } from '../pages/encuestas/encuestas';
+import { EnviarAvisoPage } from '../pages/enviarAviso/enviarAviso';
+import { MiPerfilPage } from '../pages/miPerfil/miPerfil';
+import { TomarAsistenciaPage } from '../pages/tomarAsistencia/tomarAsistencia';
 
 @Component({
   templateUrl: 'app.html'
@@ -52,6 +57,11 @@ export class MyApp {
         { title: 'List', component: ListPage },
         { title: 'Administrador', component: AdminUsuariosPage },
         {title: 'ABM Alumno', component: AbmAlumnoPage },
+        {title: 'Configuracion', component: ConfiguracionPage },
+        {title: 'Encuestas', component: EncuestasPage },
+        {title: 'Enviar Aviso', component: EnviarAvisoPage },
+        {title: 'Mi Perfil', component: MiPerfilPage },
+        {title: 'Tomar Asistencia', component: TomarAsistenciaPage }
      ];
    }  
 
