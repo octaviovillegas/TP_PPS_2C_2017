@@ -6,7 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { ListPage } from '../pages/list/list';
-import { AdministradorPage } from '../pages/adminUsuarios/adminUsuarios';
+import { AdminUsuariosPage } from '../pages/adminUsuarios/adminUsuarios';
 import { AbmAlumnoPage } from '../pages/adminUsuarios/abms/abmalumno/abmalumno';
 
 @Component({
@@ -50,7 +50,7 @@ export class MyApp {
       this.pages = [
         { title: 'Inicio', component: HomePage },
         { title: 'List', component: ListPage },
-        { title: 'Administrador', component: AdministradorPage },
+        { title: 'Administrador', component: AdminUsuariosPage },
         {title: 'ABM Alumno', component: AbmAlumnoPage },
      ];
    }  

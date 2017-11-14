@@ -17,7 +17,8 @@ import { FIREBASE_CONFIG } from './app.firebase.config';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { AdministradorPage } from '../pages/administrador/administrador';
+import { AdminUsuariosPage } from '../pages/adminUsuarios/adminUsuarios';
+import { AbmAlumnoPage } from '../pages/adminUsuarios/abms/abmAlumno/abmAlumno';
 
 @NgModule({
   declarations: [

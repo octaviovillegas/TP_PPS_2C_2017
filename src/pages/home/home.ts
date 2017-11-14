@@ -21,7 +21,7 @@ export class HomePage {
   }
 
   navigate(route: NavRoutes){
-    this.navCtrl(route.toString());
+    this.navCtrl.push("AdminUsuariosPage");
   }
 
   cerrarSesion()

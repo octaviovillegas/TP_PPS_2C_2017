@@ -37,6 +37,6 @@ export class ListPage {
 
   cerrarSesion()
   {
-    this.navCtrl.push('AdministradorPage');
+    this.navCtrl.push('AdminUsersPage');
   }
 }
