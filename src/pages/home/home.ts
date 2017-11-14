@@ -1,6 +1,15 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
+export enum NavRoutes {
+  TomarAsistencia,
+  Encuestas,
+  EnviarAviso,
+  AdminUsuario,
+  MiPerfil,
+  Configuracion
+}
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -11,14 +20,13 @@ export class HomePage {
 
   }
 
-  goAdministrador()
-  {
-    this.navCtrl.push('AdministradorPage');
+  navigate(route: NavRoutes){
+    this.navCtrl(route.toString());
   }
 
   cerrarSesion()
   {
-    this.navCtrl.push('HomePage');
+    alert('HACER LOGOUT');
   }
 
 }

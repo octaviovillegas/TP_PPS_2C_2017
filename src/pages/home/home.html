@@ -12,8 +12,6 @@
 
 <ion-content padding>
   <h3>EscuelApp</h3>
-  <button ion-button (click)="goAdministrador()">Administrador</button>
-  <button ion-button secondary menuToggle>Toggle Menu</button>
 
   <ion-card>
     <ion-card-header>
@@ -51,6 +49,11 @@
         Configuración
       </button>
       </ion-list>
+      
     </ion-card>
 
+    <button ion-button secondary menuToggle>
+        <ion-icon name="md-log-out" item-start></ion-icon>
+      Cerrar Sesión
+    </button>
 </ion-content>
