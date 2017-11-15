@@ -19,12 +19,26 @@
 
   <ion-item>
     <ion-label color="primary" >Nombre:  {{ nombre | uppercase}}</ion-label>
-    <ion-label color="primary" >Correo:  {{ correo }}</ion-label>
+
   </ion-item>
 
   <ion-item>
-    <ion-label color="primary" ></ion-label>
+    <ion-label color="primary" >Correo:  {{ correo }}</ion-label>
+    <ion-label (click)="cambiarCorreo()" color="danger" >Cambiar</ion-label>
   </ion-item>
+
+  <ion-item>
+    <ion-label color="primary" >Legajo: {{legajo}}</ion-label>
+  </ion-item>
+
+
+
+    <ion-label>Materias cursando actualmente:</ion-label>
+  <ul *ngFor= "let materia of materias">
+    <li>
+      {{materia | uppercase}}
+    </li>
+  </ul>
 
 
 

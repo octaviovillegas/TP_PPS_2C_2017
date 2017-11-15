@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
 import { PersonasServiceProvider } from "../../providers/personas-service/personas-service";
 
@@ -26,11 +26,13 @@ export class PerfilPage {
   private nombre:string;
   private materias:Array<string>;
   private legajo:string;
+  private correoModif:string;
 
   private storageRef = firebase.storage().ref();
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              private dbPersonas:PersonasServiceProvider, public camera:Camera
+              private dbPersonas:PersonasServiceProvider, public camera:Camera,
+              public alertCtrl:AlertController
   ) {}
 
   ionViewDidLoad() {
@@ -39,7 +41,7 @@ export class PerfilPage {
 
 
     this.dbPersonas.getDatosPersona(this.correo, this.perfil).subscribe(valor=>{
-      console.log('valorrr:', valor);
+
       switch (this.perfil) {
           case 'alumno':
                 //this.alumno = new Alumno();
@@ -47,6 +49,7 @@ export class PerfilPage {
                 this.nombre = valor[0]["nombre"];
                 this.foto = valor[0]["foto"];
                 this.legajo = valor[0]["legajo"];
+                this.materias = valor[0]["materias"];
 
           break;
 
@@ -57,6 +60,29 @@ export class PerfilPage {
   }
 
 
+  cambiarCorreo(){
+    let alertEmail = this.alertCtrl.create({
+      title: 'Ingrese nuevo mail',
+      inputs:[
+        {
+          name:'email',
+          placeholder:'Nuevo Correo'
+        }
+    ],
+    buttons:[
+      {
+        text: 'Aceptar',
+        handler: data=>{
+          this.correoModif = data.email;
+          this.dbPersonas.cambiarEmail(this.correoModif, this.perfil+'s', this.legajo);
+
+        }
+      }
+    ]
+    });
+    alertEmail.present();
+    //
+  }
 
   sacarFoto(){
     let options:CameraOptions ={
@@ -74,8 +100,18 @@ export class PerfilPage {
     this.camera.getPicture(options).then((imagen)=>{
           let imagenData = 'data:image/jpeg;base64,'+ imagen;
           //this.imagen = imagen;
-          let upload = this.storageRef.child('alumnos/' + this.legajo).putString(imagen, 'base64');
-    });
+          let upload = this.storageRef.child('alumnos/' + this.legajo + '.jpg').putString(imagen, 'base64');
+
+          upload.then((snapshot=>{
+                this.dbPersonas.guardarLinkFoto(this.legajo, snapshot.downloadURL, this.legajo);
+                let msjOK = this.alertCtrl.create({
+                  subTitle: 'Imagen guardada',
+                  buttons: ['Aceptar']
+                 });
+                 msjOK.present();
+          })
+          );
+        });
 
   }
 

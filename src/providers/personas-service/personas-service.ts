@@ -66,19 +66,34 @@ export class PersonasServiceProvider {
       default:
         break;
     }
-    console.log('path:', path);
+
     return path;
   }
 
 
-  guardarLinkFoto(nombre:string, path:string, uid:string){
-    let foto = new Imagen();
-    foto.setNombre(nombre);
-    foto.setFoto(path);
+  guardarLinkFoto(nombre:string, path:string, legajo:string){  //, uid:string){
+    //let foto = new Imagen();
+    //foto.setNombre(nombre);
+    //foto.setFoto(path);
 
-    this.db.app.database().ref('/fotos/'+uid+'/').push(foto);
+    this.db.app.database().ref('/alumnos/' + legajo).update({"foto":path});
 
   }
+
+
+  public cambiarEmail(correo:string, perfil:string, legajo:string){
+    let correoAntes:string = this.auth.auth.currentUser.email;
+    this.getUsuariosLista().subscribe(user=>{
+      if (user["correo"]==correoAntes) {
+        this.db.app.database().ref('usuarios/').update({"correo": correo});
+      }
+    });
+    this.db.app.database().ref(perfil + '/' + legajo).update({"correo": correo});
+    this.auth.auth.currentUser.updateEmail(correo);
+    //this.usuarios = this.db.list('/usuarios') as FirebaseListObservable<Usuario[]>;
+
+  }
+
 
 
 }
