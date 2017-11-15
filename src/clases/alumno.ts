@@ -3,18 +3,30 @@ export class Alumno{
   private legajo:string;
   private foto:string;
   private nombre:string;
-  private aulas:Array<any>;
-  private materias:Array<any>;
+  private aulas:Array<string>;
+  private materias:Array<string>;
+  private passw:string;
+  private correo:string;
+  private perfil:string;
 
   constructor(){
     this.legajo="";
+    this.correo = "";
     this.foto="";
     this.nombre="";
-    this.aulas=new Array<any>();
-    this.materias=new Array<any>();
+    this.passw = "";
+    this.perfil = "";
+    this.aulas=new Array<string>();
+    this.materias=new Array<string>();
   }
 
-  public getDni():string{
+  public getPerfil(){
+    return this.perfil;
+  }
+  public getCorreo(){
+    return this.correo;
+  }
+  public getLegajo():string{
     return this.legajo;
   }
   public getFoto():string{
@@ -29,8 +41,11 @@ export class Alumno{
   public getMaterias(){
     return this.materias;
   }
+  public getPassword():string{
+    return this.passw;
+  }
 
-  public setDni(_legajo:string):void{
+  public setLegajo(_legajo:string):void{
     this.legajo = _legajo;
   }
   public setFoto(_foto:string):void{
@@ -47,13 +62,23 @@ export class Alumno{
       return false;
     }
   }
-  public setMateria(_materia:string):boolean{
-    if (this.materias!=undefined && this.materias!=null) {
-      this.materias.push(_materia);
+  public setMateria(_materia:string[]):boolean{
+    if (_materia!=undefined && _materia!=null) {
+      this.materias = _materia;
       return true;
     } else {
       return false;
     }
+  }
+
+  public setPassword(password:string):void{
+    this.passw = password;
+  }
+  public setCorreo(mail:string):void{
+    this.correo = mail;
+  }
+  public setPerfil(_perfil:string):void{
+    this.perfil = _perfil;
   }
 
 
