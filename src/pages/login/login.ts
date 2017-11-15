@@ -49,17 +49,18 @@ export class LoginPage {
             if (usuario['correo'] == this.loginUsuario.getCorreo()) {
                 this.loginUsuario.setPerfil(usuario['perfil']);
                 this.loginUsuario.setNombre(usuario['nombre']);
+                this.loginUsuario.setClave(-1); //no necesito guardar la passw
                 this.navCtrl.push("MenuPage", JSON.stringify(this.loginUsuario));
             }
           });
         });
-      })
-      .catch(err=>{
+      }, err=>{
         let msjAlert = this.alertCtrl.create({
           subTitle: 'Error al validar usuario. Verifique sus datos',
           buttons: ['Volver']
         });
       })
+
     }
 
 

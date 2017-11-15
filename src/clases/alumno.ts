@@ -39,7 +39,7 @@ export class Alumno{
   public setNombre(_nombre:string):void{
     this.nombre = _nombre;
   }
-  public setAula(_aula:string):boolean{
+  public setAulas(_aula:string):boolean{
     if (this.aulas!=undefined && this.aulas!=null) {
       this.aulas.push(_aula);
       return true;
