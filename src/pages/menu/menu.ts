@@ -9,13 +9,26 @@ import { Usuario } from "../../clases/usuario";
 })
 export class MenuPage {
 
+  private datos:{};
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl:AlertController
 
   ) {}
 
   ionViewDidLoad() {
-    let datos:{} = JSON.parse(this.navParams.data);
+    this.datos = JSON.parse(this.navParams.data);
+    console.log(this.navParams.data);
   }
+
+
+
+
+  private irAPerfil():void{
+    this.navCtrl.push("PerfilPage", {"correo" : this.datos["correo"], "perfil":this.datos["perfil"]});
+  }
+
+
+
 
 }

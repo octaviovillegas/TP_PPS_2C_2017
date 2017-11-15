@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController, Platform } from 'ionic-angular';
 
 import { Firebase } from '@ionic-native/firebase';
 import { LoginServiceProvider } from "../../providers/login-service/login-service";
@@ -21,7 +21,8 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl:AlertController, public loadingCtrl:LoadingController,
-              private auth:LoginServiceProvider, private servicioDB:PersonasServiceProvider
+              private auth:LoginServiceProvider, private servicioDB:PersonasServiceProvider,
+              public platform:Platform
   ) {}
 
   ionViewDidLoad() {
@@ -46,20 +47,22 @@ export class LoginPage {
         this.listaUsuarios = this.servicioDB.getUsuariosLista();
         this.listaUsuarios.subscribe(lista=>{
           lista.forEach(usuario => {
+            //console.log(usuario);
             if (usuario['correo'] == this.loginUsuario.getCorreo()) {
                 this.loginUsuario.setPerfil(usuario['perfil']);
                 this.loginUsuario.setNombre(usuario['nombre']);
+                this.loginUsuario.setClave(-1); //no necesito guardar la passw
                 this.navCtrl.push("MenuPage", JSON.stringify(this.loginUsuario));
             }
           });
         });
-      })
-      .catch(err=>{
+      }, err=>{
         let msjAlert = this.alertCtrl.create({
           subTitle: 'Error al validar usuario. Verifique sus datos',
           buttons: ['Volver']
         });
       })
+
     }
 
 
@@ -104,10 +107,18 @@ export class LoginPage {
     }
 
 
+    validarCantDigitos(event){
+
+    }
+
+    validarNum(event){
+
+    }
 
 
-
-
+    salir(){
+      this.platform.exitApp();
+    }
 
 
 

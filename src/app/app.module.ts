@@ -44,13 +44,13 @@ var firebaseAuth  = {
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
+    //HomePage,
     LoginPage,
-    MateriasPage,
-    MateriaPrincipalPage,
-    PersonasPage,
-    PersonasabmPage,
-    PerfilPage
+    //MateriasPage,
+    //MateriaPrincipalPage,
+    //PersonasPage,
+    //PersonasabmPage,
+    //PerfilPage
 
   ],
   imports: [
@@ -66,13 +66,13 @@ var firebaseAuth  = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
+    //HomePage,
     LoginPage,
-    MateriasPage,
-    MateriaPrincipalPage,
-    PersonasPage,
-    PersonasabmPage,
-    PerfilPage
+    //MateriasPage,
+    //MateriaPrincipalPage,
+    //PersonasPage,
+    //PersonasabmPage,
+    //PerfilPage
   ],
   providers: [
     StatusBar,
