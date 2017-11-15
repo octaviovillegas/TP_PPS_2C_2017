@@ -41,7 +41,7 @@ export class PersonasServiceProvider {
         equalTo: correo
       }
     }) as FirebaseListObservable<any[]>;
-    console.log(this.usuarios);
+    //console.log(this.usuarios);
     return this.usuarios;
   }
 
@@ -71,26 +71,25 @@ export class PersonasServiceProvider {
   }
 
 
-  guardarLinkFoto(nombre:string, path:string, legajo:string){  //, uid:string){
-    //let foto = new Imagen();
-    //foto.setNombre(nombre);
-    //foto.setFoto(path);
-
+  guardarLinkFoto(nombre:string, path:string, legajo:string){
     this.db.app.database().ref('/alumnos/' + legajo).update({"foto":path});
-
   }
 
 
   public cambiarEmail(correo:string, perfil:string, legajo:string){
     let correoAntes:string = this.auth.auth.currentUser.email;
-    this.getUsuariosLista().subscribe(user=>{
-      if (user["correo"]==correoAntes) {
-        this.db.app.database().ref('usuarios/').update({"correo": correo});
-      }
-    });
+    this.usuarios = this.getUsuariosLista();
+    this.usuarios.subscribe(user=>{
+        user.forEach(usuario => {
+          if (usuario["correo"] == correoAntes) {
+            this.db.app.database().ref('/usuarios/'+ 2).update({"correo": correo});
+          }
+        });
+
     this.db.app.database().ref(perfil + '/' + legajo).update({"correo": correo});
     this.auth.auth.currentUser.updateEmail(correo);
-    //this.usuarios = this.db.list('/usuarios') as FirebaseListObservable<Usuario[]>;
+    });
+
 
   }
 
