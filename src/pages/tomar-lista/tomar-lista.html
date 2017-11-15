@@ -81,9 +81,7 @@ Division
   </div>
    <ion-list *ngIf="ocultarMateria==false" radio-group (ionChange)="MateriaSeleccionada($event)">   
             
-                    <ion-list-header>      
-                        Seleccione Materia
-                      </ion-list-header>
+      <div>  <h1 class="colorBlanco">SELECCIONE MATERIA</h1></div>
                  <ion-item>
                     <ion-label>Metodologia</ion-label> 
                     <ion-radio  value="Metodologia" ></ion-radio>
@@ -101,10 +99,7 @@ Division
 
 <div >
     <ion-list *ngIf="ocultarDivision==false" radio-group (ionChange)="DivisionSeleccionada($event)">   
-     
-              <ion-list-header>      
-                  Seleccione Division
-                </ion-list-header>
+        <div>  <h1 class="colorBlanco">SELECCIONE DIVISION</h1></div>
            <ion-item>
               <ion-label>4 A</ion-label> 
               <ion-radio  value="4A" ></ion-radio>
@@ -120,7 +115,7 @@ Division
 
 <div  *ngIf="mostrarListado">
 
-<ion-list>
+<!--ion-list>
   <div>  <h1 class="colorBlanco">LISTADO DE ALUMNOS</h1></div>
   <ion-item *ngFor="let student of listaEstudiantes;let i = index;">
     <ion-label text-wrap >{{student.lastname}} , {{student.firstname}}</ion-label>
@@ -133,10 +128,44 @@ Division
   </button>
 <button ion-button  color="secondary" (click)="GuardarPresente(listaEstudiantes)" [disabled]="noStudents">
   Guardar</button>
-
+  <button ion-button  color="secondary" (click)="readCsvData()" [disabled]="noStudents">
+      readCsvData</button>
+  
 </div>
 
 </div>
+<div>
+    
+        <table border="1" class="data-table">
+            <th>Legajo</th>
+            <th>Nombre</th>
+            <th>apellido</th>
+            <th>Horario</th>
+          <tr *ngFor="let row of csvData; let i = index">
+            <td *ngFor="let data of row; let j = index; trackBy: trackByFn">
+              <ion-input type="text" [(ngModel)]="csvData[i][j]"></ion-input>
+            </td>
+          </tr>
+        </table>
+     
+</div-->
 
+
+<ion-list>
+    <div>  <h1 class="colorBlanco">LISTADO DE ALUMNOS</h1></div>
+    <ion-item *ngFor="let student of listaEstudiantes2;let i = index;">
+      <ion-label text-wrap >{{student.lastname}} , {{student.firstname}}</ion-label>
+      <ion-checkbox color="dark" [(ngModel)]="student.present"></ion-checkbox>
+    </ion-item>
+  
+  </ion-list>
+  <button ion-button icon-right color="dark" (click)="changePicture()">
+      Tomar Foto
+      <ion-icon name="images"></ion-icon>
+    </button>
+  <button ion-button  color="secondary" (click)="GuardarPresente2(listaEstudiantes2)" [disabled]="noStudents">
+      Guardar</button>
+</div>
+</div>
   </ion-content>
   

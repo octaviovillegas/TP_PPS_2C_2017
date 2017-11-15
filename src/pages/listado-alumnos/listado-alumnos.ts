@@ -6,7 +6,6 @@ import { Http } from '@angular/http';
 import * as papa from 'papaparse';
 
 //$IMPORTSTATEMENT
-
 /**
  * Generated class for the ListadoAlumnosPage page.
  *
@@ -22,26 +21,44 @@ export class ListadoAlumnosPage {
 
   csvData: any[] = [];
   headerRow: any[] = [];
+  mostrarBotones:boolean;
 
   constructor(public navCtrl: NavController, private http: Http) {
-    this.readCsvData();
+    this.mostrarBotones=true;
+    
   }
 
-  private readCsvData() {
-    this.http.get('assets/dummyData.csv')
+ /* private readCsvData() {
+    this.http.get('assets/PPS -4A-2c2017.csv')
       .subscribe(
       data => this.extractData(data),
       err => this.handleError(err)
       );
-  }
- 
+  }*/
+ abrir4A(){
+  this.http.get('assets/PPS -4A-2c2017.csv')
+  .subscribe(
+  data => this.extractData(data),
+  err => this.handleError(err)
+  );
+  this.mostrarBotones=false;
+ }
+ abrir4B(){
+  this.http.get('assets/PPS-4B-2c2017.csv')
+  .subscribe(
+  data => this.extractData(data),
+  err => this.handleError(err)
+  );
+  this.mostrarBotones=false;
+   }
+
   private extractData(res) {
     let csvData = res['_body'] || '';
     let parsedData = papa.parse(csvData).data;
  
-    this.headerRow = parsedData[0];
+   // this.headerRow = parsedData[0];
  
-    parsedData.splice(0, 1);
+    //sparsedData.splice(0, 1);
     this.csvData = parsedData;
   }
  

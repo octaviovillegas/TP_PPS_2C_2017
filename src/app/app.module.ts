@@ -13,7 +13,7 @@ import { CrearEncuestaPage } from '../pages/crear-encuesta/crear-encuesta';
 //import { LectorQrPage } from './lector-qr';
 import { AuthProvider } from '../providers/auth/auth';
 import { RealizarEncuestaPage } from '../pages/realizar-encuesta/realizar-encuesta';
-
+import { DatePipe } from '@angular/common';
 
 
 import { AngularFireModule } from 'angularfire2';
@@ -105,7 +105,8 @@ export const firebaseConfig = {
     Encuesta,
     Camera,
     { provide: ErrorHandler, useClass: IonicErrorHandler },    
-    AuthProvider
+    AuthProvider,
+    DatePipe
     
   ]
 })

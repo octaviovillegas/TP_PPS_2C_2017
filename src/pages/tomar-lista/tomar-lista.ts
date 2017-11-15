@@ -6,6 +6,9 @@ import { PictureUtils } from '../../services/pictureUtils.service';
 import { Observable } from 'rxjs/Observable';
 import { BotonesPage } from '../botones/botones';
 import { Estudiante } from "../../app/clases/estudiante";
+import { DatePipe } from '@angular/common';
+import { Http } from '@angular/http';
+import * as papa from 'papaparse';
 
 
 @Component({
@@ -13,17 +16,21 @@ import { Estudiante } from "../../app/clases/estudiante";
   templateUrl: 'tomar-lista.html',
 })
 export class TomarListaPage {
-
+  csvData: any[] = [];
+  headerRow: any[] = [];
   items: FirebaseListObservable<any[]>;
+  listadoAlumnos: any[] = [];
   Materia:string;
   lista: Array<any> = new Array;
   presente:boolean;
   Unalista:FirebaseListObservable<any>;
+  unalista:FirebaseListObservable<any>;
   user:string;
   p:string;
   students: Array<any>;
   noStudents:boolean;
   listaEstudiantes:Array<Estudiante>;
+  listaEstudiantes2:Array<Estudiante>;
   unEstudiante:Estudiante;
   materia:string;
   aula:string;
@@ -42,10 +49,11 @@ export class TomarListaPage {
     public alertCtrl : AlertController,
     public actionSheetCtrl: ActionSheetController,
     public platform: Platform,
-    private pictureUtils: PictureUtils,
+    private pictureUtils: PictureUtils,private http: Http,public datePipeCtrl: DatePipe,
     public afDB: AngularFireDatabase) {
      
       console.log(this.lista);
+      this.listaEstudiantes2=new Array<Estudiante>();
     
       this.ocultarMateria=true;
       this.mostrarListado=false;
@@ -74,9 +82,9 @@ if (this.pormateria){
 this.ocultarDivision=false;}
 else if (this.pordivision)
 {this.mostrarListado=true;this.AsignarAula();
-  this.refreshPicture();}
+  this.readCsvData();
 //this.ocultarAula=false;
-}
+}}
 AsignarAula(){
   if (this.materia=="Metodologia")
   {  if(this.division=="4A"){this.aula="305"; }
@@ -100,9 +108,10 @@ DivisionSeleccionada(e:string){
   else if(this.pormateria){
   this.mostrarListado=true;
 this.AsignarAula();
-this.refreshPicture();}
+this.readCsvData();
 }
-
+}
+/*
    refreshPicture() {
     this.listaEstudiantes=new Array<Estudiante>();
     console.log('Lista/'+this.division+'/'+this.materia+'/'+this.aula);
@@ -121,7 +130,7 @@ this.refreshPicture();}
 
       });
     });
-  }
+  }*/
 
   GuardarPresente(listaE: Array<Estudiante>){
     if (listaE.length > 0) {
@@ -153,8 +162,7 @@ this.refreshPicture();}
       
   }
 
-
-  PorMateria(){
+PorMateria(){
 this.MostrarBotones=false;
 this.ocultarMateria=false;
 this.pormateria=true;
@@ -190,10 +198,134 @@ this.ocultarDivision=false;
         ]
       });
       actionSheet.present();
-      
-   
-  
     }
+
+
+    private readCsvData() {
+      if(this.division=="4A"){
+
+      this.http.get('assets/PPS -4A-2c2017.csv')
+        .subscribe(
+        data => this.extractData(data),
+        err => this.handleError(err)
+        );}
+        else     if(this.division=="4B"){
+          
+                this.http.get('assets/PPS-4b-2c2017.csv')
+                  .subscribe(
+                  data => this.extractData(data),
+                  err => this.handleError(err)
+                  );}
+ 
+    }
+
+
+  downloadCSV() {
+    let csv = papa.unparse({
+      fields: this.headerRow,
+      data: this.csvData
+    });
+ 
+    // Dummy implementation for Desktop download purpose
+    var blob = new Blob([csv]);
+    var a = window.document.createElement("a");
+    a.href = window.URL.createObjectURL(blob);
+    a.download = "newdata.csv";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+   
+  private extractData(res) {
+    let csvData = res['_body'] || '';
+    let parsedData = papa.parse(csvData).data;
+   
+ 
+    this.headerRow = parsedData[0];
+ 
+    parsedData.splice(0, 1);
+    this.csvData = parsedData;
+    this.listadoAlumnos=this.csvData;
+  console.log(this.listadoAlumnos.length);
+
+     //this.lista[index] = snapshot.val();
+     let i=-1;
+    if (this.listadoAlumnos.length > 0) {
+      this.listadoAlumnos.forEach (student=>{
+        i++;
+        console.log(this.listadoAlumnos[i][0]);
+       
+     var unEstudiante= new Estudiante();
+     unEstudiante.userid = this.listadoAlumnos[i][0];
+     unEstudiante.firstname =  this.listadoAlumnos[i][2];
+     unEstudiante.lastname =  this.listadoAlumnos[i][1];
+     unEstudiante.present =  false;
+    this.listaEstudiantes2.push(unEstudiante);
+    console.log(this.listaEstudiantes2);
+    
+
+   // console.log('data'+this.listadoAlumnos);}
+    
+  })}}
+ 
+  private handleError(err) {
+    console.log('something went wrong: ', err);
+  }
+ 
+  trackByFn(index: any, item: any) {
+    return index;
+  }
+
+
+
+  GuardarPresente2(listaE: Array<Estudiante>){
+    let datePipe = this.datePipeCtrl.transform(Date.now(), 'dd-MM-yyyy');
+   // let fechaActual = new Date();
+   // let dia = fechaActual.getDate()
+
+    if (listaE.length > 0) {
+      listaE.forEach(student =>
+      {
+        console.log(student.present);
+        if (student.present)
+        {
+          this.unalista=this.afDB.list('Lista/'+this.division+'/'+this.materia+'/'+this.aula+'/'+datePipe);
+         // this.Unalista=this.afDB.list('Lista/Matematica/'+student.firstname+'/presente');
+         
+
+         this.unalista.push({legajo:student.userid,apellido:student.lastname,nombre:student.firstname,presente:student.present});
+          this.unalista=this.afDB.list('Alumnos/'+student.userid+'/'+this.materia+'/presente');
+          this.unalista.push(1);
+          console.log(student.firstname);
+          console.log("porguardar");
+        }
+        else if (student.present==false){
+         // this.Unalista=this.afDB.list('Lista/'+this.division+'/'+this.materia+'/'+this.aula+'/'+student.lastname+'/ausente');
+          //this.Unalista=this.afDB.list('Lista/Matematica/'+student.firstname+'/ausente');
+          this.unalista=this.afDB.list('Lista/'+this.division+'/'+this.materia+'/'+this.aula+'/'+datePipe);
+          this.unalista.push({legajo:student.userid,apellido:student.lastname,nombre:student.firstname,presente:student.present});
+          this.unalista=this.afDB.list('Alumnos/'+student.userid+'/'+this.materia+'/ausente');
+          this.unalista.push(1);
+        }
+      })
+    }
+    this.listaEstudiantes2=null;
+    this.listadoAlumnos=null;
+    
+    alert("Los datos Fueron guardados Correctamente");
+    this.navCtrl.push(BotonesPage);
+      
+  }
+
+
+
+
+
+
+
+
+
 
 
 
