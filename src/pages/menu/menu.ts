@@ -28,6 +28,9 @@ export class MenuPage {
     this.navCtrl.push("PerfilPage", {"correo" : this.datos["correo"], "perfil":this.datos["perfil"]});
   }
 
+  private irAFormAlumnos(){
+    this.navCtrl.push('AlumnosFormPage');
+  }
 
 
 

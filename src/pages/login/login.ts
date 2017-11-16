@@ -116,6 +116,10 @@ export class LoginPage {
     }
 
 
+    crearAlumno(){
+      this.navCtrl.push('AlumnosFormPage');
+    }
+
     salir(){
       this.platform.exitApp();
     }
