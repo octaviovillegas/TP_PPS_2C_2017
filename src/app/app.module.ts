@@ -13,6 +13,7 @@ import { PersonasPage } from '../pages/personas/personas';
 import { PersonasabmPage } from '../pages/personasabm/personasabm';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {EncuestaPage} from '../pages/encuesta/encuesta';
+import {GraficosPage} from '../pages/graficos/graficos';
 
 import { PerfilPage } from "../pages/perfil/perfil";
 
@@ -31,7 +32,7 @@ import { AngularFireAuthModule }  from 'angularfire2/auth';
 import { Camera } from '@ionic-native/camera';
 import { PersonasServiceProvider } from '../providers/personas-service/personas-service';
 import { LoginServiceProvider } from '../providers/login-service/login-service';
-
+import { Chart } from 'chart.js';
 
 var firebaseAuth  = {
   apiKey: "AIzaSyBjrQu2x_3cZjv1Tdvw_TIYxBMAJ2VQU_M",
@@ -52,7 +53,8 @@ var firebaseAuth  = {
     //PersonasPage,
     //PersonasabmPage,
     //PerfilPage
-    EncuestaPage
+    EncuestaPage,
+    GraficosPage
   ],
   imports: [
     BrowserModule,
@@ -74,7 +76,9 @@ var firebaseAuth  = {
     //PersonasPage,
     //PersonasabmPage,
     //PerfilPage
-    EncuestaPage
+    EncuestaPage,
+    GraficosPage
+    
   ],
   providers: [
     StatusBar,

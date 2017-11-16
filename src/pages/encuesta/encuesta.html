@@ -1,18 +1,73 @@
-<!--
-  Generated template for the EncuestaPage page.
-
+<<!--
+  Generated template for the Encuesta page.
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>Encuesta</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-
-</ion-content>
+  
+    <ion-navbar>
+      <ion-title>Encuesta</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+  
+    <div>
+    <ion-card>
+          <ion-card-header>{{pregunta1}}</ion-card-header>
+          <ion-card-content>          
+          <ion-list radio-group [(ngModel)]="Preg1Rb">               
+            <ion-item>
+              <ion-label>BUENA</ion-label>
+              <ion-radio checked="true" value="Buena" ></ion-radio>            
+            </ion-item>
+            <ion-item>
+              <ion-label>REGULAR</ion-label>
+              <ion-radio  value="Regular"></ion-radio>
+            </ion-item>  
+            <ion-item>
+              <ion-label>MALA</ion-label>
+              <ion-radio value="Mala"></ion-radio>
+            </ion-item>         
+          </ion-list>         
+          </ion-card-content>
+        </ion-card>  
+  
+          <ion-card>
+          <ion-card-header>{{pregunta2}} </ion-card-header>
+          <ion-card-content>          
+          <ion-list radio-group [(ngModel)]="Preg2Rb">               
+            <ion-item>
+              <ion-label>SI</ion-label>
+              <ion-radio  checked="true" value="Si" ></ion-radio>            
+            </ion-item>
+            <ion-item>
+              <ion-label>NO</ion-label>
+              <ion-radio  value="No"></ion-radio>
+            </ion-item>                     
+          </ion-list>         
+          </ion-card-content>
+        </ion-card> 
+  
+           <ion-card>
+          <ion-card-header>{{pregunta3}} </ion-card-header>
+          <ion-card-content>          
+          <ion-list radio-group [(ngModel)]="Preg3Rb">               
+            <ion-item>
+              <ion-label>SI</ion-label>
+              <ion-radio checked="true" value="Sisi" ></ion-radio>            
+            </ion-item>
+            <ion-item>
+              <ion-label>NO</ion-label>
+              <ion-radio value="Nono"></ion-radio>
+            </ion-item>                     
+          </ion-list>         
+          </ion-card-content>
+        </ion-card>
+      
+      <button ion-button block type="submit" (click)="subirEncuesta()">Subir Encuesta</button>
+  </div>
+  
+  </ion-content>

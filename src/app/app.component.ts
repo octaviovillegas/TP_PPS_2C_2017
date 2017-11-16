@@ -17,7 +17,7 @@ import {EncuestaPage} from '../pages/encuesta/encuesta';
 })
 export class MyApp {
   @ViewChild('contenidoPrincipal') main: Nav;
-  rootPage:any = LoginPage;
+  rootPage:any = EncuestaPage;
 
   public pages: Array<{titulo: string, component:any}>;
 
