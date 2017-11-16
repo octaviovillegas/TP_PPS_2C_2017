@@ -33,6 +33,8 @@ import { Camera } from '@ionic-native/camera';
 import { PersonasServiceProvider } from '../providers/personas-service/personas-service';
 import { LoginServiceProvider } from '../providers/login-service/login-service';
 import { Chart } from 'chart.js';
+import { AlumnoServiceProvider } from '../providers/alumno-service/alumno-service';
+
 
 var firebaseAuth  = {
   apiKey: "AIzaSyBjrQu2x_3cZjv1Tdvw_TIYxBMAJ2VQU_M",
@@ -88,7 +90,8 @@ var firebaseAuth  = {
     ServMateriaProvider,
     ServpersonaProvider,
     PersonasServiceProvider,
-    LoginServiceProvider
+    LoginServiceProvider,
+    AlumnoServiceProvider
   ]
 })
 export class AppModule {}

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Usuario } from "../../clases/usuario";
 
+
 @IonicPage()
 @Component({
   selector: 'page-menu',
@@ -28,6 +29,9 @@ export class MenuPage {
     this.navCtrl.push("PerfilPage", {"correo" : this.datos["correo"], "perfil":this.datos["perfil"]});
   }
 
+  private irAFormAlumnos(){
+    this.navCtrl.push("AlumnosFormPage");
+  }
 
 
 
