@@ -9,6 +9,7 @@ import { MateriasPage } from '../pages/materias/materias';
 import { MateriaPrincipalPage } from '../pages/materia-principal/materia-principal';
 import { PersonasPage } from '../pages/personas/personas';
 import {PerfilPage} from '../pages/perfil/perfil';
+import {EncuestaPage} from '../pages/encuesta/encuesta';
 
 
 @Component({

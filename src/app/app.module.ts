@@ -12,6 +12,7 @@ import { MateriaPrincipalPage } from '../pages/materia-principal/materia-princip
 import { PersonasPage } from '../pages/personas/personas';
 import { PersonasabmPage } from '../pages/personasabm/personasabm';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {EncuestaPage} from '../pages/encuesta/encuesta';
 
 import { PerfilPage } from "../pages/perfil/perfil";
 
@@ -51,7 +52,7 @@ var firebaseAuth  = {
     //PersonasPage,
     //PersonasabmPage,
     //PerfilPage
-
+    EncuestaPage
   ],
   imports: [
     BrowserModule,
@@ -73,6 +74,7 @@ var firebaseAuth  = {
     //PersonasPage,
     //PersonasabmPage,
     //PerfilPage
+    EncuestaPage
   ],
   providers: [
     StatusBar,
