@@ -54,7 +54,6 @@ export class TomarListaPage {
      
       console.log(this.lista);
       this.listaEstudiantes2=new Array<Estudiante>();
-    
       this.ocultarMateria=true;
       this.mostrarListado=false;
       this.ocultarDivision=true;
@@ -142,6 +141,7 @@ this.readCsvData();
           this.Unalista=this.afDB.list('Lista/'+this.division+'/'+this.materia+'/'+this.aula+'/'+student.lastname+'/presente');
          // this.Unalista=this.afDB.list('Lista/Matematica/'+student.firstname+'/presente');
           this.Unalista.push(1);
+        
           this.Unalista=this.afDB.list('Alumnos/'+student.lastname+'/'+this.materia+'/presente');
           this.Unalista.push(1);
           console.log(student.firstname);

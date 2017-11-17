@@ -3,6 +3,7 @@ import 'rxjs/add/operator/map';
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable} from 'angularfire2/database';
 import * as firebase from 'firebase';
 import { Camera } from 'ionic-native';
+
 import { Platform, ActionSheetController, ToastController, IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
 
 import { AuthProvider } from '../providers/auth/auth';
