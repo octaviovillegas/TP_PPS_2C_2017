@@ -3,6 +3,7 @@ import 'rxjs/add/operator/map';
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable} from 'angularfire2/database';
 import * as firebase from 'firebase';
 import { Camera } from 'ionic-native';
+
 import { Platform, ActionSheetController, ToastController, IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
 
 import { AuthProvider } from '../providers/auth/auth';
@@ -84,7 +85,8 @@ export class PictureUtils {
   uploadProfilPicture(imgData: any,NroDeAula:string) {
     this.auth.getUser.name;
     this.storageAvatarRef = firebase.storage().ref().child('fotos/');
-    this.lista=this.afDB.list('Cosas_Lindas');
+   // this.lista=this.afDB.list('Cosas_Lindas');
+    this.lista=this.afDB.list('Fotos/');
   
     //Firebase user database avatar path
    
@@ -100,7 +102,7 @@ export class PictureUtils {
       
     //  console.log('objectToSave : ' + JSON.stringify(this.objectToSave));
     //this.profilAvatarRef = this.afDB.object('nada/');
-      this.lista.push({foto:this.objectToSave,usuario:"Aula "+NroDeAula});
+      this.lista.push({foto:this.objectToSave,aula:"Aula "+NroDeAula});
       //this.profilAvatarRef.set(this.objectToSave);
       
      //this.ref = this.afDB.list('Usuarios/'+this.objectToSave+'/');

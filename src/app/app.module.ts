@@ -13,13 +13,14 @@ import { CrearEncuestaPage } from '../pages/crear-encuesta/crear-encuesta';
 //import { LectorQrPage } from './lector-qr';
 import { AuthProvider } from '../providers/auth/auth';
 import { RealizarEncuestaPage } from '../pages/realizar-encuesta/realizar-encuesta';
-
+import { DatePipe } from '@angular/common';
 
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { MiPerfilPage } from '../pages/mi-perfil/mi-perfil';
+import { EstadisticasPage } from '../pages/estadisticas/estadisticas';
 
 
 
@@ -28,6 +29,13 @@ import { Encuesta } from '../services/encuesta.service';
 import { PictureUtils2 } from '../services/pictureUtils2.service';
 import { Camera } from '@ionic-native/camera';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ChartsModule } from 'ng2-charts';
+
+//csv
+import { ListadoAlumnosPage } from '../pages/listado-alumnos/listado-alumnos';
+
 
 //csv
 import { ListadoAlumnosPage } from '../pages/listado-alumnos/listado-alumnos';
@@ -71,12 +79,15 @@ export const firebaseConfig = {
     MiPerfilPage,
     CrearEncuestaPage,
     RealizarEncuestaPage,
-    ListadoAlumnosPage
-    RealizarEncuestaPage
+    ListadoAlumnosPage,
+    EstadisticasPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
+    NgxChartsModule,
+    BrowserAnimationsModule,
+    ChartsModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule, // imports firebase/database, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
@@ -87,6 +98,7 @@ export const firebaseConfig = {
     MyApp,
     HomePage,
     LoginPage, 
+    
     LectorQrPage,
     Home2Page,
     BotonesPage,
@@ -95,7 +107,8 @@ export const firebaseConfig = {
     CrearEncuestaPage,
     RealizarEncuestaPage,
     ListadoAlumnosPage,
-    RealizarEncuestaPage
+    RealizarEncuestaPage,
+    EstadisticasPage
     
   ],
   providers: [
@@ -105,7 +118,8 @@ export const firebaseConfig = {
     Encuesta,
     Camera,
     { provide: ErrorHandler, useClass: IonicErrorHandler },    
-    AuthProvider
+    AuthProvider,
+    DatePipe
     
   ]
 })

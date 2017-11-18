@@ -6,7 +6,6 @@ import { Http } from '@angular/http';
 import * as papa from 'papaparse';
 
 //$IMPORTSTATEMENT
-
 /**
  * Generated class for the ListadoAlumnosPage page.
  *
@@ -23,18 +22,43 @@ export class ListadoAlumnosPage {
   csvData: any[] = [];
   headerRow: any[] = [];
 
-  constructor(public navCtrl: NavController, private http: Http) {
-    this.readCsvData();
-  }
 
   private readCsvData() {
     this.http.get('assets/dummyData.csv')
+  mostrarBotones:boolean;
+
+  constructor(public navCtrl: NavController, private http: Http) {
+    this.mostrarBotones=true;
+    this.readCsvData();
+  }
+
+ /* private readCsvData() {
+    this.http.get('assets/PPS -4A-2c2017.csv')
       .subscribe(
       data => this.extractData(data),
       err => this.handleError(err)
       );
   }
- 
+  }*/
+    
+ abrir4A(){
+  this.http.get('assets/PPS -4A-2c2017.csv')
+  .subscribe(
+  data => this.extractData(data),
+  err => this.handleError(err)
+  );
+  this.mostrarBotones=false;
+ }
+ abrir4B(){
+  this.http.get('assets/PPS-4B-2c2017.csv')
+  .subscribe(
+  data => this.extractData(data),
+  err => this.handleError(err)
+  );
+  this.mostrarBotones=false;
+   }
+    
+    
   private extractData(res) {
     let csvData = res['_body'] || '';
     let parsedData = papa.parse(csvData).data;
@@ -42,6 +66,9 @@ export class ListadoAlumnosPage {
     this.headerRow = parsedData[0];
  
     parsedData.splice(0, 1);
+   // this.headerRow = parsedData[0];
+ 
+    //sparsedData.splice(0, 1);
     this.csvData = parsedData;
   }
  
@@ -69,4 +96,6 @@ export class ListadoAlumnosPage {
     return index;
   }
  
+}
+
 }

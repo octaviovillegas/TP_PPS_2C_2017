@@ -9,9 +9,10 @@
     
     
     <ion-content padding>
+      <div *ngIf="mostrarForm">
         <form>
             <p></p>
-            <h2 class="royal"> Cargar Pregunta</h2> 
+            <h2 class="royal"> Titulo de la Encuesta</h2> 
               <ion-item>
                   
             
@@ -24,9 +25,34 @@
               >
               </ion-input>
             </ion-item>
+            <h2 class="royal"> Cargar Pregunta</h2> 
+            <ion-item>
+                
+          
+            <ion-input 
+              [(ngModel)]="pregunta" 
+              name="pregunta" 
+              type="text" 
+              autocapitalize="off" 
+              required
+            >
+            </ion-input>
+          </ion-item>
           </form>
+              <button 
+          ion-button 
+          (click)="continuar()" 
+          type="submit" 
+          color="primary" 
+          block
+      >
+        Continuar
+       </button>
+      </div>
+
+<div *ngIf="mostrarForm==false">
       
-            <ion-list radio-group >   
+            <ion-list radio-group (ionChange)="opcionSeleccionada($event)">   
                 <!--p [hidden]='i+1'></p>
                 <div *ngIf="i % 2 >0">
               {{picture}}
@@ -43,21 +69,20 @@
                           
                             <ion-label>Muy Bueno / Bueno / Regular / Malo</ion-label>
                             <!--ion-checkbox color="dark"  (ionChange)="datachanged($event)" ></ion-checkbox-->
-                    <ion-radio  value="opcion1"></ion-radio>
+                    <ion-radio  value="uno"></ion-radio>
                   </ion-item>
                     <ion-item>
                         <ion-label>Si / No / Puede ser</ion-label>
-                    <ion-radio  value="opcion2"></ion-radio>
+                    <ion-radio  value="dos"></ion-radio>
                   </ion-item>
                 </div>
-              
-                
+
                 <!--ion-checkbox [(ngModel)]="presente" (ionChange)="AgregarPresente()"></ion-checkbox>
         
             </ion-item-->
           </ion-list>
       
-          <button 
+          <!--button 
           ion-button 
           (click)="guardarEncuesta()" 
           type="submit" 
@@ -65,8 +90,8 @@
           block
       >
         Guardar Encuesta
-       </button>
+       </button-->
        
-      
+      </div>
       </ion-content>
       

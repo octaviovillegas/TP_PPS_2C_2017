@@ -25,3 +25,56 @@
     </table>
   </ion-scroll>
 </ion-content>
+    <ion-navbar>
+      <ion-title>
+        Lista de alumnos 
+      </ion-title>
+      <ion-buttons end>
+        <button ion-button icon-only (click)="downloadCSV()">
+            <ion-icon name="download"></ion-icon>
+          </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+   
+  <ion-content padding>
+
+      <div *ngIf="mostrarBotones">
+         
+                  <button 
+                  ion-button 
+                  (click)="abrir4A()" 
+                  type="submit" 
+                  color="primary" 
+                  block
+              >
+               4 A
+               </button> 
+               <button 
+               ion-button 
+               (click)="abrir4B()" 
+               type="submit" 
+               color="primary" 
+               block
+           >
+            4 B
+            </button> 
+            
+      
+      </div>
+<div *ngIf="mostrarBotones==false">
+    <ion-scroll scrollX="true" scrollY="true" class="data-scroll">
+      <table border="1" class="data-table">
+          <th>Legajo</th>
+          <th>Nombre</th>
+          <th>apellido</th>
+          <th>Horario</th>
+        <tr *ngFor="let row of csvData; let i = index">
+          <td *ngFor="let data of row; let j = index; trackBy: trackByFn">
+            <ion-input type="text" [(ngModel)]="csvData[i][j]"></ion-input>
+          </td>
+        </tr>
+      </table>
+    </ion-scroll>
+  </div>
+  </ion-content>

@@ -20,8 +20,15 @@ import { BotonesPage } from '../botones/botones';
 })
 export class CrearEncuestaPage {
   encuesta:string;
+  opcion:string;
+  pregunta:string;
+  titulo:string;
+  mostrarForm:boolean;
+  Unalista:FirebaseListObservable<any>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    public afDB: AngularFireDatabase) {
+    this.mostrarForm=true;
   }
 
   ionViewDidLoad() {
@@ -31,6 +38,25 @@ export class CrearEncuestaPage {
     alert("La encuesta ha sido Guardada");
     console.log(this.encuesta);
     this.navCtrl.push(BotonesPage);
+
+  }
+  continuar(){
+    this.mostrarForm=false;
+  }
+  opcionSeleccionada(c:string){
+    this.opcion=c;
+    console.log(this.encuesta);
+    console.log(this.pregunta);
+    console.log(this.opcion);
+
+    this.Unalista=this.afDB.list('Cuestionarios');
+    this.Unalista.push({titulo:this.encuesta,pregunta:this.pregunta,opcion:this.opcion});
+   // this.Unalista=this.afDB.list('Respuestas/'+this.tituloSeleccionado+'/total');
+    //this.Unalista.push(1);
+    alert("La encuesta ha sido Guardada");
+    console.log(this.encuesta);
+    this.navCtrl.push(BotonesPage);
+
 
   }
 
