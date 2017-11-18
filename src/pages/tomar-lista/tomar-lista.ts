@@ -267,7 +267,9 @@ this.ocultarDivision=false;
 
    // console.log('data'+this.listadoAlumnos);}
     
-  })}}
+  })}
+  console.log('ssssss'+this.listaEstudiantes2.length);
+}
  
   private handleError(err) {
     console.log('something went wrong: ', err);

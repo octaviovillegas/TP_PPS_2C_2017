@@ -61,6 +61,19 @@ export class RealizarEncuestaPage {
     this.Unalista.push(1);
     this.Unalista=this.afDB.list('Respuestas/'+this.tituloSeleccionado+'/total');
     this.Unalista.push(1);
+    this.Unalista=this.afDB.list('Respuestas/'+this.tituloSeleccionado);
+    console.log("jjsj");
+    this.Unalista.subscribe(result => {console.log('dfkjdkfj'+result);
+     var aux;  });
+   
+     //aux=result.length;
+     //this.i=aux;
+     //this.lis.push(aux);
+     //this.unaEncuesta.MB=this.i;
+     
+ 
+
+
 
 
 

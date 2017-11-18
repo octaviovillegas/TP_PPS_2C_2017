@@ -1,6 +1,13 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+     ESTADISTICAS
+    </ion-title>
+  </ion-navbar>
+</ion-header>
 <ion-content padding>
     <div *ngIf="mostrarencuestas">
-      <p>kdcfdkl</p>
+    
         <ion-list *ngFor="let item of lista;let i = index;">   
             
             <ion-item>
@@ -15,13 +22,14 @@
                 color="primary" 
                 block
             >
-              Seleccionar Encuesta
+              Ver estadisticas
              </button> 
             </div>
           </ion-item>
       </ion-list>
     </div>
-<div *ngIf="mostrarGraficos">
+ 
+<div class="blanco" *ngIf="mostrarGraficos">
     <div>
       <div style="display: block">
         <canvas baseChart height="140"
@@ -33,7 +41,7 @@
                 (chartHover)="chartHovered($event)"
                 (chartClick)="chartClicked($event)"></canvas>
       </div>
-      <button (click)="randomize()">Actualizar</button>
+     
     </div>
 
     <canvas baseChart width="200" height="200"
@@ -43,4 +51,4 @@
     [legend]="ChartLegend"
     [chartType]="ChartType2"></canvas>
   </div>
-  </ion-content>
+</ion-content>

@@ -85,24 +85,18 @@ export class PictureUtils {
   uploadProfilPicture(imgData: any,NroDeAula:string) {
     this.auth.getUser.name;
     this.storageAvatarRef = firebase.storage().ref().child('fotos/');
-   // this.lista=this.afDB.list('Cosas_Lindas');
+  
     this.lista=this.afDB.list('Fotos/');
   
-    //Firebase user database avatar path
-   
     var randomNumber = Math.floor(Math.random() * 2566);
-   // console.log('Random number : ' + randomNumber);
 
     this.storageAvatarRef.child(randomNumber + '.jpg').putString(imgData, 'base64', { contentType: 'image/jpeg' }).then((savedPicture) => {
-     // console.log('saved picture URL', savedPicture.downloadURL);
-
+    
       this.objectToSave.push(savedPicture.downloadURL);
       this.unafoto=JSON.stringify(this.objectToSave);
       alert(this.unafoto);
       
-    //  console.log('objectToSave : ' + JSON.stringify(this.objectToSave));
-    //this.profilAvatarRef = this.afDB.object('nada/');
-      this.lista.push({foto:this.objectToSave,aula:"Aula "+NroDeAula});
+      this.lista.push({foto:this.objectToSave,aula:NroDeAula});
       //this.profilAvatarRef.set(this.objectToSave);
       
      //this.ref = this.afDB.list('Usuarios/'+this.objectToSave+'/');

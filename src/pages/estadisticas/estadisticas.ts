@@ -5,6 +5,8 @@ import { Encuesta } from "../../app/clases/encuesta";
 //import { NgxChartsModule } from '@swimlane/ngx-charts';
 //import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {Observable} from 'rxjs/Observable';
+import firebase from 'firebase';
+
 @Component({
   selector: 'page-estadisticas',
   templateUrl: 'estadisticas.html',
@@ -15,6 +17,7 @@ export class EstadisticasPage {
 public ChartOptions1:any = {
   scaleShowVerticalLines: false,
   responsive: true,
+
   scaleShowValues: true,
   scaleValuePaddingX: 10,
   scaleValuePaddingY: 10,
@@ -52,22 +55,30 @@ public ChartData2:any[];
 public ChartLabels1:string[];
 public ChartLabels2:string[];
 public i:number=0;
-public lis:Array<any>;
+ MB:number=0;
+public B:number=0;
+public lis:Array<number>;
 
 //listcodigos: FirebaseListObservable<any>;
 listaCuestionarios:FirebaseListObservable<any>;
 unaLista:FirebaseListObservable<any>;
-listaEncuestas:Array<Encuesta>;
+listaEncuestas:Array<number>;
 lista: Array<any> = new Array;
 unaEncuesta:Encuesta;
 mostrarencuestas:boolean;
 mostrarGraficos:boolean;
 l:Observable<any>;
 algo =[];
+algo2 =[];
+algo3 =[];
+algo4 =[];
+
+items2: Observable<any[]>;
 
 
 constructor(public navCtrl: NavController, public navParams: NavParams,
   public alertCtrl : AlertController,
+ 
   public actionSheetCtrl: ActionSheetController,
   public afDB: AngularFireDatabase) {
     this.unaEncuesta= new Encuesta();
@@ -75,6 +86,7 @@ constructor(public navCtrl: NavController, public navParams: NavParams,
     this.mostrarGraficos=false;
     this.CargarListaCuestionarios();
     this.mostrarencuestas=true;
+    this.MB=0;
         
 
 }
@@ -85,17 +97,6 @@ CargarListaCuestionarios()
   this.afDB.list('Cuestionarios', { preserveSnapshot: true }).subscribe((snapshots: any) => {
     snapshots.forEach((snapshot, index) => {
       this.lista[index] = snapshot.val();
-     /* this.unaEncuesta.nombre =this.lista[index].nombre;
-      this.unaEncuesta.pregunta =this.lista[index].pregunta;
-      this.unaEncuesta.opcion =this.lista[index].opcion;
-      this.unaEncuesta.MB =this.lista[index].MB.length;
-      this.unaEncuesta.B =this.lista[index].B.length;
-      this.unaEncuesta.M =this.lista[index].M.length;
-      this.unaEncuesta.R =this.lista[index].R.length;
-      this.unaEncuesta.Si =this.lista[index].Si.length;
-      this.unaEncuesta.No =this.lista[index].No.length;
-      this.unaEncuesta.PuedeSer =this.lista[index].PuedeSer.length;*/
-      //this.listaEncuestas.push(unaEncuesta);
       console.log(this.lista);
     });
   });  
@@ -108,94 +109,98 @@ this.mostrarencuestas=false;
 console.log(this.unaEncuesta.opcion+this.unaEncuesta.nombre+this.unaEncuesta.pregunta);
 this.i=0;
 if(opcion=="dos"){
-this.unaLista=this.afDB.list('Respuestas/'+titulo+'/Si/');
-this.unaLista.forEach(item => {
-  console.log('Item:', item);
-  
-;});
-//his.unaEncuesta.Si=i;
-
-this.unaLista=this.afDB.list('Respuestas/'+titulo+'/No/');
-this.unaLista.forEach(item => {
-  console.log('Item:', item);
-});
-//this.unaEncuesta.No=i;
-
-this.unaLista=this.afDB.list('Respuestas/'+titulo+'/PuedeSer/');
-this.unaLista.forEach(item => {
-  console.log('Item:', item);
-  });
-//this.unaEncuesta.PuedeSer=i;
 }
 if(opcion=="uno"){
-  this.lis=new Array<any>();
-  this.unaLista=this.afDB.list('Respuestas/'+titulo+'/MB');
-  this.unaLista.forEach(item => {
-    console.log('Item:', item);
-    var aux;
-    aux=item.length;
-    this.lis.push(aux);
-  });
+  this.lis=new Array<number>();
+  this.unaLista=this.afDB.list('Respuestas/'+titulo+'/B/');
+this.i=0;
 
-  this.lis.forEach(item => {
-    console.log('Item:', item);
-    
-    this.unaEncuesta.MB=item.aux;
-    
-  });
-
-
+this.unaEncuesta.MB=this.lis.length;
+console.log('largo'+this.lis);
   console.log('mbbb'+this.unaEncuesta.MB);
 console.log(this.lis);
-console.log(this.lis.indexOf(0));
-console.log(this.lis[0].value());
-
-if (this.lis.length>0){
-  this.unaEncuesta.MB=this.lis[0];
-  console.log('mbbb'+this.unaEncuesta.MB);
-}
+/*
 
 
-  //this.l=new Array<any>();
- //
-  //this.l=this.afDB.list('Respuestas/'+titulo+'/MB/');
- // this.unaEncuesta.MB=this.unaLista.lift.length;
- // this.l.subscribe(result => {console.log('dfkjdkfj'+result.length)
- // var aux;
+this.afDB.list('Respuestas/'+titulo+'/').subscribe(e=>{
+  e.forEach(res=>{
+     this.algo.push(res.MB);
+  })
+   this.algo.forEach(element => {
+        this.MB++;   
+      });
+  const ref: firebase.database.Reference = firebase.database().ref('Estadisticas/'+titulo);
+  ref.set({
+    totalMb:this.MB}
+  )
+    // this.asignarMB(this.MB);
+});*/
 
-  //aux=result.length;
-  //this.i=aux;
-  //this.lis.push(aux);
-  //this.unaEncuesta.MB=this.i;
-  
-//});
+console.log('mb'+this.MB);
+
 }
 this.mostrarGraficos=true;
-this.CargarDatos();
-}
+this.ngOnInit(titulo);
 
+}
+asignarMB(valor:number){
+  console.log('valor'+valor);
+  this.MB=valor;
+  this.unaEncuesta.MB=valor;
+  console.log(this.unaEncuesta.MB);
+
+}
+obtenerLongitud(lista:FirebaseListObservable<any>):any{
+  lista.forEach(item => {
+    console.log('Item:', item);
+    
+    console.log('l'+item.length);
+    this.i=item.length;
+
+    return item.length;
+
+   
+});}
 //ngOnInit(dato1, dato2){}
-CargarDatos(){
+public ngOnInit(titulo:string){
+
+ /* this.afDB.list('Respuestas/'+titulo).subscribe(e=>{
+    console.log('ssssaaaa'+e.totalMb)
+    e.forEach(res=>{
+       console.log('ooo'+res.totalMb);
+    })
+  });
+  this.afDB.list('Estadisticas/Clase Matematica').subscribe(e=>{
+    e.forEach(res=>{
+       this.MB=res.totalMb;
+       console.log('saksajndb'+this.MB)
+    })
+  });*/
+      // this.asignarMB(this.MB);
+  
+
+  //console.log('eldato'+encuesta.MB);
+  console.log(this.listaEncuestas);
   if (this.unaEncuesta.opcion=="uno")
   {
  this.ChartData1 = [
-  {data: [this.unaEncuesta.MB], label: 'Muy Bueno'},
-  {data: [this.unaEncuesta.B], label: 'Bueno'},
-  {data: [this.unaEncuesta.R], label: 'Regular'},
-  {data: [this.unaEncuesta.M], label: 'Malo'}]
+  {data: [2], label: 'Muy Bueno'},
+  {data: [3], label: 'Bueno'},
+  {data: [6], label: 'Regular'},
+  {data: [5], label: 'Malo'}]
   this.ChartData2 = [
-    {data: [this.unaEncuesta.MB,this.unaEncuesta.B,this.unaEncuesta.R,this.unaEncuesta.M]
+    {data: [2,3,6,5]
     , borderColor: ['#000000'], borderWidth: [10]},  ];
     this.ChartLabels2 = ['Muy Bueno','Bueno','Regular','Malo'];
 
 }
 else{
   this.ChartData1 = [
-    {data: [this.unaEncuesta.Si], label: 'Si'},
-    {data: [this.unaEncuesta.No], label: 'No'},
-    {data: [this.unaEncuesta.PuedeSer], label: 'Puede Ser'}]
+    {data: [5], label: 'Si'},
+    {data: [6], label: 'No'},
+    {data: [2], label: 'Puede Ser'}]
  this.ChartData2 = [
-      {data: [this.unaEncuesta.Si,this.unaEncuesta.No,this.unaEncuesta.PuedeSer]
+      {data: [5,6,2]
       , borderColor: ['#000000'], borderWidth: [10]},  ];
       this.ChartLabels2 = ['Si','No','Puede Ser'];
 }
