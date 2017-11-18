@@ -32,6 +32,19 @@
              Lista
               
           </button>
+
+          <button color="royal" ion-button  block width="100px"  height="80" 
+          (click)=CargarAlumno() *ngIf="this.usuario=='admin@admin.com'">
+             Cargar Alumno  
+          </button>
+          <button color="royal" ion-button  block width="100px"  height="80" 
+          (click)=CargarProfesor() *ngIf="this.usuario=='admin@admin.com'">
+             Cargar Profesor  
+          </button>
+          <button color="royal" ion-button  block width="100px"  height="80" 
+          (click)=CargarAdministrativo() *ngIf="this.usuario=='admin@admin.com'">
+             Cargar Administrativo  
+          </button>
       
             <button    ion-button block width="80px" 
             (click)=Listado_Fotos() *ngIf="this.usuario=='admin@admin.com'">
