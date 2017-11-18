@@ -1,0 +1,165 @@
+<!--
+  Generated template for the Asistencias page.
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+   <button ion-button  menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button> 
+  <ion-title ><p class="Titulo">Tomar Asistencias</p><p class="Fecha"> {{fecha}}  </p></ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content padding>  
+  <ion-card *ngIf="filtro=='filtroBotones'">
+   <ion-card-header>Filtrar Comision por:</ion-card-header>
+    <ion-card-content>  
+      <button class="btn" ion-button block (click)="filtrarPor('DIA')">DIA</button>
+      <button class="btn" ion-button block (click)="filtrarPor('AULA')">AULA</button>
+      <button class="btn" ion-button block (click)="filtrarPor('MATERIA')">MATERIA</button>
+      <button class="btn" ion-button block (click)="filtrarPor('PROFESOR')">PROFESOR</button>
+    </ion-card-content>
+  </ion-card>  
+
+<ion-card>  
+  <ion-card-content *ngIf="mostrar">
+     <ion-card-header><button class="btn" ion-button block (click)="restablecerValores();mostrar=false">Volver</button></ion-card-header>
+
+<div *ngIf="filtro=='Dia'">
+  <ion-card-header><button class="btn" *ngIf="diaSeleccionado" ion-button block (click)="filtrarPorDia(diaSeleccionado)">Buscar Alumnos por Dia {{diaSeleccionado}}</button></ion-card-header>
+  <ion-list radio-group [(ngModel)]="diaSeleccionado">      
+          <ion-item>
+            <ion-label>LUNES</ion-label>
+            <ion-radio value="Lunes" ></ion-radio>            
+          </ion-item>
+
+          <ion-item>
+            <ion-label>MARTES</ion-label>
+            <ion-radio value="Martes"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>MIERCOLES</ion-label>
+            <ion-radio value="Miercoles"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>JUEVES</ion-label>
+            <ion-radio value="Jueves"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>VIERNES</ion-label>
+            <ion-radio value="Viernes"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>SABADO</ion-label>
+            <ion-radio value="Sabado"></ion-radio>
+          </ion-item> 
+
+        </ion-list>
+        
+</div>
+
+<div *ngIf="cantidadAlumnos > 0">
+  <ion-card class="alumnocard" *ngFor="let alumno of alumnos;let i = index">
+        <ion-card-header>{{alumno.nombre}} {{alumno.apellido}} </ion-card-header>
+        <ion-card-content>       
+         Legajo: {{alumno.legajo}}<br>         
+         Curso: {{alumno.descripcion}}<br>
+
+         <ion-list radio-group [(ngModel)]="arrayPresentes[i]">      
+          {{arrayPresentes[i]}}
+          <ion-item>
+            <ion-label>PRESENTE</ion-label>
+            <ion-radio value="Presente" ></ion-radio>            
+          </ion-item>
+
+          <ion-item>
+            <ion-label>AUSENTE</ion-label>
+            <ion-radio checked="true"  value="Ausente"></ion-radio>
+          </ion-item>          
+        </ion-list>
+         
+        </ion-card-content>
+      </ion-card>  
+    
+    <button class="btn" ion-button block (click)="subirAsistencias();mostrar=false">Subir Asistencias</button>
+</div>
+
+<div *ngIf="filtro=='Aula'">
+  <ion-card-header><button class="btn" *ngIf="aulaSeleccionado" ion-button block (click)="filtrarPorAula(aulaSeleccionado)">Buscar Alumnos por Aula {{aulaSeleccionado}}</button></ion-card-header>
+  <ion-list radio-group [(ngModel)]="aulaSeleccionado">      
+    <ion-item>
+      <ion-label>Laboratorio 1</ion-label>
+       <ion-radio value="lab 1"></ion-radio>
+     </ion-item>
+
+     <ion-item>
+       <ion-label>Laboratorio 4</ion-label>
+       <ion-radio value="lab 4"></ion-radio>
+     </ion-item>
+
+
+     <ion-item>
+       <ion-label>Laboratorio 5</ion-label>
+       <ion-radio value="lab 5"></ion-radio>
+     </ion-item>
+
+
+          <ion-item>
+            <ion-label>301</ion-label>
+            <ion-radio value="301"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>305</ion-label>
+            <ion-radio value="305"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>203</ion-label>
+            <ion-radio value="203"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>310</ion-label>
+            <ion-radio value="310"></ion-radio>
+          </ion-item>
+          
+      
+       
+     
+     
+        </ion-list>
+        
+</div>
+
+<div *ngIf="filtro=='Materia'">
+    <ion-card-header><button class="btn" *ngIf="materiaSeleccionado" ion-button block (click)="filtrarPorMateria(materiaSeleccionado)">Buscar Alumnos por Materia</button></ion-card-header>
+    <ion-list *ngFor="let materia of materias" radio-group [(ngModel)]="materiaSeleccionado">
+      <ion-item>
+        <ion-label>{{materia.descripcion}}</ion-label>
+        <ion-radio value="{{materia.id_materia}}" ></ion-radio>            
+      </ion-item>         
+    </ion-list>
+</div>
+
+<div *ngIf="filtro=='Profesor'">
+    <ion-card-header><button class="btn" *ngIf="profesorSeleccionado" ion-button block (click)="filtrarPorProfesor(profesorSeleccionado)">Buscar Alumnos por Profesor</button></ion-card-header>
+    <ion-list *ngFor="let profesor of profesores" radio-group [(ngModel)]="profesorSeleccionado">
+      <ion-item>
+        <ion-label>{{profesor.apellido}} {{profesor.nombre}}</ion-label>
+        <ion-radio value="{{profesor.id_profesor}}" ></ion-radio>            
+      </ion-item>         
+    </ion-list>
+</div>
+
+
+
+  </ion-card-content>
+</ion-card>
+</ion-content>

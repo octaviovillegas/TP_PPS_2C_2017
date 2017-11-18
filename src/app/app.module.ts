@@ -14,7 +14,7 @@ import { PersonasabmPage } from '../pages/personasabm/personasabm';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {EncuestaPage} from '../pages/encuesta/encuesta';
 import {GraficosPage} from '../pages/graficos/graficos';
-
+import { AsistenciasPage } from '../pages/asistencias/asistencias';
 import { PerfilPage } from "../pages/perfil/perfil";
 
 ////////SERVICIOS
@@ -34,6 +34,8 @@ import { PersonasServiceProvider } from '../providers/personas-service/personas-
 import { LoginServiceProvider } from '../providers/login-service/login-service';
 import { Chart } from 'chart.js';
 import { AlumnoServiceProvider } from '../providers/alumno-service/alumno-service';
+import { AsistenciasProvider } from '../providers/asistencias/asistencias';
+
 
 
 var firebaseAuth  = {
@@ -56,8 +58,10 @@ var firebaseAuth  = {
     //PersonasabmPage,
     //PerfilPage
     EncuestaPage,
-    GraficosPage
-  ],
+    GraficosPage,
+    AsistenciasPage
+    
+   ],
   imports: [
     BrowserModule,
     HttpModule,
@@ -79,7 +83,8 @@ var firebaseAuth  = {
     //PersonasabmPage,
     //PerfilPage
     EncuestaPage,
-    GraficosPage
+    GraficosPage,
+    AsistenciasPage
     
   ],
   providers: [
@@ -91,7 +96,8 @@ var firebaseAuth  = {
     ServpersonaProvider,
     PersonasServiceProvider,
     LoginServiceProvider,
-    AlumnoServiceProvider
+    AlumnoServiceProvider,
+    AsistenciasProvider
   ]
 })
 export class AppModule {}

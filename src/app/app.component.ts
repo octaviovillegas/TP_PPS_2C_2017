@@ -10,6 +10,8 @@ import { MateriaPrincipalPage } from '../pages/materia-principal/materia-princip
 import { PersonasPage } from '../pages/personas/personas';
 import {PerfilPage} from '../pages/perfil/perfil';
 import {EncuestaPage} from '../pages/encuesta/encuesta';
+import {AsistenciasPage} from '../pages/asistencias/asistencias';
+
 
 
 @Component({
@@ -17,7 +19,7 @@ import {EncuestaPage} from '../pages/encuesta/encuesta';
 })
 export class MyApp {
   @ViewChild('contenidoPrincipal') main: Nav;
-  rootPage:any = EncuestaPage;
+  rootPage:any = LoginPage;
 
   public pages: Array<{titulo: string, component:any}>;
 
@@ -25,7 +27,10 @@ export class MyApp {
 
     this.pages = [
         {titulo: 'Inicio', component:LoginPage},
-        {titulo: 'Perfil', component:PerfilPage}
+        {titulo: 'Perfil', component:PerfilPage},
+        {titulo: 'Asistencias', component:AsistenciasPage},
+        {titulo: 'Encuesta', component:EncuestaPage}
+        
 
     ];
 
