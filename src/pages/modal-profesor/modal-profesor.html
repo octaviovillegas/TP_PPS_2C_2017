@@ -1,0 +1,61 @@
+<!--
+  Generated template for the ModalProfesorPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    
+      <ion-navbar>
+        <ion-title><span *ngIf="nuevo">Nuevo Profesor</span><span *ngIf="!nuevo">Modificar {{profesor.nombre}}</span></ion-title>
+      </ion-navbar>
+    
+    </ion-header>
+    
+    
+    <ion-content padding>
+    
+        <ion-list>
+            <ion-list-header>Datos del Profesor</ion-list-header>
+              <ion-item>
+                <ion-label floating>Nombre</ion-label>
+                <ion-input [(ngModel)]="profesor.nombre" type="text"></ion-input>
+              </ion-item>
+            
+              <ion-item>
+                <ion-label floating>Apellido</ion-label>
+                <ion-input [(ngModel)]="profesor.apellido" type="text"></ion-input>
+              </ion-item>
+
+                <ion-list radio-group [(ngModel)]="profesor.turno">
+                    <ion-list-header>
+                      Turno
+                    </ion-list-header>
+                  
+                    <ion-item>
+                      <ion-label>Mañana</ion-label>
+                      <ion-radio checked="true" value="mañana"></ion-radio>
+                    </ion-item>
+                  
+                    <ion-item>
+                      <ion-label>Tarde</ion-label>
+                      <ion-radio value="tarde"></ion-radio>
+                    </ion-item>
+                  </ion-list>
+
+                  <ion-item>
+                      <ion-label floating>Materias</ion-label>
+                      <ion-input #materia type="text"></ion-input>
+                  </ion-item>
+
+                  <button ion-button icon-only>
+                      <ion-icon name="plus" (click)="profesor.materias.push(materia.value)"></ion-icon>
+                  </button>
+
+            </ion-list>
+    
+            <button ion-button round outline color="secondary" (click)="Aceptar()">Confirmar</button>
+            <button ion-button round outline color="danger" (click)="Cerrar()">Cancelar</button>
+    
+    </ion-content>
+    

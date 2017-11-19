@@ -21,15 +21,11 @@ export class ListadoAlumnosPage {
 
   csvData: any[] = [];
   headerRow: any[] = [];
-
-
-  private readCsvData() {
-    this.http.get('assets/dummyData.csv')
   mostrarBotones:boolean;
 
   constructor(public navCtrl: NavController, private http: Http) {
     this.mostrarBotones=true;
-    this.readCsvData();
+    
   }
 
  /* private readCsvData() {
@@ -38,9 +34,7 @@ export class ListadoAlumnosPage {
       data => this.extractData(data),
       err => this.handleError(err)
       );
-  }
   }*/
-    
  abrir4A(){
   this.http.get('assets/PPS -4A-2c2017.csv')
   .subscribe(
@@ -57,15 +51,11 @@ export class ListadoAlumnosPage {
   );
   this.mostrarBotones=false;
    }
-    
-    
+
   private extractData(res) {
     let csvData = res['_body'] || '';
     let parsedData = papa.parse(csvData).data;
  
-    this.headerRow = parsedData[0];
- 
-    parsedData.splice(0, 1);
    // this.headerRow = parsedData[0];
  
     //sparsedData.splice(0, 1);
@@ -96,6 +86,4 @@ export class ListadoAlumnosPage {
     return index;
   }
  
-}
-
 }

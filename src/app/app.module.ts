@@ -16,13 +16,15 @@ import { RealizarEncuestaPage } from '../pages/realizar-encuesta/realizar-encues
 import { DatePipe } from '@angular/common';
 
 
+
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { MiPerfilPage } from '../pages/mi-perfil/mi-perfil';
 import { EstadisticasPage } from '../pages/estadisticas/estadisticas';
-
-
+import { ModalAlumnoPage } from '../pages/modal-alumno/modal-alumno';
+import { ModalProfesorPage } from '../pages/modal-profesor/modal-profesor';
+import { ModalAdministrativoPage } from '../pages/modal-administrativo/modal-administrativo';
 
 import { PictureUtils } from '../services/pictureUtils.service';
 import { Encuesta } from '../services/encuesta.service';
@@ -32,10 +34,6 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChartsModule } from 'ng2-charts';
-
-//csv
-import { ListadoAlumnosPage } from '../pages/listado-alumnos/listado-alumnos';
-
 
 //csv
 import { ListadoAlumnosPage } from '../pages/listado-alumnos/listado-alumnos';
@@ -79,8 +77,12 @@ export const firebaseConfig = {
     MiPerfilPage,
     CrearEncuestaPage,
     RealizarEncuestaPage,
-    ListadoAlumnosPage,
-    EstadisticasPage
+    ListadoAlumnosPage, 
+    RealizarEncuestaPage,
+    EstadisticasPage,
+    ModalAlumnoPage,
+    ModalAdministrativoPage,
+    ModalProfesorPage
   ],
   imports: [
     BrowserModule,
@@ -98,7 +100,7 @@ export const firebaseConfig = {
     MyApp,
     HomePage,
     LoginPage, 
-    
+    ModalAlumnoPage,
     LectorQrPage,
     Home2Page,
     BotonesPage,
@@ -108,7 +110,9 @@ export const firebaseConfig = {
     RealizarEncuestaPage,
     ListadoAlumnosPage,
     RealizarEncuestaPage,
-    EstadisticasPage
+    EstadisticasPage,
+    ModalAdministrativoPage,
+    ModalProfesorPage
     
   ],
   providers: [
