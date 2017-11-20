@@ -125,6 +125,14 @@ export class LoginPage {
     }
 
 
+    logearEnGitHub(){
+      let provider:any;
+      provider = this.auth.loginGitHub();
+      console.log('prov: ', provider);
+      if (provider.loggedin) {
+        this.navCtrl.push('MenuPage', provider);
+      }
+    }
 
 
 
