@@ -43,7 +43,6 @@ Branch: ABMAlumnos
 -------------------
 
 Módulos a desarrollar: • Navegación y estilos
-• Toma de lista
 
 Fecha inicio: 13/11/2017
 
