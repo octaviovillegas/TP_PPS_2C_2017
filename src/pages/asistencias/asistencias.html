@@ -142,8 +142,8 @@
     <ion-card-header><button class="btn" *ngIf="materiaSeleccionado" ion-button block (click)="filtrarPorMateria(materiaSeleccionado)">Buscar Alumnos por Materia</button></ion-card-header>
     <ion-list *ngFor="let materia of materias" radio-group [(ngModel)]="materiaSeleccionado">
       <ion-item>
-        <ion-label>{{materia.descripcion}}</ion-label>
-        <ion-radio value="{{materia.id_materia}}" ></ion-radio>            
+        <ion-label>{{materia.nombre}}</ion-label>
+        <ion-radio value="{{materia.nombre}}" ></ion-radio>            
       </ion-item>         
     </ion-list>
 </div>
