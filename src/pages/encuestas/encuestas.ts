@@ -10,19 +10,5 @@ export class EncuestasPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
-
-  /*ionViewDidLoad() {
-    console.log('ionViewDidLoad ConfiguracionPage');
-  }
-
-  goAbmAlumno()
-  {
-    this.navCtrl.push('AbmAlumnoPage');
-  }
-
-  goAbmProfesor()
-  {
-    this.navCtrl.push('AbmProfesorPage');
-  }*/
-
+  
 }

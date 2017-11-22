@@ -11,10 +11,6 @@ export class AdminUsuariosPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AdminUsuariosPage');
-  }
-
   goAbmAlumno()
   {
     this.navCtrl.push('AbmAlumnoPage');
@@ -27,6 +23,6 @@ export class AdminUsuariosPage {
 
   goAbmAdministrativo()
   {
-    this.navCtrl.push('AbmAdministradorPage');
+    this.navCtrl.push('AbmAdministrativoPage');
   } 
 }

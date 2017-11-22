@@ -35,9 +35,7 @@ export class AbmAdministrativoPage {
       this.formAlta = this.formBuilder.group({
         nombre: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
         apellido: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
-        legajo: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern("[-+]?[0-9]*\.?[0-9]*")])],
-        anio: ['', Validators.compose([Validators.required])],
-        curso: ['', Validators.compose([Validators.required])],
+        legajo: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern("[-+]?[0-9]*\.?[0-9]*")])]
       });
   }
 
@@ -64,8 +62,6 @@ export class AbmAdministrativoPage {
        this.formAlta.controls['nombre'].setValue(admin.nombre);
        this.formAlta.controls['apellido'].setValue(admin.apellido);
        this.formAlta.controls['legajo'].setValue(admin.legajo);
-       this.formAlta.controls['anio'].setValue(admin.anio);
-       this.formAlta.controls['curso'].setValue(admin.curso);
        this.modifId = admin.$key;
        this.tab = "agregar";
   }
@@ -81,8 +77,6 @@ export class AbmAdministrativoPage {
         nombre: this.formAlta.controls['nombre'].value,
         apellido: this.formAlta.controls['apellido'].value,
         legajo: this.formAlta.controls['legajo'].value,
-        anio: this.formAlta.controls['anio'].value,
-        curso: this.formAlta.controls['curso'].value
       });
       this.modifId = "";
       let prompt = this.alertCtrl.create({ title: 'Administrativo modificado', buttons: [{ text: 'Ok',}] });
