@@ -29,13 +29,12 @@
       <ion-select [(ngModel)]="filterType">
         <ion-option>Nombre</ion-option>
         <ion-option>Apellido</ion-option>
-        <ion-option>Legajo</ion-option>
       </ion-select>
     </ion-item>
     <ion-card *ngFor="let profesor of profesores | async">
       <ion-item>
         <h2>{{profesor.apellido}}, {{profesor.nombre}}</h2>
-        <p>Legajo: <b>{{profesor.legajo}}</b> | Curso: <b>{{profesor.anio}}{{profesor.curso}}</b></p>
+        <p>Curso asignado: <b>{{profesor.anio}}{{profesor.curso}}</b></p>
       </ion-item>
       <ion-row>
         <ion-col>
@@ -66,10 +65,6 @@
             <ion-input type="text" formControlName="apellido"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label>Legajo (4 dígitos)</ion-label>
-            <ion-input type="text" formControlName="legajo" maxlength="4"></ion-input>
-          </ion-item>
-          <ion-item>
             <ion-label>Año y curso asignado</ion-label>
             <ion-select formControlName="anio">
                 <ion-option>1</ion-option>
@@ -84,7 +79,7 @@
                 <ion-option>C</ion-option>
             </ion-select>
           </ion-item>
-        <button ion-button type="submit" [disabled]="!formAlta.valid">Agregar</button>
+          <button ion-button type="submit" [disabled]="!formAlta.valid">{{modifId == "" ? "Agregar" : "Modificar"}}</button>
     </form>
 </ion-content>
 

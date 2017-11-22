@@ -7,13 +7,13 @@ import 'rxjs/add/operator/map';
 
 @IonicPage()
 @Component({
-  selector: 'page-abmProfesor',
-  templateUrl: 'abmProfesor.html',
+  selector: 'page-abmAdministrativo',
+  templateUrl: 'abmAdministrativo.html',
 })
-export class AbmProfesorPage {
+export class AbmAdministrativoPage {
   
   private tab;
-  private profesores: Observable<any>;
+  private admins: Observable<any>;
   //Lista
   private searchValue: string;
   private filterType: string;
@@ -31,24 +31,25 @@ export class AbmProfesorPage {
       this.filterType = "Apellido";
       this.modifId = "";
       //Alta
-      this.filterProfesor();
+      this.filterAdmin();
       this.formAlta = this.formBuilder.group({
         nombre: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
         apellido: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
+        legajo: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern("[-+]?[0-9]*\.?[0-9]*")])],
         anio: ['', Validators.compose([Validators.required])],
         curso: ['', Validators.compose([Validators.required])],
       });
   }
 
-  //LISTA DE PROFESORES
-  public eliminarProfesor(profesorId: string, apellido: string): void {
+  //LISTA DE ADMINISTRATIVOS
+  public eliminarAdmin(adminId: string, apellido: string): void {
     let prompt = this.alertCtrl.create({
       title: 'Confirmar',
-      message: "¿Seguro que queres eliminar al profesor " + apellido + "?",
+      message: "Seguro que queres eliminar al administrativo " + apellido + "?",
       buttons: [{
         text: 'Si',
         role: 'destructive',
-        handler: data => { this.profesores.remove(profesorId); }
+        handler: data => { this.admins.remove(adminId); }
       },
       {
         text: 'No',
@@ -59,46 +60,51 @@ export class AbmProfesorPage {
     prompt.present();
   }
 
-  public modificarProfesor(profesor: any): void {
-       this.formAlta.controls['nombre'].setValue(profesor.nombre);
-       this.formAlta.controls['apellido'].setValue(profesor.apellido);
-       this.formAlta.controls['anio'].setValue(profesor.anio);
-       this.formAlta.controls['curso'].setValue(profesor.curso);
-       this.modifId = profesor.$key;
+  public modificarAdmin(admin: any): void {
+       this.formAlta.controls['nombre'].setValue(admin.nombre);
+       this.formAlta.controls['apellido'].setValue(admin.apellido);
+       this.formAlta.controls['legajo'].setValue(admin.legajo);
+       this.formAlta.controls['anio'].setValue(admin.anio);
+       this.formAlta.controls['curso'].setValue(admin.curso);
+       this.modifId = admin.$key;
        this.tab = "agregar";
   }
 
-  //AGREGAR PROFESOR
-  public agregarProfesor(): void{
+  //AGREGAR ADMINISTRATIVO
+  public agregarAdmin(): void{
     if(this.modifId == "") {
-      let prompt = this.alertCtrl.create({ title: 'Profesor agregado', buttons: [{ text: 'Ok',}] });
+      let prompt = this.alertCtrl.create({ title: 'Admin agregado', buttons: [{ text: 'Ok',}] });
       prompt.present();
-      this.af.list('/profesores').push(this.formAlta.value);
+      this.af.list('/admins').push(this.formAlta.value);
     } else {
-      this.profesores.update(this.modifId, {
-         nombre: this.formAlta.controls['nombre'].value,
-         apellido: this.formAlta.controls['apellido'].value,
-         anio: this.formAlta.controls['anio'].value,
-         curso: this.formAlta.controls['curso'].value
-       });
-       this.modifId = "";
-       let prompt = this.alertCtrl.create({ title: 'Profesor modificado', buttons: [{ text: 'Ok',}] });
-       prompt.present();
+      this.admins.update(this.modifId, {
+        nombre: this.formAlta.controls['nombre'].value,
+        apellido: this.formAlta.controls['apellido'].value,
+        legajo: this.formAlta.controls['legajo'].value,
+        anio: this.formAlta.controls['anio'].value,
+        curso: this.formAlta.controls['curso'].value
+      });
+      this.modifId = "";
+      let prompt = this.alertCtrl.create({ title: 'Administrativo modificado', buttons: [{ text: 'Ok',}] });
+      prompt.present();
     }
     this.formAlta.reset();
   }
 
   public onInput($event): void {
-    this.filterProfesor();
+    this.filterAdmin();
   }
 
-  private filterProfesor(): any {
-    this.profesores = this.af.list('/profesores').map(profesor => profesor.filter((profesor: any) => {
+  private filterAdmin(): any {
+    this.admins = this.af.list('/admins').map(admin => admin.filter(admin => {
       if(this.searchValue != "" && this.searchValue != undefined) {
+        console.log(this.filterType);
         if(this.filterType == "Nombre"){
-          return profesor.nombre.indexOf(this.searchValue) > 0;
+          return admin.nombre.indexOf(this.searchValue) > 0;
         } else if(this.filterType == "Apellido"){
-          return profesor.apellido.indexOf(this.searchValue) > 0;
+          return admin.apellido.indexOf(this.searchValue) > 0;
+        } else if(this.filterType == "Legajo"){
+          return admin.legajo.indexOf(this.searchValue) > 0;
         }
       }
       return true;
@@ -109,7 +115,7 @@ export class AbmProfesorPage {
     if(this.modifId != "" && this.tab != "agregar") {
       let prompt = this.alertCtrl.create({
         title: 'Confirmar',
-        message: "¿Seguro que perder las modificaciones?",
+        message: "Seguro que perder las modificaciones ?",
         buttons: [{
           text: 'Si',
           handler: data => { 
