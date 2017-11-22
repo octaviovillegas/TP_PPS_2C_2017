@@ -6,8 +6,7 @@
 
 
 <ion-content *ngIf="estado == 'cursos'" padding>
-
-    <ion-list no-border>
+  <h1>Cursos</h1>
   <ion-list no-border>
     <div *ngFor="let c of cursos | async">
       <ion-list-header *ngIf="c.curso == 'A'">
@@ -23,4 +22,39 @@
     </div>
   </ion-list>
 
+</ion-content>
+
+<ion-content *ngIf="estado == 'lista'" padding>
+  <h1>Alumnos de <b>5A</b></h1>
+  <ion-card (click)="selecAlumno(aaa)">
+    <ion-item>
+      <h2>Hola, Chau</h2>
+      <p>Legajo: <b>1234</b></p>
+      <ion-icon name='md-checkmark' class="completo" id="aaa" style="visibility: hidden;" item-end></ion-icon>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+    <ion-item>
+      <h2>Hola, Chau</h2>
+      <p>Legajo: <b>1234</b></p>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+    <ion-item>
+      <h2>Hola, Chau</h2>
+      <p>Legajo: <b>1234</b></p>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+    <ion-item>
+      <h2>Hola, Chau</h2>
+      <p>Legajo: <b>1234</b></p>
+    </ion-item>
+  </ion-card>
+  <!-- <ion-card *ngFor="let alumno of alumnos | async">
+    <ion-item>
+      <h2>{{alumno.apellido}}, {{alumno.nombre}}</h2>
+      <p>Legajo: <b>{{alumno.legajo}}</b> | Curso: <b>{{alumno.anio}}{{alumno.curso}}</b></p>
+    </ion-item>
+  </ion-card> -->
 </ion-content>
