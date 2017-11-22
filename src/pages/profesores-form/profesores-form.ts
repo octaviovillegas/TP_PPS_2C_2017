@@ -39,6 +39,7 @@ export class ProfesoresFormPage {
     //console.log('ionViewDidLoad ProfesoresFormPage');
     this.listaMaterias = new Array<string>();
     this.dbProfesor.traerListadoMaterias().subscribe(lista=>{
+      console.log(lista);
       this.listaMaterias = lista;
     });
     this.materiaCheck = new Array<string>();

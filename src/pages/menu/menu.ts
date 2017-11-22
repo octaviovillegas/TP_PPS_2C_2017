@@ -42,5 +42,9 @@ export class MenuPage {
     this.navCtrl.push("ProfesoresFormPage");
   }
 
+  private irABMProfesores(){
+    this.navCtrl.push("ListaProfesoresPage");
+  }
+
 
 }
