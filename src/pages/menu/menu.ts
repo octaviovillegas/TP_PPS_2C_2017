@@ -38,6 +38,9 @@ export class MenuPage {
     this.navCtrl.push("AlumnosFormPage");
   }
 
+  private irAFormProfesores(){
+    this.navCtrl.push("ProfesoresFormPage");
+  }
 
 
 }
