@@ -45,7 +45,7 @@ export class ProfesorServiceProvider {
 
 
 
- public getAlumnosLista(){
+ public getProfesoresLista(){
     this.listaProfesores = this.db.list('/profesores') as FirebaseListObservable<any[]>;
     return this.listaProfesores;
   }

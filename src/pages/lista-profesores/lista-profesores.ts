@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the ListaProfesoresPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { ProfesorServiceProvider } from "../../providers/profesor-service/profesor-service";
 
 @IonicPage()
 @Component({
@@ -15,11 +10,19 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ListaProfesoresPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  private foto:string;
+  private listado:Array<string>;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              public profesorDB:ProfesorServiceProvider
+
+  ){}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ListaProfesoresPage');
+    this.foto = '';
+    this.profesorDB.getProfesoresLista().subscribe(lista=>{
+      this.listado = lista;
+    });
   }
 
 }
