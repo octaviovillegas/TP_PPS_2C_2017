@@ -52,7 +52,18 @@ Branch: NavegacionEnAPP
 
 -------------------
 
+Módulos a desarrollar: • ABM Administrativo
+
+Fecha inicio: 21/11/2017
+
+Fecha fin: 21/11/2017
+
+Branch: ninguno (master)
+
+-------------------
+
 Módulos a desarrollar: • Toma de lista
+
 Fecha inicio: 14/11/2017
 
 Fecha fin: 
