@@ -10,15 +10,19 @@ import { Usuario } from "../../clases/usuario";
 export class MenuPage {
 
   private datos:{};
-
+  
+  
+  
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl:AlertController
 
-  ) {}
+  ) { }
 
   ionViewDidLoad() {
     this.datos = JSON.parse(this.navParams.data);
     console.log(this.navParams.data);
+   
+    
   }
 
 
