@@ -58,7 +58,7 @@ export class LoginPage {
         this.listaUsuarios = this.servicioDB.getUsuariosLista();
         this.listaUsuarios.subscribe(lista=>{
           lista.forEach(usuario => {
-            //console.log(usuario);
+            console.log(usuario);
             if (usuario['correo'] == this.loginUsuario.getCorreo()) {
                 this.loginUsuario.setPerfil(usuario['perfil']);
                 this.loginUsuario.setNombre(usuario['nombre']);

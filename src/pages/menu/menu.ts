@@ -38,6 +38,10 @@ export class MenuPage {
     this.navCtrl.push("AlumnosFormPage");
   }
 
+  private irAListaAlumnos(){
+    this.navCtrl.push('ListadoAlumnosPage');
+  }
+
 
 
 }
