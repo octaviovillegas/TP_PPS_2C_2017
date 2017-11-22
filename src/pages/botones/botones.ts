@@ -12,6 +12,9 @@ import { EstadisticasPage } from '../estadisticas/estadisticas';
 
 import { IonicPage,NavController, NavParams,AlertController } from 'ionic-angular';
 import { AuthService } from '../../services/auth.service';
+import { ModalAlumnoPage } from '../modal-alumno/modal-alumno';
+import { ModalProfesorPage } from '../modal-profesor/modal-profesor';
+import { ModalAdministrativoPage } from '../modal-administrativo/modal-administrativo';
 //$IMPORTSTATEMENT
 
 /**
@@ -70,6 +73,17 @@ usuario:string;
   CrearEncuesta(){
     console.log('lsita');
     this.navCtrl.push(CrearEncuestaPage);
+    
+  }
+
+  CargarAlumno(){
+    this.navCtrl.push(ModalAlumnoPage);
+  }
+  CargarProfesor(){
+    this.navCtrl.push(ModalProfesorPage);
+  }
+  CargarAdministrativo(){
+    this.navCtrl.push(ModalAdministrativoPage);
   }
   nada(){
     console.log("nada");

@@ -9,9 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Subscription } from 'rxjs/Subscription';
-import { BotonesPage } from '../botones/botones';
-import { EstadisticasPage } from '../estadisticas/estadisticas';
-import { RealizarEncuestaPage } from '../realizar-encuesta/realizar-encuesta';
+import { LoginPage } from '../login/login';
 //$IMPORTSTATEMENT
 
 /**
@@ -34,12 +32,8 @@ export class LectorQrPage {
   info:string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private barcodeScanner: BarcodeScanner, public auth:AuthProvider) {
+    private barcodeScanner: BarcodeScanner) {
       this.mostrarInfo=false;
-      this.codigo="";
-      this.aula="";
-      this.materia="";
-      this.info="";
   }
 
   ionViewDidLoad() {
@@ -50,43 +44,25 @@ async leerCodigo(){
   this.codigo = await result.text;
   //this.scannedCodes.push(this.scannedCode);
   if (this.codigo=="8c95def646b6127282ed50454b73240300dccabc​")
-  { if (this.auth.getUser()=="usuario@usuario.com")
   {
     this.mostrarInfo=true;
     this.aula="Aula 5";
     this.materia="Matematica discreta"
-    this.info= "Cantidad Alumnos: 50"
+    this.info= "Profesor: Pepito Cantidad de alumnos:89"
   }
-  if (this.auth.getUser()=='invitado@invitado.com')
-  {
-    alert("Usted es Alumno- No tiene permiso para ver los datos");
-    this.navCtrl.push(BotonesPage);
-  }
-  
-  }
-   if (this.codigo=="ae338e4e0cbb4e4bcffaf9ce5b409feb8edd5172")
-  {if (this.auth.getUser()=='invitado@invitado.com')
+  else if (this.codigo=="ae338e4e0cbb4e4bcffaf9ce5b409feb8edd5172​")
   {
     this.mostrarInfo=true;
     this.aula="Aula 10";
     this.materia="Metodologia"
-    this.info= "Profesor: Juancito "}
-    if (this.auth.getUser()=="usuario@usuario.com")
-    { alert("Usted es Profesor- No tiene permiso para ver los datos");
-    this.navCtrl.push(BotonesPage);}
+    this.info= "Profesor: Juancito Cantidad de alumnos:8"
   }
-
- if (this.codigo=="2786f4877b9091dcad7f35751bfcf5d5ea712b2f")
+  else if (this.codigo=="2786f4877b9091dcad7f35751bfcf5d5ea712b2f")
   {
-    if (this.auth.getUser()=="usuario@usuario.com")
-    {
-      this.navCtrl.push(EstadisticasPage);
-    }
-    if (this.auth.getUser()=='invitado@invitado.com')
-    {
-      this.navCtrl.push(RealizarEncuestaPage);
-    }
- 
+    this.mostrarInfo=true;
+    this.aula="Aula 20";
+    this.materia="Probabilidad"
+    this.info= "Profesora: Lucy Cantidad de alumnos:9"
   }
 
 /*  this.barcodeScanner.scan().then((barcodeData) => {
@@ -95,11 +71,7 @@ async leerCodigo(){
    }, (err) => {
        // An error occurred
    });*/
-   
    this.codigo="";
-   this.aula="";
-   this.materia="";
-   this.info="";
   
 }
 }

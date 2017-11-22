@@ -50,7 +50,6 @@ export class CrearEncuestaPage {
     console.log(this.opcion);
 
     this.Unalista=this.afDB.list('Cuestionarios');
-    
     this.Unalista.push({titulo:this.encuesta,pregunta:this.pregunta,opcion:this.opcion});
    // this.Unalista=this.afDB.list('Respuestas/'+this.tituloSeleccionado+'/total');
     //this.Unalista.push(1);

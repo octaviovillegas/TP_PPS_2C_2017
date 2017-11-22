@@ -36,7 +36,7 @@ export class Home2Page {
 }
 
 refreshPicture() {
-    this.afDB.list('Fotos/', { preserveSnapshot: true }).subscribe((snapshots: any) => {
+    this.afDB.list('Cosas_Lindas/', { preserveSnapshot: true }).subscribe((snapshots: any) => {
       snapshots.forEach((snapshot, index) => {
         this.userAvatarPicture[index] = snapshot.val();
       });
@@ -54,7 +54,7 @@ refreshPicture() {
           icon: !this.platform.is('ios') ? 'camera' : null,
           handler: () => {
             this.pictureUtils.openCamera().then((imageData) => {
-              this.pictureUtils.uploadProfilPicture(imageData,this.aulaSeleccionada);
+            //  this.pictureUtils.uploadProfilPicture(imageData,this.aulaSeleccionada);
             });
           }
         }, {
@@ -62,7 +62,7 @@ refreshPicture() {
           icon: !this.platform.is('ios') ? 'images' : null,
           handler: () => {
             this.pictureUtils.openGallery().then((imageData) => {
-              this.pictureUtils.uploadProfilPicture(imageData,this.aulaSeleccionada);
+           //   this.pictureUtils.uploadProfilPicture(imageData,this.aulaSeleccionada);
             });
           }
         }
