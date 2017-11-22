@@ -1,9 +1,4 @@
-<!--
-  Generated template for the LoginPage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
@@ -40,6 +35,10 @@
 
       </ion-list>
 
+      <button *ngIf="datosLoginGitHub!=undefined" ion-button block color="secondary">
+        Credenciales correctas. Ir a Menu
+      </button>
+
       <button ion-button round color="primary" (click)="crearAlumno()">
         REGISTRARSE COMO ALUMNO
       </button>
@@ -52,5 +51,11 @@
         <button ion-button round outline (click)="salir()" color="danger">
           Salir
         </button>
+
+    <ion-footer>
+      <!--img src="assets/imgs/googleplus.png" width="50" height="50"-->
+      <img src="assets/imgs/github.png" width="50" height="50" (click)="logearEnGitHub()">
+      <!--img src="assets/imgs/facebook.png" width="50" height="50"-->
+    </ion-footer>
 
 </ion-content>

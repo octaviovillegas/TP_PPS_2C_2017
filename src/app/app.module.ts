@@ -33,10 +33,9 @@ import { AngularFireAuthModule }  from 'angularfire2/auth';
 import { Camera } from '@ionic-native/camera';
 import { PersonasServiceProvider } from '../providers/personas-service/personas-service';
 import { LoginServiceProvider } from '../providers/login-service/login-service';
-import { Chart } from 'chart.js';
+import { Chart } from "chart.js";
 import { AlumnoServiceProvider } from '../providers/alumno-service/alumno-service';
 import { AsistenciasProvider } from '../providers/asistencias/asistencias';
-
 
 
 var firebaseAuth  = {
@@ -86,9 +85,14 @@ var firebaseAuth  = {
     //PerfilPage
     EncuestaPage,
     GraficosPage,
+<<<<<<< HEAD
     AsistenciasPage,
     MostrarAsistenciasPage
     
+=======
+    AsistenciasPage
+
+>>>>>>> 489f626dd0b4000b9c13447ed2eb7ecb8cbefb5d
   ],
   providers: [
     StatusBar,
