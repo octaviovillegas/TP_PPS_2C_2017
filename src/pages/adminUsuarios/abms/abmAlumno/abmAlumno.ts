@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, AlertController, ActionSheetController } from 'ionic-angular';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -49,7 +49,7 @@ export class AbmAlumnoPage {
       buttons: [{
         text: 'Si',
         role: 'destructive',
-        //handler: data => { this.alumnos.remove(alumnoId); }
+        handler: data => { this.alumnos.remove(alumnoId); }
       },
       {
         text: 'No',
@@ -96,8 +96,9 @@ export class AbmAlumnoPage {
   }
 
   private filterAlumno(): any {
-    this.alumnos = this.af.list('/alumnos').valueChanges().map(alumno => alumno.filter(alumno => {
+    this.alumnos = this.af.list('/alumnos').map(alumno => alumno.filter(alumno => {
       if(this.searchValue != "" && this.searchValue != undefined) {
+        console.log(this.filterType);
         if(this.filterType == "Nombre"){
           return alumno.nombre.indexOf(this.searchValue) > 0;
         } else if(this.filterType == "Apellido"){

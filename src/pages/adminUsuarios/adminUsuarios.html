@@ -6,6 +6,23 @@
 
 
 <ion-content padding>
+
+  <ion-list>
+    <button ion-item (click)="goAbmAlumno()">
+      <ion-icon name="md-happy" item-start></ion-icon>
+      Alumnos
+    </button>
+    <button ion-item (click)="goAbmProfesor()">
+      <ion-icon name="md-easel" item-start></ion-icon>
+      Profesores
+    </button>
+    <button ion-item (click)="goAbmAlumno()">
+      <ion-icon name="md-clipboard" item-start></ion-icon>
+      Administrativos
+    </button>
+  </ion-list>
+
+
   <button ion-button (click)="goAbmAlumno()">Alumnos</button>
   <button ion-button (click)="goAbmAlumno()">Administrativos</button>
   <button ion-button (click)="goAbmProfesor()">Profesores</button>

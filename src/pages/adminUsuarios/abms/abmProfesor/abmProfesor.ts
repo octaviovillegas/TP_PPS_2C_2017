@@ -77,13 +77,13 @@ export class AbmProfesorPage {
       prompt.present();
       this.af.list('/profesores').push(this.formAlta.value);
     } else {
-      // this.profesores.update(this.modifId, {
-      //   nombre: this.formAlta.controls['nombre'].value,
-      //   apellido: this.formAlta.controls['apellido'].value,
-      //   legajo: this.formAlta.controls['legajo'].value,
-      //   anio: this.formAlta.controls['anio'].value,
-      //   curso: this.formAlta.controls['curso'].value
-      // });
+      this.profesores.update(this.modifId, {
+         nombre: this.formAlta.controls['nombre'].value,
+         apellido: this.formAlta.controls['apellido'].value,
+         legajo: this.formAlta.controls['legajo'].value,
+         anio: this.formAlta.controls['anio'].value,
+         curso: this.formAlta.controls['curso'].value
+       });
       let prompt = this.alertCtrl.create({ title: 'Profesor modificado', buttons: [{ text: 'Ok',}] });
     }
     this.formAlta.reset();
@@ -94,7 +94,7 @@ export class AbmProfesorPage {
   }
 
   private filterProfesor(): any {
-    this.profesores = this.af.list('/profesores').valueChanges().map(profesor => profesor.filter((profesor: any) => {
+    this.profesores = this.af.list('/profesores').map(profesor => profesor.filter((profesor: any) => {
       if(this.searchValue != "" && this.searchValue != undefined) {
         if(this.filterType == "Nombre"){
           return profesor.nombre.indexOf(this.searchValue) > 0;
