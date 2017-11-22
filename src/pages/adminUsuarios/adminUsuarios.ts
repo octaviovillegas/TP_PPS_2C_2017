@@ -19,10 +19,14 @@ export class AdminUsuariosPage {
   {
     this.navCtrl.push('AbmAlumnoPage');
   }
-
+  
   goAbmProfesor()
   {
     this.navCtrl.push('AbmProfesorPage');
   }
 
+  goAbmAdministrativo()
+  {
+    this.navCtrl.push('AbmAdministradorPage');
+  } 
 }
