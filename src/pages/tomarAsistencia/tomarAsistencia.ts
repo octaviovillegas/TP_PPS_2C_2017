@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 
 @IonicPage()
@@ -10,26 +10,27 @@ import { Observable } from 'rxjs/Observable';
 })
 export class TomarAsistenciaPage {
 
-  public anios: Array<number> = [1, 2, 3, 4, 5];
-  public cursos: Array<string> = ['A', 'B'];
+  public cursos: Observable<any>;
   public estado;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public af: AngularFireDatabase) {
+    this.cursos = this.af.list("/cursos");
+    console.log(this.cursos);
     this.estado = "cursos";
   }
 
   public mostrarCurso(anio: number, curso: string): void {
     console.log(anio);
     console.log(curso);
+    this.cursoCompleto("Fasd", "fads");
   }
 
-  public cursoCompleto(anio: string, curso: string): Observable<any> {
-    return this.af.list("/cursos");
-    /*return this.af.list("/cursos").map(cursos => cursos.filter(cur => {
-      return cur.anio == anio && cur.curso == curso && cur.listo == 1;
-    }));*/
+  public cursoCompleto(anio: string, curso: string): boolean {
+    let resultado = false;
+    console.log(resultado);
+    return resultado;
   }
 
   public getTitulo(anio: number) {

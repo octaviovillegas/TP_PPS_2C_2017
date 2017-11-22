@@ -6,23 +6,21 @@
 
 
 <ion-content *ngIf="estado == 'cursos'" padding>
-  <ng-template ngFor let-a [ngForOf]="anios">
 
     <ion-list no-border>
-      <ion-list-header>
-        {{getTitulo(a)}}
+  <ion-list no-border>
+    <div *ngFor="let c of cursos | async">
+      <ion-list-header *ngIf="c.curso == 'A'">
+        {{getTitulo(c.anio)}}
       </ion-list-header>
-      
-      <ng-template ngFor let-c [ngForOf]="cursos">
-        <ion-item (click)="mostrarCurso(a, c)">
-          {{a}}{{c}}
-          <ion-note class="incompleto" item-end >           
-            Incompleto       
-          </ion-note>
-          <ion-icon name='md-checkmark' class="completo" item-end></ion-icon>
-        </ion-item>
-      </ng-template>
-    </ion-list>
+      <ion-item (click)="mostrarCurso(c.anio, c.curso)">
+        {{c.anio}}{{c.curso}}
+        <ion-note class="incompleto" item-end *ngIf="c.listo == 0">           
+          Incompleto       
+        </ion-note>
+        <ion-icon name='md-checkmark' class="completo" item-end *ngIf="c.listo == 1"></ion-icon>
+      </ion-item>
+    </div>
+  </ion-list>
 
-  </ng-template>
 </ion-content>
