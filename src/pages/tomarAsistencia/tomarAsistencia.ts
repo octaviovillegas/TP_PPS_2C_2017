@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
 
 @IonicPage()
 @Component({
@@ -24,15 +25,11 @@ export class TomarAsistenciaPage {
     console.log(curso);
   }
 
-  public estaCompleto(anio: number, curso: string): boolean {
-    let estaCompleto = false;
-    this.af.list("/cursos").forEach( c => {
-      console.log(c);
-      /*if(c.anio == anio && c.curso == curso && c.listo == 1){
-        estaCompleto == true;
-      }*/
-    })
-    return estaCompleto;
+  public cursoCompleto(anio: string, curso: string): Observable<any> {
+    return this.af.list("/cursos");
+    /*return this.af.list("/cursos").map(cursos => cursos.filter(cur => {
+      return cur.anio == anio && cur.curso == curso && cur.listo == 1;
+    }));*/
   }
 
   public getTitulo(anio: number) {
