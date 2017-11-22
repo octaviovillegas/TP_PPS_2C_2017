@@ -5,6 +5,8 @@ export class Usuario{
       private clave:number;
       private perfil:string;
       private correo:string;
+      private foto:string;
+      private loginSocial:boolean;
 
       constructor(){
           this.id = null;
@@ -12,6 +14,15 @@ export class Usuario{
           this.clave = null;
           this.perfil = "";
           this.correo = "";
+          this.foto = "";
+          this.loginSocial = false;
+      }
+
+      public getLoginSocial():boolean{
+        return this.loginSocial;
+      }
+      public getFoto():string{
+        return this.foto;
       }
 
       public getId():number{
@@ -34,6 +45,13 @@ export class Usuario{
         return this.correo;
       }
 
+      public setLoginSocial(_isLoginSocial:boolean){
+        this.loginSocial = _isLoginSocial;
+      }
+
+      public setFoto(_foto:string){
+        this.foto = _foto;
+      }
       public setId(id:number){
           if (id != undefined && id != null) {
               this.id = id;

@@ -37,7 +37,6 @@ import { AlumnoServiceProvider } from '../providers/alumno-service/alumno-servic
 import { AsistenciasProvider } from '../providers/asistencias/asistencias';
 
 
-
 var firebaseAuth  = {
   apiKey: "AIzaSyBjrQu2x_3cZjv1Tdvw_TIYxBMAJ2VQU_M",
   authDomain: "tpfinal-8ff7a.firebaseapp.com",

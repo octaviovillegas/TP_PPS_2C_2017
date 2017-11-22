@@ -4,11 +4,11 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Usuario } from '../../clases/usuario';
 import firebase from "firebase";
 
+
 @Injectable()
 export class LoginServiceProvider {
 
   constructor(private auth:AngularFireAuth, private db: AngularFireDatabase
-
 
   ) {}
 
@@ -29,15 +29,18 @@ export class LoginServiceProvider {
 
   }
 
-  public loginGitHub(){
-    this.auth.auth.signInWithPopup(new firebase.auth.GithubAuthProvider()).then(res =>{
+  public loginGitHub():any{
+    let proveedor = new firebase.auth.GithubAuthProvider();
+
+    this.auth.auth.signInWithPopup(proveedor).then(res =>{
       console.log('res: '+ JSON.stringify(res));
-      this.provider.loggedin = true;
+      /*this.provider.loggedin = true;
       this.provider.mail = res.user.email;
       this.provider.foto = res.user.photoURL;
-      this.provider.nombre = res.user.displayName;
-    })
-    return this.provider;
+      this.provider.nombre = res.user.displayName;*/
+      return this.provider;
+    });
+
   }
 
 

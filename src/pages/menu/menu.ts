@@ -20,13 +20,18 @@ export class MenuPage {
   ionViewDidLoad() {
     this.datos = JSON.parse(this.navParams.data);
     console.log(this.navParams.data);
-  }
 
+   }
 
 
 
   private irAPerfil():void{
-    this.navCtrl.push("PerfilPage", {"correo" : this.datos["correo"], "perfil":this.datos["perfil"]});
+    if (this.datos["loginSocial"]==true) {
+      this.navCtrl.push("PerfilPage", {"correo" : this.datos["correo"], "perfil":this.datos["perfil"], "nombre":this.datos["nombre"], "foto":this.datos["foto"], "isLoginSocial":this.datos["loginSocial"]});
+    }else{
+      this.navCtrl.push("PerfilPage", {"correo" : this.datos["correo"], "perfil":this.datos["perfil"]});
+    }
+
   }
 
   private irAFormAlumnos(){
