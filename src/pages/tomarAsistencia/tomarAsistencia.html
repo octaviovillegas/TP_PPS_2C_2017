@@ -5,18 +5,20 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content *ngIf="estado == 'cursos'" padding>
   <ion-list no-border>
     <ion-list-header>
       Primero
     </ion-list-header>
     <ion-item>
       1ro A
-      <ion-icon name='md-remove' item-end></ion-icon>
+      <ion-note class="incompleto" item-end>           
+        Incompleto       
+      </ion-note>
     </ion-item>
     <ion-item>
       1ro B
-      <ion-icon name='md-checkmark' item-end></ion-icon>
+      <ion-icon name='md-checkmark' class="completo" item-end></ion-icon>
     </ion-item>
   </ion-list>
 
@@ -26,11 +28,13 @@
     </ion-list-header>
     <ion-item>
       2do A
-      <ion-icon name='md-remove' item-end></ion-icon>
+      <ion-note class="incompleto" item-end>          
+        Incompleto       
+      </ion-note>
     </ion-item>
     <ion-item>
       2do B
-      <ion-icon name='md-checkmark' item-end></ion-icon>
+      <ion-icon name='md-checkmark' class="completo" item-end></ion-icon>
     </ion-item>
   </ion-list>
 
@@ -40,11 +44,13 @@
     </ion-list-header>
     <ion-item>
       3ro A
-      <ion-icon name='md-remove' item-end></ion-icon>
+      <ion-note class="incompleto" item-end>          
+        Incompleto       
+      </ion-note>
     </ion-item>
     <ion-item>
       3ro B
-      <ion-icon name='md-checkmark' item-end></ion-icon>
+      <ion-icon name='md-checkmark' class="completo" item-end></ion-icon>
     </ion-item>
   </ion-list>
 
@@ -54,11 +60,13 @@
     </ion-list-header>
     <ion-item>
       4to A
-      <ion-icon name='md-remove' item-end></ion-icon>
+      <ion-note class="incompleto" item-end>          
+        Incompleto       
+      </ion-note>
     </ion-item>
     <ion-item>
       4to B
-      <ion-icon name='md-checkmark' item-end></ion-icon>
+      <ion-icon name='md-checkmark' class="completo" item-end></ion-icon>
     </ion-item>
   </ion-list>
 
@@ -68,11 +76,13 @@
     </ion-list-header>
     <ion-item>
       5to A
-      <ion-icon name='md-remove' item-end></ion-icon>
+      <ion-note class="incompleto" item-end>          
+        Incompleto       
+      </ion-note>
     </ion-item>
     <ion-item>
       5to B
-      <ion-icon name='md-checkmark' item-end></ion-icon>
+      <ion-icon name='md-checkmark' class="completo" item-end></ion-icon>
     </ion-item>
   </ion-list>
 
