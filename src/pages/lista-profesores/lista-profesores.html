@@ -1,18 +1,29 @@
-<!--
-  Generated template for the ListaProfesoresPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>listaProfesores</ion-title>
-  </ion-navbar>
+      <ion-navbar>
+        <ion-title text-center>Profesores:</ion-title>
+      </ion-navbar>
 
-</ion-header>
+    </ion-header>
 
 
-<ion-content padding>
+    <ion-content padding>
 
-</ion-content>
+      <ion-list>
+        <ion-item *ngFor="let profesor of listado">
+          <ion-avatar item-start>
+            <img [src]="profesor.foto">
+          </ion-avatar>
+          <h2>{{ profesor.nombre}}</h2>
+          <p >DNI: {{ profesor.dni}}</p>
+          <button ion-button (click)="eliminar(profesor)">
+            Baja
+          </button>
+          <button ion-button (click)="modificar(profesor)">
+            Modificar
+          </button>
+        </ion-item>
+
+      </ion-list>
+
+    </ion-content>
