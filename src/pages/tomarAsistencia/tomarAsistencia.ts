@@ -13,12 +13,14 @@ export class TomarAsistenciaPage {
 
   public estado;
   public cursos: Observable<any>;
+  public alumnos: Observable<any>;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public af: AngularFireDatabase) {
       this.estado = "lista";
     this.cursos = this.af.list("/cursos");
+    this.alumnos = this.af.list("/usuarios").map(u => u.filter(u => u.tipo == "alumno"));
   }
 
   public mostrarCurso(anio: number, curso: string): void {
@@ -42,10 +44,10 @@ export class TomarAsistenciaPage {
   }
 
   public selecAlumno(key: string) {
-    if(document.getElementById('aaa').style.visibility == "hidden"){
-      document.getElementById('aaa').style.visibility = "visible";
+    if(document.getElementById(key).style.visibility == "hidden"){
+      document.getElementById(key).style.visibility = "visible";
     } else {
-      document.getElementById('aaa').style.visibility = "hidden";
+      document.getElementById(key).style.visibility = "hidden";
     }
   }
 
