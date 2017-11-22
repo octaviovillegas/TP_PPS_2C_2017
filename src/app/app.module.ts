@@ -16,6 +16,7 @@ import {EncuestaPage} from '../pages/encuesta/encuesta';
 import {GraficosPage} from '../pages/graficos/graficos';
 import { AsistenciasPage } from '../pages/asistencias/asistencias';
 import { PerfilPage } from "../pages/perfil/perfil";
+import { ListadoAlumnosPage } from "../pages/listado-alumnos/listado-alumnos";
 import { MostrarAsistenciasPage } from "../pages/mostrar-asistencias/mostrar-asistencias";
 
 ////////SERVICIOS
@@ -60,7 +61,8 @@ var firebaseAuth  = {
     EncuestaPage,
     GraficosPage,
     AsistenciasPage,
-    MostrarAsistenciasPage
+    MostrarAsistenciasPage,
+    ListadoAlumnosPage
     
    ],
   imports: [
@@ -86,7 +88,8 @@ var firebaseAuth  = {
     EncuestaPage,
     GraficosPage,
     AsistenciasPage,
-    MostrarAsistenciasPage
+    MostrarAsistenciasPage,
+    ListadoAlumnosPage
     
   ],
   providers: [
