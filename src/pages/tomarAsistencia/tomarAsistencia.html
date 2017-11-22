@@ -6,14 +6,13 @@
 
 
 <ion-content *ngIf="estado == 'cursos'" padding>
-
   <ng-template ngFor let-a [ngForOf]="anios">
 
     <ion-list no-border>
       <ion-list-header>
         {{getTitulo(a)}}
       </ion-list-header>
-
+      
       <ng-template ngFor let-c [ngForOf]="cursos">
         <ion-item (click)="mostrarCurso(a, c)">
           {{a}}{{c}}
@@ -23,9 +22,7 @@
           <ion-icon name='md-checkmark' class="completo" item-end *ngIf="estaCompleto(a, c)"></ion-icon>
         </ion-item>
       </ng-template>
-
     </ion-list>
 
   </ng-template>
-
 </ion-content>

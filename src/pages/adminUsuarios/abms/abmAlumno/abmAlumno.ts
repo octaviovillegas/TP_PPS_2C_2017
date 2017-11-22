@@ -98,7 +98,7 @@ export class AbmAlumnoPage {
   }
 
   private filterAlumno(): any {
-    this.alumnos = this.af.list("/usuarios").map(usuario => usuario.filter(usuario => {
+    this.alumnos = this.af.list("/usuarios").map(usuarios => usuarios.filter(usuario => {
       if(usuario.tipo == "alumno"){
         if(this.searchValue != "" && this.searchValue != undefined) {
           if(this.filterType == "Nombre"){
@@ -112,7 +112,7 @@ export class AbmAlumnoPage {
         return true;
       }
     }));
-  } // && 
+  } 
 
   public cambiarDeTab() {
     if(this.modifId != "" && this.tab != "agregar") {

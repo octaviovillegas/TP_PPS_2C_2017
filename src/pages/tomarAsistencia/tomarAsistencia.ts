@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @IonicPage()
 @Component({
@@ -12,7 +13,9 @@ export class TomarAsistenciaPage {
   public cursos: Array<string> = ['A', 'B'];
   public estado;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams,
+    public af: AngularFireDatabase) {
     this.estado = "cursos";
   }
 
@@ -22,11 +25,14 @@ export class TomarAsistenciaPage {
   }
 
   public estaCompleto(anio: number, curso: string): boolean {
-    if(anio < 3) {
-      return true;
-    } else {
-      return false;
-    }
+    let estaCompleto = false;
+    this.af.list("/cursos").forEach( c => {
+      console.log(c);
+      /*if(c.anio == anio && c.curso == curso && c.listo == 1){
+        estaCompleto == true;
+      }*/
+    })
+    return estaCompleto;
   }
 
   public getTitulo(anio: number) {
