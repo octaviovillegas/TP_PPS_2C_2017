@@ -12,6 +12,7 @@ import {PerfilPage} from '../pages/perfil/perfil';
 import {EncuestaPage} from '../pages/encuesta/encuesta';
 import {AsistenciasPage} from '../pages/asistencias/asistencias';
 import { MostrarAsistenciasPage } from "../pages/mostrar-asistencias/mostrar-asistencias";
+import { ProfesorAsistenciaPage } from "../pages/profesor-asistencia/profesor-asistencia";
 
 
 
@@ -20,7 +21,7 @@ import { MostrarAsistenciasPage } from "../pages/mostrar-asistencias/mostrar-asi
 })
 export class MyApp {
   @ViewChild('contenidoPrincipal') main: Nav;
-  rootPage:any = LoginPage;
+  rootPage:any = ProfesorAsistenciaPage;
 
   public pages: Array<{titulo: string, component:any}>;
 
