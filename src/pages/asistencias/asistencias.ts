@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { AsistenciasProvider } from "../../providers/asistencias/asistencias";
 
+import { Alumno } from "../../clases/alumno";
 /**
  * Generated class for the AsistenciasPage page.
  *
@@ -40,7 +41,7 @@ comisiones;
 arrayAsistencia : Array<asistencia> = [];
 
 
-
+ 
 restablecerValores()
 {    
   this.filtro = "filtroBotones";
@@ -73,7 +74,9 @@ public alertCtrl: AlertController) {
 ionViewDidLoad() {
 
   console.log('ionViewDidLoad Asistencias');
-} 
+}
+
+
 
 
 
@@ -107,6 +110,19 @@ filtrarPor(filtroEntrante)
 
     case 'MATERIA':
       this.filtro = 'Materia';
+      this.ARP.traerListadoMaterias().subscribe(item => {
+        
+        this.materias = item;
+        if(item.length == 0)
+        {
+          this.showAlert("MATERIAS");
+          this.restablecerValores();
+        }
+        else{
+          this.cantidadMaterias = item.length;
+        }
+                 
+      });
         
       break;
 
@@ -120,7 +136,29 @@ filtrarPor(filtroEntrante)
 
 filtrarPorDia(DiaEntrante)
 {
-  
+  this.ARP.traerAlumnos().subscribe(item=>{
+    this.alumnos = item;
+    this.cantidadAlumnos = item.length;
+    //this.comisiones = item;
+   // this.cantidadComisiones = item.length;
+    this.materiaSeleccionado = false;
+    this.filtro = "false";
+    if(this.cantidadAlumnos == 0)
+    {
+     // this.showAlert("Comision");
+      this.restablecerValores();
+    }
+    else{
+      for(var i = 0; i< this.cantidadAlumnos;i++)
+      {
+        this.arrayPresentes.push("Ausente");          
+      }
+      console.log(this.arrayPresentes);
+      console.log(this.cantidadAlumnos);
+    }
+   
+    
+  });
     
   
   
@@ -128,18 +166,59 @@ filtrarPorDia(DiaEntrante)
 
 filtrarPorAula(aulaSeleccionado){
     
-  
+  this.ARP.traerAlumnos().subscribe(item=>{
+    this.alumnos = item;
+    this.cantidadAlumnos = item.length;
+    //this.comisiones = item;
+   // this.cantidadComisiones = item.length;
+    this.materiaSeleccionado = false;
+    this.filtro = "false";
+    if(this.cantidadAlumnos == 0)
+    {
+     // this.showAlert("Comision");
+      this.restablecerValores();
+    }
+    else{
+      for(var i = 0; i< this.cantidadAlumnos;i++)
+      {
+        this.arrayPresentes.push("Ausente");          
+      }
+      console.log(this.arrayPresentes);
+      console.log(this.cantidadAlumnos);
+    }
+   
+    
+  });
   
 }
 
 filtrarPorMateria(idMateriaSeleccionada){
-
+  this.ARP.traerAlumnos().subscribe(item=>{
+    this.alumnos = item;
+    this.cantidadAlumnos = item.length;
+    //this.comisiones = item;
+   // this.cantidadComisiones = item.length;
+    this.materiaSeleccionado = false;
+    this.filtro = "false";
+    if(this.cantidadAlumnos == 0)
+    {
+     // this.showAlert("Comision");
+      this.restablecerValores();
+    }
+    else{
+      for(var i = 0; i< this.cantidadAlumnos;i++)
+      {
+        this.arrayPresentes.push("Ausente");          
+      }
+      console.log(this.arrayPresentes);
+      console.log(this.cantidadAlumnos);
+    }
+   
+    
+  });
 }
 
-filtrarPorComision(comisionIngresada)
-{
-  
-}
+
 
 filtrarPorProfesor(idProfesor){
     

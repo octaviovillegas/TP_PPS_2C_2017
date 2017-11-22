@@ -11,6 +11,7 @@ import { PersonasPage } from '../pages/personas/personas';
 import {PerfilPage} from '../pages/perfil/perfil';
 import {EncuestaPage} from '../pages/encuesta/encuesta';
 import {AsistenciasPage} from '../pages/asistencias/asistencias';
+import { MostrarAsistenciasPage } from "../pages/mostrar-asistencias/mostrar-asistencias";
 
 
 
