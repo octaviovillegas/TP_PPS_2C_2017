@@ -71,7 +71,9 @@ export class AbmAdministrativoPage {
     if(this.modifId == "") {
       let prompt = this.alertCtrl.create({ title: 'Admin agregado', buttons: [{ text: 'Ok',}] });
       prompt.present();
-      this.af.list('/admins').push(this.formAlta.value);
+      let data: {} = this.formAlta.value;
+      data["tipo"] = "admin";
+      this.af.list("/usuarios").push(data);
     } else {
       this.admins.update(this.modifId, {
         nombre: this.formAlta.controls['nombre'].value,
@@ -90,18 +92,19 @@ export class AbmAdministrativoPage {
   }
 
   private filterAdmin(): any {
-    this.admins = this.af.list('/admins').map(admin => admin.filter(admin => {
-      if(this.searchValue != "" && this.searchValue != undefined) {
-        console.log(this.filterType);
-        if(this.filterType == "Nombre"){
-          return admin.nombre.indexOf(this.searchValue) > 0;
-        } else if(this.filterType == "Apellido"){
-          return admin.apellido.indexOf(this.searchValue) > 0;
-        } else if(this.filterType == "Legajo"){
-          return admin.legajo.indexOf(this.searchValue) > 0;
+    this.admins = this.af.list("/usuarios").map(usuario => usuario.filter(usuario => {
+      if(usuario.tipo == "admin"){
+        if(this.searchValue != "" && this.searchValue != undefined) {
+          if(this.filterType == "Nombre"){
+            return usuario.nombre.indexOf(this.searchValue) > 0;
+          } else if(this.filterType == "Apellido"){
+            return usuario.apellido.indexOf(this.searchValue) > 0;
+          } else if(this.filterType == "Legajo"){
+            return usuario.legajo.indexOf(this.searchValue) > 0;
+          }
         }
+        return true;
       }
-      return true;
     }));
   }
 

@@ -75,7 +75,9 @@ export class AbmAlumnoPage {
     if(this.modifId == "") {
       let prompt = this.alertCtrl.create({ title: 'Alumno agregado', buttons: [{ text: 'Ok',}] });
       prompt.present();
-      this.af.list('/alumnos').push(this.formAlta.value);
+      let data: {} = this.formAlta.value;
+      data["tipo"] = "alumno";
+      this.af.list("/usuarios").push(data);
     } else {
       this.alumnos.update(this.modifId, {
         nombre: this.formAlta.controls['nombre'].value,
@@ -96,20 +98,21 @@ export class AbmAlumnoPage {
   }
 
   private filterAlumno(): any {
-    this.alumnos = this.af.list('/alumnos').map(alumno => alumno.filter(alumno => {
-      if(this.searchValue != "" && this.searchValue != undefined) {
-        console.log(this.filterType);
-        if(this.filterType == "Nombre"){
-          return alumno.nombre.indexOf(this.searchValue) > 0;
-        } else if(this.filterType == "Apellido"){
-          return alumno.apellido.indexOf(this.searchValue) > 0;
-        } else if(this.filterType == "Legajo"){
-          return alumno.legajo.indexOf(this.searchValue) > 0;
-        }
+    this.alumnos = this.af.list("/usuarios").map(usuario => usuario.filter(usuario => {
+      if(usuario.tipo == "alumno"){
+        if(this.searchValue != "" && this.searchValue != undefined) {
+          if(this.filterType == "Nombre"){
+            return usuario.nombre.indexOf(this.searchValue) > 0;
+          } else if(this.filterType == "Apellido"){
+            return usuario.apellido.indexOf(this.searchValue) > 0;
+          } else if(this.filterType == "Legajo"){
+            return usuario.legajo.indexOf(this.searchValue) > 0;
+          }
+        } 
+        return true;
       }
-      return true;
     }));
-  }
+  } // && 
 
   public cambiarDeTab() {
     if(this.modifId != "" && this.tab != "agregar") {
