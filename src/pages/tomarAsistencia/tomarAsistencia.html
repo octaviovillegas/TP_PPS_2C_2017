@@ -6,84 +6,26 @@
 
 
 <ion-content *ngIf="estado == 'cursos'" padding>
-  <ion-list no-border>
-    <ion-list-header>
-      Primero
-    </ion-list-header>
-    <ion-item>
-      1ro A
-      <ion-note class="incompleto" item-end>           
-        Incompleto       
-      </ion-note>
-    </ion-item>
-    <ion-item>
-      1ro B
-      <ion-icon name='md-checkmark' class="completo" item-end></ion-icon>
-    </ion-item>
-  </ion-list>
 
-  <ion-list no-border>
-    <ion-list-header>
-      Segundo
-    </ion-list-header>
-    <ion-item>
-      2do A
-      <ion-note class="incompleto" item-end>          
-        Incompleto       
-      </ion-note>
-    </ion-item>
-    <ion-item>
-      2do B
-      <ion-icon name='md-checkmark' class="completo" item-end></ion-icon>
-    </ion-item>
-  </ion-list>
+  <ng-template ngFor let-a [ngForOf]="anios">
 
-  <ion-list no-border>
-    <ion-list-header>
-      Tercero
-    </ion-list-header>
-    <ion-item>
-      3ro A
-      <ion-note class="incompleto" item-end>          
-        Incompleto       
-      </ion-note>
-    </ion-item>
-    <ion-item>
-      3ro B
-      <ion-icon name='md-checkmark' class="completo" item-end></ion-icon>
-    </ion-item>
-  </ion-list>
+    <ion-list no-border>
+      <ion-list-header>
+        {{getTitulo(a)}}
+      </ion-list-header>
 
-  <ion-list no-border>
-    <ion-list-header>
-      Cuarto
-    </ion-list-header>
-    <ion-item>
-      4to A
-      <ion-note class="incompleto" item-end>          
-        Incompleto       
-      </ion-note>
-    </ion-item>
-    <ion-item>
-      4to B
-      <ion-icon name='md-checkmark' class="completo" item-end></ion-icon>
-    </ion-item>
-  </ion-list>
+      <ng-template ngFor let-c [ngForOf]="cursos">
+        <ion-item (click)="mostrarCurso(a, c)">
+          {{a}}{{c}}
+          <ion-note class="incompleto" item-end *ngIf="!estaCompleto(a, c)">           
+            Incompleto       
+          </ion-note>
+          <ion-icon name='md-checkmark' class="completo" item-end *ngIf="estaCompleto(a, c)"></ion-icon>
+        </ion-item>
+      </ng-template>
 
-  <ion-list no-border>
-    <ion-list-header>
-      Quinto
-    </ion-list-header>
-    <ion-item>
-      5to A
-      <ion-note class="incompleto" item-end>          
-        Incompleto       
-      </ion-note>
-    </ion-item>
-    <ion-item>
-      5to B
-      <ion-icon name='md-checkmark' class="completo" item-end></ion-icon>
-    </ion-item>
-  </ion-list>
+    </ion-list>
+
+  </ng-template>
 
 </ion-content>
