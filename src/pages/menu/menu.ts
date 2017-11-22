@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Usuario } from "../../clases/usuario";
+import { ListadoAlumnosPage } from "../../pages/listado-alumnos/listado-alumnos";
 
 
 @IonicPage()

@@ -21,7 +21,7 @@ import { ProfesorAsistenciaPage } from "../pages/profesor-asistencia/profesor-as
 })
 export class MyApp {
   @ViewChild('contenidoPrincipal') main: Nav;
-  rootPage:any = ProfesorAsistenciaPage;
+  rootPage:any = LoginPage;
 
   public pages: Array<{titulo: string, component:any}>;
 

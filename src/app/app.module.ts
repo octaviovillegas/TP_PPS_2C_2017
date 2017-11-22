@@ -65,7 +65,7 @@ var firebaseAuth  = {
     AsistenciasPage,
     MostrarAsistenciasPage,
     ProfesorAsistenciaPage,
-    ListadoAlumnosPage
+
     
    ],
   imports: [
@@ -93,7 +93,7 @@ var firebaseAuth  = {
     AsistenciasPage,
     MostrarAsistenciasPage,
     ProfesorAsistenciaPage,
-    ListadoAlumnosPage
+  
     
   ],
   providers: [
