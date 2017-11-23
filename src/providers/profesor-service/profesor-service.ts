@@ -50,11 +50,11 @@ export class ProfesorServiceProvider {
     return this.listaProfesores;
   }
 
-  public borrarAlumno(dni:string){
+  public borrarProfesor(dni:string){
     this.db.app.database().ref('/alumnos/' + dni).remove();
   }
 
-  public modificarAlumno(profesor:Profesor){
+  public modificarProfesor(profesor:Profesor){
     this.db.app.database().ref('/profesores/' + profesor.getDNI()).update(profesor);
   }
 
