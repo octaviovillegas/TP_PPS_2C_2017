@@ -18,3 +18,7 @@ ion-item:active {
 .disabled ion-item {
     color: #8e9093;
 }
+
+.disabled ion-item:active {
+    background: #d8d8d8 !important;
+}

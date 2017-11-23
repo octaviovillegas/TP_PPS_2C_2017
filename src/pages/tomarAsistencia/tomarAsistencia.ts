@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -19,7 +19,8 @@ export class TomarAsistenciaPage {
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
-    public af: AngularFireDatabase) {
+    public af: AngularFireDatabase,
+    public alertCtrl: AlertController) {
     this.filtrarAlumnos("1", "A");
   }
 
@@ -65,31 +66,31 @@ export class TomarAsistenciaPage {
   }
 
   public selecAlumno(key: string) {
-    let pres = 0;
-    if(document.getElementById(key).style.visibility == "hidden"){
-      document.getElementById(key).style.visibility = "visible";
-      pres = 1;
-    } else {
-      document.getElementById(key).style.visibility = "hidden";
+    if(this.cursoObj[this.current.anio+this.current.curso].listo == "0"){
+      let pres = 0;
+      if(document.getElementById(key).style.visibility == "hidden"){
+        document.getElementById(key).style.visibility = "visible";
+        pres = 1;
+      } else {
+        document.getElementById(key).style.visibility = "hidden";
+      }
+      this.alumnos.update(key, {
+        presente: pres
+      });
     }
-    this.alumnos.update(key, {
-      presente: pres
-    });
   }
 
   public getListo(): string {
     if (this.cursoObj != undefined && this.cursoObj[this.current.anio+this.current.curso] != undefined){
       let listo = this.cursoObj[this.current.anio+this.current.curso].listo;
+      let array = document.getElementsByClassName("item-alumno");
       if(listo == "1"){
-        let array = document.getElementsByClassName("item-alumno");
-        console.log(array);
-        /*array.forEach(element => {
-          element.className += "disabled";
-        });*/
-      } else {
-        let array = document.getElementsByClassName("item-alumno");
         for (let i = 0; i < array.length; i++) {
           array[i].className = "item-alumno card card-ios disabled";
+        }
+      } else {
+        for (let i = 0; i < array.length; i++) {
+          array[i].className = "item-alumno card card-ios";
         }
       }
       return listo;
@@ -101,15 +102,44 @@ export class TomarAsistenciaPage {
   }
 
   public completarCurso(anio: string, curso: string){
-    this.cursos.update(this.cursoObj[anio+curso].key, {
-      listo: 1
+    let prompt = this.alertCtrl.create({
+      title: 'Completar',
+      message: "Se completo la toma de lista en este curso?",
+      buttons: [{
+        text: 'Si',
+        handler: data => { 
+          this.cursos.update(this.cursoObj[anio+curso].key, {
+            listo: 1
+          });
+          this.showCursos = true;
+        }
+      },
+      {
+        text: 'No',
+        role: 'cancel'
+      }]
     });
+    prompt.present();
   }
 
   public reabrirCurso(anio: string, curso: string){
-    this.cursos.update(this.cursoObj[anio+curso].key, {
-      listo: 0
-    });
-  }
 
+    let prompt = this.alertCtrl.create({
+      title: 'Reabrir',
+      message: "Desea reabrir la toma de lista?",
+      buttons: [{
+        text: 'Si',
+        handler: data => { 
+          this.cursos.update(this.cursoObj[anio+curso].key, {
+            listo: 0
+          });
+        }
+      },
+      {
+        text: 'No',
+        role: 'cancel'
+      }]
+    });
+    prompt.present();
+  }
 }
