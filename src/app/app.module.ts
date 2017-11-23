@@ -39,6 +39,7 @@ import { LoginServiceProvider } from '../providers/login-service/login-service';
 import { Chart } from "chart.js";
 import { AlumnoServiceProvider } from '../providers/alumno-service/alumno-service';
 import { AsistenciasProvider } from '../providers/asistencias/asistencias';
+import { ProfesorServiceProvider } from '../providers/profesor-service/profesor-service';
 
 
 var firebaseAuth  = {
@@ -106,7 +107,8 @@ var firebaseAuth  = {
     PersonasServiceProvider,
     LoginServiceProvider,
     AlumnoServiceProvider,
-    AsistenciasProvider
+    AsistenciasProvider,
+    ProfesorServiceProvider
   ]
 })
 export class AppModule {}
