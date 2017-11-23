@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { HomePage } from '../home/home';
 import { RegisterPage } from '../register/register';
+import { SocketService } from "../../services/socket.service";
  
 @IonicPage()
 @Component({
@@ -18,12 +19,14 @@ export class LoginPage {
   user = {} as User;
   valid = new  BehaviorSubject<boolean>(false);
   selectedUser: string;
+  connection;
   constructor(
     public toastCtrl: ToastController,
     private authAf : AngularFireAuth,
     public navCtrl: NavController,
     public navParams: NavParams,
-    public loadingCtrl: LoadingController  
+    public loadingCtrl: LoadingController,
+    public socketService: SocketService
   ) {
     
   }
@@ -35,6 +38,8 @@ export class LoginPage {
         loading.present();
         await this.authAf.auth.signInWithEmailAndPassword(user.email, user.password)
           .then(result => {
+            this.socketService.connect(user.email);
+            this.connection = this.socketService.getNotificationObservable().subscribe();
             this.navCtrl.setRoot(HomePage)})
           .catch(error => {
             loading.dismiss();

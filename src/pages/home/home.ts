@@ -3,6 +3,7 @@ import { NavController, AlertController } from 'ionic-angular';
 import { PagesService, PageType } from '../../services/pages.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { LoginPage } from '../login/login';
+import { SocketService } from "../../services/socket.service";
 
 @Component({
   selector: 'page-home',
@@ -15,8 +16,8 @@ export class HomePage {
   
   constructor(public navCtrl: NavController,
     public authAf: AngularFireAuth,
-    private alertCtrl: AlertController) {
-    var pagesService = new PagesService();
+    private alertCtrl: AlertController,
+	private socketService: SocketService) {    var pagesService = new PagesService();
     this.pages = pagesService.getByUserType(this.user);
   }
 
