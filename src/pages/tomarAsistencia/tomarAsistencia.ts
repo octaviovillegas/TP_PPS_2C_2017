@@ -24,8 +24,7 @@ export class TomarAsistenciaPage {
   }
 
   public mostrarCurso(anio: number, curso: string): void {
-    console.log(anio);
-    console.log(curso);
+    
   }
 
   public getTitulo(anio: number) {

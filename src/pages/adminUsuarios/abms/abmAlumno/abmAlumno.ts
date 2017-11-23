@@ -189,7 +189,7 @@ export class AbmAlumnoPage {
         return true;
       }
     }));
-  } // && 
+  }
 
   public cambiarDeTab() {
     if(this.modifId != "" && this.tab != "agregar") {

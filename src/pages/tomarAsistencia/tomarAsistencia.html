@@ -1,5 +1,9 @@
 <ion-header>
   <ion-navbar>
+    <button ion-button small icon-left>
+      <ion-icon name="ios-arrow-back"></ion-icon>
+      Cursos
+    </button>
     <ion-title>Tomar Asistencia</ion-title>
   </ion-navbar>
 </ion-header>
@@ -25,7 +29,12 @@
 </ion-content>
 
 <ion-content *ngIf="estado == 'lista'" padding>
-  <h1>Alumnos de <b>5A</b></h1>
+  <ion-card>
+    <ion-card-header>
+      <h1>Header</h1>
+    </ion-card-header>
+  </ion-card>
+
   <ion-card *ngFor="let alumno of alumnos | async" (click)="selecAlumno(alumno.$key)">
     <ion-item>
       <h2>{{alumno.apellido}}, {{alumno.nombre}}</h2>
@@ -33,4 +42,5 @@
       <ion-icon name='md-checkmark' class="completo" id="{{alumno.$key}}" style="visibility: hidden;" item-end></ion-icon>
     </ion-item>
   </ion-card>
+  <button ion-button block color="secondary">Completar</button>
 </ion-content>
