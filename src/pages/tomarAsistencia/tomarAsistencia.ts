@@ -15,7 +15,7 @@ export class TomarAsistenciaPage {
   public cursos: Observable<any> = this.af.list("/cursos");
   public cursosKeys = new Array<string>();
   public alumnos: Observable<any>;
-  public current: {} = {anio: "1", curso: "A"};
+  public current: {} = {anio: "1", curso: "A", listo: 0};
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -77,8 +77,16 @@ export class TomarAsistenciaPage {
     });
   }
 
-  public completarCurso(){
-    
+  public completarCurso(anio: string, curso: string){
+    this.cursos.update(this.cursosKeys[anio+curso], {
+      listo: 1
+    });
+  }
+
+  public reabrirCurso(anio: string, curso: string){
+    this.cursos.update(this.cursosKeys[anio+curso], {
+      listo: 0
+    });
   }
 
 }
