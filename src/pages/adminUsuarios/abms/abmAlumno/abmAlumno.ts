@@ -67,7 +67,7 @@ export class AbmAlumnoPage {
        this.formAlta.controls['anio'].setValue(alumno.anio);
        this.formAlta.controls['curso'].setValue(alumno.curso);
        this.modifId = alumno.$key;
-       this.tab = "agregar";
+       this.tab = "lista";
   }
 
   //AGREGAR ALUMNO
