@@ -24,7 +24,8 @@ export class TomarAsistenciaPage {
   }
 
   public setCursoKey(anio: string, curso: string, key: string): void {
-    cursosKeys[anio+curso] = key;
+    this.cursosKeys[anio+curso] = key;
+    console.log(this.cursosKeys)
   }
 
   public showHideCursos(): void {
@@ -64,6 +65,13 @@ export class TomarAsistenciaPage {
     } else {
       document.getElementById(key).style.visibility = "hidden";
     }
+    this.alumnos.update(key, {
+      nombre: this.formAlta.controls['nombre'].value,
+      apellido: this.formAlta.controls['apellido'].value,
+      legajo: this.formAlta.controls['legajo'].value,
+      anio: this.formAlta.controls['anio'].value,
+      curso: this.formAlta.controls['curso'].value
+    });
   }
 
 }
