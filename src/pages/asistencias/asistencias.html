@@ -66,7 +66,7 @@
 
 <div *ngIf="cantidadAlumnos > 0">
   <ion-card class="alumnocard" *ngFor="let alumno of alumnos;let i = index">
-        <ion-card-header>{{alumno.nombre}} {{alumno.apellido}} </ion-card-header>
+        <ion-card-header>{{alumno.nombre}}</ion-card-header>
         <ion-card-content>       
          Legajo: {{alumno.legajo}}<br>         
          Curso: {{alumno.descripcion}}<br>
@@ -142,8 +142,8 @@
     <ion-card-header><button class="btn" *ngIf="materiaSeleccionado" ion-button block (click)="filtrarPorMateria(materiaSeleccionado)">Buscar Alumnos por Materia</button></ion-card-header>
     <ion-list *ngFor="let materia of materias" radio-group [(ngModel)]="materiaSeleccionado">
       <ion-item>
-        <ion-label>{{materia.descripcion}}</ion-label>
-        <ion-radio value="{{materia.id_materia}}" ></ion-radio>            
+        <ion-label>{{materia.nombre}}</ion-label>
+        <ion-radio value="{{materia.nombre}}" ></ion-radio>            
       </ion-item>         
     </ion-list>
 </div>

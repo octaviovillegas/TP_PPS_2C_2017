@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Usuario } from "../../clases/usuario";
+import { ListadoAlumnosPage } from "../../pages/listado-alumnos/listado-alumnos";
 
 
 @IonicPage()
@@ -38,12 +39,17 @@ export class MenuPage {
     this.navCtrl.push("AlumnosFormPage");
   }
 
+
   private irAFormProfesores(){
     this.navCtrl.push("ProfesoresFormPage");
   }
 
   private irABMProfesores(){
     this.navCtrl.push("ListaProfesoresPage");
+  }
+
+  private irAListaAlumnos(){
+    this.navCtrl.push('ListadoAlumnosPage');
   }
 
 

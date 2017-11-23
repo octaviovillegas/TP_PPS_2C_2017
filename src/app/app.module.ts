@@ -16,6 +16,10 @@ import {EncuestaPage} from '../pages/encuesta/encuesta';
 import {GraficosPage} from '../pages/graficos/graficos';
 import { AsistenciasPage } from '../pages/asistencias/asistencias';
 import { PerfilPage } from "../pages/perfil/perfil";
+import { ListadoAlumnosPage } from "../pages/listado-alumnos/listado-alumnos";
+import { MostrarAsistenciasPage } from "../pages/mostrar-asistencias/mostrar-asistencias";
+import { ProfesorAsistenciaPage } from "../pages/profesor-asistencia/profesor-asistencia";
+
 
 ////////SERVICIOS
 import { ServMateriaProvider } from '../providers/serv-materia/serv-materia';
@@ -56,11 +60,14 @@ var firebaseAuth  = {
     //MateriaPrincipalPage,
     //PersonasPage,
     //PersonasabmPage,
-    //PerfilPage
+    PerfilPage,
     EncuestaPage,
     GraficosPage,
-    AsistenciasPage
+    AsistenciasPage,
+    MostrarAsistenciasPage,
+    ProfesorAsistenciaPage,
 
+    
    ],
   imports: [
     BrowserModule,
@@ -81,11 +88,14 @@ var firebaseAuth  = {
     //MateriaPrincipalPage,
     //PersonasPage,
     //PersonasabmPage,
-    //PerfilPage
+    PerfilPage,
     EncuestaPage,
     GraficosPage,
-    AsistenciasPage
-
+    AsistenciasPage,
+    MostrarAsistenciasPage,
+    ProfesorAsistenciaPage,
+  
+    
   ],
   providers: [
     StatusBar,

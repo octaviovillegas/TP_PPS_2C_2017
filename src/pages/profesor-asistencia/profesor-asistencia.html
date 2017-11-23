@@ -1,0 +1,37 @@
+<ion-header>
+  
+    <ion-navbar>
+       <button ion-button  menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button> 
+      <ion-title>Tus comisiones</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+  
+    <ion-card *ngIf="mostrar">
+        <ion-card-header>Ver tu asistencia en:</ion-card-header>
+          <ion-card-content *ngFor="let comision of comisiones">  
+            <button class="btn" ion-button block (click)="filtrarPor(comision.id_comision, comision.nombreMateria)">{{comision.nombreMateria}} - {{comision.descripcion}}</button>
+          </ion-card-content>
+    </ion-card>
+  
+    <ion-card *ngIf="!mostrar">
+      <ion-card-header>Asistencias en {{nombreMateria}}</ion-card-header>
+      <ion-card-content>
+        <ion-row>
+          <ion-col class="titulo" col-6>Fecha</ion-col>
+          <ion-col class="titulo" col-6>Estado</ion-col>
+        </ion-row>
+        <ion-row *ngFor="let asistencia of asistencias">
+          <ion-col class="datos" col-6>{{asistencia.fecha}}</ion-col>
+          <ion-col [class.colorPresente]="asistencia.estado=='Presente'" [class.colorAusente]="asistencia.estado=='Ausente'" class="datos" col-6>{{asistencia.estado}}</ion-col>
+        </ion-row>
+        <button (click)="mostrar=true"  ion-button block  class="btn">Volver</button>
+      </ion-card-content>    
+    </ion-card>
+  
+  </ion-content>
