@@ -25,7 +25,6 @@ export class TomarAsistenciaPage {
 
   public setCursoKey(anio: string, curso: string, key: string): void {
     this.cursosKeys[anio+curso] = key;
-    console.log(this.cursosKeys)
   }
 
   public showHideCursos(): void {
@@ -59,19 +58,27 @@ export class TomarAsistenciaPage {
       .map(u => u.filter(u => u.tipo == "alumno" && u.anio == anio && u.curso == curso));
   }
 
+  public setVisibility(presente: string, key: string): void {
+    if(presente == "1") {
+      document.getElementById(key).style.visibility = "visible";
+    }
+  }
+
   public selecAlumno(key: string) {
+    let pres = 0;
     if(document.getElementById(key).style.visibility == "hidden"){
       document.getElementById(key).style.visibility = "visible";
+      pres = 1;
     } else {
       document.getElementById(key).style.visibility = "hidden";
     }
     this.alumnos.update(key, {
-      nombre: this.formAlta.controls['nombre'].value,
-      apellido: this.formAlta.controls['apellido'].value,
-      legajo: this.formAlta.controls['legajo'].value,
-      anio: this.formAlta.controls['anio'].value,
-      curso: this.formAlta.controls['curso'].value
+      presente: pres
     });
+  }
+
+  public completarCurso(){
+    
   }
 
 }
