@@ -31,7 +31,7 @@ export class ProfesorServiceProvider {
   }
 
 
-  public traerListadoMateriasPorProfesor(dni:string):FirebaseListObservable<any[]>{
+  public traerListadoMateriasPorProfesor(dni?:string, materia?:any):FirebaseListObservable<any[]>{
     this.listaMaterias = this.db.list('/profesores', {
       query:{
         orderByChild:'dni',
@@ -51,7 +51,7 @@ export class ProfesorServiceProvider {
   }
 
   public borrarProfesor(dni:string){
-    this.db.app.database().ref('/alumnos/' + dni).remove();
+    this.db.app.database().ref('/profesores/' + dni).remove();
   }
 
   public modificarProfesor(profesor:Profesor){
