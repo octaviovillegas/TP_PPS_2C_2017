@@ -66,8 +66,8 @@ Branch: ninguno (master)
 
 Módulos a desarrollar: • Toma de lista
 
-Fecha inicio: 14/11/2017
+Fecha inicio: 21/11/2017
 
-Fecha fin: 
+Fecha fin: 23/11/2017
 
-Branch: 
+Branch: TomaLista
