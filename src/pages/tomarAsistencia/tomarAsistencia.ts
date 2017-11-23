@@ -13,13 +13,18 @@ export class TomarAsistenciaPage {
 
   public showCursos: boolean = false;
   public cursos: Observable<any> = this.af.list("/cursos");
+  public cursosKeys = new Array<string>();
   public alumnos: Observable<any>;
-  public current: {} = {anio: null, curso: null};
+  public current: {} = {anio: "1", curso: "A"};
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public af: AngularFireDatabase) {
-    this.mostrarLista("1", "A");
+    this.filtrarAlumnos("1", "A");
+  }
+
+  public setCursoKey(anio: string, curso: string, key: string): void {
+    cursosKeys[anio+curso] = key;
   }
 
   public showHideCursos(): void {
@@ -41,8 +46,9 @@ export class TomarAsistenciaPage {
     }
   }
 
-  public mostrarLista(anio: string, curso: string): void {
-    this.filtrarAlumnos((anio as string), curso);
+  public selectCurso(anio: string, curso: string): void {
+    this.filtrarAlumnos(anio, curso);
+    this.showHideCursos();
     this.current.anio = anio;
     this.current.curso = curso;
   }
