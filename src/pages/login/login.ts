@@ -38,7 +38,7 @@ export class LoginPage {
         loading.present();
         await this.authAf.auth.signInWithEmailAndPassword(user.email, user.password)
           .then(result => {
-            this.socketService.connect(user.email);
+            this.socketService.connect(user.email); 
             this.connection = this.socketService.getNotificationObservable().subscribe();
             this.navCtrl.setRoot(HomePage)})
           .catch(error => {
