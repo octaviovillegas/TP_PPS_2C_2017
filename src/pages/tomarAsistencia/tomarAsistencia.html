@@ -18,12 +18,12 @@
             <ion-icon class="incompleto" name="ios-arrow-forward" item-end *ngIf="c.listo == 0"></ion-icon>
             <ion-icon class="completo" name="md-checkmark" item-end *ngIf="c.listo == 1"></ion-icon>
           </ion-item>
-          {{setCursoKey(c.anio, c.curso, c.$key)}}
+          {{setCursoKey(c.anio, c.curso, c.$key, c.listo)}}
         </div>
     </ion-list>
   </ion-card>
 
-  <ion-card *ngFor="let a of alumnos | async" (click)="selecAlumno(a.$key)" id="item-alumno">
+  <ion-card *ngFor="let a of alumnos | async" (click)="selecAlumno(a.$key)" class="item-alumno">
     <ion-item>
       <h2>{{a.apellido}}, {{a.nombre}}</h2>
       <p>Legajo: <b>{{a.legajo}}</b> | Curso: <b>{{a.anio}}{{a.curso}}</b></p>
@@ -31,6 +31,6 @@
       {{setVisibility(a.presente, a.$key)}}
     </ion-item>
   </ion-card>
-  <button ion-button block color="secondary" (click)="completarCurso(current.anio, current.curso)" *ngIf="current.listo == 0">Completar</button>
-  <button ion-button block color="primary" (click)="reabrirCurso(current.anio, current.curso)" *ngIf="current.listo == 1">Reabrir</button>
+  <button ion-button block color="secondary" (click)="completarCurso(current.anio, current.curso)" *ngIf="getListo() == 0">Completar</button>
+  <button ion-button block color="primary" (click)="reabrirCurso(current.anio, current.curso)" *ngIf="getListo() == 1">Reabrir</button>
 </ion-content>

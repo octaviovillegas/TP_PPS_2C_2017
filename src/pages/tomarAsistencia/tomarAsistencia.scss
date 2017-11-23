@@ -10,3 +10,11 @@ ion-item:active {
     background-color: #c3c3c3;
 }
 
+.disabled {
+    background: #d8d8d8;
+    box-shadow: none;
+}
+
+.disabled ion-item {
+    color: #8e9093;
+}
