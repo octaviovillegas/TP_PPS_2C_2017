@@ -11,17 +11,19 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 })
 export class TomarAsistenciaPage {
 
-  public estado;
-  public cursos: Observable<any>;
+  public showCursos: boolean = false;
+  public cursos: Observable<any> = this.af.list("/cursos");
   public alumnos: Observable<any>;
   public current: {} = {anio: null, curso: null};
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public af: AngularFireDatabase) {
-      this.estado = "lista";
-    this.cursos = this.af.list("/cursos");
     this.mostrarLista("1", "A");
+  }
+
+  public showHideCursos(): void {
+    this.showCursos = !this.showCursos;
   }
 
   public getTitulo(anio: number) {
@@ -43,16 +45,11 @@ export class TomarAsistenciaPage {
     this.filtrarAlumnos((anio as string), curso);
     this.current.anio = anio;
     this.current.curso = curso;
-    this.estado = "lista";
   }
 
   private filtrarAlumnos(anio: string, curso: string): void {
     this.alumnos = this.af.list("/usuarios")
       .map(u => u.filter(u => u.tipo == "alumno" && u.anio == anio && u.curso == curso));
-  }
-
-  public backToCursos(): void {
-    this.estado = "cursos";
   }
 
   public selecAlumno(key: string) {

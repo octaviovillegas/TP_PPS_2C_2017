@@ -26,23 +26,19 @@
 <ion-content padding>
   <ion-card>
     <ion-list>
-        <ion-item color="light">
-          Cursos
-          <ion-icon name="md-arrow-down" item-end *ngIf="showCursos = 'hide'"></ion-icon>
-          <ion-icon name="md-arrow-up" item-end *ngIf="showCursos = 'show'"></ion-icon>
+        <ion-item color="light" (click)="showHideCursos()">
+          <h1>Alumnos de <b>{{current.anio}}{{current.curso}}</b></h1>
+          <ion-icon name="md-arrow-dropdown" item-end *ngIf="!showCursos"></ion-icon>
+          <ion-icon name="md-arrow-dropup" item-end *ngIf="showCursos"></ion-icon>
         </ion-item>
-        <ion-item *ngFor="let c of cursos | async" *ngIf="showCursos = 'show'">
-          {{getTitulo(c.anio)}} {{c.curso}}
-          <ion-icon class="incompleto" name="md-close" item-end *ngIf="c.listo == 0"></ion-icon>
-          <ion-icon class="completo" name="md-checkmark" item-end *ngIf="c.listo == 1"></ion-icon>
-        </ion-item>
+        <div *ngFor="let c of cursos | async">
+          <ion-item *ngIf="showCursos">
+            {{getTitulo(c.anio)}} {{c.curso}}
+            <ion-icon class="incompleto" name="md-close" item-end *ngIf="c.listo == 0"></ion-icon>
+            <ion-icon class="completo" name="md-checkmark" item-end *ngIf="c.listo == 1"></ion-icon>
+          </ion-item>
+        </div>
     </ion-list>
-  </ion-card>
-
-  <ion-card text-center padding>
-    <ion-card-header>
-      <h1>Alumnos de <b>{{current.anio}}{{current.curso}}</b></h1>
-    </ion-card-header>
   </ion-card>
 
   <ion-card *ngFor="let alumno of alumnos | async" (click)="selecAlumno(alumno.$key)">
