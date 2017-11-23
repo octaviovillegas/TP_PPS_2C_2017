@@ -18,6 +18,7 @@ import { FIREBASE_CONFIG } from './app.firebase.config';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AdminUsuariosPage } from '../pages/adminUsuarios/adminUsuarios';
+import { SocketService } from "../services/socket.service";
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { AdminUsuariosPage } from '../pages/adminUsuarios/adminUsuarios';
     ListPage,
     RegisterPage
   ],
+
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
@@ -45,7 +47,8 @@ import { AdminUsuariosPage } from '../pages/adminUsuarios/adminUsuarios';
     StatusBar,
     SplashScreen,
     AngularFireDatabase,
-    FormBuilder
+    FormBuilder,
+    SocketService
   ]
 })
 export class AppModule {}
