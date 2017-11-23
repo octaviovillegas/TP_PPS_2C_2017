@@ -1,0 +1,24 @@
+.completo {    
+    color: #00b07d;
+}
+
+.incompleto {
+    color: #4a86ef;
+}
+
+ion-item:active {
+    background-color: #c3c3c3;
+}
+
+.disabled {
+    background: #d8d8d8;
+    box-shadow: none;
+}
+
+.disabled ion-item {
+    color: #8e9093;
+}
+
+.disabled ion-item:active {
+    background: #d8d8d8 !important;
+}

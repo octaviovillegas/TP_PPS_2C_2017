@@ -1,10 +1,36 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Tomar Asistencia</ion-title>
+    <ion-title>Asistencia</ion-title>
   </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
+  <ion-card>
+    <ion-list>
+        <ion-item color="light" (click)="showHideCursos()">
+          <h1>Alumnos de <b>{{current.anio}}{{current.curso}}</b></h1>
+          <ion-icon name="md-arrow-dropdown" item-end *ngIf="!showCursos"></ion-icon>
+          <ion-icon name="md-arrow-dropup" item-end *ngIf="showCursos"></ion-icon>
+        </ion-item>
+        <div *ngFor="let c of cursos | async">
+          <ion-item *ngIf="showCursos" (click)="selectCurso(c.anio, c.curso)">
+            {{getTitulo(c.anio)}} {{c.curso}}
+            <ion-icon class="incompleto" name="ios-arrow-forward" item-end *ngIf="c.listo == 0"></ion-icon>
+            <ion-icon class="completo" name="md-checkmark" item-end *ngIf="c.listo == 1"></ion-icon>
+          </ion-item>
+          {{setCursoKey(c.anio, c.curso, c.$key, c.listo)}}
+        </div>
+    </ion-list>
+  </ion-card>
 
+  <ion-card *ngFor="let a of alumnos | async" (click)="selecAlumno(a.$key)" class="item-alumno">
+    <ion-item>
+      <h2>{{a.apellido}}, {{a.nombre}}</h2>
+      <p>Legajo: <b>{{a.legajo}}</b> | Curso: <b>{{a.anio}}{{a.curso}}</b></p>
+      <ion-icon name='md-checkmark' class="completo" id="{{a.$key}}" style="visibility: hidden;" item-end></ion-icon>
+      {{setVisibility(a.presente, a.$key)}}
+    </ion-item>
+  </ion-card>
+  <button ion-button block color="secondary" (click)="completarCurso(current.anio, current.curso)" *ngIf="getListo() == 0">Completar</button>
+  <button ion-button block color="primary" (click)="reabrirCurso(current.anio, current.curso)" *ngIf="getListo() == 1">Reabrir</button>
 </ion-content>

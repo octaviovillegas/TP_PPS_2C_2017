@@ -44,7 +44,6 @@ import { AdminUsuariosPage } from '../pages/adminUsuarios/adminUsuarios';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
     AngularFireDatabase,
     FormBuilder
   ]

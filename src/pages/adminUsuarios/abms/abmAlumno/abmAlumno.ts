@@ -26,7 +26,7 @@ export class AbmAlumnoPage {
     public af: AngularFireDatabase,
     public actionSheetCtrl: ActionSheetController, 
     private formBuilder: FormBuilder) {
-      this.tab = "lista";
+      this.tab = "agregar";
       //Lista
       this.filterType = "Apellido";
       this.modifId = "";
@@ -39,6 +39,83 @@ export class AbmAlumnoPage {
         anio: ['', Validators.compose([Validators.required])],
         curso: ['', Validators.compose([Validators.required])],
       });
+  }
+
+  public crearCuros(){
+    let obj = {
+      anio: 1,
+      curso: 'A',
+      listo: 0,
+      hora: ""
+    }
+    this.af.list("/cursos").push(obj);
+    obj = {
+      anio: 1,
+      curso: 'B',
+      listo: 0,
+      hora: ""
+    }
+    this.af.list("/cursos").push(obj);
+
+    obj = {
+      anio: 2,
+      curso: 'A',
+      listo: 0,
+      hora: ""
+    }
+    this.af.list("/cursos").push(obj);
+    obj = {
+      anio: 2,
+      curso: 'B',
+      listo: 0,
+      hora: ""
+    }
+    this.af.list("/cursos").push(obj);
+
+    obj = {
+      anio: 3,
+      curso: 'A',
+      listo: 0,
+      hora: ""
+    }
+    this.af.list("/cursos").push(obj);
+    obj = {
+      anio: 3,
+      curso: 'B',
+      listo: 0,
+      hora: ""
+    }
+    this.af.list("/cursos").push(obj);
+
+    obj = {
+      anio: 4,
+      curso: 'A',
+      listo: 0,
+      hora: ""
+    }
+    this.af.list("/cursos").push(obj);
+    obj = {
+      anio: 4,
+      curso: 'B',
+      listo: 0,
+      hora: ""
+    }
+    this.af.list("/cursos").push(obj);
+
+    obj = {
+      anio: 5,
+      curso: 'A',
+      listo: 0,
+      hora: ""
+    }
+    this.af.list("/cursos").push(obj);
+    obj = {
+      anio: 5,
+      curso: 'B',
+      listo: 0,
+      hora: ""
+    }
+    this.af.list("/cursos").push(obj);
   }
 
   //LISTA DE ALUMNOS
@@ -77,6 +154,7 @@ export class AbmAlumnoPage {
       prompt.present();
       let data: {} = this.formAlta.value;
       data["tipo"] = "alumno";
+      data["presente"] = "0";
       this.af.list("/usuarios").push(data);
     } else {
       this.alumnos.update(this.modifId, {
@@ -112,7 +190,7 @@ export class AbmAlumnoPage {
         return true;
       }
     }));
-  } // && 
+  }
 
   public cambiarDeTab() {
     if(this.modifId != "" && this.tab != "agregar") {
