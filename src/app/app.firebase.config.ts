@@ -1,8 +1,8 @@
 export const FIREBASE_CONFIG = {
-    apiKey: "AIzaSyAqcrYUqaghcsxtHRmP_-La5vlYUnAvUqY",
-    authDomain: "proyectogumer-749b0.firebaseapp.com",
-    databaseURL: "https://proyectogumer-749b0.firebaseio.com",
-    projectId: "proyectogumer-749b0",
-    storageBucket: "proyectogumer-749b0.appspot.com",
-    messagingSenderId: "533821881177"
+    apiKey: "AIzaSyAJA9230GgyiIvhMDfPAyZH7YBzCQbqT64",
+    authDomain: "pps-final.firebaseapp.com",
+    databaseURL: "https://pps-final.firebaseio.com",
+    projectId: "pps-final",
+    storageBucket: "pps-final.appspot.com",
+    messagingSenderId: "495759716998"
   };
