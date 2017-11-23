@@ -1,10 +1,12 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button small icon-left>
-      <ion-icon name="ios-arrow-back"></ion-icon>
-      Cursos
-    </button>
-    <ion-title>Tomar Asistencia</ion-title>
+    <ion-title>Asistencia</ion-title>
+    <ion-buttons id="nav-button" *ngIf="estado == 'lista'">
+      <button ion-button small icon-left (click)="backToCursos()">
+        <ion-icon name="ios-arrow-back"></ion-icon>
+        Cursos
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -16,7 +18,7 @@
       <ion-list-header *ngIf="c.curso == 'A'">
         {{getTitulo(c.anio)}}
       </ion-list-header>
-      <ion-item (click)="mostrarCurso(c.anio, c.curso)">
+      <ion-item (click)="mostrarLista(c.anio, c.curso)">
         {{c.anio}}{{c.curso}}
         <ion-note class="incompleto" item-end *ngIf="c.listo == 0">           
           Incompleto       
@@ -29,9 +31,9 @@
 </ion-content>
 
 <ion-content *ngIf="estado == 'lista'" padding>
-  <ion-card>
+  <ion-card text-center>
     <ion-card-header>
-      <h1>Header</h1>
+      <h1>Alumnos de <b>{{current.anio}}{{current.curso}}</b></h1>
     </ion-card-header>
   </ion-card>
 
