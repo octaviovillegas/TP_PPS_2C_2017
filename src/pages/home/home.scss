@@ -1,10 +1,16 @@
 ion-content{
-    background-image: url("../assets/imgs/fondo2.jpg");
+    background-image: url("../../assets/images/fondo.jpg");
 }
 
 ion-title{
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0 90px 1px;
+    width: 100%;
+    height: 100%;
     text-align: center;
-    //margin-right: 25%;
 }
 
 .menu{
@@ -13,20 +19,20 @@ ion-title{
 }
 
 .cerrarSesion{
-        width:32px;
-        height:32px;
-        border-radius:100%;
+      //  width:32px;
+       // height:32px;
+        //border-radius:100%;
         background:#F44336;
         left:0;
         bottom:0;
-        position:absolute;
-        margin-left:80%;
-        margin-bottom:14px;
+        //position:absolute;
+       // margin-left:80%;
+        //margin-bottom:14px;
         border:none;
         outline:none;
         color:#FFF;
         font-size:19px;
-        text-align: right;
+       // text-align: right;
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
         transition:.5s;  
 }
