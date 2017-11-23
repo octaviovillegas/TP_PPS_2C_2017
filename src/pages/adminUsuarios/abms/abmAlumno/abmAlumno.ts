@@ -26,7 +26,7 @@ export class AbmAlumnoPage {
     public af: AngularFireDatabase,
     public actionSheetCtrl: ActionSheetController, 
     private formBuilder: FormBuilder) {
-      this.tab = "lista";
+      this.tab = "agregar";
       //Lista
       this.filterType = "Apellido";
       this.modifId = "";

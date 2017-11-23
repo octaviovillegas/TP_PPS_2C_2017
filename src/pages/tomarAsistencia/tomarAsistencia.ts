@@ -21,7 +21,7 @@ export class TomarAsistenciaPage {
     public af: AngularFireDatabase) {
       this.estado = "lista";
     this.cursos = this.af.list("/cursos");
-    this.alumnos = this.af.list("/usuarios").map(u => u.filter(u => u.tipo == "alumno"));
+    this.mostrarLista("1", "A");
   }
 
   public getTitulo(anio: number) {
@@ -40,8 +40,6 @@ export class TomarAsistenciaPage {
   }
 
   public mostrarLista(anio: string, curso: string): void {
-    console.log(anio);
-    console.log(curso);
     this.filtrarAlumnos((anio as string), curso);
     this.current.anio = anio;
     this.current.curso = curso;
@@ -49,9 +47,8 @@ export class TomarAsistenciaPage {
   }
 
   private filtrarAlumnos(anio: string, curso: string): void {
-    /*this.alumnos = this.af.list("/usuarios").map(u => {
-      u.filter(u =>  u.anio == anio && u.curso == curso);
-    });*/
+    this.alumnos = this.af.list("/usuarios")
+      .map(u => u.filter(u => u.tipo == "alumno" && u.anio == anio && u.curso == curso));
   }
 
   public backToCursos(): void {
