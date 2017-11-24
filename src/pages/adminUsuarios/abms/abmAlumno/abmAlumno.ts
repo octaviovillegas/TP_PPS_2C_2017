@@ -38,8 +38,9 @@ export class AbmAlumnoPage {
         legajo: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern("[-+]?[0-9]*\.?[0-9]*")])],
         email: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
         pass: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(20)])],
-        anio: ['', Validators.compose([Validators.required])],
-        curso: ['', Validators.compose([Validators.required])],
+        Programacion: ['', Validators.compose([Validators.required])],
+        Laboratorio: ['', Validators.compose([Validators.required])],
+        Estadistica: ['', Validators.compose([Validators.required])]
       });
   }
 
@@ -66,8 +67,9 @@ export class AbmAlumnoPage {
        this.formAlta.controls['nombre'].setValue(alumno.nombre);
        this.formAlta.controls['apellido'].setValue(alumno.apellido);
        this.formAlta.controls['legajo'].setValue(alumno.legajo);
-       this.formAlta.controls['anio'].setValue(alumno.anio);
-       this.formAlta.controls['curso'].setValue(alumno.curso);
+       this.formAlta.controls['Programacion'].setValue(alumno.Programacion);
+       this.formAlta.controls['Laboratorio'].setValue(alumno.Laboratorio);
+       this.formAlta.controls['Estadistica'].setValue(alumno.Estadistica);
        this.formAlta.controls['email'].setValue(alumno.email);
        this.formAlta.controls['pass'].setValue(alumno.pass);
        this.modifId = alumno.$key;
@@ -90,8 +92,9 @@ export class AbmAlumnoPage {
         legajo: this.formAlta.controls['legajo'].value,
         email: this.formAlta.controls['email'].value,
         pass: this.formAlta.controls['pass'].value,
-        anio: this.formAlta.controls['anio'].value,
-        curso: this.formAlta.controls['curso'].value
+        Programacion: this.formAlta.controls['Programacion'].value,
+        Laboratorio: this.formAlta.controls['Laboratorio'].value,
+        Estadistica: this.formAlta.controls['Estadistica'].value
       });
       this.modifId = "";
       let prompt = this.alertCtrl.create({ title: 'Alumno modificado', buttons: [{ text: 'Ok',}] });
