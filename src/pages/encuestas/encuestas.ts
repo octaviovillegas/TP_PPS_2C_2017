@@ -20,7 +20,6 @@ export class EncuestasPage {
   private formCrear: FormGroup;
   //Estadisticas
   @ViewChild('tortaCanvas') tortaCanvas;
-
   tortaGrafico: any;
 
   constructor(public navCtrl: NavController, 
@@ -34,13 +33,16 @@ export class EncuestasPage {
         respuestaB: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
         tiempo: ['', Validators.compose([Validators.required])]
     });
-    initRef();
+    this.lastEncuesta = new BehaviorSubject<any>(null);
+    this.initRef();
   }
 
   public initRef(): void {
-    this.af.database.ref("/encuestas").on("child_changed", snap => { 
-      this.lastEncuesta = snap.val().last();
-    });
+    this.af.database.ref("/encuestas/").on('value', encuestas => {
+      let props = Object.getOwnPropertyNames(encuestas.val());
+      let current = encuestas.val()[props[props.length -1]];
+      console.log(current);
+    })
   }
 
   public hayEncuesta(): boolean {
@@ -77,7 +79,7 @@ export class EncuestasPage {
  }
 
   public ionViewDidLoad() {
-    this.tortaGrafico = new Chart(this.tortaCanvas.nativeElement, {
+    /*this.tortaGrafico = new Chart(this.tortaCanvas.nativeElement, {
       type: 'pie',
       data: {
         labels: ["Red", "Blue"],
@@ -88,7 +90,7 @@ export class EncuestasPage {
           hoverBackgroundColor: ["#FF6384", "#36A2EB"]
         }]
       }
-    });
+    });*/
   }
 
 
