@@ -1,0 +1,17 @@
+Fer:
+- Push notifications
+- Login (hablar, ver como mechar con abms)
+- Permisos (en el routeo)
+- Cargar/descargar Exel en los ABM (ahora lo vemos)
+
+Mauro:
+- Estilos (Buscar sonidos y hacer logo)
+- Perfil 
+- Cargar/Descargar JSON en los ABM
+ - QR
+
+Fafa:
+- ABMs (X)
+- Toma de lista (...)
+- Encuestas 
+- Fotos en los ABM y perfil

@@ -1,0 +1,105 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>Alumnos</ion-title>
+    </ion-navbar>
+    <ion-toolbar>
+      <ion-segment [(ngModel)]="tab" color="primary">
+        <ion-segment-button value="lista" (click)="cambiarDeTab()">
+          Lista
+        </ion-segment-button>
+        <ion-segment-button value="agregar" (click)="cambiarDeTab()">
+          Agregar 
+        </ion-segment-button>
+        <ion-segment-button value="agregarLista" (click)="cambiarDeTab()">
+          Agregar Lista
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+  </ion-header>
+  
+<ion-content padding>
+
+  <ion-content *ngIf="tab == 'lista'">
+      <h1>Lista de alumnos</h1>
+      <ion-searchbar
+        [(ngModel)]="searchValue"
+        (ionInput)="onInput($event)">
+      </ion-searchbar>
+      <ion-item>
+        <ion-select [(ngModel)]="filterType">
+          <ion-option>Nombre</ion-option>
+          <ion-option>Apellido</ion-option>
+          <ion-option>Legajo</ion-option>
+          <ion-option>Email</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-card *ngFor="let alumno of alumnos | async">
+        <ion-item>
+          <h2>{{alumno.apellido}}, {{alumno.nombre}}</h2>
+          <p>Legajo: <b>{{alumno.legajo}}</b> | Curso: <b>{{alumno.anio}}{{alumno.curso}}</b></p>
+          <p>Email: <b>{{alumno.email}}</b></p>
+        </ion-item>
+        <ion-row>
+          <ion-col>
+            <button ion-button icon-left clear small (click)="eliminarAlumno(alumno.$key, alumno.apellido)">
+              <ion-icon name="md-close"></ion-icon>
+              <div>Eliminar</div>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button icon-left clear small (click)="modificarAlumno(alumno)">
+              <ion-icon name="md-build"></ion-icon>
+              <div>Editar</div>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-card>      
+  </ion-content>
+  
+  <ion-content *ngIf="tab == 'agregar'">
+      <h1>Agregar alumno</h1>
+      <form [formGroup]="formAlta" (ngSubmit)="agregarAlumno()">
+        <ion-item>
+          <ion-label>Nombre</ion-label>
+            <ion-input type="text" formControlName="nombre"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Apellido</ion-label>
+              <ion-input type="text" formControlName="apellido"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Legajo</ion-label>
+              <ion-input type="text" formControlName="legajo"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Email</ion-label>
+              <ion-input type="email" formControlName="email" email></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Contraseña</ion-label>
+              <ion-input type="password" formControlName="pass"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Año y curso</ion-label>
+              <ion-select formControlName="anio">
+                  <ion-option>1</ion-option>
+                  <ion-option>2</ion-option>
+                  <ion-option>3</ion-option>
+                  <ion-option>4</ion-option>
+                  <ion-option>5</ion-option>
+              </ion-select>
+              <ion-select formControlName="curso">
+                  <ion-option>A</ion-option>
+                  <ion-option>B</ion-option>
+              </ion-select>
+            </ion-item>
+            <br>
+          <button ion-button block type="submit" [disabled]="!formAlta.valid">{{modifId == "" ? "Agregar" : "Modificar"}}</button>
+      </form>
+  </ion-content>
+  
+  <ion-content *ngIf="tab == 'agregarLista'">
+    
+  </ion-content>
+    
+</ion-content>
