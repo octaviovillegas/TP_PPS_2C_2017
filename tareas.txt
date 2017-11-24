@@ -12,6 +12,6 @@ Mauro:
 
 Fafa:
 - ABMs (X)
-- Toma de lista (...)
+- Toma de lista (X)
 - Encuestas 
 - Fotos en los ABM y perfil
