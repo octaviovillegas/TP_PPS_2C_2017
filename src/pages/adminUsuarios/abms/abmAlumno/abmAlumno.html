@@ -30,12 +30,14 @@
           <ion-option>Nombre</ion-option>
           <ion-option>Apellido</ion-option>
           <ion-option>Legajo</ion-option>
+          <ion-option>Email</ion-option>
         </ion-select>
       </ion-item>
       <ion-card *ngFor="let alumno of alumnos | async">
         <ion-item>
           <h2>{{alumno.apellido}}, {{alumno.nombre}}</h2>
           <p>Legajo: <b>{{alumno.legajo}}</b> | Curso: <b>{{alumno.anio}}{{alumno.curso}}</b></p>
+          <p>Email: <b>{{alumno.email}}</b></p>
         </ion-item>
         <ion-row>
           <ion-col>
@@ -70,6 +72,14 @@
               <ion-input type="text" formControlName="legajo"></ion-input>
             </ion-item>
             <ion-item>
+              <ion-label>Email</ion-label>
+              <ion-input type="email" formControlName="email" email></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Contraseña</ion-label>
+              <ion-input type="password" formControlName="pass"></ion-input>
+            </ion-item>
+            <ion-item>
               <ion-label>Año y curso</ion-label>
               <ion-select formControlName="anio">
                   <ion-option>1</ion-option>
@@ -83,7 +93,8 @@
                   <ion-option>B</ion-option>
               </ion-select>
             </ion-item>
-          <button ion-button type="submit" [disabled]="!formAlta.valid">{{modifId == "" ? "Agregar" : "Modificar"}}</button>
+            <br>
+          <button ion-button block type="submit" [disabled]="!formAlta.valid">{{modifId == "" ? "Agregar" : "Modificar"}}</button>
       </form>
   </ion-content>
   

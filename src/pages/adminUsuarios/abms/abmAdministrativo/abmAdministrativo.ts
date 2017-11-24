@@ -35,7 +35,9 @@ export class AbmAdministrativoPage {
       this.formAlta = this.formBuilder.group({
         nombre: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
         apellido: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
-        legajo: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern("[-+]?[0-9]*\.?[0-9]*")])]
+        legajo: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern("[-+]?[0-9]*\.?[0-9]*")])],
+        email: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
+        pass: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(20)])]
       });
   }
 
@@ -62,6 +64,8 @@ export class AbmAdministrativoPage {
        this.formAlta.controls['nombre'].setValue(admin.nombre);
        this.formAlta.controls['apellido'].setValue(admin.apellido);
        this.formAlta.controls['legajo'].setValue(admin.legajo);
+       this.formAlta.controls['email'].setValue(admin.email);
+       this.formAlta.controls['pass'].setValue(admin.pass);
        this.modifId = admin.$key;
        this.tab = "agregar";
   }
@@ -79,6 +83,8 @@ export class AbmAdministrativoPage {
         nombre: this.formAlta.controls['nombre'].value,
         apellido: this.formAlta.controls['apellido'].value,
         legajo: this.formAlta.controls['legajo'].value,
+        email: this.formAlta.controls['email'].value,
+        pass: this.formAlta.controls['pass'].value,
       });
       this.modifId = "";
       let prompt = this.alertCtrl.create({ title: 'Administrativo modificado', buttons: [{ text: 'Ok',}] });
@@ -101,6 +107,8 @@ export class AbmAdministrativoPage {
             return usuario.apellido.indexOf(this.searchValue) > 0;
           } else if(this.filterType == "Legajo"){
             return usuario.legajo.indexOf(this.searchValue) > 0;
+          } else if(this.filterType == "Email"){
+            return usuario.email.indexOf(this.searchValue) > 0;
           }
         }
         return true;
