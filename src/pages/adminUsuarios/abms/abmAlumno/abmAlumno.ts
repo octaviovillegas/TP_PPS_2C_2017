@@ -83,7 +83,9 @@ export class AbmAlumnoPage {
       prompt.present();
       let data: {} = this.formAlta.value;
       data["tipo"] = "alumno";
-      data["presente"] = "0";
+      data["pres_Programacion"] = "0";
+      data["pres_Laboratorio"] = "0";
+      data["pres_Estadistica"] = "0";
       this.af.list("/usuarios").push(data);
     } else {
       this.alumnos.update(this.modifId, {

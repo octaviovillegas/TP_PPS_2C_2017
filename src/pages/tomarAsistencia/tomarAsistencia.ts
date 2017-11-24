@@ -15,13 +15,13 @@ export class TomarAsistenciaPage {
   public materias: Observable<any> = this.af.list("/materias");
   public materiaObj = new Array<any>();
   public alumnos: Observable<any>;
-  public current: {} = {nombre: "Laboratorio", curso: "A"};
+  public current: {} = {nombre: "Programacion", curso: "A"};
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public af: AngularFireDatabase,
     public alertCtrl: AlertController) {
-    this.filtrarAlumnos("Laboratorio", "A");
+    this.filtrarAlumnos("Programacion", "A");
   }
 
   public setMateriaKey(nombre: string, curso: string, key: string, listo: string): void {
@@ -44,7 +44,8 @@ export class TomarAsistenciaPage {
       .map(u => u.filter(u => u.tipo == "alumno" && u[nombre] == curso));
   }
 
-  public setVisibility(presente: string, key: string): void {
+  public setVisibility(alumno: any, key: string): void {
+    let presente = alumno["pres_" + this.current.nombre];
     if(presente == "1") {
       document.getElementById(key).style.visibility = "visible";
     }
@@ -60,7 +61,7 @@ export class TomarAsistenciaPage {
         document.getElementById(key).style.visibility = "hidden";
       }
       this.alumnos.update(key, {
-        presente: pres
+        ["pres_" + this.current.nombre]: pres
       });
     }
   }
@@ -118,6 +119,7 @@ export class TomarAsistenciaPage {
           this.materias.update(this.materiaObj[nombre+curso].key, {
             listo: 0
           });
+          this.showMaterias = false;
         }
       },
       {

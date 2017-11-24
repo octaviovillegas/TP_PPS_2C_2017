@@ -28,7 +28,7 @@
       <h2>{{a.apellido}}, {{a.nombre}}</h2>
       <p>Legajo: <b>{{a.legajo}}</b></p>
       <ion-icon name='md-checkmark' class="completo" id="{{a.$key}}" style="visibility: hidden;" item-end></ion-icon>
-      {{setVisibility(a.presente, a.$key)}}
+      {{setVisibility(a, a.$key)}}
     </ion-item>
   </ion-card>
   <button ion-button block color="secondary" (click)="completarMateria(current.nombre, current.curso)" *ngIf="getListo() == 0">Completar</button>
