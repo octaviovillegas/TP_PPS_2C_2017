@@ -1,19 +1,22 @@
-
 <ion-header>
-
-  <ion-navbar>
-    <ion-title text-center>Login</ion-title>
-  </ion-navbar>
-
+    <ion-navbar light>
+      <ion-title>Pantalla de Ingreso</ion-title>
+      <ion-buttons left>
+        <button (click)="salir()">
+          <img width="30" heigth="30" color="transparent" src="assets/icon/descarga.jpg">
+        </button>
+      </ion-buttons>
+    </ion-navbar>
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="fondo" padding>
 
     <ion-list inset>
-        <ion-item color="primary">
-          <ion-label color="dark">Seleccionar Usuario</ion-label>
-          <ion-select color="primary" (ionChange)="writePassw()"  [(ngModel)]="correo" cancelText="Cancelar" okText="Elegir" interface="alert">
+        <ion-item class="item">
+        <ion-icon color="primary" name="ios-folder-open" item-left></ion-icon>
+          <ion-label color="dark">Seleccionar:</ion-label>
+          <ion-select (ionChange)="writePassw()"  [(ngModel)]="correo" cancelText="Cancelar" okText="Elegir" interface="alert">
             <ion-option value="admin@admin.com">Administrador</ion-option>
             <ion-option value="alumno@alumno.com.ar">Alumno</ion-option>
             <ion-option value="profesor@profesor.com">Profesor</ion-option>
@@ -35,6 +38,9 @@
 
       </ion-list>
 
+
+      <button ion-button class= "ingresar" round color="secondary" (click)="login()">
+
       <button *ngIf="datosLoginGitHub!=undefined" ion-button block color="secondary">
         Credenciales correctas. Ir a Menu
       </button>
@@ -44,13 +50,9 @@
       </button>
 
       <button ion-button round color="secondary" (click)="login()">
-          Ingresar <br>
-          <ion-icon name="arrow-dropright"></ion-icon>
-        </button>
 
-        <button ion-button round outline (click)="salir()" color="danger">
-          Salir
-        </button>
+
+        
 
     <ion-footer>
       <!--img src="assets/imgs/googleplus.png" width="50" height="50"-->

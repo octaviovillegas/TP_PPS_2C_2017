@@ -12,17 +12,23 @@ import { ListadoAlumnosPage } from "../../pages/listado-alumnos/listado-alumnos"
 export class MenuPage {
 
   private datos:{};
-
+  
+  
+  
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl:AlertController
 
-  ) {}
+  ) { }
 
   ionViewDidLoad() {
     this.datos = JSON.parse(this.navParams.data);
     console.log(this.navParams.data);
 
-   }
+   
+    
+  }
+
+
 
 
 
