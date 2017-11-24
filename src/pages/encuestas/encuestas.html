@@ -2,9 +2,42 @@
   <ion-navbar>
     <ion-title>Encuestas</ion-title>
   </ion-navbar>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="tab" color="primary">
+      <ion-segment-button value="actual">
+        Actual
+      </ion-segment-button>
+      <ion-segment-button value="crear">
+        Crear 
+      </ion-segment-button>
+      <ion-segment-button value="estadisticas">
+        Estadisticas
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
 
 <ion-content padding>
+
+  <ion-content *ngIf="tab == 'actual'">
+    <h1>Pregunta muy loca?</h1>
+    <ion-card>
+      <ion-item>
+        <ion-select [(ngModel)]="respuesta">
+          <ion-option>Opcion 1</ion-option>
+          <ion-option>Opcion 2</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-card>
+  </ion-content>
+
+  <ion-content *ngIf="tab == 'crear'">
+
+  </ion-content>
+
+  <ion-content *ngIf="tab == 'estadisticas'">
+
+  </ion-content>
 
 </ion-content>

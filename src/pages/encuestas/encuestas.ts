@@ -8,6 +8,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class EncuestasPage {
 
+  public tab: string;
+  //Actual
+  public respuesta: string;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
   
