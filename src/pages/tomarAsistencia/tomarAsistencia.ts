@@ -90,7 +90,7 @@ export class TomarAsistenciaPage {
   public completarMateria(nombre: string, curso: string){
     let prompt = this.alertCtrl.create({
       title: 'Completar',
-      message: "Se completo la toma de lista en este curso?",
+      message: "¿Terminaste de tomar lista?",
       buttons: [{
         text: 'Si',
         handler: data => { 
@@ -112,7 +112,7 @@ export class TomarAsistenciaPage {
 
     let prompt = this.alertCtrl.create({
       title: 'Reabrir',
-      message: "Desea reabrir la toma de lista?",
+      message: "¿Queres reabrir la materia?",
       buttons: [{
         text: 'Si',
         handler: data => { 
