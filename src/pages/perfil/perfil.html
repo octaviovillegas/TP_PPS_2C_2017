@@ -32,7 +32,7 @@
   </ion-item>
 
 
-<ion-item>
+<ion-item *ngIf="perfil=='alumno'">
   <ion-label>Materias cursando actualmente:</ion-label>
   <ul *ngFor= "let materia of materias">
     <li >
