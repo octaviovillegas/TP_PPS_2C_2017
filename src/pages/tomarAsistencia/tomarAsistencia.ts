@@ -11,62 +11,58 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 })
 export class TomarAsistenciaPage {
 
-  public showCursos: boolean = false;
-  public cursos: Observable<any> = this.af.list("/cursos");
-  public cursoObj = new Array<any>();
+  private tab: string;
+  //Materias
+  public showMaterias: boolean = false;
+  public materias: Observable<any> = this.af.list("/materias");
+  public materiaObj = new Array<any>();
   public alumnos: Observable<any>;
-  public current: {} = {anio: "1", curso: "A"};
+  public current: {} = {nombre: "Programacion", curso: "A"};
+  //Buscar
+  private searchValue: string;
+  public buscarPor: string = "Aula";
+  public materiasFiltradas: Observable<any> = this.af.list("/materias");
+  public profesores: Observable<any>;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public af: AngularFireDatabase,
     public alertCtrl: AlertController) {
-    this.filtrarAlumnos("1", "A");
+    this.tab = "materias";
+    this.filtrarAlumnos("Programacion", "A");
+    this.materiaDeProfe();
   }
 
-  public setCursoKey(anio: string, curso: string, key: string, listo: string): void {
-    this.cursoObj[anio+curso] = {key: key, listo: listo};
+  public setMateriaKey(nombre: string, curso: string, key: string, listo: string): void {
+    this.materiaObj[nombre+curso] = {key: key, listo: listo};
   }
 
-  public showHideCursos(): void {
-    this.showCursos = !this.showCursos;
+  public showHideMaterias(): void {
+    this.showMaterias = !this.showMaterias;
   }
 
-  public getTitulo(anio: number) {
-    switch(anio){
-      case 1:
-        return "Primero";
-      case 2:
-        return "Segundo";
-      case 3:
-        return "Tercero";
-      case 4:
-        return "Cuarto";
-      case 5:
-        return "Quinto";
-    }
-  }
-
-  public selectCurso(anio: string, curso: string): void {
-    this.filtrarAlumnos(anio, curso);
-    this.showHideCursos();
-    this.current.anio = anio;
+  public selectMateria(nombre: string, curso: string): void {
+    this.tab = "materias";
+    this.filtrarAlumnos(nombre, curso);
+    this.showMaterias = false;
+    this.current.nombre = nombre;
     this.current.curso = curso;
   }
 
-  private filtrarAlumnos(anio: string, curso: string): void {
+  private filtrarAlumnos(nombre: string, curso: string): void {
     this.alumnos = this.af.list("/usuarios")
-      .map(u => u.filter(u => u.tipo == "alumno" && u.anio == anio && u.curso == curso));
+      .map(u => u.filter(u => u.tipo == "alumno" && u[nombre] == curso));
   }
 
-  public setVisibility(presente: string, key: string): void {
+  public setVisibility(alumno: any, key: string): void {
+    let presente = alumno["pres_" + this.current.nombre];
     if(presente == "1") {
       document.getElementById(key).style.visibility = "visible";
     }
   }
 
   public selecAlumno(key: string) {
-    if(this.cursoObj[this.current.anio+this.current.curso].listo == "0"){
+    if(this.materiaObj[this.current.nombre+this.current.curso].listo == "0"){
       let pres = 0;
       if(document.getElementById(key).style.visibility == "hidden"){
         document.getElementById(key).style.visibility = "visible";
@@ -75,14 +71,14 @@ export class TomarAsistenciaPage {
         document.getElementById(key).style.visibility = "hidden";
       }
       this.alumnos.update(key, {
-        presente: pres
+        ["pres_" + this.current.nombre]: pres
       });
     }
   }
 
   public getListo(): string {
-    if (this.cursoObj != undefined && this.cursoObj[this.current.anio+this.current.curso] != undefined){
-      let listo = this.cursoObj[this.current.anio+this.current.curso].listo;
+    if (this.materiaObj != undefined && this.materiaObj[this.current.nombre+this.current.curso] != undefined){
+      let listo = this.materiaObj[this.current.nombre+this.current.curso].listo;
       let array = document.getElementsByClassName("item-alumno");
       if(listo == "1"){
         for (let i = 0; i < array.length; i++) {
@@ -101,17 +97,17 @@ export class TomarAsistenciaPage {
     }
   }
 
-  public completarCurso(anio: string, curso: string){
+  public completarMateria(nombre: string, curso: string){
     let prompt = this.alertCtrl.create({
       title: 'Completar',
-      message: "Se completo la toma de lista en este curso?",
+      message: "¿Terminaste de tomar lista?",
       buttons: [{
         text: 'Si',
         handler: data => { 
-          this.cursos.update(this.cursoObj[anio+curso].key, {
+          this.materias.update(this.materiaObj[nombre+curso].key, {
             listo: 1
           });
-          this.showCursos = true;
+          this.showMaterias = true;
         }
       },
       {
@@ -122,17 +118,18 @@ export class TomarAsistenciaPage {
     prompt.present();
   }
 
-  public reabrirCurso(anio: string, curso: string){
+  public reabrirMateria(nombre: string, curso: string){
 
     let prompt = this.alertCtrl.create({
       title: 'Reabrir',
-      message: "Desea reabrir la toma de lista?",
+      message: "¿Queres reabrir la materia?",
       buttons: [{
         text: 'Si',
         handler: data => { 
-          this.cursos.update(this.cursoObj[anio+curso].key, {
+          this.materias.update(this.materiaObj[nombre+curso].key, {
             listo: 0
           });
+          this.showMaterias = false;
         }
       },
       {
@@ -142,4 +139,33 @@ export class TomarAsistenciaPage {
     });
     prompt.present();
   }
+
+  public onInput(event: any): void {
+    if(this.buscarPor == "Aula"){
+      this.filtrarMateriasPorAula();
+    } else if (this.buscarPor == "Profesor"){
+      this.materiaDeProfe();
+    }
+  }
+
+  private filtrarMateriasPorAula(): void {
+    this.materiasFiltradas = this.af.list("/materias").map(materia => materia.filter(materia => {
+      if(this.searchValue != "" && this.searchValue != undefined) {
+        return materia.aula == this.searchValue;
+      }
+      return true;
+    }));
+  }
+
+  private materiaDeProfe(): void {
+    this.profesores = this.af.list("/usuarios").map(usuario => usuario.filter(usuario => {
+      if(usuario.tipo == "profe") {
+        if(this.searchValue != "" && this.searchValue != undefined) {
+          return usuario.apellido.toLowerCase().indexOf(this.searchValue.toLowerCase()) !== -1;
+        }
+        return true;
+      }
+    }));
+  }
+
 }

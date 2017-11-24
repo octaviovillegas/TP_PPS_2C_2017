@@ -36,7 +36,7 @@
       <ion-card *ngFor="let alumno of alumnos | async">
         <ion-item>
           <h2>{{alumno.apellido}}, {{alumno.nombre}}</h2>
-          <p>Legajo: <b>{{alumno.legajo}}</b> | Curso: <b>{{alumno.anio}}{{alumno.curso}}</b></p>
+          <p>Legajo: <b>{{alumno.legajo}}</b></p>
           <p>Email: <b>{{alumno.email}}</b></p>
         </ion-item>
         <ion-row>
@@ -80,15 +80,25 @@
               <ion-input type="password" formControlName="pass"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-label>Año y curso</ion-label>
-              <ion-select formControlName="anio">
-                  <ion-option>1</ion-option>
-                  <ion-option>2</ion-option>
-                  <ion-option>3</ion-option>
-                  <ion-option>4</ion-option>
-                  <ion-option>5</ion-option>
+              <ion-label>Programacion</ion-label>
+              <ion-select formControlName="Programacion">
+                  <ion-option>Ninguno</ion-option>
+                  <ion-option>A</ion-option>
+                  <ion-option>B</ion-option>
               </ion-select>
-              <ion-select formControlName="curso">
+            </ion-item>
+            <ion-item>
+              <ion-label>Laboratorio</ion-label>
+              <ion-select formControlName="Laboratorio">
+                  <ion-option>Ninguno</ion-option>
+                  <ion-option>A</ion-option>
+                  <ion-option>B</ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label>Estadistica</ion-label>
+              <ion-select formControlName="Estadistica">
+                  <ion-option>Ninguno</ion-option>
                   <ion-option>A</ion-option>
                   <ion-option>B</ion-option>
               </ion-select>

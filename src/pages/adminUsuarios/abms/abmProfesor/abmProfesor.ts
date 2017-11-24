@@ -37,8 +37,8 @@ export class AbmProfesorPage {
         apellido: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
         email: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
         pass: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(20)])],
-        anio: ['', Validators.compose([Validators.required])],
-        curso: ['', Validators.compose([Validators.required])],
+        materia: ['', Validators.compose([Validators.required])],
+        curso: ['', Validators.compose([Validators.required])]
       });
   }
 
@@ -66,7 +66,7 @@ export class AbmProfesorPage {
        this.formAlta.controls['apellido'].setValue(profesor.apellido);
        this.formAlta.controls['email'].setValue(profesor.email);
        this.formAlta.controls['pass'].setValue(profesor.pass);
-       this.formAlta.controls['anio'].setValue(profesor.anio);
+       this.formAlta.controls['materia'].setValue(profesor.materia);
        this.formAlta.controls['curso'].setValue(profesor.curso);
        this.modifId = profesor.$key;
        this.tab = "agregar";
@@ -86,7 +86,7 @@ export class AbmProfesorPage {
          apellido: this.formAlta.controls['apellido'].value,
          email: this.formAlta.controls['email'].value,
          pass: this.formAlta.controls['pass'].value,
-         anio: this.formAlta.controls['anio'].value,
+         materia: this.formAlta.controls['materia'].value,
          curso: this.formAlta.controls['curso'].value
        });
        this.modifId = "";
