@@ -1,0 +1,57 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title text-center>Alta de Profesores:</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <img *ngIf="foto" [src]="foto" width="100" height="130">
+    <ion-icon ios="ios-camera" md="md-camera" (click)="sacarFoto()"></ion-icon>
+    <ion-item>
+      <ion-label>Foto perfil</ion-label>
+
+    </ion-item>
+
+    <ion-item>
+        <ion-label>DNI:</ion-label>
+        <ion-input type="text" [(ngModel)]="dni"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>Nombre:</ion-label>
+        <ion-input type="text" [(ngModel)]="nombre"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>Correo:</ion-label>
+        <ion-input type="text" [(ngModel)]="correo"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>Contraseña:</ion-label>
+        <ion-input type="password" [(ngModel)]="passw"></ion-input>
+    </ion-item>
+
+  <ion-list>
+    <ion-item>
+        <ion-label>Materias que imparte: </ion-label>
+    </ion-item>
+    <ion-item >
+        <ion-select (ionChange)="marcarOpcion($event)" [(ngModel)]="materiaCheck" multiple="true" cancelText="Cancelar" okText="Aceptar">
+            <ion-option *ngFor="let materia of listaMaterias" value={{materia.nombre}}>
+              <ion-label>{{materia.nombre | uppercase}}</ion-label>
+            </ion-option>
+        </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <button ion-button block color="secondary" (click)="ingresarProfesor()">
+    INGRESAR PROFESOR
+  </button>
+
+</ion-content>

@@ -27,6 +27,7 @@ export class PerfilPage {
   private materias:Array<string>;
   private legajo:string;
   private correoModif:string;
+  private isLoginSocial:boolean=false;
 
   private storageRef = firebase.storage().ref();
 
@@ -36,27 +37,45 @@ export class PerfilPage {
   ) {}
 
   ionViewDidLoad() {
-    this.perfil = this.navParams.get('perfil');
-    this.correo = this.navParams.get('correo');
+    this.materias = new Array<string>();
+    console.log(this.navParams.data);
+     if (this.navParams.get('isLoginSocial')) {
+       if (this.navParams.get('nombre') == null || this.navParams.get('nombre') == undefined) {
+         this.nombre = '';
+       }else{
+        this.nombre = this.navParams.get('nombre');
+       }
 
+      this.correo = this.navParams.get('correo');
+      this.perfil = 'alumno';
+      this.foto = this.navParams.get('foto');
+    }else{
+      this.perfil = this.navParams.get('perfil');
+      this.correo = this.navParams.get('correo');
 
-    this.dbPersonas.getDatosPersona(this.correo, this.perfil).subscribe(valor=>{
+      this.dbPersonas.getDatosPersona(this.correo, this.perfil).subscribe(valor=>{
 
-      switch (this.perfil) {
-          case 'alumno':
-                //this.alumno = new Alumno();
-                this.materias = new Array<string>();
-                this.nombre = valor[0]["nombre"];
-                this.foto = valor[0]["foto"];
-                this.legajo = valor[0]["legajo"];
-                this.materias = valor[0]["materias"];
+            switch (this.perfil) {
+                case 'alumno':
+                      //this.alumno = new Alumno();
 
-          break;
+                      if (valor[0]["nombre"] != null && valor[0]["nombre"] != undefined) {
+                        this.nombre = valor[0]["nombre"];
+                      }else{
+                        this.nombre = '';
+                      }
+                      this.foto = valor[0]["foto"];
+                      this.legajo = valor[0]["legajo"];
+                      this.materias = valor[0]["materias"];
+                      console.log('this.materias:', this.materias);
+                break;
 
-        default:
-          break;
-      }
-    })
+              default:
+                break;
+            }
+          })
+    }
+
   }
 
 
@@ -105,7 +124,7 @@ export class PerfilPage {
           let upload = this.storageRef.child('alumnos/' + this.legajo + '.jpg').putString(imagen, 'base64');
 
           upload.then((snapshot=>{
-                this.dbPersonas.guardarLinkFoto(this.legajo, snapshot.downloadURL, this.legajo);
+                this.dbPersonas.guardarLinkFoto(snapshot.downloadURL, this.legajo);
                 let msjOK = this.alertCtrl.create({
                   subTitle: 'Imagen guardada',
                   buttons: ['Aceptar']

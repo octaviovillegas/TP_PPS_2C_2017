@@ -54,13 +54,13 @@ export class PersonasServiceProvider {
           path = "/alumnos";
         break;
         case "administrador":
-          path = "administrador";
+          path = "/administradores";
         break;
         case "administrativo":
-          path = "administrativo";
+          path = "/administrativos";
         break;
         case "profesor":
-          path = "profesor";
+          path = "/profesores";
         break;
 
       default:
@@ -71,7 +71,7 @@ export class PersonasServiceProvider {
   }
 
 
-  guardarLinkFoto(nombre:string, path:string, legajo:string){
+  guardarLinkFoto(path:string, legajo:string){
     this.db.app.database().ref('/alumnos/' + legajo).update({"foto":path});
   }
 

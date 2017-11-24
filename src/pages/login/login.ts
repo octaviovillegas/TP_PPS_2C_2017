@@ -7,6 +7,9 @@ import { PersonasServiceProvider } from "../../providers/personas-service/person
 
 import { Usuario } from "../../clases/usuario";
 
+import { AngularFireAuth } from 'angularfire2/auth';
+import firebase from "firebase";
+
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -18,11 +21,19 @@ export class LoginPage {
   private passw: any;
   private loginUsuario:Usuario;
   private listaUsuarios:any = [];
+  private datosLoginGitHub:any;
+  private provider = {
+    correo: '',
+    nombre:'',
+    foto:'',
+    perfil:'alumno',
+    loggedin:false
+  }
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl:AlertController, public loadingCtrl:LoadingController,
               private auth:LoginServiceProvider, private servicioDB:PersonasServiceProvider,
-              public platform:Platform
+              public platform:Platform, public authe:AngularFireAuth
   ) {}
 
   ionViewDidLoad() {
@@ -47,10 +58,12 @@ export class LoginPage {
         this.listaUsuarios = this.servicioDB.getUsuariosLista();
         this.listaUsuarios.subscribe(lista=>{
           lista.forEach(usuario => {
-            //console.log(usuario);
+            console.log(usuario);
             if (usuario['correo'] == this.loginUsuario.getCorreo()) {
                 this.loginUsuario.setPerfil(usuario['perfil']);
                 this.loginUsuario.setNombre(usuario['nombre']);
+                console.log('set nombre: ', usuario['perfil']);
+                this.loginUsuario.setPerfil(usuario['perfil']);
                 this.loginUsuario.setClave(-1); //no necesito guardar la passw
                 this.navCtrl.push("MenuPage", JSON.stringify(this.loginUsuario));
             }
@@ -86,7 +99,7 @@ export class LoginPage {
           //this.mostrarCardRegistro = false;
 
         break;
-        case "alumno@alumno.com":
+        case "alumno@alumno.com.ar":
           this.passw = 222222;
           //this.errCred = false;
           //this.registrar= false;
@@ -116,11 +129,31 @@ export class LoginPage {
     }
 
 
+    crearAlumno(){
+      this.navCtrl.push('AlumnosFormPage');
+    }
+
     salir(){
       this.platform.exitApp();
     }
 
 
+   async logearEnGitHub(){
+    let proveedor = new firebase.auth.GithubAuthProvider();
+
+        let res = await this.authe.auth.signInWithRedirect(proveedor).then(res =>{
+          console.log('res: '+ JSON.stringify(res));
+
+          this.loginUsuario.setCorreo(res.user.email);
+          this.loginUsuario.setPerfil('alumno');
+          this.loginUsuario.setNombre(res.user.displayName);
+          this.loginUsuario.setFoto(res.user.photoURL);
+          this.loginUsuario.setLoginSocial(true);
+          console.log('usuarios: ', this.loginUsuario);
+          this.navCtrl.push('MenuPage', JSON.stringify(this.loginUsuario));
+        });
+
+}
 
 
 

@@ -9,6 +9,11 @@ import { MateriasPage } from '../pages/materias/materias';
 import { MateriaPrincipalPage } from '../pages/materia-principal/materia-principal';
 import { PersonasPage } from '../pages/personas/personas';
 import {PerfilPage} from '../pages/perfil/perfil';
+import {EncuestaPage} from '../pages/encuesta/encuesta';
+import {AsistenciasPage} from '../pages/asistencias/asistencias';
+import { MostrarAsistenciasPage } from "../pages/mostrar-asistencias/mostrar-asistencias";
+import { ProfesorAsistenciaPage } from "../pages/profesor-asistencia/profesor-asistencia";
+
 
 
 @Component({
@@ -24,7 +29,10 @@ export class MyApp {
 
     this.pages = [
         {titulo: 'Inicio', component:LoginPage},
-        {titulo: 'Perfil', component:PerfilPage}
+        {titulo: 'Perfil', component:PerfilPage},
+        {titulo: 'Asistencias', component:AsistenciasPage},
+        {titulo: 'Encuesta', component:EncuestaPage}
+        
 
     ];
 

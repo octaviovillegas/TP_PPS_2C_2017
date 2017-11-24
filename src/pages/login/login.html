@@ -18,7 +18,7 @@
           <ion-label color="dark">Seleccionar:</ion-label>
           <ion-select (ionChange)="writePassw()"  [(ngModel)]="correo" cancelText="Cancelar" okText="Elegir" interface="alert">
             <ion-option value="admin@admin.com">Administrador</ion-option>
-            <ion-option value="alumno@alumno.com">Alumno</ion-option>
+            <ion-option value="alumno@alumno.com.ar">Alumno</ion-option>
             <ion-option value="profesor@profesor.com">Profesor</ion-option>
             <ion-option value="administrativo@administrativo.com">Administrativo</ion-option>
           </ion-select>
@@ -38,11 +38,26 @@
 
       </ion-list>
 
+
       <button ion-button class= "ingresar" round color="secondary" (click)="login()">
-          Ingresar <br>
-          <ion-icon name="arrow-dropright"></ion-icon>
-        </button>
+
+      <button *ngIf="datosLoginGitHub!=undefined" ion-button block color="secondary">
+        Credenciales correctas. Ir a Menu
+      </button>
+
+      <button ion-button round color="primary" (click)="crearAlumno()">
+        REGISTRARSE COMO ALUMNO
+      </button>
+
+      <button ion-button round color="secondary" (click)="login()">
+
 
         
+
+    <ion-footer>
+      <!--img src="assets/imgs/googleplus.png" width="50" height="50"-->
+      <img src="assets/imgs/github.png" width="50" height="50" (click)="logearEnGitHub()">
+      <!--img src="assets/imgs/facebook.png" width="50" height="50"-->
+    </ion-footer>
 
 </ion-content>

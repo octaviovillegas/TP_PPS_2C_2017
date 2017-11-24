@@ -19,3 +19,7 @@ ABM Materias
 
 Gonzalo Saidman
 Estilos
+
+
+Pluging Charts
+npm install chart.js --save

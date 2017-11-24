@@ -12,8 +12,14 @@ import { MateriaPrincipalPage } from '../pages/materia-principal/materia-princip
 import { PersonasPage } from '../pages/personas/personas';
 import { PersonasabmPage } from '../pages/personasabm/personasabm';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import {EncuestaPage} from '../pages/encuesta/encuesta';
+import {GraficosPage} from '../pages/graficos/graficos';
+import { AsistenciasPage } from '../pages/asistencias/asistencias';
 import { PerfilPage } from "../pages/perfil/perfil";
+import { ListadoAlumnosPage } from "../pages/listado-alumnos/listado-alumnos";
+import { MostrarAsistenciasPage } from "../pages/mostrar-asistencias/mostrar-asistencias";
+import { ProfesorAsistenciaPage } from "../pages/profesor-asistencia/profesor-asistencia";
+
 
 ////////SERVICIOS
 import { ServMateriaProvider } from '../providers/serv-materia/serv-materia';
@@ -30,6 +36,13 @@ import { AngularFireAuthModule }  from 'angularfire2/auth';
 import { Camera } from '@ionic-native/camera';
 import { PersonasServiceProvider } from '../providers/personas-service/personas-service';
 import { LoginServiceProvider } from '../providers/login-service/login-service';
+import { Chart } from "chart.js";
+import { AlumnoServiceProvider } from '../providers/alumno-service/alumno-service';
+import { AsistenciasProvider } from '../providers/asistencias/asistencias';
+
+import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
+import { ProfesorServiceProvider } from '../providers/profesor-service/profesor-service';
+
 
 
 var firebaseAuth  = {
@@ -50,9 +63,15 @@ var firebaseAuth  = {
     //MateriaPrincipalPage,
     //PersonasPage,
     //PersonasabmPage,
-    //PerfilPage
+    //PerfilPage,
+    EncuestaPage,
+    GraficosPage,
+    AsistenciasPage,
+    MostrarAsistenciasPage,
+    ProfesorAsistenciaPage,
 
-  ],
+
+   ],
   imports: [
     BrowserModule,
     HttpModule,
@@ -72,7 +91,14 @@ var firebaseAuth  = {
     //MateriaPrincipalPage,
     //PersonasPage,
     //PersonasabmPage,
-    //PerfilPage
+    //PerfilPage,
+    EncuestaPage,
+    GraficosPage,
+    AsistenciasPage,
+    MostrarAsistenciasPage,
+    ProfesorAsistenciaPage,
+
+
   ],
   providers: [
     StatusBar,
@@ -82,7 +108,14 @@ var firebaseAuth  = {
     ServMateriaProvider,
     ServpersonaProvider,
     PersonasServiceProvider,
-    LoginServiceProvider
+    LoginServiceProvider,
+    AlumnoServiceProvider,
+    AsistenciasProvider,
+
+    BarcodeScanner
+
+    ProfesorServiceProvider
+
   ]
 })
 export class AppModule {}
