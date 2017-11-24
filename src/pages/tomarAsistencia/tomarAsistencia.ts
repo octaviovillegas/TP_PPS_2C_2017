@@ -11,52 +11,37 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 })
 export class TomarAsistenciaPage {
 
-  public showCursos: boolean = false;
-  public cursos: Observable<any> = this.af.list("/cursos");
+  public showMaterias: boolean = false;
+  public materias: Observable<any> = this.af.list("/materias");
   public cursoObj = new Array<any>();
   public alumnos: Observable<any>;
-  public current: {} = {anio: "1", curso: "A"};
+  public current: {} = {nombre: "Laboratorio", curso: "A"};
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public af: AngularFireDatabase,
     public alertCtrl: AlertController) {
-    this.filtrarAlumnos("1", "A");
+    this.filtrarAlumnos("Laboratorio", "A");
   }
 
-  public setCursoKey(anio: string, curso: string, key: string, listo: string): void {
-    this.cursoObj[anio+curso] = {key: key, listo: listo};
+  public setCursoKey(nombre: string, curso: string, key: string, listo: string): void {
+    this.cursoObj[nombre+curso] = {key: key, listo: listo};
   }
 
-  public showHideCursos(): void {
-    this.showCursos = !this.showCursos;
+  public showHideMaterias(): void {
+    this.showMaterias = !this.showMaterias;
   }
 
-  public getTitulo(anio: number) {
-    switch(anio){
-      case 1:
-        return "Primero";
-      case 2:
-        return "Segundo";
-      case 3:
-        return "Tercero";
-      case 4:
-        return "Cuarto";
-      case 5:
-        return "Quinto";
-    }
-  }
-
-  public selectCurso(anio: string, curso: string): void {
-    this.filtrarAlumnos(anio, curso);
-    this.showHideCursos();
-    this.current.anio = anio;
+  public selectCurso(nombre: string, curso: string): void {
+    this.filtrarAlumnos(nombre, curso);
+    this.showHideMaterias();
+    this.current.nombre = nombre;
     this.current.curso = curso;
   }
 
-  private filtrarAlumnos(anio: string, curso: string): void {
+  private filtrarAlumnos(nombre: string, curso: string): void {
     this.alumnos = this.af.list("/usuarios")
-      .map(u => u.filter(u => u.tipo == "alumno" && u.anio == anio && u.curso == curso));
+      .map(u => u.filter(u => u.tipo == "alumno" && u[nombre] == curso));
   }
 
   public setVisibility(presente: string, key: string): void {
@@ -66,7 +51,7 @@ export class TomarAsistenciaPage {
   }
 
   public selecAlumno(key: string) {
-    if(this.cursoObj[this.current.anio+this.current.curso].listo == "0"){
+    if(this.cursoObj[this.current.nombre+this.current.curso].listo == "0"){
       let pres = 0;
       if(document.getElementById(key).style.visibility == "hidden"){
         document.getElementById(key).style.visibility = "visible";
@@ -81,8 +66,8 @@ export class TomarAsistenciaPage {
   }
 
   public getListo(): string {
-    if (this.cursoObj != undefined && this.cursoObj[this.current.anio+this.current.curso] != undefined){
-      let listo = this.cursoObj[this.current.anio+this.current.curso].listo;
+    if (this.cursoObj != undefined && this.cursoObj[this.current.nombre+this.current.curso] != undefined){
+      let listo = this.cursoObj[this.current.nombre+this.current.curso].listo;
       let array = document.getElementsByClassName("item-alumno");
       if(listo == "1"){
         for (let i = 0; i < array.length; i++) {
@@ -101,17 +86,17 @@ export class TomarAsistenciaPage {
     }
   }
 
-  public completarCurso(anio: string, curso: string){
+  public completarCurso(nombre: string, curso: string){
     let prompt = this.alertCtrl.create({
       title: 'Completar',
       message: "Se completo la toma de lista en este curso?",
       buttons: [{
         text: 'Si',
         handler: data => { 
-          this.cursos.update(this.cursoObj[anio+curso].key, {
+          this.materias.update(this.cursoObj[nombre+curso].key, {
             listo: 1
           });
-          this.showCursos = true;
+          this.showMaterias = true;
         }
       },
       {
@@ -122,7 +107,7 @@ export class TomarAsistenciaPage {
     prompt.present();
   }
 
-  public reabrirCurso(anio: string, curso: string){
+  public reabrirCurso(nombre: string, curso: string){
 
     let prompt = this.alertCtrl.create({
       title: 'Reabrir',
@@ -130,7 +115,7 @@ export class TomarAsistenciaPage {
       buttons: [{
         text: 'Si',
         handler: data => { 
-          this.cursos.update(this.cursoObj[anio+curso].key, {
+          this.materias.update(this.cursoObj[nombre+curso].key, {
             listo: 0
           });
         }
