@@ -35,6 +35,8 @@ export class AbmProfesorPage {
       this.formAlta = this.formBuilder.group({
         nombre: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
         apellido: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
+        email: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
+        pass: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(20)])],
         anio: ['', Validators.compose([Validators.required])],
         curso: ['', Validators.compose([Validators.required])],
       });
@@ -62,6 +64,8 @@ export class AbmProfesorPage {
   public modificarProfesor(profesor: any): void {
        this.formAlta.controls['nombre'].setValue(profesor.nombre);
        this.formAlta.controls['apellido'].setValue(profesor.apellido);
+       this.formAlta.controls['email'].setValue(profesor.email);
+       this.formAlta.controls['pass'].setValue(profesor.pass);
        this.formAlta.controls['anio'].setValue(profesor.anio);
        this.formAlta.controls['curso'].setValue(profesor.curso);
        this.modifId = profesor.$key;
@@ -80,6 +84,8 @@ export class AbmProfesorPage {
       this.profesores.update(this.modifId, {
          nombre: this.formAlta.controls['nombre'].value,
          apellido: this.formAlta.controls['apellido'].value,
+         email: this.formAlta.controls['email'].value,
+         pass: this.formAlta.controls['pass'].value,
          anio: this.formAlta.controls['anio'].value,
          curso: this.formAlta.controls['curso'].value
        });
@@ -102,6 +108,8 @@ export class AbmProfesorPage {
             return usuario.nombre.indexOf(this.searchValue) > 0;
           } else if(this.filterType == "Apellido"){
             return usuario.apellido.indexOf(this.searchValue) > 0;
+          } else if(this.filterType == "Email"){
+            return usuario.email.indexOf(this.searchValue) > 0;
           }
         }
         return true;

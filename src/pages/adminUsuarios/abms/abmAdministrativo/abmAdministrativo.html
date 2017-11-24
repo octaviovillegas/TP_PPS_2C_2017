@@ -30,12 +30,14 @@
           <ion-option>Nombre</ion-option>
           <ion-option>Apellido</ion-option>
           <ion-option>Legajo</ion-option>
+          <ion-option>Email</ion-option>
         </ion-select>
       </ion-item>
       <ion-card *ngFor="let admin of admins | async">
         <ion-item>
           <h2>{{admin.apellido}}, {{admin.nombre}}</h2>
           <p>Legajo: <b>{{admin.legajo}}</b></p>
+          <p>Email: <b>{{admin.email}}</b></p>
         </ion-item>
         <ion-row>
           <ion-col>
@@ -69,7 +71,16 @@
           <ion-label>Legajo</ion-label>
           <ion-input type="text" formControlName="legajo"></ion-input>
         </ion-item>
-        <button ion-button type="submit" [disabled]="!formAlta.valid">{{modifId == "" ? "Agregar" : "Modificar"}}</button>
+        <ion-item>
+          <ion-label>Email</ion-label>
+          <ion-input type="email" formControlName="email" email></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Contraseña</ion-label>
+          <ion-input type="password" formControlName="pass"></ion-input>
+        </ion-item>
+        <br>
+        <button ion-button block type="submit" [disabled]="!formAlta.valid">{{modifId == "" ? "Agregar" : "Modificar"}}</button>
       </form>
   </ion-content>
   

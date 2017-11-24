@@ -5,4 +5,4 @@ export const FIREBASE_CONFIG = {
     projectId: "pps-final",
     storageBucket: "pps-final.appspot.com",
     messagingSenderId: "495759716998"
-  };
+};

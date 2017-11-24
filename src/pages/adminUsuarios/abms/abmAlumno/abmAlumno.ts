@@ -36,6 +36,8 @@ export class AbmAlumnoPage {
         nombre: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
         apellido: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
         legajo: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern("[-+]?[0-9]*\.?[0-9]*")])],
+        email: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
+        pass: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(20)])],
         anio: ['', Validators.compose([Validators.required])],
         curso: ['', Validators.compose([Validators.required])],
       });
@@ -66,6 +68,8 @@ export class AbmAlumnoPage {
        this.formAlta.controls['legajo'].setValue(alumno.legajo);
        this.formAlta.controls['anio'].setValue(alumno.anio);
        this.formAlta.controls['curso'].setValue(alumno.curso);
+       this.formAlta.controls['email'].setValue(alumno.email);
+       this.formAlta.controls['pass'].setValue(alumno.pass);
        this.modifId = alumno.$key;
        this.tab = "lista";
   }
@@ -84,6 +88,8 @@ export class AbmAlumnoPage {
         nombre: this.formAlta.controls['nombre'].value,
         apellido: this.formAlta.controls['apellido'].value,
         legajo: this.formAlta.controls['legajo'].value,
+        email: this.formAlta.controls['email'].value,
+        pass: this.formAlta.controls['pass'].value,
         anio: this.formAlta.controls['anio'].value,
         curso: this.formAlta.controls['curso'].value
       });
@@ -108,6 +114,8 @@ export class AbmAlumnoPage {
             return usuario.apellido.indexOf(this.searchValue) > 0;
           } else if(this.filterType == "Legajo"){
             return usuario.legajo.indexOf(this.searchValue) > 0;
+          } else if(this.filterType == "Email"){
+            return usuario.email.indexOf(this.searchValue) > 0;
           }
         } 
         return true;
