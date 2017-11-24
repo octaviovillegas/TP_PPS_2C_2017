@@ -20,6 +20,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AdminUsuariosPage } from '../pages/adminUsuarios/adminUsuarios';
 //import { SocketService } from "../services/socket.service";
 
+
 @NgModule({
   declarations: [
     MyApp,
@@ -47,6 +48,7 @@ import { AdminUsuariosPage } from '../pages/adminUsuarios/adminUsuarios';
     StatusBar,
     SplashScreen,
     AngularFireDatabase,
+    
     FormBuilder,
     //SocketService
   ]

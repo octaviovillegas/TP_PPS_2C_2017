@@ -4,6 +4,7 @@ import { User } from '../../models/user';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { ToastController, Loading, LoadingController } from 'ionic-angular';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import swal from 'sweetalert2';
 
 import { HomePage } from '../home/home';
 import { RegisterPage } from '../register/register';
@@ -40,6 +41,12 @@ export class LoginPage {
           .then(result => {
             /*this.socketService.connect(user.email); 
             this.connection = this.socketService.getNotificationObservable().subscribe();*/
+            swal({
+              title: '¡Bienvenido!',
+              text: user.email,
+              type: 'success',
+              timer: 1500
+            })
             this.navCtrl.setRoot(HomePage)})
           .catch(error => {
             loading.dismiss();
