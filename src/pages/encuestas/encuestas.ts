@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Chart } from 'chart.js';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @IonicPage()
 @Component({
@@ -11,10 +12,10 @@ import { AngularFireDatabase } from 'angularfire2/database';
 })
 export class EncuestasPage {
 
-  public tab: string= "estadisticas";
-  public refEncuesta = this.af.database.ref("/encuesta/");
+  public tab: string= "actual";
   //Actual
   public respuesta: string;
+  public lastEncuesta: BehaviorSubject<any>;
   //Crear
   private formCrear: FormGroup;
   //Estadisticas
@@ -33,6 +34,17 @@ export class EncuestasPage {
         respuestaB: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
         tiempo: ['', Validators.compose([Validators.required])]
     });
+    initRef();
+  }
+
+  public initRef(): void {
+    this.af.database.ref("/encuestas").on("child_changed", snap => { 
+      this.lastEncuesta = snap.val().last();
+    });
+  }
+
+  public hayEncuesta(): boolean {
+    return true;
   }
 
   public crearEncuesta(){
@@ -50,7 +62,8 @@ export class EncuestasPage {
     }
     data["termina"] = data["creado"] + tiempo;
     data["terminado"] = "0";
-    this.af.list("/usuarios").push(data);
+    this.af.list("/encuestas").push(data);
+    this.formCrear.reset();
   }
 
   private milisegundosATiempo(duration: number): string {

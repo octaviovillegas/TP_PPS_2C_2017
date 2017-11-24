@@ -21,21 +21,27 @@
 <ion-content padding>
 
   <ion-content *ngIf="tab == 'actual'">
-    <h1>Pregunta muy loca?</h1>
-    <ion-card>
-      <ion-item>
-        <ion-select [(ngModel)]="respuesta">
-          <ion-option>Opcion 1</ion-option>
-          <ion-option>Opcion 2</ion-option>
-        </ion-select>
-      </ion-item>
-    </ion-card>
-    <button ion-button block >Responder</button>
-    <ion-card>
-      <ion-item text-center>
-        Tiempo restante: <h1><b>1:20:40</b></h1>
-      </ion-item>
-    </ion-card>
+    <div *ngIf="hayEncuesta()">
+      <h1>Pregunta muy loca?</h1>
+      <ion-card>
+        <ion-item>
+          <ion-select [(ngModel)]="respuesta">
+            <ion-option>Opcion 1</ion-option>
+            <ion-option>Opcion 2</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-card>
+      <button ion-button block >Responder</button>
+      <ion-card>
+        <ion-item text-center>
+          Tiempo restante: <h1><b>1:20:40</b></h1>
+        </ion-item>
+      </ion-card>
+    </div>
+
+    <div *ngIf="!hayEncuesta()">
+
+    </div>
   </ion-content>
 
   <ion-content *ngIf="tab == 'crear'">
