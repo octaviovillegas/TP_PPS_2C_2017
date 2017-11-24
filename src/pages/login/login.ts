@@ -62,6 +62,8 @@ export class LoginPage {
             if (usuario['correo'] == this.loginUsuario.getCorreo()) {
                 this.loginUsuario.setPerfil(usuario['perfil']);
                 this.loginUsuario.setNombre(usuario['nombre']);
+                console.log('set nombre: ', usuario['perfil']);
+                this.loginUsuario.setPerfil(usuario['perfil']);
                 this.loginUsuario.setClave(-1); //no necesito guardar la passw
                 this.navCtrl.push("MenuPage", JSON.stringify(this.loginUsuario));
             }
@@ -97,7 +99,7 @@ export class LoginPage {
           //this.mostrarCardRegistro = false;
 
         break;
-        case "alumno@alumno.com":
+        case "alumno@alumno.com.ar":
           this.passw = 222222;
           //this.errCred = false;
           //this.registrar= false;
@@ -136,10 +138,10 @@ export class LoginPage {
     }
 
 
-   private logearEnGitHub(){
+   async logearEnGitHub(){
     let proveedor = new firebase.auth.GithubAuthProvider();
 
-        this.authe.auth.signInWithPopup(proveedor).then(res =>{
+        let res = await this.authe.auth.signInWithRedirect(proveedor).then(res =>{
           console.log('res: '+ JSON.stringify(res));
 
           this.loginUsuario.setCorreo(res.user.email);
@@ -148,8 +150,6 @@ export class LoginPage {
           this.loginUsuario.setFoto(res.user.photoURL);
           this.loginUsuario.setLoginSocial(true);
           console.log('usuarios: ', this.loginUsuario);
-
-        }).then(res=>{
           this.navCtrl.push('MenuPage', JSON.stringify(this.loginUsuario));
         });
 

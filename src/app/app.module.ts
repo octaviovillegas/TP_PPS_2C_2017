@@ -39,6 +39,7 @@ import { LoginServiceProvider } from '../providers/login-service/login-service';
 import { Chart } from "chart.js";
 import { AlumnoServiceProvider } from '../providers/alumno-service/alumno-service';
 import { AsistenciasProvider } from '../providers/asistencias/asistencias';
+import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
 
 
 var firebaseAuth  = {
@@ -59,14 +60,14 @@ var firebaseAuth  = {
     //MateriaPrincipalPage,
     //PersonasPage,
     //PersonasabmPage,
-    PerfilPage,
+    //PerfilPage,
     EncuestaPage,
     GraficosPage,
     AsistenciasPage,
     MostrarAsistenciasPage,
     ProfesorAsistenciaPage,
 
-    
+
    ],
   imports: [
     BrowserModule,
@@ -87,14 +88,14 @@ var firebaseAuth  = {
     //MateriaPrincipalPage,
     //PersonasPage,
     //PersonasabmPage,
-    PerfilPage,
+    //PerfilPage,
     EncuestaPage,
     GraficosPage,
     AsistenciasPage,
     MostrarAsistenciasPage,
     ProfesorAsistenciaPage,
-  
-    
+
+
   ],
   providers: [
     StatusBar,
@@ -106,7 +107,8 @@ var firebaseAuth  = {
     PersonasServiceProvider,
     LoginServiceProvider,
     AlumnoServiceProvider,
-    AsistenciasProvider
+    AsistenciasProvider,
+    BarcodeScanner
   ]
 })
 export class AppModule {}

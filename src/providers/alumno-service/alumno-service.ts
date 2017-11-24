@@ -38,7 +38,7 @@ export class AlumnoServiceProvider {
     console.log('alumno service: ', alumno);
     //this.db.app.database().ref('/alumnos').child(alumno.getLegajo()).push(alumno);
     this.db.app.database().ref('/alumnos/'+alumno.getLegajo()).set(alumno);
-    this.db.app.database().ref('/usuarios').child(alumno.getLegajo()).push(alumno);
+    this.db.app.database().ref('/usuarios').child(alumno.getLegajo()).set(alumno);
     this.auth.auth.createUserWithEmailAndPassword(alumno.getCorreo(), alumno.getPassword());
   }
 
