@@ -35,38 +35,8 @@ refreshPicture() {
     });
   }
 
- /* changePicture() {
-    let actionSheet = this.actionSheetCtrl.create({
-      enableBackdropDismiss: true,
-      buttons: [
-        {
-          text: 'Take a picture',
-          icon: !this.platform.is('ios') ? 'camera' : null,
-          handler: () => {
-            this.pictureUtils.openCamera().then((imageData) => {
-              this.pictureUtils.uploadProfilPicture(imageData);
-            });
-          }
-        }, {
-          text: 'From gallery',
-          icon: !this.platform.is('ios') ? 'images' : null,
-          handler: () => {
-            this.pictureUtils.openGallery().then((imageData) => {
-              this.pictureUtils.uploadProfilPicture(imageData);
-            });
-          }
-        }
-      ]
-    });
-    actionSheet.present();
-  }*/
   ionViewDidLoad() {
-  //  this.items = this.afDB.list ('/4a/Mensajes/').valueChanges();
-   // const personRef: firebase.database.Reference = firebase.database().ref(`/4b/Usuarios/Tomy`);
-   // personRef.on('value', personSnapshot => {
-   //   this.myPerson = personSnapshot.val();
-   // });
-  
+ 
   }
 
 
