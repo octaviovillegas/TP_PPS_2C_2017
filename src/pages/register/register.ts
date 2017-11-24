@@ -4,6 +4,7 @@ import { User } from '../../models/user';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { ToastController, AlertController, Loading, LoadingController  } from 'ionic-angular';
 import { LoginPage } from '../login/login';
+import swal from 'sweetalert2';
 
 @IonicPage()
 @Component({
@@ -27,11 +28,12 @@ export class RegisterPage {
 
   async register(user: User, passRepetido: string){
     if(passRepetido != user.password){
-      this.alertCtrl.create({
+      swal({
         title: 'Error',
-        subTitle: 'Las contraseñas no coinciden',
-        buttons: ['Ok']
-      }).present();
+        text: 'Las contraseñas no coinciden',
+        type: 'error',
+        timer: 2000
+    })
     } else if(passRepetido == "" || user.password == "" || user.email == ""){
       this.toastCtrl.create({
         message: "Debe completar todos los campos",
@@ -42,7 +44,12 @@ export class RegisterPage {
         loading.present();
         await this.authAf.auth.createUserWithEmailAndPassword(user.email, user.password)
         .then(r => { 
-          this.toastCtrl.create({message: "Usuario registrado con éxito!", duration: 3000}).present(); 
+          swal({
+            title: '¡Registro exitoso!',
+            text: 'Usuario registrado con exito',
+            type: 'success',
+            timer: 1500
+          }) 
           this.navCtrl.setRoot(LoginPage);
         })
         .catch(e => {
