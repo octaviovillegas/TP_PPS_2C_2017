@@ -35,7 +35,7 @@
     <ion-card *ngFor="let profesor of profesores | async">
       <ion-item>
         <h2>{{profesor.apellido}}, {{profesor.nombre}}</h2>
-        <p>Curso asignado: <b>{{profesor.anio}}{{profesor.curso}}</b></p>
+        <p>Materia: <b>{{profesor.materia}} - {{profesor.curso}}</b></p>
         <p>Email: <b>{{profesor.email}}</b></p>
       </ion-item>
       <ion-row>
@@ -75,13 +75,11 @@
             <ion-input type="password" formControlName="pass"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label>Año y curso asignado</ion-label>
-            <ion-select formControlName="anio">
-                <ion-option>1</ion-option>
-                <ion-option>2</ion-option>
-                <ion-option>3</ion-option>
-                <ion-option>4</ion-option>
-                <ion-option>5</ion-option>
+            <ion-label>Materia y curso</ion-label>
+            <ion-select formControlName="materia">
+                <ion-option>Programacion</ion-option>
+                <ion-option>Laboratorio</ion-option>
+                <ion-option>Estadistica</ion-option>
             </ion-select>
             <ion-select formControlName="curso">
                 <ion-option>A</ion-option>
