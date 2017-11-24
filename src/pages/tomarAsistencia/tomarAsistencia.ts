@@ -20,7 +20,8 @@ export class TomarAsistenciaPage {
   public current: {} = {nombre: "Programacion", curso: "A"};
   //Buscar
   private searchValue: string;
-  private buscarPor: string = "Aula";
+  public buscarPor: string = "Aula";
+  public materiasFiltradas: Observable<any> = this.af.list("/materias");
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -39,8 +40,9 @@ export class TomarAsistenciaPage {
   }
 
   public selectMateria(nombre: string, curso: string): void {
+    this.tab = "materias";
     this.filtrarAlumnos(nombre, curso);
-    this.showHideMaterias();
+    this.showMaterias = false;
     this.current.nombre = nombre;
     this.current.curso = curso;
   }
@@ -137,7 +139,20 @@ export class TomarAsistenciaPage {
   }
 
   public onInput(event: any): void {
+    if(this.buscarPor == "Aula"){
+      this.filtrarMateriasPorAula();
+    } else {
 
+    }
+  }
+
+  private filtrarMateriasPorAula(): void {
+    this.materiasFiltradas = this.af.list("/materias").map(materia => materia.filter(materia => {
+      if(this.searchValue != "" && this.searchValue != undefined) {
+        return materia.aula == this.searchValue;
+      }
+      return true;
+    }));
   }
 
 }
