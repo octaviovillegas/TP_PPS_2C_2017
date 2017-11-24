@@ -31,14 +31,43 @@
       </ion-item>
     </ion-card>
     <button ion-button block >Responder</button>
+    <ion-card>
+      <ion-item text-center>
+        Tiempo restante: <h1><b>1:20:40</b></h1>
+      </ion-item>
+    </ion-card>
   </ion-content>
 
   <ion-content *ngIf="tab == 'crear'">
-
+    <form [formGroup]="formCrear">
+      <ion-item>
+        <ion-label>Pregunta</ion-label>
+        <ion-input type="text" formControlName="pregunta"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Respuesta A</ion-label>
+        <ion-input type="text" formControlName="respuestaA"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Respuesta B</ion-label>
+        <ion-input type="text" formControlName="respuestaB"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Materia y curso</ion-label>
+        <ion-select formControlName="tiempo">
+          <ion-option>2h</ion-option>
+          <ion-option>1h</ion-option>
+          <ion-option>30s</ion-option>
+        </ion-select>
+      </ion-item>
+      <br>
+      <button ion-button block type="submit">Crear</button>
+      <!-- [disabled]="!formCrear.valid" -->
+    </form>
   </ion-content>
 
   <ion-content *ngIf="tab == 'estadisticas'">
-
+    
   </ion-content>
 
 </ion-content>
