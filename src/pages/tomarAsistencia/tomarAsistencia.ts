@@ -13,7 +13,7 @@ export class TomarAsistenciaPage {
 
   public showMaterias: boolean = false;
   public materias: Observable<any> = this.af.list("/materias");
-  public cursoObj = new Array<any>();
+  public materiaObj = new Array<any>();
   public alumnos: Observable<any>;
   public current: {} = {nombre: "Laboratorio", curso: "A"};
 
@@ -24,15 +24,15 @@ export class TomarAsistenciaPage {
     this.filtrarAlumnos("Laboratorio", "A");
   }
 
-  public setCursoKey(nombre: string, curso: string, key: string, listo: string): void {
-    this.cursoObj[nombre+curso] = {key: key, listo: listo};
+  public setMateriaKey(nombre: string, curso: string, key: string, listo: string): void {
+    this.materiaObj[nombre+curso] = {key: key, listo: listo};
   }
 
   public showHideMaterias(): void {
     this.showMaterias = !this.showMaterias;
   }
 
-  public selectCurso(nombre: string, curso: string): void {
+  public selectMateria(nombre: string, curso: string): void {
     this.filtrarAlumnos(nombre, curso);
     this.showHideMaterias();
     this.current.nombre = nombre;
@@ -51,7 +51,7 @@ export class TomarAsistenciaPage {
   }
 
   public selecAlumno(key: string) {
-    if(this.cursoObj[this.current.nombre+this.current.curso].listo == "0"){
+    if(this.materiaObj[this.current.nombre+this.current.curso].listo == "0"){
       let pres = 0;
       if(document.getElementById(key).style.visibility == "hidden"){
         document.getElementById(key).style.visibility = "visible";
@@ -66,8 +66,8 @@ export class TomarAsistenciaPage {
   }
 
   public getListo(): string {
-    if (this.cursoObj != undefined && this.cursoObj[this.current.nombre+this.current.curso] != undefined){
-      let listo = this.cursoObj[this.current.nombre+this.current.curso].listo;
+    if (this.materiaObj != undefined && this.materiaObj[this.current.nombre+this.current.curso] != undefined){
+      let listo = this.materiaObj[this.current.nombre+this.current.curso].listo;
       let array = document.getElementsByClassName("item-alumno");
       if(listo == "1"){
         for (let i = 0; i < array.length; i++) {
@@ -86,14 +86,14 @@ export class TomarAsistenciaPage {
     }
   }
 
-  public completarCurso(nombre: string, curso: string){
+  public completarMateria(nombre: string, curso: string){
     let prompt = this.alertCtrl.create({
       title: 'Completar',
       message: "Se completo la toma de lista en este curso?",
       buttons: [{
         text: 'Si',
         handler: data => { 
-          this.materias.update(this.cursoObj[nombre+curso].key, {
+          this.materias.update(this.materiaObj[nombre+curso].key, {
             listo: 1
           });
           this.showMaterias = true;
@@ -107,7 +107,7 @@ export class TomarAsistenciaPage {
     prompt.present();
   }
 
-  public reabrirCurso(nombre: string, curso: string){
+  public reabrirMateria(nombre: string, curso: string){
 
     let prompt = this.alertCtrl.create({
       title: 'Reabrir',
@@ -115,7 +115,7 @@ export class TomarAsistenciaPage {
       buttons: [{
         text: 'Si',
         handler: data => { 
-          this.materias.update(this.cursoObj[nombre+curso].key, {
+          this.materias.update(this.materiaObj[nombre+curso].key, {
             listo: 0
           });
         }
