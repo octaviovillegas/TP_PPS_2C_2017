@@ -18,7 +18,7 @@ import { FIREBASE_CONFIG } from './app.firebase.config';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AdminUsuariosPage } from '../pages/adminUsuarios/adminUsuarios';
-import { SocketService } from "../services/socket.service";
+//import { SocketService } from "../services/socket.service";
 
 @NgModule({
   declarations: [
@@ -48,7 +48,7 @@ import { SocketService } from "../services/socket.service";
     SplashScreen,
     AngularFireDatabase,
     FormBuilder,
-    SocketService
+    //SocketService
   ]
 })
 export class AppModule {}

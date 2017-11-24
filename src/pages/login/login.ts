@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { HomePage } from '../home/home';
 import { RegisterPage } from '../register/register';
-import { SocketService } from "../../services/socket.service";
+//import { SocketService } from "../../services/socket.service";
  
 @IonicPage()
 @Component({
@@ -26,7 +26,7 @@ export class LoginPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public loadingCtrl: LoadingController,
-    public socketService: SocketService
+    //public socketService: SocketService
   ) {
     
   }
@@ -38,8 +38,8 @@ export class LoginPage {
         loading.present();
         await this.authAf.auth.signInWithEmailAndPassword(user.email, user.password)
           .then(result => {
-            this.socketService.connect(user.email); 
-            this.connection = this.socketService.getNotificationObservable().subscribe();
+            /*this.socketService.connect(user.email); 
+            this.connection = this.socketService.getNotificationObservable().subscribe();*/
             this.navCtrl.setRoot(HomePage)})
           .catch(error => {
             loading.dismiss();
