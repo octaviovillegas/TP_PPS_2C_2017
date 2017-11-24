@@ -54,13 +54,13 @@ export class PersonasServiceProvider {
           path = "/alumnos";
         break;
         case "administrador":
-          path = "administrador";
+          path = "/administradores";
         break;
         case "administrativo":
-          path = "administrativo";
+          path = "/administrativos";
         break;
         case "profesor":
-          path = "profesor";
+          path = "/profesores";
         break;
 
       default:

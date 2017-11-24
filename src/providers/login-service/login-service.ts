@@ -32,7 +32,7 @@ export class LoginServiceProvider {
   public loginGitHub():any{
     let proveedor = new firebase.auth.GithubAuthProvider();
 
-    this.auth.auth.signInWithPopup(proveedor).then(res =>{
+    this.auth.auth.signInWithRedirect(proveedor).then(res =>{
       console.log('res: '+ JSON.stringify(res));
       /*this.provider.loggedin = true;
       this.provider.mail = res.user.email;
