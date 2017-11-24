@@ -61,15 +61,13 @@
         </ion-select>
       </ion-item>
       <br>
-      <button ion-button block type="submit">Crear</button>
-      <!-- [disabled]="!formCrear.valid" -->
+      <button ion-button block type="submit" [disabled]="!formCrear.valid" (click)="crearEncuesta()">Crear</button>
     </form>
   </ion-content>
 
   <ion-content *ngIf="tab == 'estadisticas'">
         <h1 text-center>Resultados</h1>
         <canvas #tortaCanvas></canvas>
-
   </ion-content>
 
 </ion-content>
