@@ -70,6 +70,16 @@
         </ion-item>
       </ion-card>      
     </div>
+
+    <div *ngIf="buscarPor == 'Profesor'">
+        <ion-card *ngFor="let p of profesores | async">
+          <ion-item (click)="selectMateria(p.materia, m.curso)">
+            <h2>{{p.materia}} {{p.curso}}</h2>
+            <p>Profesor: <b>{{p.apellido}}</b></p>
+            <ion-icon name="ios-arrow-forward" item-end></ion-icon>
+          </ion-item>
+        </ion-card>      
+      </div>
   </ion-content>
 
 </ion-content>

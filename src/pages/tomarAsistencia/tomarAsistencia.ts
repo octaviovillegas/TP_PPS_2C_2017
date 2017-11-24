@@ -22,6 +22,7 @@ export class TomarAsistenciaPage {
   private searchValue: string;
   public buscarPor: string = "Aula";
   public materiasFiltradas: Observable<any> = this.af.list("/materias");
+  public profesores: Observable<any>;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -29,6 +30,7 @@ export class TomarAsistenciaPage {
     public alertCtrl: AlertController) {
     this.tab = "materias";
     this.filtrarAlumnos("Programacion", "A");
+    this.materiaDeProfe();
   }
 
   public setMateriaKey(nombre: string, curso: string, key: string, listo: string): void {
@@ -141,8 +143,8 @@ export class TomarAsistenciaPage {
   public onInput(event: any): void {
     if(this.buscarPor == "Aula"){
       this.filtrarMateriasPorAula();
-    } else {
-
+    } else if (this.buscarPor == "Profesor"){
+      this.materiaDeProfe();
     }
   }
 
@@ -152,6 +154,17 @@ export class TomarAsistenciaPage {
         return materia.aula == this.searchValue;
       }
       return true;
+    }));
+  }
+
+  private materiaDeProfe(): void {
+    this.profesores = this.af.list("/usuarios").map(usuario => usuario.filter(usuario => {
+      if(usuario.tipo == "profe") {
+        if(this.searchValue != "" && this.searchValue != undefined) {
+          return usuario.apellido.toLowerCase().indexOf(this.searchValue.toLowerCase()) !== -1;
+        }
+        return true;
+      }
     }));
   }
 
