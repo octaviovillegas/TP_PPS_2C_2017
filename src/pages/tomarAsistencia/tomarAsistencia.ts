@@ -11,16 +11,22 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 })
 export class TomarAsistenciaPage {
 
+  private tab: string;
+  //Materias
   public showMaterias: boolean = false;
   public materias: Observable<any> = this.af.list("/materias");
   public materiaObj = new Array<any>();
   public alumnos: Observable<any>;
   public current: {} = {nombre: "Programacion", curso: "A"};
+  //Buscar
+  private searchValue: string;
+  private buscarPor: string = "Aula";
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public af: AngularFireDatabase,
     public alertCtrl: AlertController) {
+    this.tab = "materias";
     this.filtrarAlumnos("Programacion", "A");
   }
 
@@ -129,4 +135,9 @@ export class TomarAsistenciaPage {
     });
     prompt.present();
   }
+
+  public onInput(event: any): void {
+
+  }
+
 }
