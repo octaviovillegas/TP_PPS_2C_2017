@@ -4,7 +4,7 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Chart } from 'chart.js';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { setInterval } from 'timers';
+import { setInterval, setTimeout } from 'timers';
 
 @IonicPage()
 @Component({
@@ -42,34 +42,30 @@ export class EncuestasPage {
     this.af.database.ref("/encuestas/").on('value', encuestas => {
       if(encuestas.val() != undefined){
         let props = Object.getOwnPropertyNames(encuestas.val());
-        if(props.length > 0) {
-          let current = encuestas.val()[props[props.length -1]];
-          if(current.termina > new Date().getTime()) {
-            if(current.terminado == 0) {
-              this.lastEncuesta = current;
-              this.currentKey = props[props.length -1];
-              console.log("ola");
-              this.getTime();
-            }
-          } else {
-            this.tab = "estadisticas";
-            this.loadEstadisticas(current["A"], current["B"]);
-            this.setTerminado(props[props.length -1]);
+        let current = encuestas.val()[props[props.length -1]];
+        this.lastEncuesta = current;
+        this.currentKey = props[props.length -1];
+        if(current.termina > new Date().getTime()) {
+          if(current.terminado == 0) {
+            this.getTime();
           }
+        } else {
+          this.tab = "estadisticas";
+          this.loadEstadisticas();
+          this.setTerminado(props[props.length -1]);
         }
       }
     })
   }
 
   private setTerminado(key: string): void {
-    this.lastEncuesta = undefined;
     this.af.list("/encuestas").update(key, {
       terminado: 1
     });
   }
 
   public hayEncuesta(): boolean {
-    return this.lastEncuesta != undefined;
+    return this.lastEncuesta != undefined && this.lastEncuesta.terminado == 0;
   }
 
   public crearEncuesta(){
@@ -111,27 +107,29 @@ export class EncuestasPage {
     }, 1000)
   }
 
-  public responder() {
+  public responderPreg() {
     this.af.list("/encuestas").update(this.currentKey, {
       [this.respuesta]: this.lastEncuesta[this.respuesta] + 1
     });
     this.tab = "estadisticas";
-    this.loadEstadisticas(this.lastEncuesta["A"], this.lastEncuesta["B"]);
+    this.loadEstadisticas();
   }
 
-  public loadEstadisticas(a: string, b: string) {
-    this.tortaGrafico = new Chart(this.tortaCanvas.nativeElement, {
-      type: 'pie',
-      data: {
-        labels: ["Red", "Blue"],
-        datasets: [{
-          label: '# of Votes',
-          data: [12, 19],
-          backgroundColor: ['#FF6384','#36A2EB',],
-          hoverBackgroundColor: ["#FF6384", "#36A2EB"]
-        }]
-      }
-    });
+  public loadEstadisticas() {
+    setTimeout( () => {
+      this.tortaGrafico = new Chart(this.tortaCanvas.nativeElement, {
+        type: 'pie',
+        data: {
+          labels: ["Red", "Blue"],
+          datasets: [{
+            label: '# of Votes',
+            data: [this.lastEncuesta.A, this.lastEncuesta.B],
+            backgroundColor: ['#FF6384','#36A2EB',],
+            hoverBackgroundColor: ["#FF6384", "#36A2EB"]
+          }]
+        }
+      });
+    }, 500);
   }
 
 
