@@ -154,7 +154,7 @@ export class TomarAsistenciaPage {
   }
 
   private filtrarMateriasPorAula(): void {
-    this.materiasFiltradas = this.af.list("/materias").map(materia => materia.filter(materia => {
+    this.materiasFiltradas = this.materias.map(materia => materia.filter(materia => {
       if(this.searchValue != "" && this.searchValue != undefined) {
         return materia.aula == this.searchValue;
       }
