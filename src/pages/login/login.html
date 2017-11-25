@@ -1,0 +1,68 @@
+<div id="custom-overlay" [style.display]="splash ? 'flex': 'none'">
+  <div class="flb">
+    <div class="Aligner-item Aligner-item--top"></div>
+    <img src="assets/images/escuela.png">
+    <div class="Aligner-item Aligner-item--bottom"></div>
+  </div>
+</div>
+
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title>Ingreso</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content scroll="false">
+  <div padding id="cloud-layer">
+
+    <div style=" margin: 0 auto">
+      <ion-row>
+        <img style="width: 50px; height:50px; margin: 0 auto;" src="assets/images/icon.png" />
+      </ion-row>
+      <h1>ESCUELA FSZ</h1>
+    </div>
+    <ion-row class="fondo">
+      <ion-col>
+      <ion-list inset>
+
+      <ion-label class="myLabel">Email</ion-label>
+      <ion-item style="border-radius: 25px">
+        <ion-input  type="email" [(ngModel)]="user.email" required></ion-input>
+      </ion-item>
+
+      <ion-label class="myLabel">Constraseña</ion-label>
+      <ion-item style="border-radius: 25px">
+        <ion-input  type="password" [(ngModel)]="user.password" required></ion-input>
+      </ion-item>
+
+      </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-list class="fondo" style="width:100%; margin: 0 auto;color:black; font-weight: bold">
+      <ion-item style="width:90%; margin: 0 auto; border-radius: 25px; color:black; font-weight: bold">
+        <ion-label>Seleccionar Usuario</ion-label>
+        <ion-select  style="width:50%; margin: 0 auto; border-radius: 25px; color:black; font-weight: bold"  name="firstField" [(ngModel)]="selectedUser" (ionChange)="SeleccionarUsuario()">
+          <ion-option value="profesor">Profesor</ion-option>
+          <ion-option value="alumno">Alumno</ion-option>
+          <ion-option value="admin">Administrador</ion-option>
+          <ion-option value="administrativo">Administrativo</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <ion-row class="fondo">
+      <ion-col>
+        <div style= "width:12em; margin: 0 auto">
+          <button ion-button style="width:100%; margin: 0 auto; border-radius: 25px; background-color: #FF6A2F; color:#FFFFFF; font-weight: bold" class="login-button" (click)="login(user)" [disabled]="isInvalid()" >Ingresar</button>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="fondo">
+        <ion-col>
+          <div style= "width:12em; margin: 0 auto">
+            <button ion-button style="width:100%; margin: 0 auto; border-radius: 25px; background-color: #FF6A2F; color:#FFFFFF; font-weight: bold" class="login-button" (click)="register()" >Registrarse</button>
+          </div>
+        </ion-col>
+      </ion-row>
+  </div>
+</ion-content>
