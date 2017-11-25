@@ -56,8 +56,7 @@ export class TomarAsistenciaPage {
   }
 
   private filtrarAlumnos(nombre: string, curso: string): void {
-    this.alumnos = this.usuarios
-      .map(u => u.filter(u => u.tipo == "alumno" && u[nombre] == curso)) as FirebaseListObservable<any[]>;
+    this.alumnos = this.usuarios.map(u => u.filter(u => u.tipo == "alumno" && u[nombre] == curso)) as FirebaseListObservable<any[]>;
   }
 
   public setVisibility(alumno: any, key: string): void {
