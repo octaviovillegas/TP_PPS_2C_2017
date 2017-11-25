@@ -3,8 +3,8 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Chart } from 'chart.js';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { setInterval, setTimeout } from 'timers';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @IonicPage()
 @Component({
@@ -18,6 +18,7 @@ export class EncuestasPage {
   public respuesta: string;
   public lastEncuesta: any;
   public currentKey: string;
+  public puedoResponder: boolean = true;
   //Crear
   private formCrear: FormGroup;
   //Estadisticas
@@ -28,6 +29,7 @@ export class EncuestasPage {
     public navParams: NavParams,
     private formBuilder: FormBuilder,
     public alertCtrl: AlertController, 
+    private authAf : AngularFireAuth,
     public af: AngularFireDatabase) {
     this.formCrear = this.formBuilder.group({
         pregunta: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
@@ -47,7 +49,18 @@ export class EncuestasPage {
         this.currentKey = props[props.length -1];
         if(current.termina > new Date().getTime()) {
           if(current.terminado == 0) {
+            this.respuesta = "A";
             this.getTime();
+            let respondieron = current.respondieron;
+            console.log(respondieron);
+            let propRes = Object.getOwnPropertyNames(respondieron);
+            let email = this.authAf.auth.currentUser.email;
+            propRes.forEach( p => {
+              console.log(respondieron[p]);
+              if(respondieron[p] == email){
+                this.puedoResponder = false;
+              }
+            });
           }
         } else {
           this.tab = "estadisticas";
@@ -85,6 +98,9 @@ export class EncuestasPage {
     data["terminado"] = "0";
     data["A"] = 0;
     data["B"] = 0;
+    data["respondieron"] = {
+      hola: "hola"
+    };
     this.af.list("/encuestas").push(data);
     this.formCrear.reset();
   }
@@ -111,6 +127,19 @@ export class EncuestasPage {
     this.af.list("/encuestas").update(this.currentKey, {
       [this.respuesta]: this.lastEncuesta[this.respuesta] + 1
     });
+    this.af.database.ref("/usuarios/").on('value', usr => {
+      let datos = usr.val();
+      let props = Object.getOwnPropertyNames(usr.val());
+      let email = this.authAf.auth.currentUser.email;
+      props.forEach( p => {
+        if(datos[p].email == email){
+          this.af.list("/encuestas/" + this.currentKey).update("respondieron", {
+            [datos[p].legajo]: email
+          });
+        }
+      });
+    });
+    let id = this.authAf.auth.currentUser;
     this.tab = "estadisticas";
     this.loadEstadisticas();
   }
