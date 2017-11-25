@@ -4,6 +4,7 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Chart } from 'chart.js';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { setInterval } from 'timers';
 
 @IonicPage()
 @Component({
@@ -28,7 +29,7 @@ export class EncuestasPage {
     public alertCtrl: AlertController, 
     public af: AngularFireDatabase) {
     this.formCrear = this.formBuilder.group({
-        pregunta: ['', Validators.compose([Validators.required, Validators.minLength(5)])],
+        pregunta: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
         respuestaA: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
         respuestaB: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
         tiempo: ['', Validators.compose([Validators.required])]
@@ -38,23 +39,31 @@ export class EncuestasPage {
 
   public initRef(): void {
     this.af.database.ref("/encuestas/").on('value', encuestas => {
-      let props = Object.getOwnPropertyNames(encuestas.val());
-      if(props.length > 0) {
-        let current = encuestas.val()[props[props.length -1]];
-        if(current.termina > new Date().getTime()){
-          if(current.terminado == 0){
-            this.lastEncuesta = current;
-            this.getTime();
+      if(encuestas.val() != undefined){
+        let props = Object.getOwnPropertyNames(encuestas.val());
+        if(props.length > 0) {
+          let current = encuestas.val()[props[props.length -1]];
+          if(current.termina > new Date().getTime()){
+            if(current.terminado == 0) {
+              this.lastEncuesta = current;
+              this.getTime();
+            }
+          } else {
+            this.setTerminado(props[props.length -1]);
           }
         } else {
-          this.setTerminado(props[props.length -1]);
+          this.tab = "estadisticas";
         }
       }
     })
   }
 
   private setTerminado(key: string): void {
-    console.log("IMPLEMENTAME GATX");
+    this.lastEncuesta = undefined;
+    this.af.list("/encuestas").update(key, {
+      terminado: 1
+    });
+    this.tab = "estadisticas";
   }
 
   public hayEncuesta(): boolean {
@@ -82,15 +91,22 @@ export class EncuestasPage {
     this.formCrear.reset();
   }
 
-  public getTime(): string {
-    let duration = this.lastEncuesta.termina - new Date().getTime();
-    let horNum = parseInt(((duration/(1000*60*60))%24) + "");
-    let minNum = parseInt(((duration/(1000*60))%60) + "");
-    let segNum = parseInt(((duration/1000)%60) + "");
-    let horas = (horNum < 10) ? "0" + horNum : horNum;
-    let minutos = (minNum < 10) ? "0" + minNum : minNum;
-    let segundos = (segNum < 10) ? "0" + segNum : segNum;
-    return horas + ":" + minutos + ":" + segundos;
+  public getTime(): void {
+    setInterval( () => {
+      if(this.lastEncuesta != null && this.lastEncuesta != undefined) {
+        let duration = this.lastEncuesta.termina - new Date().getTime();
+        let horNum = parseInt(((duration/(1000*60*60))%24) + "");
+        let minNum = parseInt(((duration/(1000*60))%60) + "");
+        let segNum = parseInt(((duration/1000)%60) + "");
+        let horas = (horNum < 10) ? "0" + horNum : horNum;
+        let minutos = (minNum < 10) ? "0" + minNum : minNum;
+        let segundos = (segNum < 10) ? "0" + segNum : segNum;
+        if(horas <= 0 && minutos <= 0 && segundos <= 0){
+          this.initRef();
+        }
+        this.lastEncuesta.cuenta = horas + ":" + minutos + ":" + segundos;
+      }
+    }, 1000)
  }
 
   public ionViewDidLoad() {

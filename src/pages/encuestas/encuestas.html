@@ -22,7 +22,7 @@
 
   <ion-content *ngIf="tab == 'actual'">
     <div *ngIf="hayEncuesta()">
-      <h1>{{lastEncuesta.pregunta}}</h1>
+      <h1 text-center>{{lastEncuesta.pregunta}}</h1>
       <ion-card>
         <ion-item>
           <ion-select [(ngModel)]="respuesta">
@@ -34,8 +34,7 @@
       <button ion-button block >Responder</button>
       <ion-card>
         <ion-item text-center>
-          {{lastEncuesta.termina}}
-          Tiempo restante: <h1><b>1:20:40</b></h1>
+          Tiempo restante: <h1><b>{{lastEncuesta.cuenta}}</b></h1>
         </ion-item>
       </ion-card>
     </div>
