@@ -2,7 +2,6 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { ListPage } from '../pages/list/list';
 import { AdminUsuariosPage } from '../pages/adminUsuarios/adminUsuarios';
-import { AbmAlumnoPage } from '../pages/adminUsuarios/abms/abmalumno/abmalumno';
 import { ConfiguracionPage } from '../pages/configuracion/configuracion';
 import { EncuestasPage } from '../pages/encuestas/encuestas';
 import { EnviarAvisoPage } from '../pages/enviarAviso/enviarAviso';
@@ -46,7 +45,6 @@ export class PagesService{
                 this.encuestasPage,
                 this.enviarAvisoPage,
                 this.adminUsuariosPage,
-                this.abmAlumnoPage,
                 this.miPerfilPage,
                 this.configuracionPage
             ];
@@ -73,14 +71,6 @@ export class PagesService{
         route: 'AdminUsuarios',
         type: PageType.Listable,
         icon: "md-people"
-    };
-
-    public abmAlumnoPage = { 
-        title: 'ABM Alumno', 
-        component: AbmAlumnoPage,
-        route: 'AbmAlumno',
-        type: PageType.NotListable,
-        icon: ""
     };
 
     public configuracionPage = { 
