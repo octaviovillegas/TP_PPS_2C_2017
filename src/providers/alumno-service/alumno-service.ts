@@ -33,6 +33,17 @@ export class AlumnoServiceProvider {
     return this.listaMaterias;
   }
 
+  public traerMateriasPorAlumno_Correo(correo:string):FirebaseListObservable<any[]>{
+    this.listaMaterias = this.db.list('/alumnos', {
+      query:{
+        orderByChild:'correo',
+        equalTo:correo
+      }
+    }) as FirebaseListObservable<any[]>
+    console.log('materias por alumno: ', this.listaMaterias);
+    return this.listaMaterias;
+  }
+
   public guardarAlumno(alumno:Alumno):void{
     alumno.setPerfil('alumno');
     console.log('alumno service: ', alumno);
@@ -45,6 +56,10 @@ export class AlumnoServiceProvider {
   public getAlumnosLista(){
     this.listaAlumnos = this.db.list('/alumnos') as FirebaseListObservable<any[]>;
     return this.listaAlumnos;
+  }
+
+  public getAlumnoPorCorreo(){
+
   }
 
   public borrarAlumno(legajo:string){

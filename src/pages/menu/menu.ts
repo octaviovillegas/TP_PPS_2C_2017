@@ -43,6 +43,10 @@ export class MenuPage {
     this.navCtrl.push('ListadoAlumnosPage');
   }
 
-
+  private irAFormAlumnosQrPage(){
+    console.log(this.datos["correo"]);
+    console.log(this.datos["perfil"]);
+    this.navCtrl.push('FormAlumnosQrPage', {'correo':this.datos["correo"], 'perfil':this.datos["perfil"]});
+  }
 
 }
