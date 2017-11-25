@@ -3,8 +3,8 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Chart } from 'chart.js';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { setInterval, setTimeout } from 'timers';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @IonicPage()
 @Component({
@@ -28,6 +28,7 @@ export class EncuestasPage {
     public navParams: NavParams,
     private formBuilder: FormBuilder,
     public alertCtrl: AlertController, 
+    private authAf : AngularFireAuth,
     public af: AngularFireDatabase) {
     this.formCrear = this.formBuilder.group({
         pregunta: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
