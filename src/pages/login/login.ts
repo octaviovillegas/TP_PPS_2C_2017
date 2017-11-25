@@ -21,6 +21,9 @@ export class LoginPage {
   valid = new  BehaviorSubject<boolean>(false);
   selectedUser: string;
   connection;
+  splash = true;
+  //secondPage = SecondPagePage;
+
   constructor(
     public toastCtrl: ToastController,
     private authAf : AngularFireAuth,
@@ -31,6 +34,11 @@ export class LoginPage {
   ) {
     
   }
+
+  ionViewDidLoad() {
+    setTimeout(() => this.splash = false, 4000);
+  }
+
   async login(user: User) {
     this.allFilled();
     if(this.valid.value){
