@@ -98,10 +98,10 @@ export class AbmAlumnoPage {
         Laboratorio: this.formAlta.controls['Laboratorio'].value,
         Estadistica: this.formAlta.controls['Estadistica'].value
       });
-      this.modifId = "";
       let prompt = this.alertCtrl.create({ title: 'Alumno modificado', buttons: [{ text: 'Ok',}] });
       prompt.present();
     }
+    this.modifId = "";
     this.formAlta.reset();
   }
 
@@ -144,7 +144,7 @@ export class AbmAlumnoPage {
           text: 'No',
           role: 'cancel',
           handler: data => { 
-            this.tab = "agregar"
+            this.tab = "agregar";
           }
         }]
       });

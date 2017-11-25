@@ -89,10 +89,10 @@ export class AbmProfesorPage {
          materia: this.formAlta.controls['materia'].value,
          curso: this.formAlta.controls['curso'].value
        });
-       this.modifId = "";
        let prompt = this.alertCtrl.create({ title: 'Profesor modificado', buttons: [{ text: 'Ok',}] });
        prompt.present();
-    }
+      }
+    this.modifId = "";
     this.formAlta.reset();
   }
 
@@ -133,7 +133,7 @@ export class AbmProfesorPage {
           text: 'No',
           role: 'cancel',
           handler: data => { 
-            this.tab = "agregar"
+            this.tab = "agregar";
           }
         }]
       });
