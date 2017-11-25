@@ -12,6 +12,7 @@ import { NativeAudio } from '@ionic-native/native-audio';
 })
 export class HomePage {
 
+  usera: any;
   user: string = "Administrador";
   public pages: Array<any>;
   
@@ -55,4 +56,24 @@ export class HomePage {
     });
     alert.present();
   }
+
 }
+
+  // var user = firebase.auth().currentUser;
+  
+  // if (user) {
+  //   // User is signed in.
+  // } else {
+  //   // No user is signed in.
+  // }
+
+  // asd(){
+  // this.authAf.auth.onAuthStateChanged(this.usera);
+  //   if (this.usera) {
+  //     console.log(this.usera + "Logueado");
+  //   } else {
+  //     console.log(this.usera + "No logueado");
+  //   }
+  // }
+
+// }

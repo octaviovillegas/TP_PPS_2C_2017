@@ -13,10 +13,12 @@ ion-title{
     text-align: center;
 }
 
-.menu{
-   position: absolute;
-   text-align: center;
-}
+.ToastWarning{
+    > div{
+      background-color:#FF0015!important;
+      text-align: center;
+  }
+  }
 
 .cerrarSesion{
       //  width:32px;
