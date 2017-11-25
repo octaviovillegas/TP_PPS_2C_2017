@@ -28,6 +28,7 @@ export class TomarAsistenciaPage {
   public buscarPor: string = "Aula";
   public materiasFiltradas: FirebaseListObservable<any[]> = this.af.list("/materias");
   public profesores: FirebaseListObservable<any[]>;
+  public usuarios: FirebaseListObservable<any[]> = this.af.list("/usuarios");
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -55,7 +56,7 @@ export class TomarAsistenciaPage {
   }
 
   private filtrarAlumnos(nombre: string, curso: string): void {
-    this.alumnos = this.af.list("/usuarios")
+    this.alumnos = this.usuarios
       .map(u => u.filter(u => u.tipo == "alumno" && u[nombre] == curso)) as FirebaseListObservable<any[]>;
   }
 
@@ -163,7 +164,7 @@ export class TomarAsistenciaPage {
   }
 
   private materiaDeProfe(): void {
-    this.profesores = this.af.list("/usuarios").map(usuario => usuario.filter(usuario => {
+    this.profesores = this.usuarios.map(usuario => usuario.filter(usuario => {
       if(usuario.tipo == "profe") {
         if(this.searchValue != "" && this.searchValue != undefined) {
           return usuario.apellido.toLowerCase().indexOf(this.searchValue.toLowerCase()) !== -1;
