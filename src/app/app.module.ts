@@ -15,6 +15,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FIREBASE_CONFIG } from './app.firebase.config';
 
+import { NativeAudio } from '@ionic-native/native-audio';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AdminUsuariosPage } from '../pages/adminUsuarios/adminUsuarios';
@@ -48,7 +49,7 @@ import { AdminUsuariosPage } from '../pages/adminUsuarios/adminUsuarios';
     StatusBar,
     SplashScreen,
     AngularFireDatabase,
-    
+    NativeAudio,
     FormBuilder,
     //SocketService
   ]

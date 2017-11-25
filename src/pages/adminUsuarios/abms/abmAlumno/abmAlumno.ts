@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, AlertController, ActionSheetController } from 'ionic-angular';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 @IonicPage()
@@ -13,7 +12,7 @@ import 'rxjs/add/operator/map';
 export class AbmAlumnoPage {
   
   private tab;
-  private alumnos: Observable<any>;
+  private alumnos: FirebaseListObservable<any[]>;
   //Lista
   private searchValue: string;
   private filterType: string;
@@ -73,7 +72,7 @@ export class AbmAlumnoPage {
        this.formAlta.controls['email'].setValue(alumno.email);
        this.formAlta.controls['pass'].setValue(alumno.pass);
        this.modifId = alumno.$key;
-       this.tab = "lista";
+       this.tab = "agregar";
   }
 
   //AGREGAR ALUMNO
@@ -98,10 +97,10 @@ export class AbmAlumnoPage {
         Laboratorio: this.formAlta.controls['Laboratorio'].value,
         Estadistica: this.formAlta.controls['Estadistica'].value
       });
-      this.modifId = "";
       let prompt = this.alertCtrl.create({ title: 'Alumno modificado', buttons: [{ text: 'Ok',}] });
       prompt.present();
     }
+    this.modifId = "";
     this.formAlta.reset();
   }
 
@@ -125,7 +124,7 @@ export class AbmAlumnoPage {
         } 
         return true;
       }
-    }));
+    })) as FirebaseListObservable<any[]>;
   }
 
   public cambiarDeTab() {
@@ -144,7 +143,7 @@ export class AbmAlumnoPage {
           text: 'No',
           role: 'cancel',
           handler: data => { 
-            this.tab = "agregar"
+            this.tab = "agregar";
           }
         }]
       });

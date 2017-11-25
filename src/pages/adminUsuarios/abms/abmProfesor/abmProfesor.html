@@ -68,7 +68,7 @@
           </ion-item>
           <ion-item>
             <ion-label>Email</ion-label>
-            <ion-input type="email" formControlName="email" email></ion-input>
+            <ion-input type="email" [disabled]="modifId != ''" formControlName="email" email></ion-input>
           </ion-item>
           <ion-item>
             <ion-label>Contraseña</ion-label>

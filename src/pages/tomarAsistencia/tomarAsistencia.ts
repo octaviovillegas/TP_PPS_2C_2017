@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+
+export class CurrentAux {
+  constructor(public nombre: any,
+  public curso: any) {
+
+  }
+}
 
 @IonicPage()
 @Component({
@@ -14,15 +19,16 @@ export class TomarAsistenciaPage {
   private tab: string;
   //Materias
   public showMaterias: boolean = false;
-  public materias: Observable<any> = this.af.list("/materias");
+  public materias: FirebaseListObservable<any[]> = this.af.list("/materias");
   public materiaObj = new Array<any>();
-  public alumnos: Observable<any>;
-  public current: {} = {nombre: "Programacion", curso: "A"};
+  public alumnos: FirebaseListObservable<any[]>;
+  public current: CurrentAux = new CurrentAux("Programacion", "A");
   //Buscar
   private searchValue: string;
   public buscarPor: string = "Aula";
-  public materiasFiltradas: Observable<any> = this.af.list("/materias");
-  public profesores: Observable<any>;
+  public materiasFiltradas: FirebaseListObservable<any[]> = this.af.list("/materias");
+  public profesores: FirebaseListObservable<any[]>;
+  public usuarios: FirebaseListObservable<any[]> = this.af.list("/usuarios");
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -50,8 +56,7 @@ export class TomarAsistenciaPage {
   }
 
   private filtrarAlumnos(nombre: string, curso: string): void {
-    this.alumnos = this.af.list("/usuarios")
-      .map(u => u.filter(u => u.tipo == "alumno" && u[nombre] == curso));
+    this.alumnos = this.usuarios.map(u => u.filter(u => u.tipo == "alumno" && u[nombre] == curso)) as FirebaseListObservable<any[]>;
   }
 
   public setVisibility(alumno: any, key: string): void {
@@ -149,23 +154,23 @@ export class TomarAsistenciaPage {
   }
 
   private filtrarMateriasPorAula(): void {
-    this.materiasFiltradas = this.af.list("/materias").map(materia => materia.filter(materia => {
+    this.materiasFiltradas = this.materias.map(materia => materia.filter(materia => {
       if(this.searchValue != "" && this.searchValue != undefined) {
         return materia.aula == this.searchValue;
       }
       return true;
-    }));
+    })) as FirebaseListObservable<any[]>;
   }
 
   private materiaDeProfe(): void {
-    this.profesores = this.af.list("/usuarios").map(usuario => usuario.filter(usuario => {
+    this.profesores = this.usuarios.map(usuario => usuario.filter(usuario => {
       if(usuario.tipo == "profe") {
         if(this.searchValue != "" && this.searchValue != undefined) {
           return usuario.apellido.toLowerCase().indexOf(this.searchValue.toLowerCase()) !== -1;
         }
         return true;
       }
-    }));
+    })) as FirebaseListObservable<any[]>;
   }
 
 }

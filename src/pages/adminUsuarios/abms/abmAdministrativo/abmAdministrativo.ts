@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, AlertController, ActionSheetController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 @IonicPage()
@@ -86,10 +85,10 @@ export class AbmAdministrativoPage {
         email: this.formAlta.controls['email'].value,
         pass: this.formAlta.controls['pass'].value,
       });
-      this.modifId = "";
       let prompt = this.alertCtrl.create({ title: 'Administrativo modificado', buttons: [{ text: 'Ok',}] });
       prompt.present();
     }
+    this.modifId = "";
     this.formAlta.reset();
   }
 
@@ -132,7 +131,7 @@ export class AbmAdministrativoPage {
           text: 'No',
           role: 'cancel',
           handler: data => { 
-            this.tab = "agregar"
+            this.tab = "agregar";
           }
         }]
       });
