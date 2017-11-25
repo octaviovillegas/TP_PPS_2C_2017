@@ -36,7 +36,7 @@ export class ListadoAlumnosPage {
       );
   }*/
  abrir4A(){
-  this.http.get('assets/PPS -4A-2c2017.csv')
+  this.http.get('assets/PPS-4A-2c2017.csv')
   .subscribe(
   data => this.extractData(data),
   err => this.handleError(err)

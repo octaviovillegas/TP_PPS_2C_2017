@@ -84,8 +84,9 @@ export class PictureUtils2 {
   //Upload a new profile picture to the firebase storage
   uploadProfilPicture(imgData: any) {
     this.auth.getUser.name;
+    let foto;
     this.storageAvatarRef = firebase.storage().ref().child('fotos/');
-    this.lista=this.afDB.list('Usuarios');
+    this.lista=this.afDB.list('Usuarios/'+this.auth.getUserId()+'/');
   
     //Firebase user database avatar path
    
@@ -98,11 +99,14 @@ export class PictureUtils2 {
       this.objectToSave.push(savedPicture.downloadURL);
       this.unafoto=JSON.stringify(this.objectToSave);
       alert(this.unafoto);
-      
+      this.profilAvatarRef = this.afDB.object('Usuarios/'+this.auth.getUserId+'/foto/');//Firebase user database avatar path
     //  console.log('objectToSave : ' + JSON.stringify(this.objectToSave));
     //this.profilAvatarRef = this.afDB.object('nada/');
-      this.lista.push({foto:this.objectToSave,usuario:this.auth.getUser()});
-      //this.profilAvatarRef.set(this.objectToSave);
+     // this.lista.update(foto,this.objectToSave);
+     // this.lista. .set({foto:this.objectToSave});
+      
+      //.push({foto:this.objectToSave,usuario:this.auth.getUser()});
+      this.profilAvatarRef.set(this.objectToSave);
       
      //this.ref = this.afDB.list('Usuarios/'+this.objectToSave+'/');
     // this.afDB.database.ref('sitios').set('algo');

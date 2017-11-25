@@ -58,7 +58,7 @@
             Login
           </button> 
       
-          <button 
+          <!--button 
             ion-button 
             (click)="signin()" 
             type="submit" 
@@ -66,7 +66,7 @@
             block
           >
             Dar de alta
-          </button>
+          </button-->
           <button 
           ion-button icon-rigth color="dark" round
           (click)="administrador()" 
@@ -75,11 +75,18 @@
         <ion-icon name="person"></ion-icon>
           ..administrador
         </button>
-
+        <button 
+        ion-button icon-rigth color="dark" round
+        (click)="administrativo()" 
+        type="submit" 
+      >
+      <ion-icon name="person"></ion-icon>
+        ..administrativo
+      </button>
 
         <button 
         ion-button icon-rigth color="dark" round
-        (click)="usuario()" 
+        (click)="profesor()" 
         type="submit" 
       >
       <ion-icon name="person"></ion-icon>
@@ -87,7 +94,7 @@
       </button>
       <button 
       ion-button icon-rigth color="dark" round
-      (click)="invitado()" 
+      (click)="alumno()" 
       type="submit" 
     >
     <ion-icon name="person"></ion-icon>
@@ -99,11 +106,11 @@
         
               <h3  class="royal">O iniciar sesión usando:</h3>
               
-                <button ion-button icon-start style="background-color:#3b5998">
+                <button ion-button icon-start style="background-color:#3b5998" >
                   <ion-icon name="logo-facebook"> </ion-icon>Facebook</button>
                 <button ion-button icon-start style="background-color:#c71610">
                   <ion-icon name="logo-google"> </ion-icon>Google</button>
-                <button ion-button icon-start style="background-color:#282a36">
+                <button ion-button icon-start style="background-color:#282a36"  (click)="loginGitHub()" >
                   <ion-icon name="logo-github"> </ion-icon>GitHub</button>
             </div>
     </ion-list>

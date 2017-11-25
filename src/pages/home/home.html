@@ -23,16 +23,21 @@
     <!--Loop trough picture array here we use preserveSnapshot:true but I think we can also use async pipe with FirebaseListObservable-->
    <ion-list>
       <ion-spinner></ion-spinner>
-    <ion-item *ngFor="let picture of userAvatarPicture;let i = index;">   
-        <!--p [hidden]='i+1'></p>
-        <div *ngIf="i % 2 >0">
-      {{picture}}
-        </div-->
-       Foto de Aula {{picture.aula}}
-       <br><br>
-      <img src="{{picture.foto}}" />
-
-    </ion-item>
+      <ion-item *ngFor="let picture of userAvatarPicture;let i = index;">   
+          <!--p [hidden]='i+1'></p>
+          <div *ngIf="i % 2 >0">
+        {{picture}}
+          </div-->
+          Fecha: {{picture.fecha}}
+          <br/>
+         Aula {{picture.aula}} - 
+         Materia {{picture.materia}} -
+         Division {{picture.division}}
+         
+         <br><br>
+        <img src="{{picture.foto}}" />
+  
+      </ion-item>
   </ion-list>
     
 

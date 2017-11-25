@@ -11,7 +11,6 @@ TP Final de la practica profesional supervisada
  Matías Gutiérrez:
   - <strike>ABM de Usuarios</strike>
   - <strike>Carga de datos CSV a JSON</strike>
-  - Generación de JSON a CSV
   - <strike>Maquetado</strike>
   - Login con red social
   - <strike>ABM – Alumno</strike>
@@ -35,7 +34,7 @@ TP Final de la practica profesional supervisada
   - <strike>Realizar gráficas de las estadísticas obtenidas</strike>
   - <strike>Toma de asistencia a los alumnos</strike>
   - <strike>Carga de cuestionarios/ encuestas dinámicas</strike>
-  - Carga de archivos Excel/CSV
+  - <strike>Carga de datos CSV a JSON</strike>
   - Administración de su propio perfil
   - <strike>Gráficos estadísticos</strike>
   - <strike>QR para Alumnos</strike>

@@ -38,6 +38,7 @@ usuario:string;
     console.log('ionViewDidLoad BotonesPage');
     this.usuario=this.auth.getUser();
   }
+
   Listado_Fotos(){
     console.log('listado fotos');
     this.navCtrl.push(HomePage);
@@ -87,7 +88,50 @@ usuario:string;
   }
   nada(){
     console.log("nada");
+
+  ingresar(dato:any){
+    console.log(dato);
+   switch (dato) {
+    case "MiPerfil":
+      this.navCtrl.push(MiPerfilPage);
+        break;
+    case "Subir_foto":
+        this.navCtrl.push(Home2Page);
+          break;
+    case "Listado_Fotos":
+        this.navCtrl.push(HomePage);
+          break;
+  case "LectorQR":
+      this.navCtrl.push(LectorQrPage);
+        break;
+    case "TomarLista":
+        this.navCtrl.push(TomarListaPage);
+          break;
+    case "Estadisticas":
+        this.navCtrl.push(EstadisticasPage);
+          break;
+    case "Lista":
+          this.navCtrl.push(ListadoAlumnosPage);
+            break;
+    case "RealizarEncuesta":
+          this.navCtrl.push(RealizarEncuestaPage);
+            break;
+    case "CrearEncuesta":
+        this.navCtrl.push(CrearEncuestaPage);
+          break;
+      case "CargarAlumno":
+          this.navCtrl.push(ModalAlumnoPage);
+            break;
+      case "CargarProfesor":
+          this.navCtrl.push(ModalProfesorPage);
+            break;
+       case "CargarAdministrativo":
+            this.navCtrl.push(ModalAdministrativoPage);
+              break;
+
   }
+}
+ 
   cerrarSesion(){
     this.auth.logout();
 }

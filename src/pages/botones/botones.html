@@ -7,26 +7,13 @@
 </ion-header>
 <ion-content padding>
     
-      
-     
-        
 
-
-        
         <ion-spinner></ion-spinner>
-        <button  ion-button  block width="100px"  height="80" 
-        (click)=Miperfil() >
-        <ion-icon name="person"></ion-icon>
-        
-         . Mi perfil
-            
-        </button>
-            <button color="royal" ion-button  block width="100px"  height="80" 
-            (click)=TomarLista() *ngIf="this.usuario=='admin@admin.com'">
-              Tomar Lista
-                
+        <button  ion-button  block width="100px"  height="80"  (click)="ingresar('MiPerfil')" >
+            <ion-icon name="person"></ion-icon>
+             . Mi perfil      
             </button>
-          
+
           <button color="royal" ion-button  block width="100px"  height="80" 
           (click)=Lista() *ngIf="this.usuario=='admin@admin.com'">
              Lista
@@ -46,32 +33,67 @@
              Cargar Administrativo  
           </button>
       
+        <div *ngIf="this.usuario=='administrativo@administrativo.com'">
+            <button color="royal" ion-button  block width="100px"  height="80" 
+            (click)="ingresar('TomarLista')">
+              Tomar Lista  
+            </button> 
             <button    ion-button block width="80px" 
-            (click)=Listado_Fotos() *ngIf="this.usuario=='admin@admin.com'">
+            (click)="ingresar('Listado_Fotos')" >
               Fotos Tomadas
               </button>
+              <button color="royal" ion-button  block width="100px"  height="80" 
+              (click)="ingresar('Lista')" >
+                 Listas
+              </button>
+        </div>
+        <div *ngIf="this.usuario=='profesor@profesor.com'">
 
+            <button  ion-button block width="80px" 
+            (click)="ingresar('CrearEncuesta')">
+             Cargar Cuestionario
+              </button>
               <button  ion-button block width="80px" 
-              (click)=CrearEncuesta() *ngIf="this.usuario=='usuario@usuario.com'">
-               Cargar Cuestionario
+              (click)="ingresar('Estadisticas')">
+                Ver Estadisticas
                 </button>
-                <button  ion-button block width="80px" 
-                (click)=Estadisticas() *ngIf="this.usuario=='usuario@usuario.com'">
-                  Ver Estadisticas
+                <button   ion-button block width="80px" 
+                (click)="ingresar('LectorQR')" >
+                  Leer QR
                   </button>
-                  <button  ion-button block width="80px" 
-                  (click)=RealizarEncuesta() *ngIf="this.usuario=='invitado@invitado.com'">
+            
+          </div>
+
+          <div *ngIf="this.usuario=='admin@admin.com'">
+          <button color="royal" ion-button  block width="100px"  height="80" 
+          (click)="ingresar('CargarAlumno')" >
+             Cargar Alumno  
+          </button>
+          <button color="royal" ion-button  block width="100px"  height="80" 
+          (click)="ingresar('CargarProfesor')" >
+             Cargar Profesor  
+          </button>
+          <button color="royal" ion-button  block width="100px"  height="80" 
+          (click)="ingresar('CargarAdministrativo')">
+             Cargar Administrativo  
+          </button>
+          <button color="royal" ion-button  block width="100px"  height="80" 
+          (click)="ingresar('Lista')" >
+             Listas
+          </button>
+          </div>
+           
+          <div *ngIf="this.usuario=='alumno@alumno.com'">
+              <button  ion-button block width="80px" 
+                (click)="ingresar('RealizarEncuesta')" >
                     Realizar Encuesta 
                     </button>
-                    <button   ion-button block width="80px" 
-                    (click)=LectorQR() *ngIf="this.usuario=='invitado@invitado.com'">
-                      Leer QR
-                      </button>
-                      <button   ion-button block width="80px" 
-                      (click)=LectorQR() *ngIf="this.usuario=='usuario@usuario.com'">
-                        Leer QR
-                        </button>
-  
+                 
+               <button   ion-button block width="80px" 
+               (click)="ingresar('LectorQR')">
+                   Leer QR
+                 </button>
+  </div>
   
       
         <button ion-button block (click)="cerrarSesion()" color="danger">Cerrar Sesión</button>

@@ -31,6 +31,10 @@ export class AuthProvider {
     return this.afAuth.auth.currentUser.email;
    // return this.afAuth.auth.currentUser.uid;
   }
+  getUserId(){
+    return this.afAuth.auth.currentUser;
+   // return this.afAuth.auth.currentUser.uid;
+  }
  // Login de usuario
  loginUser(email:string, password:string){
    return this.afAuth.auth.signInWithEmailAndPassword(email, password)

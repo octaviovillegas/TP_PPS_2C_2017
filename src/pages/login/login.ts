@@ -2,6 +2,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,AlertController  } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
+import { Injectable } from '@angular/core';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { Usuario } from '../../clases/usuario';
+import firebase from "firebase";
 
 /**
  * Generated class for the LoginPage page.
@@ -18,9 +23,16 @@ import { AuthProvider } from '../../providers/auth/auth';
 export class LoginPage {
 
   user= { email : '', password : ''};
+  private provider = {
+    mail: '',
+    nombre:'',
+    foto:'',
+    loggedin:false
+  }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public auth : AuthProvider,
-    public alertCtrl : AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public auth1 : AuthProvider,
+    public alertCtrl : AlertController,
+    public auth:AngularFireAuth ) {
   
   }
 
@@ -29,7 +41,7 @@ export class LoginPage {
   }
 
   signin(){
-    this.auth.registerUser(this.user.email,this.user.password)
+    this.auth1.registerUser(this.user.email,this.user.password)
     .then((user) => {
       // El usuario se ha creado correctamente
     })
@@ -47,7 +59,7 @@ export class LoginPage {
   login() 
   {
     console.log("algo");
-      this.auth.loginUser(this.user.email,this.user.password ).then((user) => {
+      this.auth1.loginUser(this.user.email,this.user.password ).then((user) => {
         console.log("algo2"); }
       )
        .catch(err=>{
@@ -59,18 +71,34 @@ export class LoginPage {
         alert.present();
       })
     }
-
+    public loginGitHub():any{
+      let proveedor = new firebase.auth.GithubAuthProvider();
+  
+      this.auth.auth.signInWithRedirect(proveedor).then(res =>{
+        console.log('res: '+ JSON.stringify(res));
+        /*this.provider.loggedin = true;
+        this.provider.mail = res.user.email;
+        this.provider.foto = res.user.photoURL;
+        this.provider.nombre = res.user.displayName;*/
+        return this.provider;
+      });
+  
+    }
     administrador(){
       this.user.email='admin@admin.com';
       this.user.password='111111';
     }
-    invitado(){
-      this.user.email='invitado@invitado.com';
-      this.user.password='222222';
+    administrativo(){
+      this.user.email='administrativo@administrativo.com';
+      this.user.password='123456';
     }
-    usuario(){
-      this.user.email='usuario@usuario.com';
-      this.user.password='333333';
+    profesor(){
+      this.user.email='profesor@profesor.com';
+      this.user.password='123456';
+    }
+    alumno(){
+      this.user.email='alumno@alumno.com';
+      this.user.password='123456';
     }
 
 }
