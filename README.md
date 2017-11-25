@@ -18,7 +18,7 @@ Módulos a desarrollar:
 
 Fecha inicio: 24/11/2017
 
-Fecha fin:
+Fecha fin: 24/11/2017
 
 Branch: Perfil
 
@@ -29,9 +29,9 @@ Módulos a desarrollar:
 
 Fecha inicio: 03/11/2017
 
-Fecha fin:
+Fecha fin: 03/11/2017
 
-Branch:
+Branch: Login
 
 # Juan Manuel Barreda Fafasuli
 Módulos a desarrollar: • ABM de Alumnos
