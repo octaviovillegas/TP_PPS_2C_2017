@@ -36,6 +36,7 @@ seleccionado : string = "";
     loggedin:false
   }
 
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -44,6 +45,11 @@ seleccionado : string = "";
     public auth:AngularFireAuth,
     public platform: Platform,
   public loginProvider : LoginProvider ) {
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,public auth1 : AuthProvider,
+    public alertCtrl : AlertController,
+    public auth:AngularFireAuth ) {
+
   
   }
 
@@ -84,6 +90,7 @@ seleccionado : string = "";
   
       })
     }
+
 
 
 
@@ -148,6 +155,36 @@ seleccionado : string = "";
 
 
 
+
+
+    public loginGitHub():any{
+      let proveedor = new firebase.auth.GithubAuthProvider();
+  
+      this.auth.auth.signInWithRedirect(proveedor).then(res =>{
+        console.log('res: '+ JSON.stringify(res));
+        /*this.provider.loggedin = true;
+        this.provider.mail = res.user.email;
+        this.provider.foto = res.user.photoURL;
+        this.provider.nombre = res.user.displayName;*/
+        return this.provider;
+      });
+  
+    }
+    administrador(){
+      this.user.email='admin@admin.com';
+      this.user.password='111111';
+    }
+    administrativo(){
+      this.user.email='administrativo@administrativo.com';
+      this.user.password='123456';
+    }
+    profesor(){
+      this.user.email='profesor@profesor.com';
+      this.user.password='123456';
+    }
+    alumno(){
+      this.user.email='alumno@alumno.com';
+      this.user.password='123456';
 
     }
 

@@ -46,6 +46,7 @@ export class TomarListaPage {
 
 
 
+ 
   constructor(
     public toastCtrl: ToastController,
     public navCtrl: NavController, public navParams: NavParams,
@@ -110,11 +111,15 @@ Aula(dato:number){
   console.log('materia'+this.materia);
   if (this.materia=='')
   {
+
     let toast = this.toastCtrl.create({
       message: 'No se estan dictando clases en el Aula seleccionada',
       duration: 2000
     });
     toast.present();
+
+    alert("No se estan dictando clases en el Aula seleccionada");
+
   }
  }
 

@@ -67,6 +67,41 @@
           >
             Dar de alta
           </button-->
+
+          <button 
+          ion-button icon-rigth color="dark" round
+          (click)="administrador()" 
+          type="submit" 
+        >
+        <ion-icon name="person"></ion-icon>
+          ..administrador
+        </button>
+        <button 
+        ion-button icon-rigth color="dark" round
+        (click)="administrativo()" 
+        type="submit" 
+      >
+      <ion-icon name="person"></ion-icon>
+        ..administrativo
+      </button>
+
+        <button 
+        ion-button icon-rigth color="dark" round
+        (click)="profesor()" 
+        type="submit" 
+      >
+      <ion-icon name="person"></ion-icon>
+         ..Profesor
+      </button>
+      <button 
+      ion-button icon-rigth color="dark" round
+      (click)="alumno()" 
+      type="submit" 
+    >
+    <ion-icon name="person"></ion-icon>
+      ..Alumno
+    </button>
+
         </div>
       </form>
 
@@ -84,11 +119,18 @@
         
               <h3  class="royal">O iniciar sesión usando:</h3>
               
+
                 <button ion-button icon-start style="background-color:#3b5998" (click)="loginSocial('FB')">
+
+                <button ion-button icon-start style="background-color:#3b5998" >
+
                   <ion-icon name="logo-facebook"> </ion-icon>Facebook</button>
                 <button ion-button icon-start style="background-color:#c71610" (click)="loginSocial('GO')">
                   <ion-icon name="logo-google"> </ion-icon>Google</button>
+
                 <button ion-button icon-start style="background-color:#282a36"  (click)="loginSocial('GH')" >
+
+                <button ion-button icon-start style="background-color:#282a36"  (click)="loginGitHub()" >
                   <ion-icon name="logo-github"> </ion-icon>GitHub</button>
             </div>
     </ion-list>

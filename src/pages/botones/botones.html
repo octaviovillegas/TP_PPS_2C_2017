@@ -59,6 +59,17 @@
                   </button>
             
           </div>
+        <button  ion-button  block width="100px"  height="80"  (click)="ingresar('MiPerfil')" >
+            <ion-icon name="person"></ion-icon>
+             . Mi perfil      
+            </button>
+
+          <button color="royal" ion-button  block width="100px"  height="80" 
+          (click)=Lista() *ngIf="this.usuario=='admin@admin.com'">
+             Lista
+              
+          </button>
+
 
           <div *ngIf="this.usuario=='admin@admin.com'">
           <button color="royal" ion-button  block round large icon-left width="100px"  height="80" 
@@ -81,14 +92,64 @@
           <ion-icon name="add"></ion-icon>
              Cargar Administrativo  
           </button>
+
           <button color="royal" ion-button  block round large icon-left width="100px"  height="80" 
           (click)="ingresar('Lista')" >
           <ion-icon name="list-box"></ion-icon>
+
+      
+        <div *ngIf="this.usuario=='administrativo@administrativo.com'">
+            <button color="royal" ion-button  block width="100px"  height="80" 
+            (click)="ingresar('TomarLista')">
+              Tomar Lista  
+            </button> 
+            <button    ion-button block width="80px" 
+            (click)="ingresar('Listado_Fotos')" >
+              Fotos Tomadas
+              </button>
+              <button color="royal" ion-button  block width="100px"  height="80" 
+              (click)="ingresar('Lista')" >
+                 Listas
+              </button>
+        </div>
+        <div *ngIf="this.usuario=='profesor@profesor.com'">
+
+            <button  ion-button block width="80px" 
+            (click)="ingresar('CrearEncuesta')">
+             Cargar Cuestionario
+              </button>
+              <button  ion-button block width="80px" 
+              (click)="ingresar('Estadisticas')">
+                Ver Estadisticas
+                </button>
+                <button   ion-button block width="80px" 
+                (click)="ingresar('LectorQR')" >
+                  Leer QR
+                  </button>
+            
+          </div>
+
+          <div *ngIf="this.usuario=='admin@admin.com'">
+          <button color="royal" ion-button  block width="100px"  height="80" 
+          (click)="ingresar('CargarAlumno')" >
+             Cargar Alumno  
+          </button>
+          <button color="royal" ion-button  block width="100px"  height="80" 
+          (click)="ingresar('CargarProfesor')" >
+             Cargar Profesor  
+          </button>
+          <button color="royal" ion-button  block width="100px"  height="80" 
+          (click)="ingresar('CargarAdministrativo')">
+             Cargar Administrativo  
+          </button>
+          <button color="royal" ion-button  block width="100px"  height="80" 
+          (click)="ingresar('Lista')" >
              Listas
           </button>
           </div>
            
           <div *ngIf="this.usuario=='alumno@alumno.com'">
+
               <button  ion-button block round large icon-left width="80px" 
                 (click)="ingresar('RealizarEncuesta')" >
                 <ion-icon name="stats"></ion-icon>
@@ -98,6 +159,15 @@
                <button   ion-button block round large icon-left width="80px" 
                (click)="ingresar('LectorQR')">
                <ion-icon name="qr-scanner"></ion-icon>
+
+              <button  ion-button block width="80px" 
+                (click)="ingresar('RealizarEncuesta')" >
+                    Realizar Encuesta 
+                    </button>
+                 
+               <button   ion-button block width="80px" 
+               (click)="ingresar('LectorQR')">
+
                    Leer QR
                  </button>
   </div>

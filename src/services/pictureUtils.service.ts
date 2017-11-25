@@ -97,11 +97,15 @@ export class PictureUtils {
     
       this.objectToSave.push(savedPicture.downloadURL);
       this.unafoto=JSON.stringify(this.objectToSave);
+
       let toast = this.toastCtrl.create({
         message: this.unafoto,
         duration: 2000
       });
       toast.present();
+
+      alert(this.unafoto);
+
     
       this.lista.push({
         foto:this.objectToSave,

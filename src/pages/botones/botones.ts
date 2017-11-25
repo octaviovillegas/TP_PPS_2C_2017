@@ -16,7 +16,6 @@ import { ModalAlumnoPage } from '../modal-alumno/modal-alumno';
 import { ModalProfesorPage } from '../modal-profesor/modal-profesor';
 import { ModalAdministrativoPage } from '../modal-administrativo/modal-administrativo';
 import { ListadoPage } from '../listado/listado';
-//$IMPORTSTATEMENT
 
 /**
  * Generated class for the BotonesPage page.
@@ -37,6 +36,45 @@ usuario:string;
   audio = new Audio();
   ionViewDidLoad() {
     this.usuario=this.auth.getUser();
+
+  }
+
+  Listado_Fotos(){
+    console.log('listado fotos');
+    this.navCtrl.push(HomePage);
+  }
+  Subir_foto(){
+    console.log('tomar foto');
+    this.navCtrl.push(Home2Page);
+  }
+  LectorQR(){
+    console.log('qr');
+    this.navCtrl.push(LectorQrPage);
+  }
+  TomarLista(){
+    console.log('lsita');
+    this.navCtrl.push(TomarListaPage);
+  }
+  Estadisticas(){
+    console.log('lsita');
+    this.navCtrl.push(EstadisticasPage);
+  }
+  Lista(){
+    console.log('lsita');
+    this.navCtrl.push(ListadoAlumnosPage);
+  }
+  RealizarEncuesta(){
+    console.log('lsita');
+    this.navCtrl.push(RealizarEncuestaPage);
+  }
+  Miperfil(){
+    console.log('lsita');
+    this.navCtrl.push(MiPerfilPage);
+  }
+  CrearEncuesta(){
+    console.log('lsita');
+    this.navCtrl.push(CrearEncuestaPage);
+
     
     this.audio.src = "../../assets/blop.mp3";
     this.audio.load();
@@ -91,6 +129,60 @@ usuario:string;
       case "ListadoAlumnos":
         this.navCtrl.push(ListadoPage, {tipo: "Alumnos"})
         break;
+
+
+  CargarAlumno(){
+    this.navCtrl.push(ModalAlumnoPage);
+  }
+  CargarProfesor(){
+    this.navCtrl.push(ModalProfesorPage);
+  }
+  CargarAdministrativo(){
+    this.navCtrl.push(ModalAdministrativoPage);
+  }
+  nada(){
+    console.log("nada");
+
+  ingresar(dato:any){
+    console.log(dato);
+   switch (dato) {
+    case "MiPerfil":
+      this.navCtrl.push(MiPerfilPage);
+        break;
+    case "Subir_foto":
+        this.navCtrl.push(Home2Page);
+          break;
+    case "Listado_Fotos":
+        this.navCtrl.push(HomePage);
+          break;
+  case "LectorQR":
+      this.navCtrl.push(LectorQrPage);
+        break;
+    case "TomarLista":
+        this.navCtrl.push(TomarListaPage);
+          break;
+    case "Estadisticas":
+        this.navCtrl.push(EstadisticasPage);
+          break;
+    case "Lista":
+          this.navCtrl.push(ListadoAlumnosPage);
+            break;
+    case "RealizarEncuesta":
+          this.navCtrl.push(RealizarEncuestaPage);
+            break;
+    case "CrearEncuesta":
+        this.navCtrl.push(CrearEncuestaPage);
+          break;
+      case "CargarAlumno":
+          this.navCtrl.push(ModalAlumnoPage);
+            break;
+      case "CargarProfesor":
+          this.navCtrl.push(ModalProfesorPage);
+            break;
+       case "CargarAdministrativo":
+            this.navCtrl.push(ModalAdministrativoPage);
+              break;
+
 
   }
 }

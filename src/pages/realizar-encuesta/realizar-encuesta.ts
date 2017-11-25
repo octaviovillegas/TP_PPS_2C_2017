@@ -69,13 +69,38 @@ export class RealizarEncuestaPage {
     console.log("guardar respuesta");
     console.log(value);
     this.respuesta=value;
+
+    alert("respuesta Guardada");
+    //this.Unalista=this.afDB.list('Respuestas/'+this.tituloSeleccionado+'/'+this.respuesta);
+    this.Unalista=this.afDB.list('Respuestas/'+this.tituloSeleccionado);
+    this.Unalista.push({res:this.respuesta});
+    this.navCtrl.push(BotonesPage);
+  }
+  EnviarRespuesta(){
+    console.log("guardar respuesta");
     
+    
+
+    //this.Unalista=this.afDB.list('Respuestas/'+this.tituloSeleccionado+'/'+this.respuesta);
+    if (this.respuestaTexto!=''){
+      this.Unalista=this.afDB.list('Respuestas/'+this.tituloSeleccionado);
+      this.Unalista.push({res:this.respuestaTexto});
+      alert("respuesta Guardada");
+      this.navCtrl.push(BotonesPage);
+    }
+    else{
+      alert('No ingreso respuesta');
+    }
+  }
+
+
 
     let toast = this.toastCtrl.create({
       message: 'Respuesta guardada',
       duration: 2000
     });
     toast.present();
+
 
 
     //this.Unalista=this.afDB.list('Respuestas/'+this.tituloSeleccionado+'/'+this.respuesta);
@@ -107,6 +132,7 @@ export class RealizarEncuestaPage {
       toast.present();
     }
   }
+
 
 
 
