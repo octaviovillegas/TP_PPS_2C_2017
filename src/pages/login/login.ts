@@ -92,6 +92,7 @@ export class LoginPage {
     }
     this.toastCtrl.create({
       message: mensaje,
+      cssClass: 'ToastWarning',
       duration: 2000
     }).present();
   }  
