@@ -15,7 +15,7 @@ export class EncuestasPage {
   public tab: string= "actual";
   //Actual
   public respuesta: string;
-  public lastEncuesta: BehaviorSubject<any>;
+  public lastEncuesta: any;
   //Crear
   private formCrear: FormGroup;
   //Estadisticas
@@ -33,20 +33,32 @@ export class EncuestasPage {
         respuestaB: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
         tiempo: ['', Validators.compose([Validators.required])]
     });
-    this.lastEncuesta = new BehaviorSubject<any>(null);
     this.initRef();
   }
 
   public initRef(): void {
     this.af.database.ref("/encuestas/").on('value', encuestas => {
       let props = Object.getOwnPropertyNames(encuestas.val());
-      let current = encuestas.val()[props[props.length -1]];
-      console.log(current);
+      if(props.length > 0) {
+        let current = encuestas.val()[props[props.length -1]];
+        if(current.termina > new Date().getTime()){
+          if(current.terminado == 0){
+            this.lastEncuesta = current;
+            this.getTime();
+          }
+        } else {
+          this.setTerminado(props[props.length -1]);
+        }
+      }
     })
   }
 
+  private setTerminado(key: string): void {
+    console.log("IMPLEMENTAME GATX");
+  }
+
   public hayEncuesta(): boolean {
-    return true;
+    return this.lastEncuesta != undefined;
   }
 
   public crearEncuesta(){
@@ -64,14 +76,17 @@ export class EncuestasPage {
     }
     data["termina"] = data["creado"] + tiempo;
     data["terminado"] = "0";
+    data["A"] = 0;
+    data["B"] = 0;
     this.af.list("/encuestas").push(data);
     this.formCrear.reset();
   }
 
-  private milisegundosATiempo(duration: number): string {
-    let horNum =   (duration/(1000*60*60))%24;
-    let minNum = (duration/(1000*60))%60;
-    let segNum = (duration/1000)%60;
+  public getTime(): string {
+    let duration = this.lastEncuesta.termina - new Date().getTime();
+    let horNum = parseInt(((duration/(1000*60*60))%24) + "");
+    let minNum = parseInt(((duration/(1000*60))%60) + "");
+    let segNum = parseInt(((duration/1000)%60) + "");
     let horas = (horNum < 10) ? "0" + horNum : horNum;
     let minutos = (minNum < 10) ? "0" + minNum : minNum;
     let segundos = (segNum < 10) ? "0" + segNum : segNum;

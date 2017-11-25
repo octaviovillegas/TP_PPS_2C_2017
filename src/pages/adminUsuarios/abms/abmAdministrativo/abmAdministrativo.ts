@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, AlertController, ActionSheetController } from 'ionic-angular';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -13,7 +13,7 @@ import 'rxjs/add/operator/map';
 export class AbmAdministrativoPage {
   
   private tab;
-  private admins: Observable<any>;
+  private admins: FirebaseListObservable<any[]>;
   //Lista
   private searchValue: string;
   private filterType: string;
@@ -113,7 +113,7 @@ export class AbmAdministrativoPage {
         }
         return true;
       }
-    }));
+    })) as FirebaseListObservable<any[]>;
   }
 
   public cambiarDeTab() {
