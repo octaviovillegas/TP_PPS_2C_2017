@@ -32,35 +32,7 @@ export class MiPerfilPage implements OnInit{
       this.email = this.user.email;
       this.photoUrl = this.user.photoURL;
       this.emailVerified = this.user.emailVerified;
-      this.uid = this.user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
-                       // this value to authenticate with your backend server, if
-                       // you have one. Use User.getToken() instead.
-      console.log(this.email);
-      console.log(this.uid);
+      this.uid = this.user.uid;  
     }
   }
-
-  actualizarDatos(){
-    this.user.updateEmail(this.email).then(function() {
-      // Update successful.
-    }).catch(function(error) {
-      // An error happened.
-    });
-  }
-
-
-  /*ionViewDidLoad() {
-    console.log('ionViewDidLoad ConfiguracionPage');
-  }
-
-  goAbmAlumno()
-  {
-    this.navCtrl.push('AbmAlumnoPage');
-  }
-*/
-  cancelar()
-  {
-    this.navCtrl.setRoot(HomePage);
-  }
-
 }
