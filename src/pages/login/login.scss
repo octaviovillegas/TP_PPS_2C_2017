@@ -3,6 +3,11 @@ page-login {
     font-weight: bold
 }
 
+.fondo{
+    background-color: rgb(235, 235, 235);
+   
+}
+
 #custom-overlay {
     position: fixed;
     top: 0;
@@ -44,6 +49,76 @@ page-login {
 
 
   
+
+  @import url(https://fonts.googleapis.com/css?family=Erica+One);
+  /* BODY */
+  body {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;  
+    height: 100%;   
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    overflow: hidden;
+  }
+  ::selection {
+    background: transparent;
+  }
+  
+  h1, img {
+    cursor: default;
+    position: relative;
+    top: 1px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 150px;
+    margin: auto;
+    display: block;
+    
+    -webkit-animation: bounce .4s ease infinite alternate;
+    
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif, cursive;
+    font-size: 50px;
+    color: #FF6A2F;
+    text-align: center;
+    line-height: 100px;
+    text-shadow: 0 1px 0 #CCC,
+                 0 2px 0 #CCC,
+                 0 3px 0 #CCC,
+                 0 4px 0 #CCC,
+                 0 5px 0 #CCC,
+                 0 6px 0 transparent,
+                 0 7px 0 transparent,
+                 0 8px 0 transparent,
+                 0 9px 0 transparent,
+                 0 10px 10px rgba(0, 0, 0, .6);
+  }
+  /* ANIMATION */
+  @-webkit-keyframes bounce {
+    100% {
+      top: -1px;
+      
+      text-shadow: 0 1px 0 #CCC,
+                   0 2px 0 #CCC,
+                   0 3px 0 #CCC,
+                   0 4px 0 #CCC,
+                   0 5px 0 #CCC,
+                   0 6px 0 #CCC,
+                   0 7px 0 #CCC,
+                   0 8px 0 #CCC,
+                   0 9px 0 #CCC,
+                   0 30px 30px rgba(0, 0, 0, .3);
+    }
+  }
+
+
+
+
+
 
 
 
@@ -331,7 +406,5 @@ page-login {
     94.18% { -webkit-transform: matrix3d(3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 0, -10, 0, 0, 1); transform: matrix3d(3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 0, -10, 0, 0, 1); }
     100% { -webkit-transform: matrix3d(3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 0, -10, 0, 0, 1); transform: matrix3d(3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 0, -10, 0, 0, 1); } 
   }
-  
-  
-  
+
   
