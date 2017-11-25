@@ -35,4 +35,28 @@ export class MiPerfilPage implements OnInit{
       this.uid = this.user.uid;  
     }
   }
+
+  actualizarDatos(){
+    this.user.updateEmail(this.email).then(function() {
+      // Update successful.
+    }).catch(function(error) {
+      // An error happened.
+    });
+  }
+
+
+  /*ionViewDidLoad() {
+    console.log('ionViewDidLoad ConfiguracionPage');
+  }
+
+  goAbmAlumno()
+  {
+    this.navCtrl.push('AbmAlumnoPage');
+  }
+*/
+  cancelar()
+  {
+    this.navCtrl.setRoot(HomePage);
+  }
+  
 }
