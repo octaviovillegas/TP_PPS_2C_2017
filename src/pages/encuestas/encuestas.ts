@@ -120,7 +120,7 @@ export class EncuestasPage {
       this.tortaGrafico = new Chart(this.tortaCanvas.nativeElement, {
         type: 'pie',
         data: {
-          labels: ["Red", "Blue"],
+          labels: [this.lastEncuesta.respuestaA, this.lastEncuesta.respuestaB],
           datasets: [{
             label: '# of Votes',
             data: [this.lastEncuesta.A, this.lastEncuesta.B],
