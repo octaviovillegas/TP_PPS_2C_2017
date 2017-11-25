@@ -9,6 +9,7 @@ export class Encuesta {
     No:number;
     PuedeSer:number;
     opcion:string;
+    fecha:string;
    // present:boolean;
 
     constructor() {

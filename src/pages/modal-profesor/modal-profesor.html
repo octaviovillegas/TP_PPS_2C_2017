@@ -27,6 +27,18 @@
                 <ion-input [(ngModel)]="profesor.apellido" type="text"></ion-input>
               </ion-item>
 
+
+          <ion-item>
+              <ion-label floating>Legajo</ion-label>
+              <ion-input [(ngModel)]="profesor.legajo" type="number"></ion-input>
+            </ion-item>
+            
+
+              <ion-item>
+                  <ion-label floating>Dirección</ion-label>
+                  <ion-input [(ngModel)]="profesor.direccion" type="text"></ion-input>
+              </ion-item>
+
                 <ion-list radio-group [(ngModel)]="profesor.turno">
                     <ion-list-header>
                       Turno
@@ -49,7 +61,7 @@
                   </ion-item>
 
                   <button ion-button icon-only>
-                      <ion-icon name="plus" (click)="profesor.materias.push(materia.value)"></ion-icon>
+                      <ion-icon name="add" (click)="profesor.materias.push(materia.value)"></ion-icon>
                   </button>
 
             </ion-list>

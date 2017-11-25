@@ -32,7 +32,7 @@ export class TomarListaPage {
   listaEstudiantes:Array<Estudiante>;
   listaEstudiantes2:Array<Estudiante>;
   unEstudiante:Estudiante;
-  materia:string;
+  materia:string='';
   aula:string;
   profesor:string;
   ocultarMateria:boolean;
@@ -45,7 +45,10 @@ export class TomarListaPage {
   pordivision:boolean;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
+
+  constructor(
+    public toastCtrl: ToastController,
+    public navCtrl: NavController, public navParams: NavParams,
     public alertCtrl : AlertController,
     public actionSheetCtrl: ActionSheetController,
     public platform: Platform,
@@ -57,79 +60,64 @@ export class TomarListaPage {
       this.ocultarMateria=true;
       this.mostrarListado=false;
       this.ocultarDivision=true;
-      this.pormateria=false;
-      this.pordivision=false;
+     // this.pormateria=false;
+     // this.pordivision=false;
       this.MostrarBotones=true;
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TomarListaPage');
+  let d =new Date();
+  console.log(d);
+  console.log(d.getDay());
+  console.log(d.getHours());
+  console.log(d.getFullYear());
   }
 
    datachanged(usuario:any){
     console.log(usuario);
     this.user=usuario;
-  
-    
+     
 }
-MateriaSeleccionada(e:string){
-  this.materia=e;
-console.log(e);
-console.log("algo");
-this.ocultarMateria=true;
-if (this.pormateria){
-this.ocultarDivision=false;}
-else if (this.pordivision)
-{this.mostrarListado=true;this.AsignarAula();
-  this.readCsvData();
-//this.ocultarAula=false;
-}}
-AsignarAula(){
-  if (this.materia=="Metodologia")
-  {  if(this.division=="4A"){this.aula="305"; }
-  else {this.aula="310"}
-}
-if (this.materia=="BaseDeDatos")
-{  if(this.division=="4A"){this.aula="309"; }
-else {this.aula="308"}
-}
-if (this.materia=="LaboratorioIV")
-{  if(this.division=="4A"){this.aula="201"; }
-else {this.aula="200"}
-}
- 
-}
-DivisionSeleccionada(e:string){
-  this.division=e;
-  this.ocultarDivision=true;
-  if(this.pordivision){
-  this.ocultarMateria=false;}
-  else if(this.pormateria){
-  this.mostrarListado=true;
-this.AsignarAula();
-this.readCsvData();
-}
-}
-/*
-   refreshPicture() {
-    this.listaEstudiantes=new Array<Estudiante>();
-    console.log('Lista/'+this.division+'/'+this.materia+'/'+this.aula);
-    this.afDB.list('Lista/'+this.division+'/'+this.materia+'/'+this.aula, { preserveSnapshot: true }).subscribe((snapshots: any) => {
-    //this.afDB.list('Lista/Matematica', { preserveSnapshot: true }).subscribe((snapshots: any) => {
-      snapshots.forEach((snapshot, index) => {
-        this.lista[index] = snapshot.val();
-       
-        var unEstudiante= new Estudiante();
-        unEstudiante.userid = index;
-        unEstudiante.firstname =  this.lista[index].nombre;
-        unEstudiante.lastname =  this.lista[index].apellido;
-        unEstudiante.present =  false;
-       this.listaEstudiantes.push(unEstudiante);
-       console.log(this.listaEstudiantes);
 
-      });
+Aula(dato:number){
+  let d =new Date();
+  console.log(d);
+  console.log(d.getDay());
+  console.log(d.getHours());
+  this.aula=JSON.stringify(dato);
+  if (dato==310){
+    this.division='4A'
+    if ((d.getDay()==3)&&(d.getHours()<14))
+    {
+      this.materia='PPS';
+      this.mostrarListado=true;
+      this.MostrarBotones=false;
+      this.readCsvData();
+    }
+  }
+  if (dato==305){
+    this.division='4B'
+    if ((d.getDay()==3)&&(d.getHours()<20))
+    {
+      this.materia='PPS';
+      this.mostrarListado=true;
+      this.MostrarBotones=false;
+      this.readCsvData();
+    }
+  }
+  console.log('materia'+this.materia);
+  if (this.materia=='')
+  {
+    let toast = this.toastCtrl.create({
+      message: 'No se estan dictando clases en el Aula seleccionada',
+      duration: 2000
     });
-  }*/
+    toast.present();
+  }
+ }
+
 
   GuardarPresente(listaE: Array<Estudiante>){
     if (listaE.length > 0) {
@@ -142,7 +130,7 @@ this.readCsvData();
          // this.Unalista=this.afDB.list('Lista/Matematica/'+student.firstname+'/presente');
           this.Unalista.push(1);
         
-          this.Unalista=this.afDB.list('Alumnos/'+student.lastname+'/'+this.materia+'/presente');
+          this.Unalista=this.afDB.list('Asistencias/'+student.lastname+'/'+this.materia+'/presente');
           this.Unalista.push(1);
           console.log(student.firstname);
           console.log("porguardar");
@@ -151,30 +139,23 @@ this.readCsvData();
           this.Unalista=this.afDB.list('Lista/'+this.division+'/'+this.materia+'/'+this.aula+'/'+student.lastname+'/ausente');
           //this.Unalista=this.afDB.list('Lista/Matematica/'+student.firstname+'/ausente');
           this.Unalista.push(1);
-          this.Unalista=this.afDB.list('Alumnos/'+student.lastname+'/'+this.materia+'/ausente');
+          this.Unalista=this.afDB.list('Asistencias/'+student.lastname+'/'+this.materia+'/ausente');
           this.Unalista.push(1);
         }
       })
     }
     this.listaEstudiantes=null;
-    alert("Los datos Fueron guardados Correctamente");
+    let toast = this.toastCtrl.create({
+      message: 'Los datos Fueron guardados Correctamente',
+      duration: 2000
+    });
+    toast.present();
     this.navCtrl.push(BotonesPage);
       
   }
 
-PorMateria(){
-this.MostrarBotones=false;
-this.ocultarMateria=false;
-this.pormateria=true;
-  }
-  PorDivision(){
-    this.pordivision=true;
-this.MostrarBotones=false;
-this.ocultarDivision=false;
-  }
-
   changePicture(){
-    
+    let datePipe = this.datePipeCtrl.transform(Date.now(), 'dd-MM-yyyy');
       let actionSheet = this.actionSheetCtrl.create({
         enableBackdropDismiss: true,
         buttons: [
@@ -183,7 +164,8 @@ this.ocultarDivision=false;
             icon: !this.platform.is('ios') ? 'camera' : null,
             handler: () => {
               this.pictureUtils.openCamera().then((imageData) => {
-                this.pictureUtils.uploadProfilPicture(imageData,this.aula);
+                this.pictureUtils.uploadProfilPicture(imageData,this.aula,datePipe,this.materia,this.division);
+                
               });
             }
           }, {
@@ -191,7 +173,7 @@ this.ocultarDivision=false;
             icon: !this.platform.is('ios') ? 'images' : null,
             handler: () => {
               this.pictureUtils.openGallery().then((imageData) => {
-                this.pictureUtils.uploadProfilPicture(imageData,this.aula);
+                this.pictureUtils.uploadProfilPicture(imageData,this.aula,datePipe,this.materia,this.division);
               });
             }
           }
@@ -202,20 +184,18 @@ this.ocultarDivision=false;
 
 
     private readCsvData() {
-      if(this.division=="4A"){
+      let cuatrimestre='';
+      let d =new Date();
+      if (d.getMonth()>7){ cuatrimestre='2c'; }
+      if (d.getMonth()<=7){ cuatrimestre='1c'; }
+    let texto ='assets/'+this.materia+'-'+this.division+'-'+cuatrimestre+d.getFullYear()+'.csv';
+    console.log(texto);
+      this.http.get(texto)
+      .subscribe(
+      data => this.extractData(data),
+      err => this.handleError(err)
+      );
 
-      this.http.get('assets/PPS -4A-2c2017.csv')
-        .subscribe(
-        data => this.extractData(data),
-        err => this.handleError(err)
-        );}
-        else     if(this.division=="4B"){
-          
-                this.http.get('assets/PPS-4b-2c2017.csv')
-                  .subscribe(
-                  data => this.extractData(data),
-                  err => this.handleError(err)
-                  );}
  
     }
 
@@ -263,9 +243,7 @@ this.ocultarDivision=false;
      unEstudiante.present =  false;
     this.listaEstudiantes2.push(unEstudiante);
     console.log(this.listaEstudiantes2);
-    
 
-   // console.log('data'+this.listadoAlumnos);}
     
   })}}
  
@@ -281,8 +259,7 @@ this.ocultarDivision=false;
 
   GuardarPresente2(listaE: Array<Estudiante>){
     let datePipe = this.datePipeCtrl.transform(Date.now(), 'dd-MM-yyyy');
-   // let fechaActual = new Date();
-   // let dia = fechaActual.getDate()
+
 
     if (listaE.length > 0) {
       listaE.forEach(student =>
@@ -291,11 +268,10 @@ this.ocultarDivision=false;
         if (student.present)
         {
           this.unalista=this.afDB.list('Lista/'+this.division+'/'+this.materia+'/'+this.aula+'/'+datePipe);
-         // this.Unalista=this.afDB.list('Lista/Matematica/'+student.firstname+'/presente');
-         
+        
 
          this.unalista.push({legajo:student.userid,apellido:student.lastname,nombre:student.firstname,presente:student.present});
-          this.unalista=this.afDB.list('Alumnos/'+student.userid+'/'+this.materia+'/presente');
+          this.unalista=this.afDB.list('Asistencias/'+student.userid+'/'+this.materia+'/presente');
           this.unalista.push(1);
           console.log(student.firstname);
           console.log("porguardar");
@@ -305,7 +281,7 @@ this.ocultarDivision=false;
           //this.Unalista=this.afDB.list('Lista/Matematica/'+student.firstname+'/ausente');
           this.unalista=this.afDB.list('Lista/'+this.division+'/'+this.materia+'/'+this.aula+'/'+datePipe);
           this.unalista.push({legajo:student.userid,apellido:student.lastname,nombre:student.firstname,presente:student.present});
-          this.unalista=this.afDB.list('Alumnos/'+student.userid+'/'+this.materia+'/ausente');
+          this.unalista=this.afDB.list('Asistencias/'+student.userid+'/'+this.materia+'/ausente');
           this.unalista.push(1);
         }
       })
@@ -313,7 +289,11 @@ this.ocultarDivision=false;
     this.listaEstudiantes2=null;
     this.listadoAlumnos=null;
     
-    alert("Los datos Fueron guardados Correctamente");
+    let toast = this.toastCtrl.create({
+      message: 'Los datos fueron guardados correctamente',
+      duration: 2000
+    });
+    toast.present();
     this.navCtrl.push(BotonesPage);
       
   }

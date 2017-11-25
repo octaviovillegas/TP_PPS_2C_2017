@@ -19,6 +19,8 @@ export class MiPerfilPage {
   nombre:string;
   userAvatarPicture: Array<any> = new Array;
   usuarioLogueado:any;
+  unaLista:FirebaseListObservable<any>;
+  algo =[];
 
   constructor(public platform: Platform,public auth : AuthProvider,
     public alertCtrl : AlertController,
@@ -27,7 +29,24 @@ export class MiPerfilPage {
       private pictureUtils: PictureUtils2){
         this.usuarioLogueado=this.auth.getUser();
         this.refreshPicture();
-      }
+
+
+       this.afDB.list('/Usuarios/').subscribe(e=>{
+        e.forEach(res=>{
+           this.algo.push(res);
+           console.log('res'+res);
+          
+        })
+        this.algo.forEach(element => {
+          console.log('elem'+element.foto); 
+          console.log('elem'+element.usuario); 
+           });
+       
+     });
+     }
+
+
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MiPerfilPage');
@@ -37,9 +56,15 @@ export class MiPerfilPage {
     this.afDB.list('Usuarios/', { preserveSnapshot: true }).subscribe((snapshots: any) => {
       snapshots.forEach((snapshot, index) => {
         this.userAvatarPicture[index] = snapshot.val();
+
       });
     });
   }
+
+
+
+
+
   changePicture(){
 
       let actionSheet = this.actionSheetCtrl.create({

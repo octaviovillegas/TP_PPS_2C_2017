@@ -1,11 +1,9 @@
+import { Persona } from "./persona";
 
 
-export class Profesor {
-nombre:string;
-apellido:string;
-turno:string;
+
+export class Profesor extends Persona {
+
 materias:Array<string>;
 
-    constructor() {
-    }
 }

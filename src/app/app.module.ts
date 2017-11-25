@@ -34,9 +34,22 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChartsModule } from 'ng2-charts';
+import { Push } from '@ionic-native/push'
 
 //csv
 import { ListadoAlumnosPage } from '../pages/listado-alumnos/listado-alumnos';
+import { ListadoPage } from '../pages/listado/listado';
+import { DescargaService } from '../services/descarga.service';
+import { LoginProvider } from '../providers/login/login';
+import { KeysPipe } from '../pipes/keys/keys';
+import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
+
+const cloudSettings: CloudSettings = {
+  'core': {
+    'app_id': '5ac75a32'
+  }
+};
+
 
 
 // Must export the config
@@ -82,7 +95,9 @@ export const firebaseConfig = {
     EstadisticasPage,
     ModalAlumnoPage,
     ModalAdministrativoPage,
-    ModalProfesorPage
+    ModalProfesorPage,
+    ListadoPage,
+    KeysPipe
   ],
   imports: [
     BrowserModule,
@@ -93,7 +108,8 @@ export const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule, // imports firebase/database, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    CloudModule.forRoot(cloudSettings)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -112,7 +128,8 @@ export const firebaseConfig = {
     RealizarEncuestaPage,
     EstadisticasPage,
     ModalAdministrativoPage,
-    ModalProfesorPage
+    ModalProfesorPage,
+    ListadoPage
     
   ],
   providers: [
@@ -121,9 +138,12 @@ export const firebaseConfig = {
     BarcodeScanner,
     Encuesta,
     Camera,
+    Push,
+    DescargaService,
     { provide: ErrorHandler, useClass: IonicErrorHandler },    
     AuthProvider,
-    DatePipe
+    DatePipe,
+    LoginProvider
     
   ]
 })

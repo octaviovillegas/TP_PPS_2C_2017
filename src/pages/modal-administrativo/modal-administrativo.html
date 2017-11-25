@@ -27,6 +27,16 @@
                 <ion-input [(ngModel)]="administrativo.apellido" type="text"></ion-input>
               </ion-item>
 
+              <ion-item>
+                  <ion-label floating>Legajo</ion-label>
+                  <ion-input [(ngModel)]="administrativo.legajo" type="text"></ion-input>
+                </ion-item>
+
+              <ion-item>
+                    <ion-label floating>Dirección</ion-label>
+                    <ion-input [(ngModel)]="administrativo.direccion" type="text"></ion-input>
+              </ion-item>
+
               <ion-list radio-group [(ngModel)]="administrativo.turno">
                   <ion-list-header>
                     Turno
@@ -42,6 +52,11 @@
                     <ion-radio value="tarde"></ion-radio>
                   </ion-item>
                 </ion-list>
+
+                <ion-item>
+                    <ion-label floating>Cargo</ion-label>
+                    <ion-input [(ngModel)]="administrativo.cargo" type="text"></ion-input>
+                  </ion-item>
 
         </ion-list>
     

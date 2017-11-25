@@ -6,6 +6,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 import { Encuesta } from '../../services/encuesta.service';
 import { Observable } from 'rxjs/Observable';
 import { BotonesPage } from '../botones/botones';
+import { DatePipe } from '@angular/common';
 
 
 /**
@@ -28,18 +29,30 @@ export class RealizarEncuestaPage {
   mostrarTodas:boolean;
   respuesta:string;
   Unalista:FirebaseListObservable<any>;
+  fecha:Date;
+  fechastring:string;
+  date:string;
+  respuestaTexto:string='';
 
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
+  constructor(public navCtrl: NavController, public datePipeCtrl: DatePipe,public navParams: NavParams,
     public platform: Platform,public auth : AuthProvider,
     public alertCtrl : AlertController,
+    public toastCtrl : ToastController,
      public afDB: AngularFireDatabase, 
      public actionSheetCtrl: ActionSheetController,
       private pictureUtils: Encuesta){
       this.ObtenerLista();
       this.mostrarEncuesta=false;
       this.mostrarTodas=true;
+      this.fecha =new Date();
+      console.log(this.fecha);
+      console.log(this.fecha.getMonth());
+      this.fechastring=this.fecha.getFullYear()+'-'+this.fecha.getMonth()+'-'+this.fecha.getDate();
+      console.log(this.fechastring);
+       this.date = this.datePipeCtrl.transform(Date.now(), 'yyyy-MM-dd');
+      console.log(this.date);
   }
 
   ionViewDidLoad() {
@@ -56,16 +69,48 @@ export class RealizarEncuestaPage {
     console.log("guardar respuesta");
     console.log(value);
     this.respuesta=value;
-    alert("respuesta Guardada");
-    this.Unalista=this.afDB.list('Respuestas/'+this.tituloSeleccionado+'/'+this.respuesta);
-    this.Unalista.push(1);
-    this.Unalista=this.afDB.list('Respuestas/'+this.tituloSeleccionado+'/total');
-    this.Unalista.push(1);
+    
+
+    let toast = this.toastCtrl.create({
+      message: 'Respuesta guardada',
+      duration: 2000
+    });
+    toast.present();
 
 
-
+    //this.Unalista=this.afDB.list('Respuestas/'+this.tituloSeleccionado+'/'+this.respuesta);
+    this.Unalista=this.afDB.list('Respuestas/'+this.tituloSeleccionado);
+    this.Unalista.push({res:this.respuesta});
     this.navCtrl.push(BotonesPage);
   }
+  EnviarRespuesta(){
+    console.log("guardar respuesta");
+    
+    
+
+    //this.Unalista=this.afDB.list('Respuestas/'+this.tituloSeleccionado+'/'+this.respuesta);
+    if (this.respuestaTexto!=''){
+      this.Unalista=this.afDB.list('Respuestas/'+this.tituloSeleccionado);
+      this.Unalista.push({res:this.respuestaTexto});
+      let toast = this.toastCtrl.create({
+        message: 'Respuesta guardada',
+        duration: 2000
+      });
+      toast.present();
+      this.navCtrl.push(BotonesPage);
+    }
+    else{
+      let toast = this.toastCtrl.create({
+        message: 'No ingresó respuesta',
+        duration: 2000
+      });
+      toast.present();
+    }
+  }
+
+
+
+
   Seleccionar(titulo:string,pregunta:string,opcion:string){
 this.tituloSeleccionado=titulo;
 console.log(pregunta);

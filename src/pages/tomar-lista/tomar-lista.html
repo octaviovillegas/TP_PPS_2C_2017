@@ -14,63 +14,35 @@
 
 
 <ion-content padding>
-  
-    
-  
-        <!--ion-list radio-group *ngFor="let algo of lista;let i = index;" (ionChange)="datachanged(algo.nombre,$event)">   
-            <p [hidden]='i+1'></p>
-            <div *ngIf="i % 2 >0">
-          {{picture}}
-            </div>
-           <div>
-                    <ion-list-header>
-                      
-                        {{i+1}}
-                        {{algo.nombre}}
-                      </ion-list-header-->
-                    <!--h1 class="colorBlanco"> {{i+1}} - 
-                      {{algo.nombre}}</h1> 
-                    <ion-item>
-                      
-                        <ion-label>Presente</ion-label>
-                        <ion-checkbox color="dark"  (ionChange)="datachanged($event)" ></ion-checkbox-->
-                <!--ion-radio  value="presente"></ion-radio>
-              </ion-item>
-                <ion-item>
-                    <ion-label>Ausente</ion-label>
-                <ion-radio  value="ausente"></ion-radio>
-              </ion-item>
-            </div>
-      </ion-list>
-  
-      <button 
-      ion-button 
-      (click)="guardarDatos()" 
-      type="submit" 
-      color="primary" 
-      block
-  >
-    Guardar Datos
-  </button--> 
+   
 <div *ngIf="MostrarBotones">
   <button 
-  ion-button 
-  (click)="PorMateria()" 
+  ion-button round large
+  (click)="Aula(310)" 
   type="submit" 
   color="primary" 
   block>
-Materia
+Aula 310
 </button> 
-<button 
+<button round large
+ion-button 
+(click)="Aula(305)" 
+type="submit" 
+color="primary" 
+block>
+Aula 305
+</button> 
+<!--button 
 ion-button 
 (click)="PorDivision()" 
 type="submit" 
 color="primary" 
 block>
 Division
-</button> 
+</button--> 
 </div>
-<div *ngIf="MostrarBotones==false">
+
+<!--div *ngIf="MostrarBotones==false">
   <div class="colorBlanco">
     MATERIA : {{this.materia}}
   
@@ -109,7 +81,7 @@ Division
           <ion-radio  value="4B"></ion-radio>
         </ion-item>
 </ion-list>
-</div>
+</div-->
 
 
 
@@ -159,13 +131,13 @@ Division
     </ion-item>
   
   </ion-list>
-  <button ion-button icon-right color="dark" (click)="changePicture()">
+  <button ion-button round large icon-right color="dark" (click)="changePicture()">
       Tomar Foto
       <ion-icon name="images"></ion-icon>
     </button>
-  <button ion-button  color="secondary" (click)="GuardarPresente2(listaEstudiantes2)" [disabled]="noStudents">
+  <button ion-button round large color="secondary" (click)="GuardarPresente2(listaEstudiantes2)" [disabled]="noStudents">
       Guardar</button>
 </div>
-</div>
+
   </ion-content>
   

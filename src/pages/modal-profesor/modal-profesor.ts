@@ -32,8 +32,13 @@ listado:FirebaseListObservable<any>;
     this.listado = this.afDB.list("Profesores/");
     this.listado.push(this.profesor);
 
-    this.navCtrl.push(LoginPage);
+    this.navCtrl.pop();
   }
+  Cerrar()
+  {
+    this.navCtrl.pop();
+  }
+  
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ModalProfesorPage');

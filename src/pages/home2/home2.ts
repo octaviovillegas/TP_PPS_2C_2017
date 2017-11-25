@@ -54,7 +54,7 @@ refreshPicture() {
           icon: !this.platform.is('ios') ? 'camera' : null,
           handler: () => {
             this.pictureUtils.openCamera().then((imageData) => {
-              this.pictureUtils.uploadProfilPicture(imageData,this.aulaSeleccionada);
+            //  this.pictureUtils.uploadProfilPicture(imageData,this.aulaSeleccionada);
             });
           }
         }, {
@@ -62,7 +62,7 @@ refreshPicture() {
           icon: !this.platform.is('ios') ? 'images' : null,
           handler: () => {
             this.pictureUtils.openGallery().then((imageData) => {
-              this.pictureUtils.uploadProfilPicture(imageData,this.aulaSeleccionada);
+           //   this.pictureUtils.uploadProfilPicture(imageData,this.aulaSeleccionada);
             });
           }
         }

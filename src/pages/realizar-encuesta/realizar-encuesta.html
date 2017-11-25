@@ -15,16 +15,19 @@
 
 <ion-content padding>
   <div *ngIf="mostrarTodas">
+  
     <ion-list *ngFor="let item of unaLista;let i = index;">   
         <!--p [hidden]='i+1'></p>
         <div *ngIf="i % 2 >0">
       {{picture}}
         </div-->
+        <div *ngIf="item.fecha>this.date">
         <ion-item>
         <div>
             <h1 > {{item.titulo}}</h1>
+            <h2>finaliza el dia {{item.fecha}}</h2>
             <button 
-            ion-button 
+            ion-button round large
             (click)="Seleccionar(item.titulo,item.pregunta,item.opcion)" 
             type="submit" 
             color="primary" 
@@ -34,8 +37,11 @@
          </button> 
         </div>
       </ion-item>
+    </div>
   </ion-list>
+
 </div>
+
 <div *ngIf="mostrarEncuesta">
   <div>
       <h1 class="royal">{{this.preguntaSeleccionada}}
@@ -85,6 +91,32 @@
   </ion-list>
 </div>
 
+<div *ngIf="opcionSeleccionada=='tres'">
+    <ion-list>   
+       <div>
+          <p></p>
+          <ion-item>
+          <ion-input 
+          [(ngModel)]="respuestaTexto" 
+          name="respuestaTexto" 
+          type="text" 
+          autocapitalize="off" 
+       
+        >
+        </ion-input>
+          </ion-item>
+        </div>       
+        <button 
+        ion-button round large
+        (click)="EnviarRespuesta()" 
+        type="submit" 
+        color="primary" 
+        block
+    >
+      Continuar
+     </button>   
+  </ion-list>
+</div>
 
 
 

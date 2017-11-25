@@ -47,7 +47,7 @@ export class PictureUtils {
     encodingType: Camera.EncodingType.JPEG
   }
 
-  constructor(public afDB: AngularFireDatabase, public auth : AuthProvider,  public alertCtrl : AlertController) {
+  constructor(public toastCtrl : ToastController,  public afDB: AngularFireDatabase, public auth : AuthProvider,  public alertCtrl : AlertController) {
    // this.storageAvatarRef = firebase.storage().ref().child('userPicture/');//Firebase storage main path
      //this.profilAvatarRef = afDB.object('TEST/avatar/');//Firebase user database avatar path
   }
@@ -82,48 +82,36 @@ export class PictureUtils {
   }
 
   //Upload a new profile picture to the firebase storage
-  uploadProfilPicture(imgData: any,NroDeAula:string) {
+ /// this.pictureUtils.uploadProfilPicture(imageData,this.aula,datePipe,this.materia,this.division);
+  
+  uploadProfilPicture(imgData: any,NroDeAula:string,dale:string,mat:string,div:string) {
     this.auth.getUser.name;
     this.storageAvatarRef = firebase.storage().ref().child('fotos/');
-   // this.lista=this.afDB.list('Cosas_Lindas');
+ 
     this.lista=this.afDB.list('Fotos/');
   
-    //Firebase user database avatar path
-   
+ 
     var randomNumber = Math.floor(Math.random() * 2566);
-   // console.log('Random number : ' + randomNumber);
 
     this.storageAvatarRef.child(randomNumber + '.jpg').putString(imgData, 'base64', { contentType: 'image/jpeg' }).then((savedPicture) => {
-     // console.log('saved picture URL', savedPicture.downloadURL);
-
+    
       this.objectToSave.push(savedPicture.downloadURL);
       this.unafoto=JSON.stringify(this.objectToSave);
-      alert(this.unafoto);
+      let toast = this.toastCtrl.create({
+        message: this.unafoto,
+        duration: 2000
+      });
+      toast.present();
+    
+      this.lista.push({
+        foto:this.objectToSave,
+        aula:"Aula "+NroDeAula,
+        fecha:dale,
+        materia:mat,
+        division:div
       
-    //  console.log('objectToSave : ' + JSON.stringify(this.objectToSave));
-    //this.profilAvatarRef = this.afDB.object('nada/');
-      this.lista.push({foto:this.objectToSave,aula:"Aula "+NroDeAula});
-      //this.profilAvatarRef.set(this.objectToSave);
-      
-     //this.ref = this.afDB.list('Usuarios/'+this.objectToSave+'/');
-    // this.afDB.database.ref('sitios').set('algo');
-      //var ref: firebase.database.Reference = firebase.database().ref(`Usuarios/`+this.unafoto);
-   //   this.ref.set({name:this.auth.getUser()});
-
-     // DatabaseReference postsRef = ref.child("posts");
-      
-    ///  DatabaseReference newPostRef = postsRef.push();
-    //  newPostRef.setValue(new Post("gracehop", "Announcing COBOL, a New Programming Language"));
-   //   ref.set({foto:this.unafoto,usuario:this.auth.getUser()});
-
-    /*  var foto = {
-        name: this.auth.getUser(),
-        picture: this.objectToSave
-      }
-      this.ref.push(foto);*/
-
-
-     // this.profilAvatarRef.set(this.objectToSave, {usuario: this.auth.getUser() });
+      });
+    
   });
   this.objectToSave.length=0;
 }

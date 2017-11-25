@@ -7,7 +7,7 @@
 <ion-header>
   
     <ion-navbar>
-      <ion-title>login</ion-title>
+      <ion-title>Inicio</ion-title>
     </ion-navbar>
   
   </ion-header>
@@ -26,7 +26,7 @@
 
       <form>
         <ion-item>
-          <ion-label floating>Email</ion-label>
+          <ion-label floating>Correo electrónico</ion-label>
           <ion-input 
             [(ngModel)]="user.email" 
             name="email" 
@@ -53,12 +53,12 @@
               (click)="login()" 
               type="submit" 
               color="primary" 
-              block
+              block round large
           >
-            Login
+            Ingresar
           </button> 
       
-          <button 
+          <!--button 
             ion-button 
             (click)="signin()" 
             type="submit" 
@@ -66,44 +66,29 @@
             block
           >
             Dar de alta
-          </button>
-          <button 
-          ion-button icon-rigth color="dark" round
-          (click)="administrador()" 
-          type="submit" 
-        >
-        <ion-icon name="person"></ion-icon>
-          ..administrador
-        </button>
-
-
-        <button 
-        ion-button icon-rigth color="dark" round
-        (click)="usuario()" 
-        type="submit" 
-      >
-      <ion-icon name="person"></ion-icon>
-         ..Profesor
-      </button>
-      <button 
-      ion-button icon-rigth color="dark" round
-      (click)="invitado()" 
-      type="submit" 
-    >
-    <ion-icon name="person"></ion-icon>
-      ..Alumno
-    </button>
+          </button-->
         </div>
       </form>
+
+      <ion-item>
+          <ion-label>Seleccione usuario</ion-label>
+          <ion-select [(ngModel)]="seleccionado" interface="action-sheet" (ionChange)="cambiar($event)">
+            <ion-option value="">Ninguno</ion-option>
+            <ion-option value="administrador">Administrador</ion-option>
+            <ion-option value="administrativo">Administrativo</ion-option>
+            <ion-option value="profesor">Profesor</ion-option>
+            <ion-option value="alumno">Alumno</ion-option>
+          </ion-select>
+        </ion-item>
       <div style="text-align:center">
         
               <h3  class="royal">O iniciar sesión usando:</h3>
               
-                <button ion-button icon-start style="background-color:#3b5998">
+                <button ion-button icon-start style="background-color:#3b5998" (click)="loginSocial('FB')">
                   <ion-icon name="logo-facebook"> </ion-icon>Facebook</button>
-                <button ion-button icon-start style="background-color:#c71610">
+                <button ion-button icon-start style="background-color:#c71610" (click)="loginSocial('GO')">
                   <ion-icon name="logo-google"> </ion-icon>Google</button>
-                <button ion-button icon-start style="background-color:#282a36">
+                <button ion-button icon-start style="background-color:#282a36"  (click)="loginSocial('GH')" >
                   <ion-icon name="logo-github"> </ion-icon>GitHub</button>
             </div>
     </ion-list>

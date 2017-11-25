@@ -9,16 +9,19 @@
     
     
     <ion-content padding>
+ 
+          
+              
       <div *ngIf="mostrarForm">
-        <form>
+        <form [formGroup]="form" padding>
             <p></p>
             <h2 class="royal"> Titulo de la Encuesta</h2> 
-              <ion-item>
-                  
-            
+
+        
+            <ion-item>
               <ion-input 
-                [(ngModel)]="encuesta" 
-                name="encuesta" 
+                [(ngModel)]="laencuesta.Titulo" 
+                formControlName="titulo" 
                 type="text" 
                 autocapitalize="off" 
                 required
@@ -30,17 +33,23 @@
                 
           
             <ion-input 
-              [(ngModel)]="pregunta" 
-              name="pregunta" 
+              [(ngModel)]="laencuesta.Pregunta" 
+              formControlName="pregunta" 
               type="text" 
               autocapitalize="off" 
               required
             >
             </ion-input>
           </ion-item>
-          </form>
+          <h2 class="royal"> Fecha Finalizacion</h2> 
+          
+          <ion-item>
+              <ion-label>Desde</ion-label>
+              <ion-datetime displayFormat="MM/DD/YYYY" pickerFormat="YYYY MMM DD"  formControlName="fecha"  [(ngModel)]="laencuesta.Fecha"></ion-datetime>
+            </ion-item>
+             
               <button 
-          ion-button 
+          ion-button round large
           (click)="continuar()" 
           type="submit" 
           color="primary" 
@@ -48,7 +57,9 @@
       >
         Continuar
        </button>
+      </form>
       </div>
+ 
 
 <div *ngIf="mostrarForm==false">
       
@@ -75,6 +86,10 @@
                         <ion-label>Si / No / Puede ser</ion-label>
                     <ion-radio  value="dos"></ion-radio>
                   </ion-item>
+                  <ion-item>
+                      <ion-label>[texto]</ion-label>
+                  <ion-radio  value="tres"></ion-radio>
+                </ion-item>
                 </div>
 
                 <!--ion-checkbox [(ngModel)]="presente" (ionChange)="AgregarPresente()"></ion-checkbox>

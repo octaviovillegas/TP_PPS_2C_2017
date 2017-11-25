@@ -20,7 +20,7 @@
                   (click)="abrir4A()" 
                   type="submit" 
                   color="primary" 
-                  block
+                  block round large
               >
                4 A
                </button> 
@@ -29,7 +29,7 @@
                (click)="abrir4B()" 
                type="submit" 
                color="primary" 
-               block
+               block round large
            >
             4 B
             </button> 
@@ -40,8 +40,8 @@
     <ion-scroll scrollX="true" scrollY="true" class="data-scroll">
       <table border="1" class="data-table">
           <th>Legajo</th>
+          <th>Apellido</th>
           <th>Nombre</th>
-          <th>apellido</th>
           <th>Horario</th>
         <tr *ngFor="let row of csvData; let i = index">
           <td *ngFor="let data of row; let j = index; trackBy: trackByFn">
