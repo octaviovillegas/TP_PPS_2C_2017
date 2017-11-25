@@ -32,6 +32,27 @@
               <ion-input [(ngModel)]="alumno.legajo" type="number"></ion-input>
             </ion-item>
 
+            <ion-item>
+                <ion-label floating>Dirección</ion-label>
+                <ion-input [(ngModel)]="alumno.direccion" type="text"></ion-input>
+          </ion-item>
+
+          <ion-list radio-group [(ngModel)]="alumno.turno">
+              <ion-list-header>
+                Turno
+              </ion-list-header>
+            
+              <ion-item>
+                <ion-label>Mañana</ion-label>
+                <ion-radio checked="true" value="mañana"></ion-radio>
+              </ion-item>
+            
+              <ion-item>
+                <ion-label>Tarde</ion-label>
+                <ion-radio value="tarde"></ion-radio>
+              </ion-item>
+            </ion-list>
+
             <ion-list-header>
                 Horario
               </ion-list-header>

@@ -46,7 +46,7 @@ export class PictureUtils2 {
     encodingType: Camera.EncodingType.JPEG
   }
 
-  constructor(public afDB: AngularFireDatabase, public auth : AuthProvider,  public alertCtrl : AlertController) {
+  constructor(public toastCtrl:ToastController, public afDB: AngularFireDatabase, public auth : AuthProvider,  public alertCtrl : AlertController) {
    // this.storageAvatarRef = firebase.storage().ref().child('userPicture/');//Firebase storage main path
      //this.profilAvatarRef = afDB.object('TEST/avatar/');//Firebase user database avatar path
      this.profilAvatarRef = afDB.object('Usuarios/');//Firebase user database avatar path
@@ -98,7 +98,15 @@ export class PictureUtils2 {
 
       this.objectToSave.push(savedPicture.downloadURL);
       this.unafoto=JSON.stringify(this.objectToSave);
+
+      let toast = this.toastCtrl.create({
+        message: this.unafoto,
+        duration: 2000
+      });
+      toast.present();
+
       alert(this.unafoto);
+
       this.profilAvatarRef = this.afDB.object('Usuarios/'+this.auth.getUserId+'/foto/');//Firebase user database avatar path
     //  console.log('objectToSave : ' + JSON.stringify(this.objectToSave));
     //this.profilAvatarRef = this.afDB.object('nada/');

@@ -46,7 +46,10 @@ export class TomarListaPage {
 
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
+ 
+  constructor(
+    public toastCtrl: ToastController,
+    public navCtrl: NavController, public navParams: NavParams,
     public alertCtrl : AlertController,
     public actionSheetCtrl: ActionSheetController,
     public platform: Platform,
@@ -108,7 +111,15 @@ Aula(dato:number){
   console.log('materia'+this.materia);
   if (this.materia=='')
   {
+
+    let toast = this.toastCtrl.create({
+      message: 'No se estan dictando clases en el Aula seleccionada',
+      duration: 2000
+    });
+    toast.present();
+
     alert("No se estan dictando clases en el Aula seleccionada");
+
   }
  }
 
@@ -124,7 +135,7 @@ Aula(dato:number){
          // this.Unalista=this.afDB.list('Lista/Matematica/'+student.firstname+'/presente');
           this.Unalista.push(1);
         
-          this.Unalista=this.afDB.list('Alumnos/'+student.lastname+'/'+this.materia+'/presente');
+          this.Unalista=this.afDB.list('Asistencias/'+student.lastname+'/'+this.materia+'/presente');
           this.Unalista.push(1);
           console.log(student.firstname);
           console.log("porguardar");
@@ -133,13 +144,17 @@ Aula(dato:number){
           this.Unalista=this.afDB.list('Lista/'+this.division+'/'+this.materia+'/'+this.aula+'/'+student.lastname+'/ausente');
           //this.Unalista=this.afDB.list('Lista/Matematica/'+student.firstname+'/ausente');
           this.Unalista.push(1);
-          this.Unalista=this.afDB.list('Alumnos/'+student.lastname+'/'+this.materia+'/ausente');
+          this.Unalista=this.afDB.list('Asistencias/'+student.lastname+'/'+this.materia+'/ausente');
           this.Unalista.push(1);
         }
       })
     }
     this.listaEstudiantes=null;
-    alert("Los datos Fueron guardados Correctamente");
+    let toast = this.toastCtrl.create({
+      message: 'Los datos Fueron guardados Correctamente',
+      duration: 2000
+    });
+    toast.present();
     this.navCtrl.push(BotonesPage);
       
   }
@@ -261,7 +276,7 @@ Aula(dato:number){
         
 
          this.unalista.push({legajo:student.userid,apellido:student.lastname,nombre:student.firstname,presente:student.present});
-          this.unalista=this.afDB.list('Alumnos/'+student.userid+'/'+this.materia+'/presente');
+          this.unalista=this.afDB.list('Asistencias/'+student.userid+'/'+this.materia+'/presente');
           this.unalista.push(1);
           console.log(student.firstname);
           console.log("porguardar");
@@ -271,7 +286,7 @@ Aula(dato:number){
           //this.Unalista=this.afDB.list('Lista/Matematica/'+student.firstname+'/ausente');
           this.unalista=this.afDB.list('Lista/'+this.division+'/'+this.materia+'/'+this.aula+'/'+datePipe);
           this.unalista.push({legajo:student.userid,apellido:student.lastname,nombre:student.firstname,presente:student.present});
-          this.unalista=this.afDB.list('Alumnos/'+student.userid+'/'+this.materia+'/ausente');
+          this.unalista=this.afDB.list('Asistencias/'+student.userid+'/'+this.materia+'/ausente');
           this.unalista.push(1);
         }
       })
@@ -279,7 +294,11 @@ Aula(dato:number){
     this.listaEstudiantes2=null;
     this.listadoAlumnos=null;
     
-    alert("Los datos Fueron guardados Correctamente");
+    let toast = this.toastCtrl.create({
+      message: 'Los datos fueron guardados correctamente',
+      duration: 2000
+    });
+    toast.present();
     this.navCtrl.push(BotonesPage);
       
   }

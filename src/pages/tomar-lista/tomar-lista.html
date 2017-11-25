@@ -17,14 +17,22 @@
    
 <div *ngIf="MostrarBotones">
   <button 
-  ion-button 
+  ion-button round large
   (click)="Aula(310)" 
   type="submit" 
   color="primary" 
   block>
 Aula 310
 </button> 
-<button 
+<button round large
+ion-button 
+(click)="Aula(305)" 
+type="submit" 
+color="primary" 
+block>
+Aula 305
+</button> 
+<!--button 
 ion-button 
 (click)="Aula(305)" 
 type="submit" 
@@ -131,11 +139,11 @@ Division
     </ion-item>
   
   </ion-list>
-  <button ion-button icon-right color="dark" (click)="changePicture()">
+  <button ion-button round large icon-right color="dark" (click)="changePicture()">
       Tomar Foto
       <ion-icon name="images"></ion-icon>
     </button>
-  <button ion-button  color="secondary" (click)="GuardarPresente2(listaEstudiantes2)" [disabled]="noStudents">
+  <button ion-button round large color="secondary" (click)="GuardarPresente2(listaEstudiantes2)" [disabled]="noStudents">
       Guardar</button>
 </div>
 

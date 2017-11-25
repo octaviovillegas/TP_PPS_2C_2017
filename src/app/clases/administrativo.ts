@@ -1,8 +1,6 @@
-export class Administrativo {
-nombre:string;
-apellido:string;
-turno:string;
+import { Persona } from "./persona";
 
-    constructor() {
-    }
+export class Administrativo extends Persona {
+ cargo : string;
+
 }

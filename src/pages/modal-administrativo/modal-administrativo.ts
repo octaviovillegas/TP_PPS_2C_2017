@@ -31,7 +31,12 @@ export class ModalAdministrativoPage {
       this.listado = this.afDB.list("Administrativos/");
       this.listado.push(this.administrativo);
   
-      this.navCtrl.push(LoginPage);
+      this.navCtrl.pop();
+    }
+
+    Cerrar()
+    {
+      this.navCtrl.pop();
     }
   
 

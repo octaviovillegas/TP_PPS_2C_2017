@@ -7,6 +7,10 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Usuario } from '../../clases/usuario';
 import firebase from "firebase";
+import { Platform } from 'ionic-angular/platform/platform';
+import { BotonesPage } from '../botones/botones';
+import { LoginProvider } from '../../providers/login/login';
+import { ToastController } from 'ionic-angular/components/toast/toast-controller';
 
 /**
  * Generated class for the LoginPage page.
@@ -22,6 +26,8 @@ import firebase from "firebase";
 })
 export class LoginPage {
 
+seleccionado : string = "";
+
   user= { email : '', password : ''};
   private provider = {
     mail: '',
@@ -30,9 +36,20 @@ export class LoginPage {
     loggedin:false
   }
 
+
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public auth1 : AuthProvider,
+    public toastCtrl : ToastController,
+    public auth:AngularFireAuth,
+    public platform: Platform,
+  public loginProvider : LoginProvider ) {
+
   constructor(public navCtrl: NavController, public navParams: NavParams,public auth1 : AuthProvider,
     public alertCtrl : AlertController,
     public auth:AngularFireAuth ) {
+
   
   }
 
@@ -46,12 +63,13 @@ export class LoginPage {
       // El usuario se ha creado correctamente
     })
     .catch(err=>{
-      let alert = this.alertCtrl.create({
-        title: 'Error',
-        subTitle: err.message,
-        buttons: ['Aceptar']
+
+      let toast = this.toastCtrl.create({
+        message: 'Error',
+        duration: 2000
       });
-      alert.present();
+      toast.present();
+
     })
 
   }
@@ -63,14 +81,82 @@ export class LoginPage {
         console.log("algo2"); }
       )
        .catch(err=>{
-        let alert = this.alertCtrl.create({
-          title: 'Error',
-          subTitle: err.message,
-          buttons: ['Aceptar']
+ 
+        let toast = this.toastCtrl.create({
+          message: 'Error',
+          duration: 2000
         });
-        alert.present();
+        toast.present();
+  
       })
     }
+
+
+
+
+  private loginSocial(proveedor: string): any
+  {
+    
+    localStorage.setItem("tipoUsuario","Alumno");
+    this.loginProvider.loginRedSocial(proveedor);
+    
+  }
+    
+
+
+
+
+
+
+    cambiar(evento : any)
+    {
+
+      switch(this.seleccionado)
+    {
+      case "administrador":
+      {
+        this.user.email='admin@admin.com';
+        this.user.password='111111';
+        break;
+      }
+      case "administrativo":
+      {
+        this.user.email='administrativo@administrativo.com';
+        this.user.password='123456';
+        break;
+      }
+      case "alumno":
+      {
+        this.user.email='alumno@alumno.com';
+        this.user.password='123456';
+        break;
+      }
+      case "profesor":
+      {
+        this.user.email='profesor@profesor.com';
+        this.user.password='123456';
+        break;
+      }
+      case "":
+      {
+        this.user.email='';
+        this.user.password='';
+        break; 
+      }
+      default: { 
+        break; 
+     } 
+     
+    }
+ 
+
+
+
+
+
+
+
+
     public loginGitHub():any{
       let proveedor = new firebase.auth.GithubAuthProvider();
   
@@ -99,6 +185,7 @@ export class LoginPage {
     alumno(){
       this.user.email='alumno@alumno.com';
       this.user.password='123456';
+
     }
 
 }

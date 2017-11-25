@@ -20,7 +20,7 @@
                 <h2 class="royal"> Pregunta: {{item.pregunta}}</h2>
              
                 <button 
-                ion-button 
+                ion-button large
                 (click)="Seleccionar(item.titulo,item.pregunta,item.opcion)" 
                 type="submit" 
                 color="primary" 
@@ -47,6 +47,7 @@
                 (chartHover)="chartHovered($event)"
                 (chartClick)="chartClicked($event)"></canvas>
       </div>
+
 
      <!-- <button (click)="randomize()">Actualizar</button> -->
     </div>

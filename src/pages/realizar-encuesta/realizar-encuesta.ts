@@ -39,6 +39,7 @@ export class RealizarEncuestaPage {
   constructor(public navCtrl: NavController, public datePipeCtrl: DatePipe,public navParams: NavParams,
     public platform: Platform,public auth : AuthProvider,
     public alertCtrl : AlertController,
+    public toastCtrl : ToastController,
      public afDB: AngularFireDatabase, 
      public actionSheetCtrl: ActionSheetController,
       private pictureUtils: Encuesta){
@@ -68,6 +69,7 @@ export class RealizarEncuestaPage {
     console.log("guardar respuesta");
     console.log(value);
     this.respuesta=value;
+
     alert("respuesta Guardada");
     //this.Unalista=this.afDB.list('Respuestas/'+this.tituloSeleccionado+'/'+this.respuesta);
     this.Unalista=this.afDB.list('Respuestas/'+this.tituloSeleccionado);
@@ -90,6 +92,47 @@ export class RealizarEncuestaPage {
       alert('No ingreso respuesta');
     }
   }
+
+
+
+    let toast = this.toastCtrl.create({
+      message: 'Respuesta guardada',
+      duration: 2000
+    });
+    toast.present();
+
+
+
+    //this.Unalista=this.afDB.list('Respuestas/'+this.tituloSeleccionado+'/'+this.respuesta);
+    this.Unalista=this.afDB.list('Respuestas/'+this.tituloSeleccionado);
+    this.Unalista.push({res:this.respuesta});
+    this.navCtrl.push(BotonesPage);
+  }
+  EnviarRespuesta(){
+    console.log("guardar respuesta");
+    
+    
+
+    //this.Unalista=this.afDB.list('Respuestas/'+this.tituloSeleccionado+'/'+this.respuesta);
+    if (this.respuestaTexto!=''){
+      this.Unalista=this.afDB.list('Respuestas/'+this.tituloSeleccionado);
+      this.Unalista.push({res:this.respuestaTexto});
+      let toast = this.toastCtrl.create({
+        message: 'Respuesta guardada',
+        duration: 2000
+      });
+      toast.present();
+      this.navCtrl.push(BotonesPage);
+    }
+    else{
+      let toast = this.toastCtrl.create({
+        message: 'No ingresó respuesta',
+        duration: 2000
+      });
+      toast.present();
+    }
+  }
+
 
 
 
