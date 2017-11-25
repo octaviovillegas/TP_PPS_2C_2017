@@ -34,7 +34,7 @@ Fecha fin: 03/11/2017
 Branch: Login
 
 # Juan Manuel Barreda Fafasuli
-Módulos a desarrollar: • ABM de Alumnos
+Módulos a desarrollar: • ABM de Alumnos (G)
 
 Fecha inicio: 09/11/2017
 
@@ -44,7 +44,7 @@ Branch: ABMAlumnos
 
 -------------------
 
-Módulos a desarrollar: • Navegación y estilos
+Módulos a desarrollar: • Navegación y estilos (I)
 
 Fecha inicio: 13/11/2017
 
@@ -54,9 +54,9 @@ Branch: NavegacionEnAPP
 
 -------------------
 
-Módulos a desarrollar: • ABM Administrativo
+Módulos a desarrollar: • ABM Administrativo 
 
-• ABM Profesor
+• ABM Profesor (J)
 
 Fecha inicio: 21/11/2017
 
@@ -66,7 +66,7 @@ Branch: ninguno (master)
 
 -------------------
 
-Módulos a desarrollar: • Toma de lista
+Módulos a desarrollar: • Toma de lista (A)
 
 Fecha inicio: 21/11/2017
 
@@ -76,7 +76,9 @@ Branch: TomaLista
 
 -------------------
 
-Módulos a desarrollar: • Encuestas
+Módulos a desarrollar: • Encuestas (B)
+
+ • Graficos (L)
 
 Fecha inicio: 24/11/2017
 
