@@ -36,20 +36,18 @@
           <ion-input color="input1" type="password" (ionChange)="validarCantDigitos($event)" (keypress)="validarNum($event)" [(ngModel)]="passw"></ion-input>
         </ion-item>
 
-      </ion-list>
+    </ion-list>
 
 
-      <button ion-button class= "ingresar" round color="secondary" (click)="login()">
+      <button ion-button class= "ingresar" round color="secondary" (click)="login()">INGRESAR</button>
 
       <button *ngIf="datosLoginGitHub!=undefined" ion-button block color="secondary">
         Credenciales correctas. Ir a Menu
       </button>
 
-      <button ion-button round color="primary" (click)="crearAlumno()">
-        REGISTRARSE COMO ALUMNO
-      </button>
+      <button ion-button round color="primary" (click)="crearAlumno()">NUEVO ALUMNO</button>
 
-      <button ion-button round color="secondary" (click)="login()">
+      
 
 
         

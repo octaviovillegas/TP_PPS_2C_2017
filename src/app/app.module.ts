@@ -111,9 +111,7 @@ var firebaseAuth  = {
     LoginServiceProvider,
     AlumnoServiceProvider,
     AsistenciasProvider,
-
-    BarcodeScanner
-
+    BarcodeScanner,
     ProfesorServiceProvider
 
   ]

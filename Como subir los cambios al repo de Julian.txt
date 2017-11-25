@@ -1,0 +1,13 @@
+Abrir la consola de git bash here y poner lo siguiente:
+
+git add .
+git status (muestra en verde los cambios)
+git commit -m "mensaje de lo que hice"
+git push
+
+Luego ir al repo mio y presionar el boton New Pull Request
+
+FIREBASE
+
+Usuario: Ionicutn@gmail.com
+pass : ionicutn2017
