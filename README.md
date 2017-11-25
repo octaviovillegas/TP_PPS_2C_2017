@@ -56,6 +56,8 @@ Branch: NavegacionEnAPP
 
 Módulos a desarrollar: • ABM Administrativo
 
+• ABM Profesor
+
 Fecha inicio: 21/11/2017
 
 Fecha fin: 21/11/2017
@@ -71,3 +73,13 @@ Fecha inicio: 21/11/2017
 Fecha fin: 23/11/2017
 
 Branch: TomaLista
+
+-------------------
+
+Módulos a desarrollar: • Encuestas
+
+Fecha inicio: 24/11/2017
+
+Fecha fin: 24/11/2017
+
+Branch: Encuestas
