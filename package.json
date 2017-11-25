@@ -26,6 +26,7 @@
     "@ionic-native/status-bar": "4.3.2",
     "@ionic/storage": "2.0.1",
     "angularfire2": "4.0.0-rc.2",
+    "chart.js": "^2.7.1",
     "cordova-android": "^6.2.3",
     "cordova-plugin-device": "^1.1.4",
     "cordova-plugin-ionic-webview": "^1.1.11",

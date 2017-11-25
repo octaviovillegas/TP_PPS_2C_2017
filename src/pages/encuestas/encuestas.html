@@ -2,9 +2,87 @@
   <ion-navbar>
     <ion-title>Encuestas</ion-title>
   </ion-navbar>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="tab" color="primary">
+      <ion-segment-button value="actual">
+        Actual
+      </ion-segment-button>
+      <ion-segment-button value="crear">
+        Crear 
+      </ion-segment-button>
+      <ion-segment-button value="estadisticas" (click)="loadEstadisticas()">
+        Estadisticas
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
 
 <ion-content padding>
+
+  <ion-content *ngIf="tab == 'actual'">
+    <div *ngIf="hayEncuesta()">
+      <h1 text-center>{{lastEncuesta.pregunta}}</h1>
+      <ion-card>
+        <ion-item>
+          <ion-select [(ngModel)]="respuesta">
+            <ion-option value="A">{{lastEncuesta.respuestaA}}</ion-option>
+            <ion-option value="B">{{lastEncuesta.respuestaB}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-card>
+      <button ion-button block (click)="responderPreg()" >Responder</button>
+      <ion-card>
+        <ion-item text-center>
+          Tiempo restante: <h1><b>{{lastEncuesta.cuenta}}</b></h1>
+        </ion-item>
+      </ion-card>
+    </div>
+
+    <div *ngIf="!hayEncuesta()">
+      <ion-card text-center *ngIf="lastEncuesta != undefined">
+        <ion-item>
+          Cargando...
+        </ion-item>
+      </ion-card>
+    </div>
+  </ion-content>
+
+  <ion-content *ngIf="tab == 'crear'">
+    <form [formGroup]="formCrear">
+      <ion-card text-center *ngIf="hayEncuesta()">
+        <ion-item>
+          Hay una encuesta en curso...
+        </ion-item>
+      </ion-card>
+      <ion-item>
+        <ion-label>Pregunta</ion-label>
+        <ion-input type="text" formControlName="pregunta" [disabled]="hayEncuesta()"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Respuesta A</ion-label>
+        <ion-input type="text" formControlName="respuestaA" [disabled]="hayEncuesta()"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Respuesta B</ion-label>
+        <ion-input type="text" formControlName="respuestaB" [disabled]="hayEncuesta()"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Materia y curso</ion-label>
+        <ion-select formControlName="tiempo" [disabled]="hayEncuesta()">
+          <ion-option>2h</ion-option>
+          <ion-option>1h</ion-option>
+          <ion-option>30s</ion-option>
+        </ion-select>
+      </ion-item>
+      <br>
+      <button ion-button block type="submit" [disabled]="!formCrear.valid || hayEncuesta()" (click)="crearEncuesta()">Crear</button>
+    </form>
+  </ion-content>
+
+  <ion-content *ngIf="tab == 'estadisticas'">
+        <h1 text-center>Resultados</h1>
+        <canvas #tortaCanvas></canvas>
+  </ion-content>
 
 </ion-content>
