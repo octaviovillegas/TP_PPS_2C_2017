@@ -44,17 +44,18 @@ export class EncuestasPage {
         let props = Object.getOwnPropertyNames(encuestas.val());
         if(props.length > 0) {
           let current = encuestas.val()[props[props.length -1]];
-          if(current.termina > new Date().getTime()){
+          if(current.termina > new Date().getTime()) {
             if(current.terminado == 0) {
               this.lastEncuesta = current;
               this.currentKey = props[props.length -1];
+              console.log("ola");
               this.getTime();
             }
           } else {
+            this.tab = "estadisticas";
+            this.loadEstadisticas(current["A"], current["B"]);
             this.setTerminado(props[props.length -1]);
           }
-        } else {
-          this.tab = "estadisticas";
         }
       }
     })
@@ -65,7 +66,6 @@ export class EncuestasPage {
     this.af.list("/encuestas").update(key, {
       terminado: 1
     });
-    this.tab = "estadisticas";
   }
 
   public hayEncuesta(): boolean {
@@ -115,12 +115,12 @@ export class EncuestasPage {
     this.af.list("/encuestas").update(this.currentKey, {
       [this.respuesta]: this.lastEncuesta[this.respuesta] + 1
     });
-    
     this.tab = "estadisticas";
+    this.loadEstadisticas(this.lastEncuesta["A"], this.lastEncuesta["B"]);
   }
 
-  public ionViewDidLoad() {
-    /*this.tortaGrafico = new Chart(this.tortaCanvas.nativeElement, {
+  public loadEstadisticas(a: string, b: string) {
+    this.tortaGrafico = new Chart(this.tortaCanvas.nativeElement, {
       type: 'pie',
       data: {
         labels: ["Red", "Blue"],
@@ -131,7 +131,7 @@ export class EncuestasPage {
           hoverBackgroundColor: ["#FF6384", "#36A2EB"]
         }]
       }
-    });*/
+    });
   }
 
 
