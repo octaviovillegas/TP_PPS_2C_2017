@@ -6,14 +6,57 @@
   </ion-navbar>
 
 </ion-header>
+<ion-content class="fondoMenu" padding>
 
-<ion-content padding>
+    
+      
+  <ion-list>
+    <ion-item class="itemMenu">
+      <ion-thumbnail item-start>
+        <img src="assets/imgs/alumno.png">
+      </ion-thumbnail>
+      <h2>Alumno</h2>
+      <p>Perfil del alumno</p>
+      <button ion-button (click)="irAPerfil()" item-end>Ver</button>
+    </ion-item>
+    <br>
+    <br>
+    <ion-item class="itemMenu">
+        <ion-thumbnail item-start>
+          <img src="assets/imgs/profesor.png">
+        </ion-thumbnail>
+        <h2>Profesor</h2>
+        <p>Perfil del Profesor</p>
+        <button ion-button item-end>Ver</button>
+    </ion-item>
+    <br>
+    <br>
+    <ion-item class="itemMenu">
+        <ion-thumbnail item-start>
+          <img src="assets/imgs/admin.png">
+        </ion-thumbnail>
+        <h2>Administración</h2>
+        <p>Administración de documentos</p>
+        <button ion-button item-end>Ver</button>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>
+<!-- <ion-content class="fondoMenu" padding>
 
   <button ion-button color="light" round block (click)="irAPerfil()">Mi Perfil</button>
   <button ion-button round block (click)="irAFormAlumnos()">Alta de Alumnos</button>
+
+  <button ion-button color="secondary" round block> Secondary Round </button>
+  <button ion-button color="danger" round block> Danger Round </button>
+  <button ion-button color="dark" round block (click)="irAFormProfesores()"> Alta de Profesor </button>
+  <button ion-button color="dark" round block (click)="irABMProfesores()"> Listado de Profesores </button>
+
   <button ion-button color="secondary" round block > Cargar Alumnos con Excel</button>
   <button ion-button color="danger" round block (click)="irAListaAlumnos()">Alumnos ABM</button>
   <button ion-button color="dark" round block> Dark Round </button>
   <button ion-button color="dark" round block (click)="irAFormAlumnosQrPage()"> Leer QR </button>
 
-</ion-content>
+</ion-content> -->
+

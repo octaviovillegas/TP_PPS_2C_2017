@@ -1,3 +1,46 @@
 page-login {
 
+    .button.ingresar {
+        
+        padding: 10%;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 15px;
+        top: 60%;
+        position: absolute;
+        right: 10%;
+        width: 80%;
+        
+        }
+        
+    ion-title {
+            background-color:#EECD90;
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 0 90px 1px;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            
+    }
+
+    .fondo {
+
+        background-color:lightgreen;
+        
+    }
+
+    .item {
+        background-color:lightgreen;
+        
+    }
+
+    .select {
+        color:#160101;
+    }
+
+      
+        
 }

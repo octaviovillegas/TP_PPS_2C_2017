@@ -72,7 +72,7 @@ export class AlumnosFormPage {
       targetWidth:600,
       correctOrientation:true,
       saveToPhotoAlbum:true,
-      cameraDirection:this.camera.Direction.FRONT
+      cameraDirection:this.camera.Direction.BACK
     };
 
     this.camera.getPicture(options).then((imagen)=>{

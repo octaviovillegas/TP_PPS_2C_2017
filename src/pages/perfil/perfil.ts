@@ -95,8 +95,10 @@ export class PerfilPage {
           this.correoModif = data.email;
           this.dbPersonas.cambiarEmail(this.correoModif, this.perfil+'s', this.legajo);
           this.navCtrl.push("LoginPage");
-        }
+        },
+        cssClass: 'alertDanger'
       }
+      
     ]
     });
     alertEmail.present();

@@ -12,17 +12,23 @@ import { ListadoAlumnosPage } from "../../pages/listado-alumnos/listado-alumnos"
 export class MenuPage {
 
   private datos:{};
-
+  
+  
+  
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl:AlertController
 
-  ) {}
+  ) { }
 
   ionViewDidLoad() {
     this.datos = JSON.parse(this.navParams.data);
     console.log(this.navParams.data);
 
-   }
+   
+    
+  }
+
+
 
 
 
@@ -39,14 +45,25 @@ export class MenuPage {
     this.navCtrl.push("AlumnosFormPage");
   }
 
+
+  private irAFormProfesores(){
+    this.navCtrl.push("ProfesoresFormPage");
+  }
+
+  private irABMProfesores(){
+    this.navCtrl.push("ListaProfesoresPage");
+  }
+
   private irAListaAlumnos(){
     this.navCtrl.push('ListadoAlumnosPage');
   }
+
 
   private irAFormAlumnosQrPage(){
     console.log(this.datos["correo"]);
     console.log(this.datos["perfil"]);
     this.navCtrl.push('FormAlumnosQrPage', {'correo':this.datos["correo"], 'perfil':this.datos["perfil"]});
   }
+
 
 }
