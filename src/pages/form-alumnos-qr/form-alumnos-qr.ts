@@ -18,6 +18,7 @@ export class FormAlumnosQrPage {
   private listaMaterias:any[];
   private listaPorAlumno:any[];
   private objCode:{};
+  private listado:string = "";
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public barcodeScanner:BarcodeScanner, public alertCtrl:AlertController,
@@ -52,6 +53,11 @@ export class FormAlumnosQrPage {
         break;
     }
 
+  }
+
+  async leerQR() {
+    let resultado:BarcodeScanResult = await this.barcodeScanner.scan();
+    this.listado = resultado.text;
   }
 
   private armarObjCodeAlumno():string{
