@@ -17,6 +17,7 @@ export class EncuestasPage {
   //Actual
   public respuesta: string;
   public lastEncuesta: any;
+  public currentKey: string;
   //Crear
   private formCrear: FormGroup;
   //Estadisticas
@@ -46,6 +47,7 @@ export class EncuestasPage {
           if(current.termina > new Date().getTime()){
             if(current.terminado == 0) {
               this.lastEncuesta = current;
+              this.currentKey = props[props.length -1];
               this.getTime();
             }
           } else {
@@ -107,7 +109,15 @@ export class EncuestasPage {
         this.lastEncuesta.cuenta = horas + ":" + minutos + ":" + segundos;
       }
     }, 1000)
- }
+  }
+
+  public responder() {
+    this.af.list("/encuestas").update(this.currentKey, {
+      [this.respuesta]: this.lastEncuesta[this.respuesta] + 1
+    });
+    
+    this.tab = "estadisticas";
+  }
 
   public ionViewDidLoad() {
     /*this.tortaGrafico = new Chart(this.tortaCanvas.nativeElement, {

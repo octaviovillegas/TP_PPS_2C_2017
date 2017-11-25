@@ -26,12 +26,12 @@
       <ion-card>
         <ion-item>
           <ion-select [(ngModel)]="respuesta">
-            <ion-option>{{lastEncuesta.respuestaA}}</ion-option>
-            <ion-option>{{lastEncuesta.respuestaB}}</ion-option>
+            <ion-option value="A">{{lastEncuesta.respuestaA}}</ion-option>
+            <ion-option value="B">{{lastEncuesta.respuestaB}}</ion-option>
           </ion-select>
         </ion-item>
       </ion-card>
-      <button ion-button block >Responder</button>
+      <button ion-button block (click)="responderPreg()" >Responder</button>
       <ion-card>
         <ion-item text-center>
           Tiempo restante: <h1><b>{{lastEncuesta.cuenta}}</b></h1>
@@ -40,7 +40,11 @@
     </div>
 
     <div *ngIf="!hayEncuesta()">
-
+      <ion-card text-center *ngIf="lastEncuesta != undefined">
+        <ion-item>
+          Cargando...
+        </ion-item>
+      </ion-card>
     </div>
   </ion-content>
 
