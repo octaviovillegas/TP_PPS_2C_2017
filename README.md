@@ -2,7 +2,7 @@
 TP Final de la practica profesional supervisada
 
 # Mauro Ezequiel Zampini
-Módulos a desarrollar:
+Módulo a desarrollar:
 • Diseño de estilos (Punto I)
 
 Fecha inicio: 03/11/2017
@@ -13,7 +13,7 @@ Branch: Styles
 
 -------------------
 
-Módulos a desarrollar:
+Módulo a desarrollar:
 • Administración de su propio perfil (Punto H)
 
 Fecha inicio: 24/11/2017
@@ -22,9 +22,21 @@ Fecha fin: 24/11/2017
 
 Branch: Perfil
 
+-------------------
+
+Módulo a desarrollar:
+• Login con red social (Punto F)
+
+Fecha inicio: 26/11/2017
+
+Fecha fin: 26/11/2017
+
+Branch: LoginRedSocial
+
+-------------------
 
 # Fernando Martin Saibene
-Módulos a desarrollar:
+Módulo a desarrollar:
 • Pantalla de Login con usuarios por mail
 
 Fecha inicio: 03/11/2017
@@ -33,8 +45,10 @@ Fecha fin: 03/11/2017
 
 Branch: Login
 
+-------------------
+
 # Juan Manuel Barreda Fafasuli
-Módulos a desarrollar: • ABM de Alumnos (G)
+Módulo a desarrollar: • ABM de Alumnos (G)
 
 Fecha inicio: 09/11/2017
 
@@ -44,7 +58,7 @@ Branch: ABMAlumnos
 
 -------------------
 
-Módulos a desarrollar: • Navegación y estilos (I)
+Módulo a desarrollar: • Navegación y estilos (I)
 
 Fecha inicio: 13/11/2017
 
@@ -54,7 +68,7 @@ Branch: NavegacionEnAPP
 
 -------------------
 
-Módulos a desarrollar: • ABM Administrativo 
+Módulo a desarrollar: • ABM Administrativo 
 
 • ABM Profesor (J)
 
@@ -66,7 +80,7 @@ Branch: ninguno (master)
 
 -------------------
 
-Módulos a desarrollar: • Toma de lista (A)
+Módulo a desarrollar: • Toma de lista (A)
 
 Fecha inicio: 21/11/2017
 
@@ -76,7 +90,7 @@ Branch: TomaLista
 
 -------------------
 
-Módulos a desarrollar: • Encuestas (B)
+Módulo a desarrollar: • Encuestas (B)
 
  • Graficos (L)
 

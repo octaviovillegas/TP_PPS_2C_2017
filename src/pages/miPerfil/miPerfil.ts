@@ -46,8 +46,7 @@ export class MiPerfilPage implements OnInit{
       });
 
       this.user.updatePassword(this.newPassword).then(function() {
-        // let loading = this.loadSpinner();
-        // loading.present();
+
 
       }).catch(function(error) {
       });
