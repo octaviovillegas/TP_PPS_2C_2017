@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController,LoadingController } from 'ionic-angular';
 import { Usuario } from "../../clases/usuario";
 import { ListadoAlumnosPage } from "../../pages/listado-alumnos/listado-alumnos";
 
@@ -15,8 +15,9 @@ export class MenuPage {
   
   
   
+  
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public alertCtrl:AlertController
+              public alertCtrl:AlertController,public loadingCtrl:LoadingController
 
   ) { }
 
@@ -24,21 +25,24 @@ export class MenuPage {
     this.datos = JSON.parse(this.navParams.data);
     console.log(this.navParams.data);
 
-   
-    
   }
 
 
-
-
-
   private irAPerfil():void{
+    
+    const loading = this.loadingCtrl.create({
+      content: 'Ingresando. Espere...',
+      dismissOnPageChange: true,
+      spinner:"bubbles"
+    });
+    loading.present();
+
     if (this.datos["loginSocial"]==true) {
       this.navCtrl.push("PerfilPage", {"correo" : this.datos["correo"], "perfil":this.datos["perfil"], "nombre":this.datos["nombre"], "foto":this.datos["foto"], "isLoginSocial":this.datos["loginSocial"]});
     }else{
       this.navCtrl.push("PerfilPage", {"correo" : this.datos["correo"], "perfil":this.datos["perfil"]});
     }
-
+    
   }
 
   private irAFormAlumnos(){

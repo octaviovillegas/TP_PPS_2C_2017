@@ -1,16 +1,16 @@
 <ion-header>
 
       <ion-navbar>
-        <ion-title text-center>Profesores:</ion-title>
+        <ion-title text-center>Profesores</ion-title>
       </ion-navbar>
 
     </ion-header>
 
 
-    <ion-content padding>
+    <ion-content class="fondo" padding>
 
       <ion-list>
-        <ion-item *ngFor="let profesor of listado">
+        <ion-item class="fondo" *ngFor="let profesor of listado">
           <ion-avatar item-start>
             <img [src]="profesor.foto">
           </ion-avatar>
