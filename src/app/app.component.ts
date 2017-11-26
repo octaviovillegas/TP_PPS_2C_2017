@@ -29,7 +29,7 @@ export class MyApp {
 
     this.pages = [
         {titulo: 'Inicio', component:LoginPage},
-        {titulo: 'Perfil', component:PerfilPage},
+        //{titulo: 'Perfil', component:PerfilPage},
         {titulo: 'Asistencias', component:AsistenciasPage},
         {titulo: 'Encuesta', component:EncuestaPage}
         
