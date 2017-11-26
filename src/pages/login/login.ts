@@ -8,6 +8,9 @@ import swal from 'sweetalert2';
 
 import { HomePage } from '../home/home';
 import { RegisterPage } from '../register/register';
+import { Facebook } from '@ionic-native/facebook';
+import firebase from 'firebase';
+
 //import { SocketService } from "../../services/socket.service";
  
 @IonicPage()
@@ -30,6 +33,7 @@ export class LoginPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public loadingCtrl: LoadingController,
+    public facebook: Facebook
     //public socketService: SocketService
   ) {
     
@@ -37,6 +41,20 @@ export class LoginPage {
 
   ionViewDidLoad() {
     setTimeout(() => this.splash = false, 4000);
+  }
+
+  facebookLogin(): Promise<any> {
+    return this.facebook.login(['email'])
+      .then( response => {
+        const facebookCredential = firebase.auth.FacebookAuthProvider
+          .credential(response.authResponse.accessToken);
+        firebase.auth().signInWithCredential(facebookCredential)
+          .then( success => { 
+            this.navCtrl.setRoot(HomePage);
+            console.log("Firebase success: " + JSON.stringify(success)); 
+          });
+  
+      }).catch((error) => { console.log(error) });
   }
 
   async login(user: User) {
@@ -136,7 +154,7 @@ export class LoginPage {
   {
     let loader = this.loadingCtrl.create({
       dismissOnPageChange: true,
-      content:"Cargando..",
+      content:"Cargando...",
       duration: 2500
       
     });

@@ -20,6 +20,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AdminUsuariosPage } from '../pages/adminUsuarios/adminUsuarios';
 //import { SocketService } from "../services/socket.service";
+import { Facebook } from '@ionic-native/facebook';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { AdminUsuariosPage } from '../pages/adminUsuarios/adminUsuarios';
     AngularFireDatabase,
     NativeAudio,
     FormBuilder,
+    Facebook
     //SocketService
   ]
 })

@@ -6,11 +6,6 @@
   </div>
 </div>
 
-<ion-header>
-  <ion-navbar color="dark">
-    <ion-title>Ingreso</ion-title>
-  </ion-navbar>
-</ion-header>
 <ion-content scroll="false">
   <div padding id="cloud-layer">
 
@@ -64,5 +59,11 @@
           </div>
         </ion-col>
       </ion-row>
+
+      <button ion-button block color="possitive" (click)="facebookLogin()">
+        <ion-icon name="logo-facebook"></ion-icon>
+        Entrar con Facebook
+      </button>
+
   </div>
 </ion-content>
