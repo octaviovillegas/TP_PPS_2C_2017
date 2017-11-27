@@ -2,21 +2,24 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title text-center>Alumnos:</ion-title>
+    <ion-title text-center>Alumnos</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="fondo" padding>
 
   <ion-list>
-    <ion-item *ngFor="let alumno of listado">
+    <ion-item class="fondo" *ngFor="let alumno of listado">
       <ion-avatar item-start>
-        <img [src]="alumno.foto">
+        <img (click)="modificar(alumno)" [src]="alumno.foto">
       </ion-avatar>
       <h2>{{ alumno.nombre}}</h2>
       <p >Legajo: {{ alumno.legajo}}</p>
+      <button ion-button>
+        Alta
+      </button>
       <button ion-button (click)="eliminar(alumno)">
         Baja
       </button>

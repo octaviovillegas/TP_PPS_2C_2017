@@ -1,19 +1,20 @@
-
 <ion-header>
-
-  <ion-navbar>
-    <ion-title text-center>Login</ion-title>
-  </ion-navbar>
-
+    <ion-navbar light>
+      <ion-title>Inicio</ion-title>
+      <ion-buttons left>
+        <img class="imagen" (click)="salir()" src="assets/icon/salir1.png">
+      </ion-buttons>
+    </ion-navbar>
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="fondo" padding>
 
     <ion-list inset>
-        <ion-item color="primary">
-          <ion-label color="dark">Seleccionar Usuario</ion-label>
-          <ion-select color="primary" (ionChange)="writePassw()"  [(ngModel)]="correo" cancelText="Cancelar" okText="Elegir" interface="alert">
+        <ion-item class="item">
+        <ion-icon color="primary" name="ios-folder-open" item-left></ion-icon>
+          <ion-label color="dark">Seleccionar:</ion-label>
+          <ion-select (ionChange)="writePassw()"  [(ngModel)]="correo" cancelText="Cancelar" okText="Elegir" interface="alert">
             <ion-option value="admin@admin.com">Administrador</ion-option>
             <ion-option value="alumno@alumno.com.ar">Alumno</ion-option>
             <ion-option value="profesor@profesor.com">Profesor</ion-option>
@@ -33,28 +34,22 @@
           <ion-input color="input1" type="password" (ionChange)="validarCantDigitos($event)" (keypress)="validarNum($event)" [(ngModel)]="passw"></ion-input>
         </ion-item>
 
-      </ion-list>
+    </ion-list>
+      
+      
+      <button ion-button class= "btnIngresar" color="secondary" (click)="login()">INGRESAR</button>
+    
+      <button ion-button class= "btnAlumno" round color="primary" (click)="crearAlumno()">NUEVO ALUMNO</button>
+    
 
       <button *ngIf="datosLoginGitHub!=undefined" ion-button block color="secondary">
         Credenciales correctas. Ir a Menu
       </button>
 
-      <button ion-button round color="primary" (click)="crearAlumno()">
-        REGISTRARSE COMO ALUMNO
-      </button>
-
-      <button ion-button round color="secondary" (click)="login()">
-          Ingresar <br>
-          <ion-icon name="arrow-dropright"></ion-icon>
-        </button>
-
-        <button ion-button round outline (click)="salir()" color="danger">
-          Salir
-        </button>
-
     <ion-footer>
       <!--img src="assets/imgs/googleplus.png" width="50" height="50"-->
-      <img src="assets/imgs/github.png" width="50" height="50" (click)="logearEnGitHub()">
+      <p><img src="assets/imgs/github.png" width="50" height="50" (click)="logearEnGitHub()">
+      &nbsp;&nbsp;&nbsp;&nbsp;Grupo IONIC - Facultad UTN</p>
       <!--img src="assets/imgs/facebook.png" width="50" height="50"-->
     </ion-footer>
 

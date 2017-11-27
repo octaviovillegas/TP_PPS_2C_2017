@@ -9,10 +9,18 @@
 
 <ion-content padding>
 
+  <img src="assets/imgs/qr.png" width="80" height="80" (click)="leerQR()">
 
+  <ion-label>Description</ion-label>
+    <ion-textarea [(ngModel)]="listado" formControlName="listado">
 
-  <button ion-button block (click)="encodeData()">
-    Encode
+    </ion-textarea>
+  </ion-item>
+
+  <!--button ion-button block (click)="encodeData()">
+    Generar QR
   </button>
+
+  <img *ngIf="url" [src]="url" width="100" height="100"-->
 
 </ion-content>

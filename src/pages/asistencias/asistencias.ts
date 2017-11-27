@@ -167,6 +167,13 @@ filtrarPorDia(DiaEntrante)
 filtrarPorAula(aulaSeleccionado){
     
   this.ARP.traerAlumnos().subscribe(item=>{
+
+   /* if(item.respuesta1 == aulaSeleccionado)
+    {
+      this.cantB += 1;
+      console.log("buena",this.cantB);
+      
+    }/*/
     this.alumnos = item;
     this.cantidadAlumnos = item.length;
     //this.comisiones = item;

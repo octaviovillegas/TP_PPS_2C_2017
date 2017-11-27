@@ -1,0 +1,29 @@
+<ion-header>
+
+      <ion-navbar>
+        <ion-title text-center>Profesores</ion-title>
+      </ion-navbar>
+
+    </ion-header>
+
+
+    <ion-content class="fondo" padding>
+
+      <ion-list>
+        <ion-item class="fondo" *ngFor="let profesor of listado">
+          <ion-avatar item-start>
+            <img [src]="profesor.foto">
+          </ion-avatar>
+          <h2>{{ profesor.nombre}}</h2>
+          <p >DNI: {{ profesor.dni}}</p>
+          <button ion-button (click)="eliminar(profesor)">
+            Baja
+          </button>
+          <button ion-button (click)="modificar(profesor)">
+            Modificar
+          </button>
+        </ion-item>
+
+      </ion-list>
+
+    </ion-content>

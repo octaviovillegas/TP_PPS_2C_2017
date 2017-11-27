@@ -46,7 +46,8 @@ export class LoginPage {
   login():void{
     const loading = this.loadingCtrl.create({
       content: 'Verificando datos. Espere...',
-      dismissOnPageChange: true
+      dismissOnPageChange: true,
+      spinner:"bubbles"
     });
     loading.present();
     this.loginUsuario.setCorreo(this.correo);
