@@ -8,39 +8,39 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="fondo" padding>
 
-    <ion-item>
+    <ion-item class="fondo">
         <ion-label>DNI:</ion-label>
         <ion-input type="text" disabled=true  ngDefaultControl>{{dni}}</ion-input>
     </ion-item>
 
-    <ion-item>
+    <ion-item class="fondo">
         <ion-label>Nombre:</ion-label>
         <ion-input type="text" [disabled]="mostrarDatos" [(ngModel)]="nombre" ngDefaultControl>{{nombre}}</ion-input>
     </ion-item>
 
-    <ion-item>
+    <ion-item class="fondo">
         <ion-label>Correo:</ion-label>
         <ion-input type="text" [disabled]="mostrarDatos" [(ngModel)]="correo" ngDefaultControl>{{correo}}</ion-input>
     </ion-item>
 
     <ion-list>
         <ion-item-sliding  *ngFor="let materia of listaMaterias">
-          <ion-item  >
+          <ion-item  class="fondo1">
             <ion-avatar item-start>
               <img src="assets/imgs/imgListaMaterias.png">
             </ion-avatar>
             <h2>{{materia}}</h2>
           </ion-item>
           <ion-item-options side="left">
-            <button ion-button color="light" (click)="modificarMateria(materia)">
+            <button class="btn1" ion-button color="light" (click)="modificarMateria(materia)">
               <img width="25" height="25" src="assets/imgs/imgActualizar.jpg">
               Modificar
             </button>
           </ion-item-options>
           <ion-item-options side="right">
-            <button ion-button color="light" (click)="eliminarMateria(materia)">
+            <button class="btn1" ion-button color="light" (click)="eliminarMateria(materia)">
               <img width="25" height="25" src="assets/imgs/imgCancelar.jpg" >
               Eliminar
             </button>
@@ -53,15 +53,15 @@
     <img *ngIf="foto" [src]="foto" width="70" height="70" [(ngModel)]="foto" ngDefaultControl>
 
     <br><br>
-    <button ion-button full color="light" (click)="cancelarOpe()">
+    <button class="btn" ion-button full color="light" (click)="cancelarOpe()">
       Cancelar
     </button>
     <br>
-    <button ion-button full *ngIf="mostrarDatos" (click)="eliminarProfesor()">
+    <button ion-button class="btn1" full *ngIf="mostrarDatos" (click)="eliminarProfesor()">
       Eliminar Profesor
     </button>
 
-    <button ion-button full *ngIf="!mostrarDatos" (click)="modificarProfesor()">
+    <button ion-button class="btn1" full *ngIf="!mostrarDatos" (click)="modificarProfesor()">
       Modificar Profesor
     </button>
 
