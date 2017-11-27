@@ -401,3 +401,16 @@
     100% { -webkit-transform: matrix3d(3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 0, -10, 0, 0, 1); transform: matrix3d(3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 0, -10, 0, 0, 1); } 
   }
 
+.loader{
+    background-image: url("../assets/images/escuela.gif");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+}
+
+.ToastWarning{
+  > div{
+    background-color:#FF0015!important;
+    text-align: center;
+}
+}

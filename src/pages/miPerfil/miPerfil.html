@@ -13,12 +13,22 @@
   
         <ion-label class="myLabel">Email</ion-label>
         <ion-item style="border-radius: 25px">
-          <ion-input  type="email" value="{{email}}" [(ngModel)]="email"></ion-input>
+          <ion-input  type="email" value="{{email}}" [(ngModel)]="email" [disabled]="true"></ion-input>
         </ion-item>
   
         <ion-label class="myLabel">Constraseña</ion-label>
         <ion-item style="border-radius: 25px">
+          <ion-input  type="password" [(ngModel)]="oldPassword"></ion-input>
+        </ion-item>
+
+        <ion-label class="myLabel">Constraseña nueva</ion-label>
+        <ion-item style="border-radius: 25px">
           <ion-input  type="password" [(ngModel)]="newPassword"></ion-input>
+        </ion-item>
+
+        <ion-label class="myLabel">Repetir constraseña nueva</ion-label>
+        <ion-item style="border-radius: 25px">
+          <ion-input  type="password" [(ngModel)]="repeatNewPassword"></ion-input>
         </ion-item>
 
         </ion-list>
