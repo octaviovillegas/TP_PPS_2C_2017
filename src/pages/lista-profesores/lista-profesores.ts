@@ -27,8 +27,14 @@ export class ListaProfesoresPage {
   }
 
 
+  abrirModalView(profesor){
+    console.log(profesor);
+    let consultaView = this.modalCtrl.create('ConsultarBajaModifPage', {'profesor':profesor});
+    consultaView.present();
+  }
 
-  eliminar(profesor:any){
+
+ /* eliminar(profesor:any){
 
         console.log('modificar', profesor);
         let modalAlumno = this.modalCtrl.create('DatosProfesoresPage', {'profesor':profesor, 'boolDatos':true});
@@ -41,6 +47,7 @@ export class ListaProfesoresPage {
         let modalAlumno = this.modalCtrl.create('DatosProfesoresPage', {'profesor':profesor, 'boolDatos':false});
         modalAlumno.present();
   }
+  */
 
 
 
