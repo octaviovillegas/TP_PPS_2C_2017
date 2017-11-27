@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController,LoadingController } from 'ionic-angular';
 import { Usuario } from "../../clases/usuario";
 import { ListadoAlumnosPage } from "../../pages/listado-alumnos/listado-alumnos";
-
+import { AlumnoServiceProvider } from "../../providers/alumno-service/alumno-service";
 
 @IonicPage()
 @Component({
@@ -12,16 +12,17 @@ import { ListadoAlumnosPage } from "../../pages/listado-alumnos/listado-alumnos"
 export class MenuPage {
 
   private datos:{};
-  
-  
-  
-  
+
+
+
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl:AlertController,public loadingCtrl:LoadingController
 
   ) { }
 
   ionViewDidLoad() {
+
     this.datos = JSON.parse(this.navParams.data);
     console.log(this.navParams.data);
 
@@ -29,7 +30,7 @@ export class MenuPage {
 
 
   private irAPerfil():void{
-    
+
     const loading = this.loadingCtrl.create({
       content: 'Ingresando. Espere...',
       dismissOnPageChange: true,
@@ -42,7 +43,7 @@ export class MenuPage {
     }else{
       this.navCtrl.push("PerfilPage", {"correo" : this.datos["correo"], "perfil":this.datos["perfil"]});
     }
-    
+
   }
 
   private irAFormAlumnos(){

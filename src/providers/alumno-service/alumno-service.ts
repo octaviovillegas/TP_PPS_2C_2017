@@ -62,6 +62,24 @@ export class AlumnoServiceProvider {
 
   }
 
+  public getAlumnosPorMateria(materiaParam:string){
+    let alumnos:Array<any> = new Array<any>();
+    let listado: Array<any> = new Array<any>();
+    if (this.listaAlumnos==undefined) {
+      this.db.list('/alumnos').subscribe(lista=>{
+        listado = lista;
+        for (var i = 0; i < listado.length; i++) {
+          listado[i].materias.forEach(materia => {
+            if (materia == materiaParam) {
+              alumnos.push(listado[i]);
+            }
+          });
+        }
+      });
+    }
+    return alumnos;
+  }
+
   public borrarAlumno(legajo:string){
     this.db.app.database().ref('/alumnos/' + legajo).remove();
   }
