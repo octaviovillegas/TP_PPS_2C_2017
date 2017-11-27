@@ -10,18 +10,18 @@
     <ion-content class="fondo" padding>
 
       <ion-list>
-        <ion-item class="fondo" *ngFor="let profesor of listado">
+        <ion-item (click)="abrirModalView(profesor)" class="fondo" *ngFor="let profesor of listado">
           <ion-avatar item-start>
-            <img [src]="profesor.foto">
+            <img  [src]="profesor.foto">
           </ion-avatar>
           <h2>{{ profesor.nombre}}</h2>
           <p >DNI: {{ profesor.dni}}</p>
-          <button ion-button (click)="eliminar(profesor)">
+          <!--button ion-button (click)="eliminar(profesor)">
             Baja
           </button>
           <button ion-button (click)="modificar(profesor)">
             Modificar
-          </button>
+          </button-->
         </ion-item>
 
       </ion-list>
