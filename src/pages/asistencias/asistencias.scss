@@ -1,3 +1,32 @@
 page-asistencias {
 
+    .fondo {
+        
+                background-color:lightgreen;
+                
+           }
+    .fondo1 {
+                background-color:#EECD90;
+                font-family: Courier New, Courier, monospace;
+                text-align: center;
+    }
+
+    ion-title {
+                background-color:#EECD90;
+                position: absolute;
+                top: 0;
+                left: 0;
+                padding: 0 70px 0px;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif;
+                
+                
+    }
+    .titunombre {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 80%;
+    }
+    
 }

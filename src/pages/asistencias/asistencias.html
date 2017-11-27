@@ -5,17 +5,16 @@
 -->
 <ion-header>
   <ion-navbar>
-   <button ion-button  menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button> 
-  <ion-title ><p class="Titulo">Tomar Asistencias</p><p class="Fecha"> {{fecha}}  </p></ion-title>
+   <ion-title><p class="titunombre">
+    Tomar Asistencias - {{fecha}}</p>
+   </ion-title>
   </ion-navbar>
 
 </ion-header>
-<ion-content padding>  
-  <ion-card *ngIf="filtro=='filtroBotones'">
-   <ion-card-header>Filtrar Comision por:</ion-card-header>
-    <ion-card-content>  
+<ion-content class="fondo" padding>  
+  <ion-card class="fondo" *ngIf="filtro=='filtroBotones'">
+   <ion-card-header class="fondo1">Filtrar Comision por</ion-card-header>
+    <ion-card-content class="fondo">  
       <button class="btn" ion-button block (click)="filtrarPor('DIA')">DIA</button>
       <button class="btn" ion-button block (click)="filtrarPor('AULA')">AULA</button>
       <button class="btn" ion-button block (click)="filtrarPor('MATERIA')">MATERIA</button>
@@ -24,11 +23,11 @@
   </ion-card>  
 
 <ion-card>  
-  <ion-card-content *ngIf="mostrar">
-     <ion-card-header><button class="btn" ion-button block (click)="restablecerValores();mostrar=false">Volver</button></ion-card-header>
+  <ion-card-content class="fondo" *ngIf="mostrar">
+     <ion-card-header class="fondo"><button class="btn" ion-button block (click)="restablecerValores();mostrar=false">Volver</button></ion-card-header>
 
 <div *ngIf="filtro=='Dia'">
-  <ion-card-header><button class="btn" *ngIf="diaSeleccionado" ion-button block (click)="filtrarPorDia(diaSeleccionado)">Buscar Alumnos por Dia {{diaSeleccionado}}</button></ion-card-header>
+  <ion-card-header class="fondo"><button class="btn" *ngIf="diaSeleccionado" ion-button block (click)="filtrarPorDia(diaSeleccionado)">Buscar Alumnos por Dia {{diaSeleccionado}}</button></ion-card-header>
   <ion-list radio-group [(ngModel)]="diaSeleccionado">      
           <ion-item>
             <ion-label>LUNES</ion-label>

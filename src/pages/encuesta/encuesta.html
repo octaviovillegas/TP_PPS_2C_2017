@@ -12,62 +12,62 @@
   </ion-header>
   
   
-  <ion-content padding>
+  <ion-content class="fondo" padding>
   
     <div>
-    <ion-card>
-          <ion-card-header>{{pregunta1}}</ion-card-header>
+    <ion-card class="fondo">
+          <ion-card-header class="fondo1">{{pregunta1}}</ion-card-header>
           <ion-card-content>          
-          <ion-list radio-group [(ngModel)]="Preg1Rb">               
-            <ion-item>
-              <ion-label>BUENA</ion-label>
+          <ion-list class="fondo" radio-group [(ngModel)]="Preg1Rb">               
+            <ion-item class="fondo">
+              <ion-label class="fondo">BUENA</ion-label>
               <ion-radio checked="true" value="Buena" ></ion-radio>            
             </ion-item>
-            <ion-item>
-              <ion-label>REGULAR</ion-label>
+            <ion-item class="fondo">
+              <ion-label class="fondo">REGULAR</ion-label>
               <ion-radio  value="Regular"></ion-radio>
             </ion-item>  
-            <ion-item>
-              <ion-label>MALA</ion-label>
+            <ion-item class="fondo">
+              <ion-label class="fondo">MALA</ion-label>
               <ion-radio value="Mala"></ion-radio>
             </ion-item>         
           </ion-list>         
           </ion-card-content>
         </ion-card>  
   
-          <ion-card>
-          <ion-card-header>{{pregunta2}} </ion-card-header>
+          <ion-card class="fondo">
+          <ion-card-header class="fondo1">{{pregunta2}} </ion-card-header>
           <ion-card-content>          
-          <ion-list radio-group [(ngModel)]="Preg2Rb">               
-            <ion-item>
-              <ion-label>SI</ion-label>
+          <ion-list class="fondo" radio-group [(ngModel)]="Preg2Rb">               
+            <ion-item class="fondo">
+              <ion-label class="fondo">SI</ion-label>
               <ion-radio  checked="true" value="Si" ></ion-radio>            
             </ion-item>
-            <ion-item>
-              <ion-label>NO</ion-label>
+            <ion-item class="fondo">
+              <ion-label class="fondo">NO</ion-label>
               <ion-radio  value="No"></ion-radio>
             </ion-item>                     
           </ion-list>         
           </ion-card-content>
         </ion-card> 
   
-           <ion-card>
-          <ion-card-header>{{pregunta3}} </ion-card-header>
+           <ion-card class="fondo">
+          <ion-card-header class="fondo1">{{pregunta3}} </ion-card-header>
           <ion-card-content>          
           <ion-list radio-group [(ngModel)]="Preg3Rb">               
-            <ion-item>
-              <ion-label>SI</ion-label>
+            <ion-item class="fondo">
+              <ion-label class="fondo">SI</ion-label>
               <ion-radio checked="true" value="Sisi" ></ion-radio>            
             </ion-item>
-            <ion-item>
-              <ion-label>NO</ion-label>
+            <ion-item class="fondo">
+              <ion-label class="fondo">NO</ion-label>
               <ion-radio value="Nono"></ion-radio>
             </ion-item>                     
           </ion-list>         
           </ion-card-content>
         </ion-card>
       
-      <button ion-button block type="submit" (click)="subirEncuesta()">Subir Encuesta</button>
+      <button ion-button class="btn" block type="submit" (click)="subirEncuesta()">Subir Encuesta</button>
   </div>
   
   </ion-content>
