@@ -10,6 +10,7 @@ import { HomePage } from '../home/home';
 import { RegisterPage } from '../register/register';
 import { Facebook } from '@ionic-native/facebook';
 import firebase from 'firebase';
+import { DomSanitizer } from '@angular/platform-browser';
 
 //import { SocketService } from "../../services/socket.service";
  
@@ -25,6 +26,7 @@ export class LoginPage {
   selectedUser: string;
   connection;
   splash = true;
+  safeSvg;
   //secondPage = SecondPagePage;
 
   constructor(
@@ -33,7 +35,8 @@ export class LoginPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public loadingCtrl: LoadingController,
-    public facebook: Facebook
+    public facebook: Facebook,
+    private sanitizer: DomSanitizer
     //public socketService: SocketService
   ) {
     
@@ -44,17 +47,28 @@ export class LoginPage {
   }
 
   facebookLogin(): Promise<any> {
+    let loading = this.loadSpinner();
+    loading.present();
     return this.facebook.login(['email'])
       .then( response => {
         const facebookCredential = firebase.auth.FacebookAuthProvider
           .credential(response.authResponse.accessToken);
         firebase.auth().signInWithCredential(facebookCredential)
           .then( success => { 
+            swal({
+              title: '¡Bienvenido!',
+              type: 'success',
+              timer: 1500
+            })
             this.navCtrl.setRoot(HomePage);
             console.log("Firebase success: " + JSON.stringify(success)); 
           });
   
-      }).catch((error) => { console.log(error) });
+      })
+      .catch((error) => { 
+        loading.dismiss();
+        console.log(error)
+       });
   }
 
   async login(user: User) {
@@ -152,12 +166,18 @@ export class LoginPage {
   }
   private loadSpinner():Loading
   {
+    let img = `<img src="../assets/images/escuela.gif">`;
+
+    this.safeSvg = this.sanitizer.bypassSecurityTrustHtml(img);
+
     let loader = this.loadingCtrl.create({
       dismissOnPageChange: true,
-      content:"Cargando...",
+      spinner: 'hide',
+      cssClass: 'loader',
+      content: this.safeSvg,
       duration: 2500
-      
     });
     return loader;
   }
+
 }

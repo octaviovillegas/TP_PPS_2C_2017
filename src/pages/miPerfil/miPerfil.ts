@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, LoadingController, Loading } from 
 import { AngularFireAuth } from 'angularfire2/auth';
 import { HomePage } from '../home/home';
 import swal from 'sweetalert2';
+import { User } from '../../models/user';
 
 @IonicPage()
 @Component({
@@ -11,10 +12,13 @@ import swal from 'sweetalert2';
 })
 export class MiPerfilPage implements OnInit{
   
+  userloggued = {} as User;
   user = this.authAf.auth.currentUser;
   name;
   email;
+  oldPassword;
   newPassword;
+  repeatNewPassword;
   photoUrl;
   uid;
   emailVerified;
@@ -41,24 +45,43 @@ export class MiPerfilPage implements OnInit{
 
   actualizarDatos(){
     // if (this.email != null && this.newPassword != null && this.email != "" && this.newPassword != "") {
-      this.user.updateEmail(this.email).then(function() {
-      }).catch(function(error) {
-      });
-
-      this.user.updatePassword(this.newPassword).then(function() {
-
-
-      }).catch(function(error) {
-      });
-      let loading = this.loadSpinner();
-      loading.present();
+      // let loading = this.loadSpinner();
+      // loading.present();  
+    // this.user.updateEmail(this.email).then(function() {
+    //   }).catch(function(error) {
+    //   });
+    if (this.oldPassword != null && this.oldPassword != "" && 
+    this.newPassword != null && this.newPassword != "" && 
+    this.repeatNewPassword != null && this.repeatNewPassword != "")
+    {
+      if (this.newPassword == this.repeatNewPassword){
+        this.user.updatePassword(this.newPassword)
+        .then(function() { })
+        .catch(function(error) { });
+        swal({
+          title: '¡Datos actualizados!',
+          type: 'success',
+          timer: 1500
+        })
+        this.navCtrl.setRoot(HomePage)
+      } //cierre if
+      else{
+        swal({
+          title: 'Las contraseñas no coinciden',
+          type: 'error',
+          timer: 1500
+        })
+      } 
+    } //cierre if global
+    else{
       swal({
-        title: '¡Datos actualizados!',
-        type: 'success',
+        title: 'No hay nada para actualizar',
+        type: 'error',
         timer: 1500
       })
-      this.navCtrl.setRoot(HomePage)
+      
     }
+  }
   // }
 
   cancelar()
