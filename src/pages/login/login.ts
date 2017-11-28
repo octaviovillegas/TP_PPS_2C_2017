@@ -131,6 +131,13 @@ export class LoginPage {
 
 
     crearAlumno(){
+      const loading = this.loadingCtrl.create({
+        content: 'Ingresando. Espere...',
+        dismissOnPageChange: true,
+        spinner:"bubbles"
+      });
+      loading.present();
+
       this.navCtrl.push('AlumnosFormPage');
     }
 

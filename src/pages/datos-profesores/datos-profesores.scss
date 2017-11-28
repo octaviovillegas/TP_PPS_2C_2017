@@ -24,7 +24,7 @@ page-datos-profesores {
                         
             }
 
-            .btn   {
+    .btn   {
                 background: #34d955;
                 background-image: -webkit-linear-gradient(top, #34d955, #ccf057);
                 background-image: -moz-linear-gradient(top, #34d955, #ccf057);
@@ -41,9 +41,9 @@ page-datos-profesores {
                 border: solid #e0e0aa 2px;
                 text-decoration: none;
                 position: absolute;
-                height: 60px;
-                bottom:25%;
-                left:0.1%;
+                height: 20%;
+                bottom:35%;
+                width: 90%;
               }
               
     .btn:hover {
@@ -68,9 +68,10 @@ page-datos-profesores {
                 border: solid #e0e0aa 2px;
                 text-decoration: none;
                 position: absolute;
-                height: 60px;
+                height: 20%;
                 bottom:10%;
-                left:0.1%;
+                width: 90%;
+                
               }
               
     .btn1:hover {
