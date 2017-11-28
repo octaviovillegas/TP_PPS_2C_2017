@@ -73,12 +73,12 @@
         <ion-input type="text" formControlName="respuestaB" [disabled]="hayEncuesta()"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>Materia y curso</ion-label>
-        <ion-select formControlName="tiempo" [disabled]="hayEncuesta()">
-          <ion-option>2h</ion-option>
-          <ion-option>1h</ion-option>
-          <ion-option>30s</ion-option>
-        </ion-select>
+        <ion-label>Fecha de inicio</ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY" min="getMinDate()" max="getMaxDate()" formControlName="fechaInicio"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Fecha de fin</ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY" min="getMinDate()" max="getMaxDate()" formControlName="fechaFin"></ion-datetime>
       </ion-item>
       <br>
       <button ion-button block type="submit" [disabled]="!formCrear.valid || hayEncuesta()" (click)="crearEncuesta()">Crear</button>

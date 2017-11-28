@@ -19,7 +19,6 @@ import { NativeAudio } from '@ionic-native/native-audio';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AdminUsuariosPage } from '../pages/adminUsuarios/adminUsuarios';
-//import { SocketService } from "../services/socket.service";
 import { Facebook } from '@ionic-native/facebook';
 
 
@@ -37,7 +36,7 @@ import { Facebook } from '@ionic-native/facebook';
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireAuthModule,
-    AngularFireDatabaseModule,
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -53,7 +52,6 @@ import { Facebook } from '@ionic-native/facebook';
     NativeAudio,
     FormBuilder,
     Facebook
-    //SocketService
   ]
 })
 export class AppModule {}

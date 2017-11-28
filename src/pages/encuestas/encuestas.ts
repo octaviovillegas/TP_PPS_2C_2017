@@ -23,7 +23,9 @@ export class EncuestasPage {
   private formCrear: FormGroup;
   //Estadisticas
   @ViewChild('tortaCanvas') tortaCanvas;
-  tortaGrafico: any;
+  public tortaGrafico: any;
+  public myDate;
+  public myOtherDate;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -35,9 +37,20 @@ export class EncuestasPage {
         pregunta: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
         respuestaA: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
         respuestaB: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-        tiempo: ['', Validators.compose([Validators.required])]
+        fechaInicio: ['', Validators.compose([Validators.required])],
+        fechaFin: ['', Validators.compose([Validators.required])]
     });
     this.initRef();
+  }
+
+  public getMinDate(): string {
+    let date = new Date();
+    return date.getMonth() + "-" + date.getDate()  + "-" + date.getFullYear();
+  }
+
+  public getMaxDate(): string {
+    let date = new Date();
+    return date.getMonth() + "-" + date.getDate()  + "-" + date.getFullYear();
   }
 
   public initRef(): void {
