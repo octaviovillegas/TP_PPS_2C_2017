@@ -50,6 +50,7 @@ export class EncuestasPage {
 
   public getMaxDate(): string {
     let date = new Date();
+    date.setMonth(date.getMonth() + 4);
     return date.getMonth() + "-" + date.getDate()  + "-" + date.getFullYear();
   }
 
