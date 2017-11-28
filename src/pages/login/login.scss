@@ -89,7 +89,8 @@ page-login {
     }
 
     .imagen {
-        background-color:#EECD90;
+        
+        background-color: #EECD90;
         width: 35px;
         height: 35px;
         max-width: 100%;
@@ -101,6 +102,12 @@ page-login {
         
         background-color:lightgreen;
         font-family: 'Times New Roman', Times, serif;
-    }         
+    }
+    
+    .btnSalir {
+
+    background-color: #EECD90;
+    
+    }
         
 }

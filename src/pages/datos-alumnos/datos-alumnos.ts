@@ -20,6 +20,7 @@ export class DatosAlumnosPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alumnoDB:AlumnoServiceProvider, public view:ViewController
+              
 
   ) {}
 
@@ -44,12 +45,14 @@ export class DatosAlumnosPage {
   }
 
   eliminarAlumno(){
+    
     this.alumnoDB.borrarAlumno(this.legajo);
 
     this.view.dismiss();
   }
 
   modificarAlumno(){
+    
     let alumno:Alumno=new Alumno();
     alumno.setLegajo(this.legajo);
     alumno.setCorreo(this.correo);

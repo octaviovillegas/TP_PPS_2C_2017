@@ -47,6 +47,7 @@ export class AlumnosFormPage {
 
 
   ingresarAlumno(){
+        
     this.alumno.setNombre(this.nombre);
     this.alumno.setLegajo(this.legajo);
     this.alumno.setMateria(this.materiaCheck);

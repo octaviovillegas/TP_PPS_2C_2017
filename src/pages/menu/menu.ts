@@ -47,24 +47,58 @@ export class MenuPage {
   }
 
   private irAFormAlumnos(){
+    const loading = this.loadingCtrl.create({
+      content: 'Ingresando. Espere...',
+      dismissOnPageChange: true,
+      spinner:"bubbles"
+    });
+    loading.present();
+
     this.navCtrl.push("AlumnosFormPage");
   }
 
 
   private irAFormProfesores(){
+    const loading = this.loadingCtrl.create({
+      content: 'Ingresando. Espere...',
+      dismissOnPageChange: true,
+      spinner:"bubbles"
+    });
+    loading.present();
     this.navCtrl.push("ProfesoresFormPage");
   }
 
   private irABMProfesores(){
+    const loading = this.loadingCtrl.create({
+      content: 'Ingresando. Espere...',
+      dismissOnPageChange: true,
+      spinner:"bubbles"
+    });
+    loading.present();
+    
     this.navCtrl.push("ListaProfesoresPage");
   }
 
   private irAListaAlumnos(){
+    const loading = this.loadingCtrl.create({
+      content: 'Ingresando. Espere...',
+      dismissOnPageChange: true,
+      spinner:"bubbles"
+    });
+    loading.present();
+
     this.navCtrl.push('ListadoAlumnosPage');
   }
 
 
   private irAFormAlumnosQrPage(){
+    const loading = this.loadingCtrl.create({
+      content: 'Ingresando. Espere...',
+      dismissOnPageChange: true,
+      spinner:"bubbles"
+    });
+    loading.present();
+
     console.log(this.datos["correo"]);
     console.log(this.datos["perfil"]);
     this.navCtrl.push('FormAlumnosQrPage', {'correo':this.datos["correo"], 'perfil':this.datos["perfil"]});

@@ -21,6 +21,7 @@ export class DatosProfesoresPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public view:ViewController, private profesorDB:ProfesorServiceProvider
+              
 
   ) {}
 
@@ -46,6 +47,7 @@ export class DatosProfesoresPage {
   }
 
   eliminarMateria(materia:string){
+    
       console.log('mate', materia);
       this.profesorDB.traerListadoMateriasPorProfesor().subscribe(lista=>{
         console.log('lista', lista);

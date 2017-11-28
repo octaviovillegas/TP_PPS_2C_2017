@@ -1,9 +1,13 @@
 <ion-header>
-    <ion-navbar light>
-      <ion-title>Inicio</ion-title>
-      <ion-buttons left>
-        <img class="imagen" (click)="salir()" src="assets/icon/salir1.png">
-      </ion-buttons>
+    <ion-navbar>
+        <ion-buttons left>
+          <button class="btnSalir" (click)="salir()">
+            <img class="imagen" src="assets/icon/salir1.png">
+          </button>
+        </ion-buttons>
+        <ion-title>
+           Inicio
+        </ion-title>
     </ion-navbar>
 </ion-header>
 
@@ -54,3 +58,5 @@
     </ion-footer>
 
 </ion-content>
+
+

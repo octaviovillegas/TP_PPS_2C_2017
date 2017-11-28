@@ -1,5 +1,5 @@
 <ion-header>
-
+  
   <ion-navbar>
     <ion-title text-center>Escanear QR</ion-title>
   </ion-navbar>
@@ -7,15 +7,17 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="fondo" padding>
 
-  <img src="assets/imgs/qr.png" width="80" height="80" (click)="leerQR()">
+  <img class="img" src="assets/imgs/qr.png" (click)="leerQR()">
 
-  <ion-label>Description</ion-label>
-    <ion-textarea [(ngModel)]="listado" formControlName="listado">
+  <ion-label class="label">Description</ion-label>
+    <ion-textarea [(ngModel)]="listado">
+
+        <!--ion-textarea [(ngModel)]="listado" formControlName="listado">-->
 
     </ion-textarea>
-  </ion-item>
+ 
 
   <!--button ion-button block (click)="encodeData()">
     Generar QR
