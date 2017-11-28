@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-navbar color='favorite'>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Encuesta</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="fondo">
+
+  <button class="button button1" (click)="generarEncuesta()">
+    <ion-icon name="clipboard"></ion-icon> Nueva Encuesta</button>
+
+  <div *ngFor="let e of encuestas | async; let i = index">
+    <ion-card>
+      <ion-card-header (click)="e.isOpen = !e.isOpen">
+        <div>
+          <ion-item class="center">
+            <button style="color: black" ion-button clear item-end icon-only (click)="modificarEncuesta(e)" [hidden]="e.enviada">
+              <ion-icon style="width:50px" name="md-create"></ion-icon>
+            </button>
+            <button style="color: black" ion-button clear item-end icon-only (click)="eliminarEncuesta(e)">
+              <ion-icon style="width:50px" name="trash"></ion-icon>
+            </button>
+            <button ion-button *ngIf="!e.enviada" class="btnEnv btnChico" (click)="enviarEncuesta(e)">
+              <ion-icon name="send"></ion-icon>
+            </button>
+          </ion-item>
+        </div>
+        <div style="color : rgb(26, 18, 92)">{{e.nombreEncuesta}}</div>
+
+      </ion-card-header>
+
+      <ion-card-content [hidden]="e.isOpen">
+        <div *ngFor="let pregunta of e.preguntas; let i = index">
+          <ion-item>
+            <ion-label style="color : rgb(85, 158, 218)">*{{pregunta.texto}}</ion-label>
+          </ion-item>
+        </div>        
+
+      </ion-card-content>
+
+      <div>
+        <button ion-button style="float:right;" (click)="verEncuestaDetalle(e)" [hidden]="!e.enviada">Detalle</button>
+      </div>
+    </ion-card>
+
+  </div>
+
+
+
+</ion-content>

@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ModalController } from 'ionic-angular';
+//import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/database-deprecated"
+import { AngularFireAuth } from 'angularfire2/auth';
+import { EnviarEncuestaPage } from '../enviar-encuesta/enviar-encuesta';
+import { EncuestasDataProvider } from '../../providers/encuestas-data/encuestas-data';
+import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import { GraficosPage } from '../graficos/graficos';
 
 /**
  * Generated class for the Encuesta page.
@@ -16,46 +21,155 @@ import { GraficosPage } from '../graficos/graficos';
 })
 export class EncuestaPage {
 
-  public pregunta1;
-  public pregunta2;
-  public pregunta3;
-  public Preg1Rb;
-  public Preg2Rb;
-  public Preg3Rb;
-  public preg;
-  public respuesta;
-  fireDB : FirebaseListObservable<any>;
+  
+  encuesta = { nombreEncuesta: '', duracion: 0, autor: '', respondida: false, enviada: false, preguntas: [{isOpen: false, texto: '' }], destinatarios: [{}], fechaIngreso: '' };
+  opcionesSelect = [{ valor: '1' }, { valor: '2' }, { valor: '3' }, { valor: '4' }, { valor: '5' }, { valor: '6' }];
+  cantidadOpcionesDisponiblesSelect = [{ valor: '1 a 2' }, { valor: '1 a 3' }];
+  creadorDelaEncuesta = '';
+  deshabilitar = false;
+  modificar = false;
+  seModifica = null;
+  duracion = [{ valor: 5 }, { valor: 10 }, { valor: 15 }, { valor: 20 }, { valor: 25 }, { valor: 30 }, { valor: 35 },
+  { valor: 40 }, { valor: 45 }, { valor: 50 }, { valor: 55 }, { valor: 60 },]
+  public myForm: FormGroup;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, 
-  public alertCtrl: AlertController, public af: AngularFireDatabase) {
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams, public afDB: AngularFireDatabase,
+    public alertCtrl: AlertController, public afAuth: AngularFireAuth, 
+    public modalCtrl: ModalController,
+    public eDataProvider: EncuestasDataProvider, 
+    public formBuilder: FormBuilder, public datePipeCtrl: DatePipe) {
+    //this.creadorDelaEncuesta = this.getUser();
+    //console.log(this.creadorDelaEncuesta);      
+    this.myForm = formBuilder.group({
+      nombreEncuesta: ['', Validators.compose([Validators.required])],
+      fechaIngreso: ['', Validators.compose([Validators.required])],
+      fechaEgreso: ['', Validators.compose([Validators.required])],
+      preguntaTexto: ['', Validators.compose([Validators.required])],
+      tipoRespuesta: ['', Validators.compose([Validators.required])],
+      cantidadOpciones: ['', Validators.compose([Validators.required])],
+      opciones: ['', Validators.compose([Validators.required])],
 
-    this.pregunta1 = "Como calificarias a esta Aplicacion?";
-    this.pregunta2 = "Te gusta la interfaz de la Aplicacion?";
-    this.pregunta3 = "Recomendarias esta App a otras personas?";
+    });
 
-    this.fireDB = af.list('/encuesta');
+    this.seModifica = this.navParams.get('data');
+    if (this.seModifica) {
+      this.encuesta = this.seModifica;
+      this.modificar = true;
+    }
+  }
+
+  getUser() {
+    return this.afAuth.auth.currentUser.email;
+  }
+
+  trackByIndex(index: number, value: number) {
+    return index;
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad Encuesta');
   }
 
-  subirEncuesta(){
+  siguiente() {
+    let errorStr = '';
+    if (this.encuesta.nombreEncuesta == '') {
+      errorStr = errorStr + ' ' + 'Nombre de la Encuesta-';
+    } 
+    if (this.encuesta.duracion == 0) {
+      errorStr = errorStr + ' ' + 'Duracion-';
+    }
+    let band=0;
+    this.encuesta.preguntas.forEach(p=>{
+      if(p.texto == '' && band==0){
+        errorStr = errorStr + ' ' + 'Pregunta-';
+        band++;
+      }
+    });
 
-     let respuestas={pregunta1:"pregunta1",respuesta1:this.Preg1Rb,
-                     pregunta2:"pregunta2",respuesta2:this.Preg2Rb,
-                     pregunta3:"pregunta3",respuesta3:this.Preg3Rb};
+    if(errorStr != ''){
+      this.showAlertError('Debe completar los campos'+ errorStr);
+    }else{
+      var jsonEncuesta = { encuesta: this.encuesta, modificar: this.modificar };
+      this.navCtrl.push(EnviarEncuestaPage, jsonEncuesta);
+    }
+    
+  }
 
-      this.fireDB.push(respuestas);               
-      let alert = this.alertCtrl.create({
-          title: 'Gracias!',
-          subTitle: 'Tus respuestas han sido procesadas.',
-          buttons: ['OK']
-        });
+  agregarPregunta() {
+    // this.encuesta.preguntas.push({texto:''});
+    //this.encuesta.preguntas.push({texto:'',isOpen: false });
+    this.encuesta.preguntas.forEach(pregunta => {
+      pregunta.isOpen = false;
+    });
+    this.encuesta.preguntas.push({ isOpen: false, texto: '' });
+
+  }
+
+  tipoRespuestaSelected(pregunta) {
+    if (pregunta.tipoRespuesta == 'OPINION') {
+      pregunta.opciones = [];
+    } else if (pregunta.tipoRespuesta == 'UNASOLARESPUESTA') {
+      pregunta.opciones = [];
+    }
+  }
+
+  generarItemsOpciones(pregunta) {
+    console.log(JSON.stringify(pregunta));
+    pregunta.opciones = [];
+    for (var i = 1; i <= pregunta.cantidadOpciones; i++) {
+      pregunta.opciones.push("");
+    }
+  }
+
+  generarItemsOpcionesParaUnaSolaRespuesta(pregunta) {
+    console.log(JSON.stringify(pregunta));
+    pregunta.opciones = [];
+    if (pregunta.opcionesUnaSolaRespuesta == '1 a 2') {
+      pregunta.opciones.push("", "");
+    } else if (pregunta.opcionesUnaSolaRespuesta == '1 a 3') {
+      pregunta.opciones.push("", "", "");
+    }
+  }
+
+  eliminarPregunta(pregunta) {
+    var preguntasAux = [];
+    this.encuesta.preguntas.forEach(preguntaItem => {
+      if (preguntaItem != pregunta) {
+        preguntasAux.push(preguntaItem);
+      }
+    })
+    this.encuesta.preguntas = preguntasAux;
+  }
+
+  showAlertError(mensaje: string) {
+    let alert = this.alertCtrl.create({
+      title: 'ERROR!',
+      subTitle: mensaje,
+      buttons: ['aceptar']
+    });
     alert.present();
+  }
 
-    this.navCtrl.setRoot(GraficosPage);
-   }
+  showAlerOK(mensaje: string) {
+    let alert = this.alertCtrl.create({
+      title: 'Info',
+      subTitle: mensaje,
+      buttons: ['aceptar']
+    });
+    alert.present();
+  }
+
+  validar() {
+    if (this.encuesta.nombreEncuesta == "") {
+      alert("Se deben completar el nombre de la encuesta")
+    }
+
+    let fecha = new Date();
+
+    console.log(fecha.getHours);
+    console.log(fecha.getMinutes);
+
+  }
 
 
 

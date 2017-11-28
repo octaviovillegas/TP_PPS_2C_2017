@@ -19,6 +19,8 @@ import { PerfilPage } from "../pages/perfil/perfil";
 import { ListadoAlumnosPage } from "../pages/listado-alumnos/listado-alumnos";
 import { MostrarAsistenciasPage } from "../pages/mostrar-asistencias/mostrar-asistencias";
 import { ProfesorAsistenciaPage } from "../pages/profesor-asistencia/profesor-asistencia";
+import { EncuestasHomePage } from "../pages/encuestas-home/encuestas-home";
+import { EnviarEncuestaPage } from "../pages/enviar-encuesta/enviar-encuesta";
 
 
 ////////SERVICIOS
@@ -42,6 +44,8 @@ import { AsistenciasProvider } from '../providers/asistencias/asistencias';
 
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
 import { ProfesorServiceProvider } from '../providers/profesor-service/profesor-service';
+import { EncuestasDataProvider } from '../providers/encuestas-data/encuestas-data';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -69,7 +73,8 @@ var firebaseAuth  = {
     AsistenciasPage,
     MostrarAsistenciasPage,
     ProfesorAsistenciaPage,
-
+    EncuestasHomePage,
+    EnviarEncuestaPage
 
    ],
   imports: [
@@ -97,7 +102,8 @@ var firebaseAuth  = {
     AsistenciasPage,
     MostrarAsistenciasPage,
     ProfesorAsistenciaPage,
-
+    EncuestasHomePage,
+    EnviarEncuestaPage
 
   ],
   providers: [
@@ -112,7 +118,8 @@ var firebaseAuth  = {
     AlumnoServiceProvider,
     AsistenciasProvider,
     BarcodeScanner,
-    ProfesorServiceProvider
+    ProfesorServiceProvider,
+    EncuestasDataProvider ,  DatePipe  
 
   ]
 })
