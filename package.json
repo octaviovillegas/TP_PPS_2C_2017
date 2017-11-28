@@ -20,6 +20,7 @@
         "@angular/http": "4.4.4",
         "@angular/platform-browser": "4.4.4",
         "@angular/platform-browser-dynamic": "4.4.4",
+        "@ionic-native/barcode-scanner": "^4.4.2",
         "@ionic-native/core": "4.3.2",
         "@ionic-native/facebook": "^4.4.2",
         "@ionic-native/native-audio": "^4.4.2",
@@ -29,8 +30,8 @@
         "angularfire2": "4.0.0-rc.2",
         "chart.js": "^2.7.1",
         "cordova-android": "^6.2.3",
+        "cordova-plugin-compat": "^1.0.0",
         "cordova-plugin-device": "^1.1.4",
-        "cordova-plugin-facebook4": "^1.9.1",
         "cordova-plugin-ionic-webview": "^1.1.11",
         "cordova-plugin-nativeaudio": "^3.0.9",
         "cordova-plugin-splashscreen": "^4.0.3",
@@ -39,6 +40,7 @@
         "ionic-angular": "3.8.0",
         "ionic-plugin-keyboard": "^2.2.1",
         "ionicons": "3.0.0",
+        "phonegap-plugin-barcodescanner": "^6.0.8",
         "rxjs": "5.4.3",
         "socket.io": "^2.0.4",
         "sw-toolbox": "3.6.0",
@@ -59,10 +61,7 @@
             "cordova-plugin-whitelist": {},
             "ionic-plugin-keyboard": {},
             "cordova-plugin-nativeaudio": {},
-            "cordova-plugin-facebook4": {
-                "APP_ID": "812191038983818",
-                "APP_NAME": "escuelafsz"
-            }
+            "phonegap-plugin-barcodescanner": {}
         },
         "platforms": [
             "android"
