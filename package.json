@@ -1,17 +1,17 @@
 {
-    "name": "TP_PPS_2C_2017",
-    "version": "0.0.1",
-    "author": "Ionic Framework",
-    "homepage": "http://ionicframework.com/",
-    "private": true,
-    "scripts": {
-        "clean": "ionic-app-scripts clean",
-        "build": "ionic-app-scripts build",
-        "lint": "ionic-app-scripts lint",
-        "ionic:build": "ionic-app-scripts build",
-        "ionic:serve": "ionic-app-scripts serve"
-    },
-    "dependencies": {
+  "name": "TP_PPS_2C_2017",
+  "version": "0.0.1",
+  "author": "Ionic Framework",
+  "homepage": "http://ionicframework.com/",
+  "private": true,
+  "scripts": {
+    "clean": "ionic-app-scripts clean",
+    "build": "ionic-app-scripts build",
+    "lint": "ionic-app-scripts lint",
+    "ionic:build": "ionic-app-scripts build",
+    "ionic:serve": "ionic-app-scripts serve"
+  },
+      "dependencies": {
         "@angular/common": "4.4.4",
         "@angular/compiler": "4.4.4",
         "@angular/compiler-cli": "4.4.4",
@@ -61,7 +61,8 @@
             "cordova-plugin-whitelist": {},
             "ionic-plugin-keyboard": {},
             "cordova-plugin-nativeaudio": {},
-            "phonegap-plugin-barcodescanner": {}
+            "phonegap-plugin-barcodescanner": {},
+            "cordova-plugin-datepicker": {}
         },
         "platforms": [
             "android"
