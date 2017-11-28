@@ -8,16 +8,23 @@
 </ion-header-->
 
 
-<ion-content padding>
-  <img *ngIf="foto!=undefined" [src]="foto" width="100" height="100">
-  <h2>Elija una opción para: {{nombre}}</h2>
-
-  <button ion-button (click)="eliminar()">
-    Dar de baja
+<ion-content class="fondo" padding>
+  <h4>Seleccione la opción deseada</h4>
+  <h4> {{nombre}} </h4>
+  <br> 
+  <img class="imagen" *ngIf="foto!=undefined" [src]="foto" width="150px" height="150px">
+  <br>
+  
+  <button class="btn" ion-button (click)="cancelarOpe()">
+    Cancelar
   </button>
 
-  <button ion-button (click)="modificar()">
-    Modificar datos
+  <button class="btn1" ion-button (click)="modificar()">
+    Modificar
+  </button>
+
+  <button class="btn2" ion-button (click)="eliminar()">
+    Eliminar
   </button>
 
 </ion-content>

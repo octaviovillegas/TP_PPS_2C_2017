@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController,ViewController } from 'ionic-angular';
 
 
 
@@ -15,7 +15,7 @@ export class ConsultarBajaModifPage {
   private foto:string="";
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public modalCtrl:ModalController
+              public modalCtrl:ModalController,public view:ViewController
 
   ) {}
 
@@ -25,11 +25,14 @@ export class ConsultarBajaModifPage {
     this.foto = this.profesor.foto;
     console.log(this.profesor);
     console.log(this.profesor.nombre);
+
+    
   }
 
   eliminar(){
     let modalAlumno = this.modalCtrl.create('DatosProfesoresPage', {'profesor':this.profesor, 'boolDatos':true});
     modalAlumno.present();
+    
   }
 
   modificar(){
@@ -38,6 +41,8 @@ export class ConsultarBajaModifPage {
     modalAlumno.present();
   }
 
-
+  cancelarOpe(){
+    this.view.dismiss();
+  }
 
 }
