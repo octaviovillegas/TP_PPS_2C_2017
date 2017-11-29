@@ -53,7 +53,8 @@ export class EncuestasPage {
     date.setMonth(date.getMonth() + 4);
     return date.getFullYear() + "-" + (date.getMonth() < 10 ? "0" : "") + date.getMonth()  + "-" + (date.getDate() < 10 ? "0" : "") + date.getDate();
   }
-  public isValidDate(): boolean {
+  
+  public isInvalidDate(): boolean {
     if(this.formCrear != undefined) {
       console.log(this.formCrear.value);
       let inicioStr = this.formCrear.value["fechaInicio"];
@@ -75,16 +76,15 @@ export class EncuestasPage {
         let current = encuestas.val()[props[props.length -1]];
         this.lastEncuesta = current;
         this.currentKey = props[props.length -1];
-        if(current.termina > new Date().getTime()) {
+        let startTime = new Date(current.fechaInicio);
+        let endTime = new Date(current.fechaFin);
+        if(startTime <= new Date() && endTime >= new Date()) {
           if(current.terminado == 0) {
             this.respuesta = "A";
-            this.getTime();
             let respondieron = current.respondieron;
-            console.log(respondieron);
             let propRes = Object.getOwnPropertyNames(respondieron);
             let email = this.authAf.auth.currentUser.email;
             propRes.forEach( p => {
-              console.log(respondieron[p]);
               if(respondieron[p] == email){
                 this.puedoResponder = false;
               }
@@ -113,16 +113,6 @@ export class EncuestasPage {
     let prompt = this.alertCtrl.create({ title: 'Encuesta creada', buttons: [{ text: 'Ok',}] });
     prompt.present();
     let data: {} = this.formCrear.value;
-    data["creado"] = new Date().getTime();
-    let tiempo = 0;
-    if(data["tiempo"] == "2h"){
-      tiempo = 7200000;
-    } else if (data["tiempo"] == "1h") {
-      tiempo = 3600000;
-    } else if (data["tiempo"] == "30s") {
-      tiempo = 30000;
-    }
-    data["termina"] = data["creado"] + tiempo;
     data["terminado"] = "0";
     data["A"] = 0;
     data["B"] = 0;
@@ -131,24 +121,6 @@ export class EncuestasPage {
     };
     this.af.list("/encuestas").push(data);
     this.formCrear.reset();
-  }
-
-  public getTime(): void {
-    setInterval( () => {
-      if(this.lastEncuesta != null && this.lastEncuesta != undefined) {
-        let duration = this.lastEncuesta.termina - new Date().getTime();
-        let horNum = parseInt(((duration/(1000*60*60))%24) + "");
-        let minNum = parseInt(((duration/(1000*60))%60) + "");
-        let segNum = parseInt(((duration/1000)%60) + "");
-        let horas = (horNum < 10) ? "0" + horNum : horNum;
-        let minutos = (minNum < 10) ? "0" + minNum : minNum;
-        let segundos = (segNum < 10) ? "0" + segNum : segNum;
-        if(horas <= 0 && minutos <= 0 && segundos <= 0){
-          this.initRef();
-        }
-        this.lastEncuesta.cuenta = horas + ":" + minutos + ":" + segundos;
-      }
-    }, 1000)
   }
 
   public responderPreg() {

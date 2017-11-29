@@ -39,7 +39,7 @@
       <button ion-button block (click)="responderPreg()" [disabled]="!puedoResponder" >Responder</button>
       <ion-card>
         <ion-item text-center>
-          Tiempo restante: <h1><b>{{lastEncuesta.cuenta}}</b></h1>
+          Termina el: <h1><b>{{lastEncuesta.fechaFin}}</b></h1>
         </ion-item>
       </ion-card>
     </div>
@@ -80,13 +80,13 @@
         <ion-label>Fecha de fin</ion-label>
         <ion-datetime displayFormat="MM/DD/YYYY" min="{{getMinDate()}}" max="{{getMaxDate()}}" formControlName="fechaFin"></ion-datetime>
       </ion-item>
-      <ion-card *ngIf="formCrear.valid && !isValidDate()">
+      <ion-card *ngIf="formCrear.valid && isInvalidDate()">
         <ion-card-content>
           Fechas incorrectas
         </ion-card-content>
       </ion-card>
       <br>
-      <button ion-button block type="submit" [disabled]="!formCrear.valid || isValidDate()" (click)="crearEncuesta()">Crear</button>
+      <button ion-button block type="submit" [disabled]="!formCrear.valid || isInvalidDate()" (click)="crearEncuesta()">Crear</button>
     </form>
   </ion-content>
 
