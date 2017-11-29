@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { AngularFireDatabase } from 'angularfire2/database-deprecated';
+import { AngularFireDatabase } from 'angularfire2/database';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 import { MyApp } from './app.component';
