@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database-deprecated';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 import { MyApp } from './app.component';
@@ -20,6 +20,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AdminUsuariosPage } from '../pages/adminUsuarios/adminUsuarios';
 import { Facebook } from '@ionic-native/facebook';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 
 @NgModule({
@@ -51,7 +52,9 @@ import { Facebook } from '@ionic-native/facebook';
     AngularFireDatabase,
     NativeAudio,
     FormBuilder,
-    Facebook
+    Facebook,
+    BarcodeScanner
+    //SocketService
   ]
 })
 export class AppModule {}

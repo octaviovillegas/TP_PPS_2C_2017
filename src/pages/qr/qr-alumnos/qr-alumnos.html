@@ -1,0 +1,28 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>QR Alumno</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-card *ngFor="let alumno of alumnos | async">
+    <ion-item [hidden]="alumno.email != emailCodigo">
+    
+        <h2>{{alumno.apellido}}, {{alumno.nombre}}</h2>
+        <p>Legajo: <b>{{alumno.legajo}}</b></p>
+        <p>Email lista alumnos: <b>{{alumno.email}}</b></p>
+        <p>Email logueado: {{email}}</p>
+        <p>Estadística: {{alumno.Estadistica}}</p>
+        <p>Laboratorio: {{alumno.Laboratorio}}</p>
+        <p>Programación: {{alumno.Programacion}}</p>
+   
+    </ion-item>
+  </ion-card>     
+
+  <button ion-button class="escanear" round full (click)="scanCode()">Escanear <ion-icon name="qr-scanner"></ion-icon></button>
+
+</ion-content>

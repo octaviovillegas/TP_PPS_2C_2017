@@ -7,6 +7,7 @@ import { EncuestasPage } from '../pages/encuestas/encuestas';
 import { EnviarAvisoPage } from '../pages/enviarAviso/enviarAviso';
 import { MiPerfilPage } from '../pages/miPerfil/miPerfil';
 import { TomarAsistenciaPage } from '../pages/tomarAsistencia/tomarAsistencia';
+import { QrAlumnosPage } from '../pages/qr/qr-alumnos/qr-alumnos';
 
 export enum PageType {
     Listable,
@@ -19,7 +20,8 @@ export class PagesService{
         if (usrType == "Alumno") {
             return [ 
                 this.inicioPage, 
-                this.listPage
+                this.listPage,
+                this.QrAlumnosPage
             ];
         }
 
@@ -46,7 +48,8 @@ export class PagesService{
                 this.enviarAvisoPage,
                 this.adminUsuariosPage,
                 this.miPerfilPage,
-                this.configuracionPage
+                this.configuracionPage,
+                this.QrAlumnosPage                
             ];
         }
     }
@@ -111,5 +114,13 @@ export class PagesService{
         route: 'TomarAsistencia',
         type: PageType.Listable,
         icon: "md-hand"
+    };
+
+    public QrAlumnosPage = { 
+        title: 'QR Alumno', 
+        component: QrAlumnosPage,
+        route: 'QrAlumnos',
+        type: PageType.Listable,
+        icon: "md-qr-scanner"
     };
 }
