@@ -74,11 +74,11 @@
       </ion-item>
       <ion-item>
         <ion-label>Fecha de inicio</ion-label>
-        <ion-datetime displayFormat="MM/DD/YYYY" min="getMinDate()" max="getMaxDate()" formControlName="fechaInicio"></ion-datetime>
+        <ion-datetime displayFormat="MM/DD/YYYY" min="{{getMinDate()}}" max="{{getMaxDate()}}" formControlName="fechaInicio"></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label>Fecha de fin</ion-label>
-        <ion-datetime displayFormat="MM/DD/YYYY" min="getMinDate()" max="getMaxDate()" formControlName="fechaFin"></ion-datetime>
+        <ion-datetime displayFormat="MM/DD/YYYY" min="{{getMinDate()}}" max="{{getMaxDate()}}" formControlName="fechaFin"></ion-datetime>
       </ion-item>
       <br>
       <button ion-button block type="submit" [disabled]="!formCrear.valid || hayEncuesta()" (click)="crearEncuesta()">Crear</button>

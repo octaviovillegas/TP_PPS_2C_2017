@@ -38,20 +38,34 @@ export class EncuestasPage {
         respuestaA: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
         respuestaB: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
         fechaInicio: ['', Validators.compose([Validators.required])],
-        fechaFin: ['', Validators.compose([Validators.required])]
+        fechaFin: ['', Validators.compose([Validators.required, this.isValidEndDate.bind(this)])]
     });
     this.initRef();
   }
 
   public getMinDate(): string {
     let date = new Date();
-    return date.getMonth() + "-" + date.getDate()  + "-" + date.getFullYear();
+    return date.getFullYear() + "-" + (date.getMonth() < 10 ? "0" : "") + date.getMonth()  + "-" + (date.getDate() < 10 ? "0" : "") + date.getDate();
   }
 
   public getMaxDate(): string {
     let date = new Date();
     date.setMonth(date.getMonth() + 4);
-    return date.getMonth() + "-" + date.getDate()  + "-" + date.getFullYear();
+    return date.getFullYear() + "-" + (date.getMonth() < 10 ? "0" : "") + date.getMonth()  + "-" + (date.getDate() < 10 ? "0" : "") + date.getDate();
+  }
+
+  public isValidEndDate(): boolean {
+    if(this.formCrear != undefined) {
+      let inicioStr = this.formCrear.value["fechaInicio"];
+      let finStr = this.formCrear.value["fechaFin"];
+      if(inicioStr != "" && inicioStr != null && inicioStr != undefined
+      && finStr != "" && finStr != null && finStr != undefined) {
+        if(new Date(inicioStr) <= new Date(finStr)){
+          return false;
+        } 
+      }
+    }
+    return true;
   }
 
   public initRef(): void {
