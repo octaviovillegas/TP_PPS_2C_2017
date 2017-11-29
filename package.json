@@ -22,6 +22,7 @@
         "@angular/platform-browser-dynamic": "4.4.4",
         "@ionic-native/barcode-scanner": "^4.4.2",
         "@ionic-native/core": "4.3.2",
+        "@ionic-native/date-picker": "^4.4.2",
         "@ionic-native/facebook": "^4.4.2",
         "@ionic-native/native-audio": "^4.4.2",
         "@ionic-native/splash-screen": "4.3.2",
@@ -31,6 +32,7 @@
         "chart.js": "^2.7.1",
         "cordova-android": "^6.2.3",
         "cordova-plugin-compat": "^1.0.0",
+        "cordova-plugin-datepicker": "^0.9.3",
         "cordova-plugin-device": "^1.1.4",
         "cordova-plugin-ionic-webview": "^1.1.11",
         "cordova-plugin-nativeaudio": "^3.0.9",
@@ -52,7 +54,7 @@
         "@ionic/app-scripts": "3.0.1",
         "typescript": "2.3.4"
     },
-    "description": "An Ionic project",
+    "description": "TP PPS 2017",
     "cordova": {
         "plugins": {
             "cordova-plugin-device": {},
