@@ -35,7 +35,6 @@ export class TomarAsistenciaPage {
     public af: AngularFireDatabase,
     public alertCtrl: AlertController) {
     this.tab = "materias";
-    this.filtrarAlumnos("Programacion", "A");
     this.materiaDeProfe();
   }
 
@@ -49,14 +48,9 @@ export class TomarAsistenciaPage {
 
   public selectMateria(nombre: string, curso: string): void {
     this.tab = "materias";
-    this.filtrarAlumnos(nombre, curso);
     this.showMaterias = false;
     this.current.nombre = nombre;
     this.current.curso = curso;
-  }
-
-  private filtrarAlumnos(nombre: string, curso: string): void {
-    this.alumnos = this.usuarios.map(u => u.filter(u => u.tipo == "alumno" && u[nombre] == curso)) as FirebaseListObservable<any[]>;
   }
 
   public setVisibility(alumno: any, key: string): void {
@@ -163,14 +157,14 @@ export class TomarAsistenciaPage {
   }
 
   private materiaDeProfe(): void {
-    this.profesores = this.usuarios.map(usuario => usuario.filter(usuario => {
+    /*this.profesores = this.usuarios.map(usuario => usuario.filter(usuario => {
       if(usuario.tipo == "profe") {
         if(this.searchValue != "" && this.searchValue != undefined) {
           return usuario.apellido.toLowerCase().indexOf(this.searchValue.toLowerCase()) !== -1;
         }
         return true;
       }
-    })) as FirebaseListObservable<any[]>;
+    })) as FirebaseListObservable<any[]>;*/
   }
 
 }

@@ -19,32 +19,19 @@
   <ion-content *ngIf="tab == 'materias'">
     <ion-card>
       <ion-list>
-          <ion-item color="light" (click)="showHideMaterias()">
-            <h1> <b>{{current.nombre}} {{current.curso}}</b> </h1>
-            <ion-icon name="md-arrow-dropdown" item-end *ngIf="!showMaterias"></ion-icon>
-            <ion-icon name="md-arrow-dropup" item-end *ngIf="showMaterias"></ion-icon>
+        <ion-item>
+          <h1>Materias</h1>
+        </ion-item>
+        <div *ngFor="let m of materias | async">
+          <ion-item *ngIf="showMaterias" (click)="selectMateria(m.nombre, m.curso)">
+            {{m.nombre}} {{m.curso}}
+            <ion-icon class="incompleto" name="ios-arrow-forward" item-end *ngIf="m.listo == 0"></ion-icon>
+            <ion-icon class="completo" name="md-checkmark" item-end *ngIf="m.listo == 1"></ion-icon>
           </ion-item>
-          <div *ngFor="let m of materias | async">
-            <ion-item *ngIf="showMaterias" (click)="selectMateria(m.nombre, m.curso)">
-              {{m.nombre}} {{m.curso}}
-              <ion-icon class="incompleto" name="ios-arrow-forward" item-end *ngIf="m.listo == 0"></ion-icon>
-              <ion-icon class="completo" name="md-checkmark" item-end *ngIf="m.listo == 1"></ion-icon>
-            </ion-item>
-            {{setMateriaKey(m.nombre, m.curso, m.$key, m.listo)}}
-          </div>
+          {{setMateriaKey(m.nombre, m.curso, m.$key, m.listo)}}
+        </div>
       </ion-list>
     </ion-card>
-
-    <ion-card *ngFor="let a of alumnos | async" (click)="selecAlumno(a.$key)" class="item-alumno">
-      <ion-item>
-        <h2>{{a.apellido}}, {{a.nombre}}</h2>
-        <p>Legajo: <b>{{a.legajo}}</b></p>
-        <ion-icon name='md-checkmark' class="completo" id="{{a.$key}}" style="visibility: hidden;" item-end></ion-icon>
-        {{setVisibility(a, a.$key)}}
-      </ion-item>
-    </ion-card>
-    <button ion-button block color="secondary" (click)="completarMateria(current.nombre, current.curso)" *ngIf="getListo() == 0">Completar</button>
-    <button ion-button block color="primary" (click)="reabrirMateria(current.nombre, current.curso)" *ngIf="getListo() == 1">Reabrir</button>
   </ion-content>
 
 
