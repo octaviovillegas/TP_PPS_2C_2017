@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { FirebaseListObservable } from 'angularfire2/database';
+import { FirebaseListObservable } from 'angularfire2/database-deprecated';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database-deprecated';
 import { AngularFireAuth } from 'angularfire2/auth';
 import swal from 'sweetalert2';
 
 @IonicPage()
 @Component({
-  selector: 'page-qr-alumnos',
-  templateUrl: 'qr-alumnos.html',
+  selector: 'page-qr-profesores',
+  templateUrl: 'qr-profesores.html',
 })
-export class QrAlumnosPage implements OnInit {
+export class QrProfesoresPage implements OnInit {
 
-  private alumnos: FirebaseListObservable<any[]>;
-  private listAlumnos: any = []; 
+  private profesores: FirebaseListObservable<any[]>;
+  private listAlumnos: FirebaseListObservable<any[]>; 
   apellido;
 
   user = this.authAf.auth.currentUser;
@@ -24,6 +24,11 @@ export class QrAlumnosPage implements OnInit {
   photoUrl;
   uid;
   emailVerified;
+  tipo: string = "alumno";
+  ninguno: string = "Ninguno";
+  estadistica: string = "Estadistica";
+  laboratorio: string = "Laboratorio";
+  programacion: string = "Programacion";
 
   scannedCode: string;
   scannedCodes: Array<string>;
@@ -34,7 +39,7 @@ export class QrAlumnosPage implements OnInit {
     public af: AngularFireDatabase,
     public barcodeScanner: BarcodeScanner) 
     {
-      this.alumnos = this.af.list('/usuarios');
+      this.profesores = this.af.list('/usuarios');
     }
 
     ngOnInit(): void {
@@ -47,20 +52,22 @@ export class QrAlumnosPage implements OnInit {
         this.email = this.user.email;
         this.photoUrl = this.user.photoURL;
         this.emailVerified = this.user.emailVerified;
-        this.uid = this.user.uid;  
+        this.uid = this.user.uid;
       }
     }
 
   async scanCode(){
     const result = await this.barcodeScanner.scan();
     this.scannedCode = await result.text;
-    if (this.scannedCode == "alumno") {
-      this.emailCodigo = this.email;
-    }
     if (this.scannedCode == "profesor") {
+      //this.informacion(this.alumno);
+      this.emailCodigo = this.email;
+      //this.scannedCodes.push("100");
+    }
+    if (this.scannedCode == "alumno") {
       swal({
         title: 'Error',
-        text: 'QR válido solamente para profesores.',
+        text: 'QR válido solamente para alumnos.',
         type: 'error',
         timer: 5000
       })

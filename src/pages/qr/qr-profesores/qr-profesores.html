@@ -1,0 +1,43 @@
+<ion-header>
+  
+    <ion-navbar>
+      <ion-title>QR Profesor</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+  
+    <ion-card *ngFor="let usuario of profesores | async">
+      <div [hidden]="usuario.email != emailCodigo">
+      <ion-item>
+      
+          <h2>{{usuario.apellido}}, {{usuario.nombre}}</h2>
+          <p>Legajo: <b>{{usuario.legajo}}</b></p>
+          <!-- <p>Email lista profesores: <b>{{usuario.email}}</b></p>
+          <p>Email logueado: {{email}}</p> -->
+          <p>Materia: {{usuario.materia}}</p>
+
+     
+      </ion-item>
+   
+    
+      <div *ngFor="let alumno of profesores | async">
+      <ion-item [hidden]="alumno.tipo != tipo">
+          <p>Alumno:</p>
+          <h2>{{usuario.apellido}}, {{usuario.nombre}}</h2>
+          <p>Legajo: <b>{{usuario.legajo}}</b></p>
+          <p [hidden]="alumno.Estadistica != ninguno && usuario.materia == estadistica">Estadística: {{usuario.Estadistica}}</p>
+          <p [hidden]="alumno.Laboratorio != ninguno && usuario.materia == laboratorio">Laboratorio: {{usuario.Laboratorio}}</p>
+          <p [hidden]="alumno.Programacion != ninguno && usuario.materia == programacion">Programación: {{usuario.Programacion}}</p>
+     
+      </ion-item>
+      </div>
+    </div>
+    </ion-card>     
+  
+    <button ion-button class="escanear" round full (click)="scanCode()">Escanear <ion-icon name="qr-scanner"></ion-icon></button>
+  
+  </ion-content>
+  

@@ -35,6 +35,28 @@ Branch: LoginRedSocial
 
 -------------------
 
+Módulo a desarrollar:
+• QR para Alumnos (Punto M)
+
+Fecha inicio: 27/11/2017
+
+Fecha fin: 27/11/2017
+
+Branch: LoginRedSocial
+
+-------------------
+
+Módulo a desarrollar:
+• QR para Profesores (Punto N)
+
+Fecha inicio: 28/11/2017
+
+Fecha fin: -
+
+Branch: LoginRedSocial
+
+-------------------
+
 # Fernando Martin Saibene
 Módulo a desarrollar:
 • Pantalla de Login con usuarios por mail
