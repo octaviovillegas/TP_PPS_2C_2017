@@ -80,8 +80,13 @@
         <ion-label>Fecha de fin</ion-label>
         <ion-datetime displayFormat="MM/DD/YYYY" min="{{getMinDate()}}" max="{{getMaxDate()}}" formControlName="fechaFin"></ion-datetime>
       </ion-item>
+      <ion-card *ngIf="formCrear.valid && !isValidDate()">
+        <ion-card-content>
+          Fechas incorrectas
+        </ion-card-content>
+      </ion-card>
       <br>
-      <button ion-button block type="submit" [disabled]="!formCrear.valid || hayEncuesta()" (click)="crearEncuesta()">Crear</button>
+      <button ion-button block type="submit" [disabled]="!formCrear.valid || isValidDate()" (click)="crearEncuesta()">Crear</button>
     </form>
   </ion-content>
 

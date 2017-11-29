@@ -38,7 +38,7 @@ export class EncuestasPage {
         respuestaA: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
         respuestaB: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
         fechaInicio: ['', Validators.compose([Validators.required])],
-        fechaFin: ['', Validators.compose([Validators.required, this.isValidEndDate.bind(this)])]
+        fechaFin: ['', Validators.compose([Validators.required])]
     });
     this.initRef();
   }
@@ -53,9 +53,9 @@ export class EncuestasPage {
     date.setMonth(date.getMonth() + 4);
     return date.getFullYear() + "-" + (date.getMonth() < 10 ? "0" : "") + date.getMonth()  + "-" + (date.getDate() < 10 ? "0" : "") + date.getDate();
   }
-
-  public isValidEndDate(): boolean {
+  public isValidDate(): boolean {
     if(this.formCrear != undefined) {
+      console.log(this.formCrear.value);
       let inicioStr = this.formCrear.value["fechaInicio"];
       let finStr = this.formCrear.value["fechaFin"];
       if(inicioStr != "" && inicioStr != null && inicioStr != undefined
