@@ -36,10 +36,15 @@ export class TomarAsistenciaPage {
       this.materias = this.alumnos = this.af.list("/materias");
   }
 
-  public setMateriaKey(nombre: string, curso: string, key: string, listo: string): void {
-    this.materiaObj[nombre+curso] = {key: key, listo: listo};
+  public selectMateria(nombre: string, curso: string): void {
+    this.tab = "materias";
+    this.navCtrl.push('ListaCursoPage', {
+      nombre: nombre,
+      curso: curso
+    });
   }
 
+  //Buscar
   public onInput(event: any): void {
     if(this.buscarPor == "Aula"){
       this.filtrarMateriasPorAula();

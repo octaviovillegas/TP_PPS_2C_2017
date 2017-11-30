@@ -15,7 +15,6 @@
   </ion-header>
   
 <ion-content padding>
-
   <ion-content *ngIf="tab == 'materias'">
     <ion-card>
       <ion-list>
@@ -28,7 +27,6 @@
             <ion-icon class="incompleto" name="ios-arrow-forward" item-end *ngIf="m.listo == 0"></ion-icon>
             <ion-icon class="completo" name="md-checkmark" item-end *ngIf="m.listo == 1"></ion-icon>
           </ion-item>
-            {{setMateriaKey(m.nombre, m.curso, m.$key, m.listo)}}
           </div>
       </ion-list>
     </ion-card>
