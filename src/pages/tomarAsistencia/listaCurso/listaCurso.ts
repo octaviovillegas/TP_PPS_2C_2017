@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavParams, AlertController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import { Camera } from '@ionic-native/camera';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 import 'rxjs/add/operator/map';
 
 @IonicPage()
@@ -17,25 +17,28 @@ export class ListaCursoPage {
 
   constructor(public navParams: NavParams,
     public alertCtrl: AlertController,
-    public af: AngularFireDatabase) {
+    public af: AngularFireDatabase,
+    private camera: Camera) {
       let nombre = navParams.get('nombre');
       let curso = navParams.get('curso');
-      let key = navParams.get('key');
       this.filterAlumnos(nombre, curso);
       this.filterMaterias(nombre, curso);
   }
 
-  takePicture(){
-    console.log(Camera);
-    /*Camera.getPicture({
-        destinationType: Camera.DestinationType.DATA_URL,
-        targetWidth: 1000,
-        targetHeight: 1000
-    }).then((imageData) => {
-        this.base64Image = "data:image/jpeg;base64," + imageData;
+  public takePicture(): void {
+    let options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+    this.camera.getPicture(options).then((imageData) => {
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64:
+      this.base64Image = 'data:image/jpeg;base64,' + imageData;
     }, (err) => {
-        console.log(err);
-    });*/
+      // Handle error
+    });
   }
   
   private filterAlumnos(nombre: string, curso: string): void {

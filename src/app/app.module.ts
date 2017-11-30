@@ -21,7 +21,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AdminUsuariosPage } from '../pages/adminUsuarios/adminUsuarios';
 import { Facebook } from '@ionic-native/facebook';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
-
+import { Camera } from '@ionic-native/camera';
 
 @NgModule({
   declarations: [
@@ -53,7 +53,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     NativeAudio,
     FormBuilder,
     Facebook,
-    BarcodeScanner
+    BarcodeScanner,
+    Camera
     //SocketService
   ]
 })
