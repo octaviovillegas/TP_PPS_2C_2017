@@ -149,7 +149,7 @@ export class LoginPage {
    async logearEnGitHub(){
     let proveedor = new firebase.auth.GithubAuthProvider();
 
-        let res = await this.authe.auth.signInWithRedirect(proveedor)
+        let res = await this.authe.auth.signInWithPopup(proveedor)
 
           .then(res =>{
             console.log('res: '+ JSON.stringify(res));
