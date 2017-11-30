@@ -10,19 +10,20 @@
 
 <ion-content class="fondo" padding>
 
+  <ion-item class="fondo">
+      <img (click)="addNuevoAlumno()" src="assets/imgs/add.png" width="40" height="40">
+  </ion-item>
+
+  <ion-item class="fondo">
+    <img (click)="cargarArchivos()" src="assets/imgs/excel.png" width="40" height="40">
+  </ion-item>
+
   <ion-list>
-    <ion-item (click)="abrirModalView(alumno)" class="fondo" *ngFor="let alumno of listado">
-      <ion-avatar item-start>
-        <img [src]="alumno.foto">
-      </ion-avatar>
+    <ion-item  class="fondo" *ngFor="let alumno of listado">
+        <img *ngIf="alumno.foto!=''" [src]="alumno.foto">
       <h2>{{ alumno.nombre}}</h2>
-      <p >Legajo: {{ alumno.legajo}}</p>
-      <!--<button ion-button (click)="eliminar(alumno)">
-        Baja
-      </button>
-      <button ion-button (click)="modificar(alumno)">
-        Modificar
-      </button>-->
+      <p>Legajo: {{ alumno.legajo}}</p>
+      <button ion-button color="primary" (click)="abrirModalView(alumno)">Detalles</button>
     </ion-item>
 
   </ion-list>

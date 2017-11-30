@@ -46,7 +46,7 @@ import { ProfesorServiceProvider } from '../providers/profesor-service/profesor-
 import { File } from "@ionic-native/file";
 import { FilePath } from "@ionic-native/file-path";
 import { FileChooser } from "@ionic-native/file-chooser";
-import { FileOpener } from "@ionic-native/file-opener";
+
 
 
 var firebaseAuth  = {
@@ -119,8 +119,7 @@ var firebaseAuth  = {
     ProfesorServiceProvider,
     File,
     FileChooser,
-    FilePath,
-    FileOpener
+    FilePath
 
   ]
 })

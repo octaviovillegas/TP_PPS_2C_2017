@@ -23,7 +23,9 @@
         "@ionic-native/barcode-scanner": "^4.4.2",
         "@ionic-native/camera": "^4.3.3",
         "@ionic-native/core": "4.3.0",
-        "@ionic-native/file-opener": "^4.4.2",
+        "@ionic-native/file": "^4.4.2",
+        "@ionic-native/file-chooser": "^4.4.2",
+        "@ionic-native/file-path": "^4.4.2",
         "@ionic-native/firebase": "^4.3.3",
         "@ionic-native/native-audio": "^4.4.2",
         "@ionic-native/push": "^4.3.3",
@@ -36,7 +38,10 @@
         "cordova-plugin-camera": "^2.4.1",
         "cordova-plugin-compat": "^1.1.0",
         "cordova-plugin-device": "^1.1.4",
+        "cordova-plugin-file": "^4.3.3",
         "cordova-plugin-file-opener2": "^2.0.19",
+        "cordova-plugin-filechooser": "^1.0.1",
+        "cordova-plugin-filepath": "^1.1.0",
         "cordova-plugin-firebase": "^0.1.24",
         "cordova-plugin-ionic-webview": "^1.1.11",
         "cordova-plugin-nativeaudio": "^3.0.9",
@@ -66,8 +71,11 @@
             "ionic-plugin-keyboard": {},
             "cordova-plugin-firebase": {},
             "phonegap-plugin-barcodescanner": {},
+            "cordova-plugin-nativeaudio": {},
             "cordova-plugin-file-opener2": {},
-            "cordova-plugin-nativeaudio": {}
+            "cordova-plugin-file": {},
+            "cordova-plugin-filechooser": {},
+            "cordova-plugin-filepath": {}
         },
         "platforms": [
             "android"

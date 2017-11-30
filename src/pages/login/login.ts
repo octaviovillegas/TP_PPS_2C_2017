@@ -149,17 +149,19 @@ export class LoginPage {
    async logearEnGitHub(){
     let proveedor = new firebase.auth.GithubAuthProvider();
 
-        let res = await this.authe.auth.signInWithRedirect(proveedor).then(res =>{
-          console.log('res: '+ JSON.stringify(res));
+        let res = await this.authe.auth.signInWithPopup(proveedor)
 
-          this.loginUsuario.setCorreo(res.user.email);
-          this.loginUsuario.setPerfil('alumno');
-          this.loginUsuario.setNombre(res.user.displayName);
-          this.loginUsuario.setFoto(res.user.photoURL);
-          this.loginUsuario.setLoginSocial(true);
-          console.log('usuarios: ', this.loginUsuario);
-          this.navCtrl.push('MenuPage', JSON.stringify(this.loginUsuario));
-        });
+          .then(res =>{
+            console.log('res: '+ JSON.stringify(res));
+
+            this.loginUsuario.setCorreo(res.user.email);
+            this.loginUsuario.setPerfil('alumno');
+            this.loginUsuario.setNombre(res.user.displayName);
+            this.loginUsuario.setFoto(res.user.photoURL);
+            this.loginUsuario.setLoginSocial(true);
+            console.log('usuarios: ', this.loginUsuario);
+            this.navCtrl.push('MenuPage', JSON.stringify(this.loginUsuario));
+          });
 
 }
 

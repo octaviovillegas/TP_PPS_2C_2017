@@ -11,6 +11,7 @@ import { IonicPage, NavController, NavParams, ModalController,ViewController } f
 export class ConsultarBajaModifPage {
 
   private profesor:any;
+  private alumno:any;
   private nombre:string="";
   private foto:string="";
 
@@ -20,25 +21,39 @@ export class ConsultarBajaModifPage {
   ) {}
 
   ionViewDidLoad() {
-    this.profesor = this.navParams.get('profesor');
-    this.nombre = this.profesor.nombre;
-    this.foto = this.profesor.foto;
-    console.log(this.profesor);
-    console.log(this.profesor.nombre);
+    if (this.navParams.get('profesor')!=undefined) {
+      this.profesor = this.navParams.get('profesor');
+      this.nombre = this.profesor.nombre;
+      this.foto = this.profesor.foto;
+    }else{
+     this.alumno = this.navParams.get('alumno');
+     this.nombre = this.alumno.nombre;
+     this.foto = this.alumno.foto;
+    }
 
-    
   }
 
   eliminar(){
-    let modalAlumno = this.modalCtrl.create('DatosProfesoresPage', {'profesor':this.profesor, 'boolDatos':true});
-    modalAlumno.present();
-    
+    if (this.profesor!=undefined) {
+      let modalProfesor = this.modalCtrl.create('DatosProfesoresPage', {'profesor':this.profesor, 'boolDatos':true});
+      modalProfesor.present();
+    }else{
+      let modalAlumno = this.modalCtrl.create('DatosAlumnosPage', {'alumno':this.alumno, 'boolDatos':true});
+      modalAlumno.present();
+    }
+
+
   }
 
   modificar(){
-    console.log('modificar', this.profesor);
-    let modalAlumno = this.modalCtrl.create('DatosProfesoresPage', {'profesor':this.profesor, 'boolDatos':false});
-    modalAlumno.present();
+    if (this.profesor!=undefined) {
+      let modalProfesor = this.modalCtrl.create('DatosProfesoresPage', {'profesor':this.profesor, 'boolDatos':false});
+      modalProfesor.present();
+    }else{
+      let modalAlumno = this.modalCtrl.create('DatosAlumnosPage', {'alumno':this.alumno, 'boolDatos':false});
+      modalAlumno.present();
+    }
+
   }
 
   cancelarOpe(){

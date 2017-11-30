@@ -29,26 +29,16 @@ export class ListaProfesoresPage {
 
   abrirModalView(profesor){
     console.log(profesor);
-    let consultaView = this.modalCtrl.create('ConsultarBajaModifPage', {'profesor':profesor});
-    consultaView.present();
+    //let consultaView = this.modalCtrl.create('ConsultarBajaModifPage', {'profesor':profesor});
+    //consultaView.present();
+    this.navCtrl.push('ConsultarBajaModifPage', {'alumno':profesor});
   }
 
 
- /* eliminar(profesor:any){
 
-        console.log('modificar', profesor);
-        let modalAlumno = this.modalCtrl.create('DatosProfesoresPage', {'profesor':profesor, 'boolDatos':true});
-        modalAlumno.present();
+  public irAFormProfesor(){
+    this.navCtrl.push('ProfesoresFormPage');
   }
-
-  modificar(profesor:any){
-
-        console.log('modificar', profesor);
-        let modalAlumno = this.modalCtrl.create('DatosProfesoresPage', {'profesor':profesor, 'boolDatos':false});
-        modalAlumno.present();
-  }
-  */
-
 
 
 
