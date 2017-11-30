@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavParams, AlertController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { Camera } from '@ionic-native/camera';
 import 'rxjs/add/operator/map';
 
 @IonicPage()
@@ -12,6 +13,7 @@ export class ListaCursoPage {
 
   public materias: FirebaseListObservable<any[]>;
   public alumnos: FirebaseListObservable<any[]>;
+  public base64Image: string;
 
   constructor(public navParams: NavParams,
     public alertCtrl: AlertController,
@@ -21,6 +23,19 @@ export class ListaCursoPage {
       let key = navParams.get('key');
       this.filterAlumnos(nombre, curso);
       this.filterMaterias(nombre, curso);
+  }
+
+  takePicture(){
+    console.log(Camera);
+    /*Camera.getPicture({
+        destinationType: Camera.DestinationType.DATA_URL,
+        targetWidth: 1000,
+        targetHeight: 1000
+    }).then((imageData) => {
+        this.base64Image = "data:image/jpeg;base64," + imageData;
+    }, (err) => {
+        console.log(err);
+    });*/
   }
   
   private filterAlumnos(nombre: string, curso: string): void {
