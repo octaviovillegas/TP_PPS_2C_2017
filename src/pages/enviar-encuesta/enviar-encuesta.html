@@ -1,35 +1,70 @@
+
 <ion-header>
-  <ion-navbar color='favorite'>
-    <ion-title>Destinatarios</ion-title>
-  </ion-navbar>
-</ion-header>
-
-
-<ion-content padding class="fondo">  
-
-  <ion-item>
-    <ion-label style="color : rgb(85, 158, 218)">Materias</ion-label>
-    <ion-select [(ngModel)]="destinatarios" multiple="true">
-      <ion-option *ngFor="let a of listExcel; let i = index" value="a.$key" [value]="a.$key">{{a.$key}}</ion-option>
-    </ion-select>
-  </ion-item>
   
-  <br>
-
-  <ion-item>
-    <div style="color : rgb(26, 18, 92)">Destinatarios:</div>
-  </ion-item>
-
-  <ion-item *ngFor="let d of destinatarios">
-    <div style="color : rgb(26, 18, 92)">{{d}}</div>
-  </ion-item>
-
-  <br>
-  <br>
-  <!--<button ion-button (click)="cerrarModal()">Guardar</button>-->
-
-  <!--<button ion-button (click)="mostrarDestinatarios()">mostrarOP</button>-->
-
-  <button ion-button (click)="siguiente()" style="float:right;" class="btnEnv" round [disabled]="verificarDestinatarios()">Siguiente</button>
-
-</ion-content>
+    <ion-navbar>
+      <ion-title>Encuesta: {{nombre}}</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content class="fondo" padding>
+  
+    <!--disabled=true-->
+      <ion-item class="fondo">
+          <ion-label>Pregunta:</ion-label>
+          <ion-input type="text" [disabled]="mostrarDatos" [(ngModel)]="pregunta" ngDefaultControl>{{pregunta}}</ion-input>
+      </ion-item>
+  
+      <ion-item class="fondo">
+          <ion-label>Opcion1:</ion-label>
+          <ion-input type="text" [disabled]="mostrarDatos" [(ngModel)]="opcion1" ngDefaultControl>{{opcion1}}</ion-input>
+      </ion-item>
+  
+      <ion-item class="fondo">
+          <ion-label>Opcion2:</ion-label>
+          <ion-input type="text" [disabled]="mostrarDatos" [(ngModel)]="opcion2" ngDefaultControl>{{opcion2}}</ion-input>
+      </ion-item>
+  <!--
+      <ion-list>
+          <ion-item-sliding  *ngFor="let materia of listaMaterias">
+            <ion-item  class="fondo1">
+              <ion-avatar item-start>
+                <img src="assets/imgs/imgListaMaterias.png">
+              </ion-avatar>
+              <h2>{{materia}}</h2>
+            </ion-item>
+            <ion-item-options side="left">
+              <button class="btn1" ion-button color="light" (click)="modificarEncuesta(materia)">
+                <img width="25" height="25" src="assets/imgs/imgActualizar.jpg">
+                Modificar
+              </button>
+            </ion-item-options>
+            <ion-item-options side="right">
+              <button class="btn1" ion-button color="light" (click)="eliminarMateria(materia)">
+                <img width="25" height="25" src="assets/imgs/imgCancelar.jpg" >
+                Eliminar
+              </button>
+            </ion-item-options>
+          </ion-item-sliding>
+      </ion-list>
+  
+      <br><br>
+    -->
+     
+  
+      <br><br>
+      <button class="btn" ion-button full color="light" (click)="cancelarOpe()">
+        Cancelar
+      </button>
+      <br>
+      <!--*ngIf="mostrarDatos" -->
+      <button ion-button class="btn1" full   (click)="eliminarEncuesta()">
+        Eliminar Encuesta
+      </button>
+  
+      <button ion-button class="btn1" full *ngIf="!mostrarDatos" (click)="modificarEncuesta()">
+        Modificar Encuesta
+      </button>
+  
+  

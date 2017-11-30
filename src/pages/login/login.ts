@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController, Platform } from 'ionic-angular';
+import { IonicPage,ToastController, NavController, NavParams, AlertController, LoadingController, Platform } from 'ionic-angular';
 
 import { Firebase } from '@ionic-native/firebase';
 import { LoginServiceProvider } from "../../providers/login-service/login-service";
@@ -30,7 +30,7 @@ export class LoginPage {
     loggedin:false
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
+  constructor(public navCtrl: NavController,public toastCtrl: ToastController, public navParams: NavParams,
               public alertCtrl:AlertController, public loadingCtrl:LoadingController,
               private auth:LoginServiceProvider, private servicioDB:PersonasServiceProvider,
               public platform:Platform, public authe:AngularFireAuth
@@ -41,41 +41,65 @@ export class LoginPage {
     this.passw = null;
     this.loginUsuario = new Usuario();
   }
-
+  toastOk(x) {
+    let toast = this.toastCtrl.create({
+      message: x + ' correctamente',
+      position: 'middle',
+      duration: 1000
+    });
+    toast.present();
+  }
 
   login():void{
-    const loading = this.loadingCtrl.create({
-      content: 'Verificando datos. Espere...',
-      dismissOnPageChange: true,
-      spinner:"bubbles"
+    if(this.correo =="" )
+    {
+    
+      let toast = this.toastCtrl.create({
+        message: ' Error Acceso denegado.Verifique sus datos',
+      position: 'middle',
+      duration: 1000
     });
-    loading.present();
-    this.loginUsuario.setCorreo(this.correo);
-    this.loginUsuario.setClave(this.passw);
-
-    this.auth.loginUser(this.loginUsuario.getCorreo(), this.loginUsuario.getClave().toString())
-      .then(user=>{
-
-        this.listaUsuarios = this.servicioDB.getUsuariosLista();
-        this.listaUsuarios.subscribe(lista=>{
-          lista.forEach(usuario => {
-            console.log(usuario);
-            if (usuario['correo'] == this.loginUsuario.getCorreo()) {
-                this.loginUsuario.setPerfil(usuario['perfil']);
-                this.loginUsuario.setNombre(usuario['nombre']);
-                console.log('set nombre: ', usuario['perfil']);
-                this.loginUsuario.setPerfil(usuario['perfil']);
-                this.loginUsuario.setClave(-1); //no necesito guardar la passw
-                this.navCtrl.push("MenuPage", JSON.stringify(this.loginUsuario));
-            }
+    toast.present();
+    
+       
+    
+    }
+    else
+    {
+      const loading = this.loadingCtrl.create({
+        content: 'Verificando datos. Espere...',
+        dismissOnPageChange: true,
+        spinner:"bubbles"
+      });
+      loading.present();
+      this.loginUsuario.setCorreo(this.correo);
+      this.loginUsuario.setClave(this.passw);
+  
+      this.auth.loginUser(this.loginUsuario.getCorreo(), this.loginUsuario.getClave().toString())
+        .then(user=>{
+  
+          this.listaUsuarios = this.servicioDB.getUsuariosLista();
+          this.listaUsuarios.subscribe(lista=>{
+            lista.forEach(usuario => {
+              console.log(usuario);
+              if (usuario['correo'] == this.loginUsuario.getCorreo()) {
+                  this.loginUsuario.setPerfil(usuario['perfil']);
+                  this.loginUsuario.setNombre(usuario['nombre']);
+                  console.log('set nombre: ', usuario['perfil']);
+                  this.loginUsuario.setPerfil(usuario['perfil']);
+                  this.loginUsuario.setClave(-1); //no necesito guardar la passw
+                  this.navCtrl.push("MenuPage", JSON.stringify(this.loginUsuario));
+              }
+            });
           });
-        });
-      }, err=>{
-        let msjAlert = this.alertCtrl.create({
-          subTitle: 'Error al validar usuario. Verifique sus datos',
-          buttons: ['Volver']
-        });
-      })
+        }, err=>{
+          let msjAlert = this.alertCtrl.create({
+            subTitle: 'Error al validar usuario. Verifique sus datos',
+            buttons: ['Volver']
+          });
+        })
+      
+    }
 
     }
 

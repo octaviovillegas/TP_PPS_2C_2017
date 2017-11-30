@@ -13,17 +13,21 @@
     <ion-icon name="clipboard"></ion-icon> Nueva Encuesta</button>
 
     <ion-list>
-      <ion-item (click)="abrirModalView(encuesta)" class="fondo" *ngFor="let encuesta of listado">
+      <ion-item  class="fondo" *ngFor="let encuesta of listado">
         <ion-avatar item-start>
         </ion-avatar>
         <h2>{{ encuesta.pregunta}}</h2>
-        <p >Legajo: {{ encuesta.opcion1}}</p>
-        <!--<button ion-button (click)="eliminar(alumno)">
-          Baja
+       <!--  <p >Legajo: {{ encuesta.opcion1}}</p>-->
+       <button ion-button (click)="Votar(encuesta)">
+          Votar
         </button>
-        <button ion-button (click)="modificar(alumno)">
-          Modificar
-        </button>-->
+        <button ion-button (click)="abrirModalView(encuesta)">
+         Modificar
+        </button>
+        <button ion-button (click)="Grafico(encuesta)">
+          Ver Grafico
+         </button>
+    
       </ion-item>
   
     </ion-list>

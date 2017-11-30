@@ -40,6 +40,7 @@ export class EncuestaDetPage {
   private encuesta:Encuesta;
   private fechaE:string;
   private fechaI:string;
+  private numero;
   
   private alumno:Alumno;
 
@@ -62,7 +63,7 @@ export class EncuestaDetPage {
   }
 
   ingresarEncuesta(){
-    console.log('alumno form: ', this.codigo);
+    /*console.log('alumno form: ', this.codigo);
     
     console.log('alumno form: ', this.fechaE);
     console.log('alumno form: ', this.fechaI);
@@ -70,7 +71,7 @@ export class EncuestaDetPage {
     console.log('alumno form: ', this.opcion1);
     console.log('alumno form: ', this.opcion2);
     console.log('alumno form: ', this.opcion3);
-    console.log('alumno form: ', this.encuesta); 
+    console.log('alumno form: ', this.encuesta); */
     this.encuesta.setCodigo(this.codigo);
     this.encuesta.setfechaE(this.fechaE);
     this.encuesta.setfechaI(this.fechaI);
@@ -84,9 +85,20 @@ export class EncuestaDetPage {
 
 
 }
+ getRandomInt(min, max):string {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
 
-ionViewDidLoad() {
+
+ionViewDidLoad() 
+{
   this.encuesta =new Encuesta;
+  this.numero=Math.floor(Math.random() * (99919 -1 )) + 1;
+  this.codigo=this.numero;
+ 
+  console.log(this.codigo)
+
+  
 }
 
 }
