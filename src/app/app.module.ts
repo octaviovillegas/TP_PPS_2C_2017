@@ -49,6 +49,10 @@ import { ProfesorServiceProvider } from '../providers/profesor-service/profesor-
 import { EncuestasDataProvider } from '../providers/encuestas-data/encuestas-data';
 import { DatePipe } from '@angular/common';
 
+import { File } from "@ionic-native/file";
+import { FilePath } from "@ionic-native/file-path";
+import { FileChooser } from "@ionic-native/file-chooser";
+import { FileOpener } from "@ionic-native/file-opener";
 
 
 var firebaseAuth  = {
@@ -122,7 +126,11 @@ var firebaseAuth  = {
     AsistenciasProvider,
     BarcodeScanner,
     ProfesorServiceProvider,
-    EncuestasDataProvider ,  DatePipe  
+    EncuestasDataProvider ,  DatePipe,  
+    File,
+    FileChooser,
+    FilePath,
+    FileOpener
 
   ]
 })
