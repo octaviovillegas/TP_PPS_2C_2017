@@ -20,6 +20,7 @@ export class ConsultarBajaModifPage {
   ) {}
 
   ionViewDidLoad() {
+    
     this.profesor = this.navParams.get('profesor');
     this.nombre = this.profesor.nombre;
     this.foto = this.profesor.foto;
