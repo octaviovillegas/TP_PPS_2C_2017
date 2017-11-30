@@ -9,6 +9,8 @@ import { FileChooser } from "@ionic-native/file-chooser";
 
 import { Alumno } from "../../clases/alumno";
 
+import { ConsultarBajaModifPage } from "../consultar-baja-modif/consultar-baja-modif";
+
 @IonicPage()
 @Component({
   selector: 'page-listado-alumnos',
@@ -39,7 +41,7 @@ export class ListadoAlumnosPage {
     console.log(alumno);
     //let consultaView = this.modalCtrl.create('ConsultarBajaModifPage', {'alumno':alumno});
     //consultaView.present();
-    this.navCtrl.push('ConsultarBajaModifPage', {'alumno':alumno});
+    this.navCtrl.push(ConsultarBajaModifPage, {'alumno':alumno});
   }
 
   addNuevoAlumno(){

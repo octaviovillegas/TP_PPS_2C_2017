@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, ModalController, ViewController } 
 
 import { ProfesorServiceProvider } from "../../providers/profesor-service/profesor-service";
 
+import { ConsultarBajaModifPage } from "../consultar-baja-modif/consultar-baja-modif";
+
 @IonicPage()
 @Component({
   selector: 'page-lista-profesores',
@@ -31,7 +33,7 @@ export class ListaProfesoresPage {
     console.log(profesor);
     //let consultaView = this.modalCtrl.create('ConsultarBajaModifPage', {'profesor':profesor});
     //consultaView.present();
-    this.navCtrl.push('ConsultarBajaModifPage', {'alumno':profesor});
+    this.navCtrl.push(ConsultarBajaModifPage, {'profesor':profesor});
   }
 
 
