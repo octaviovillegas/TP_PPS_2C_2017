@@ -43,6 +43,10 @@ import { AsistenciasProvider } from '../providers/asistencias/asistencias';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
 import { ProfesorServiceProvider } from '../providers/profesor-service/profesor-service';
 
+import { File } from "@ionic-native/file";
+import { FilePath } from "@ionic-native/file-path";
+import { FileChooser } from "@ionic-native/file-chooser";
+import { FileOpener } from "@ionic-native/file-opener";
 
 
 var firebaseAuth  = {
@@ -112,7 +116,11 @@ var firebaseAuth  = {
     AlumnoServiceProvider,
     AsistenciasProvider,
     BarcodeScanner,
-    ProfesorServiceProvider
+    ProfesorServiceProvider,
+    File,
+    FileChooser,
+    FilePath,
+    FileOpener
 
   ]
 })
