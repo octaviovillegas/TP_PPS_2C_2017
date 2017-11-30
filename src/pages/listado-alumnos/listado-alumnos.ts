@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, ModalController, ModalOptions, Ale
 
 import { AlumnoServiceProvider } from "../../providers/alumno-service/alumno-service";
 
-import { File } from "@ionic-native/file";
+import { File,FileEntry } from "@ionic-native/file";
 import { FilePath } from "@ionic-native/file-path";
 import { FileChooser } from "@ionic-native/file-chooser";
 
@@ -53,18 +53,15 @@ export class ListadoAlumnosPage {
 
         this.fileChooser.open().then(path=>{
           this.filePath.resolveNativePath(path).then(nativePath=>{
-
-            this.file.readAsText(this.extraerPath(nativePath), this.extraerNombreArchivo(nativePath)).then(texto=>{
-              this.procesarContenidoCSV(texto);
-
-            });
-
+                this.file.readAsText(this.extraerPath(nativePath), this.extraerNombreArchivo(nativePath)).then(texto=>{
+                    this.procesarContenidoCSV(texto);
+                });
           });
 
         });
       }
 
-      private procesarContenidoCSV(_texto:string){
+  private procesarContenidoCSV(_texto:string){
           let campoLegajo:string='';
           let campoNombre:string='';
           let campoHorario:string='';
@@ -108,7 +105,7 @@ export class ListadoAlumnosPage {
               }//fin if
             }//fin for
             this.navCtrl.pop();
-      }
+  }
 
       private extraerPath(_path:string):string{
         let path:string='';
@@ -127,7 +124,14 @@ export class ListadoAlumnosPage {
         return nombre;
       }
 
+      private extraerTipoFile(_path:string):string{
+        let ext:string="";
 
+        let puntoIDX:number = _path.lastIndexOf('.');
+        ext=_path.substring(puntoIDX);
+
+        return ext;
+      }
 
 
 
