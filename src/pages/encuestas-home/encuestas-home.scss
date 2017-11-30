@@ -1,0 +1,32 @@
+page-encuestas-home {
+    
+           .fondo{ background-image: url("../assets/img/fondo1.jpg");
+        background-size: 100%;
+        background-position-y: 50%;
+    
+        .btnEnv{
+            background-color: rgb(78, 240, 191);
+        }
+    
+        .btnChico{
+            width:50px;
+            height:30px;
+        }
+        .button1 {
+            background-color: 	#48D1CC; 
+            color: black;
+            border: 2px solid #008CBA;
+            font-size: 19px;
+        }
+        
+        .button1:hover {
+            background-color: #8B008B;
+            color: white;
+        }
+    
+        .center {
+            text-align: center;
+           
+        }
+    }
+    }
