@@ -2,39 +2,11 @@
   <ion-navbar>
     <ion-title>Asistencia</ion-title>
   </ion-navbar>
-  <ion-toolbar>
-    <ion-segment [(ngModel)]="tab" color="primary">
-      <ion-segment-button value="materias">
-        Materias
-      </ion-segment-button>
-      <ion-segment-button value="buscar">
-        Buscar 
-      </ion-segment-button>
-    </ion-segment>
-  </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
 
-  <ion-content *ngIf="tab == 'materias'">
-    <ion-card>
-      <ion-list>
-          <ion-item color="light" (click)="showHideMaterias()">
-            <h1> <b>{{current.nombre}} {{current.curso}}</b> </h1>
-            <ion-icon name="md-arrow-dropdown" item-end *ngIf="!showMaterias"></ion-icon>
-            <ion-icon name="md-arrow-dropup" item-end *ngIf="showMaterias"></ion-icon>
-          </ion-item>
-          <div *ngFor="let m of materias | async">
-            <ion-item *ngIf="showMaterias" (click)="selectMateria(m.nombre, m.curso)">
-              {{m.nombre}} {{m.curso}}
-              <ion-icon class="incompleto" name="ios-arrow-forward" item-end *ngIf="m.listo == 0"></ion-icon>
-              <ion-icon class="completo" name="md-checkmark" item-end *ngIf="m.listo == 1"></ion-icon>
-            </ion-item>
-            {{setMateriaKey(m.nombre, m.curso, m.$key, m.listo)}}
-          </div>
-      </ion-list>
-    </ion-card>
-
+  <ion-content>
     <ion-card *ngFor="let a of alumnos | async" (click)="selecAlumno(a.$key)" class="item-alumno">
       <ion-item>
         <h2>{{a.apellido}}, {{a.nombre}}</h2>
@@ -45,41 +17,6 @@
     </ion-card>
     <button ion-button block color="secondary" (click)="completarMateria(current.nombre, current.curso)" *ngIf="getListo() == 0">Completar</button>
     <button ion-button block color="primary" (click)="reabrirMateria(current.nombre, current.curso)" *ngIf="getListo() == 1">Reabrir</button>
-  </ion-content>
-
-
-  <ion-content *ngIf="tab == 'buscar'">
-    <h1>Lista de alumnos</h1>
-    <ion-searchbar
-      [(ngModel)]="searchValue"
-      (ionInput)="onInput($event)">
-    </ion-searchbar>
-    <ion-item>
-      <ion-select [(ngModel)]="buscarPor">
-        <ion-option>Aula</ion-option>
-        <ion-option>Profesor</ion-option>
-      </ion-select>
-    </ion-item>
-    
-    <div *ngIf="buscarPor == 'Aula'">
-      <ion-card *ngFor="let m of materiasFiltradas | async">
-        <ion-item (click)="selectMateria(m.nombre, m.curso)">
-          <h2>{{m.nombre}} {{m.curso}}</h2>
-          <p>Aula: <b>{{m.aula}}</b></p>
-          <ion-icon name="ios-arrow-forward" item-end></ion-icon>
-        </ion-item>
-      </ion-card>      
-    </div>
-
-    <div *ngIf="buscarPor == 'Profesor'">
-        <ion-card *ngFor="let p of profesores | async">
-          <ion-item (click)="selectMateria(p.materia, m.curso)">
-            <h2>{{p.materia}} {{p.curso}}</h2>
-            <p>Profesor: <b>{{p.apellido}}</b></p>
-            <ion-icon name="ios-arrow-forward" item-end></ion-icon>
-          </ion-item>
-        </ion-card>      
-      </div>
   </ion-content>
 
 </ion-content>
