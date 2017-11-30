@@ -1,11 +1,13 @@
 <ion-header>
-    <ion-navbar light>
-      <ion-title>Pantalla de Ingreso</ion-title>
-      <ion-buttons left>
-        <button (click)="salir()">
-          <img width="30" heigth="30" color="transparent" src="assets/icon/descarga.jpg">
-        </button>
-      </ion-buttons>
+    <ion-navbar>
+        <ion-buttons left>
+          <button class="btnSalir" (click)="salir()">
+            <img class="imagen" src="assets/icon/salir1.png">
+          </button>
+        </ion-buttons>
+        <ion-title>
+           Inicio
+        </ion-title>
     </ion-navbar>
 </ion-header>
 
@@ -15,7 +17,7 @@
     <ion-list inset>
         <ion-item class="item">
         <ion-icon color="primary" name="ios-folder-open" item-left></ion-icon>
-          <ion-label color="dark">Seleccionar:</ion-label>
+          <ion-label >Seleccionar</ion-label>
           <ion-select (ionChange)="writePassw()"  [(ngModel)]="correo" cancelText="Cancelar" okText="Elegir" interface="alert">
             <ion-option value="admin@admin.com">Administrador</ion-option>
             <ion-option value="alumno@alumno.com.ar">Alumno</ion-option>
@@ -28,7 +30,7 @@
 
         <ion-item color="primary2">
           <ion-label floating>Correo</ion-label>
-          <ion-input color="input1" type="text" [(ngModel)]="correo"></ion-input>
+          <ion-input color="input1" type="text"  [(ngModel)]="correo" minlength="5" maxlength="40" required></ion-input>
         </ion-item>
 
         <ion-item color="primary2">
@@ -37,25 +39,24 @@
         </ion-item>
 
     </ion-list>
-
-
-      <button ion-button class= "ingresar" round color="secondary" (click)="login()">INGRESAR</button>
+      
+      
+      <button ion-button class= "btnIngresar" color="secondary" (click)="login()">INGRESAR</button>
+    
+      <button ion-button class= "btnAlumno" round color="primary" (click)="crearAlumno()">NUEVO ALUMNO</button>
+    
 
       <button *ngIf="datosLoginGitHub!=undefined" ion-button block color="secondary">
         Credenciales correctas. Ir a Menu
       </button>
 
-      <button ion-button round color="primary" (click)="crearAlumno()">NUEVO ALUMNO</button>
-
-      
-
-
-        
-
     <ion-footer>
       <!--img src="assets/imgs/googleplus.png" width="50" height="50"-->
-      <img src="assets/imgs/github.png" width="50" height="50" (click)="logearEnGitHub()">
+      <p><img src="assets/imgs/github.png" width="50" height="50" (click)="logearEnGitHub()">
+      &nbsp;&nbsp;&nbsp;&nbsp;Grupo IONIC - Facultad UTN</p>
       <!--img src="assets/imgs/facebook.png" width="50" height="50"-->
     </ion-footer>
 
 </ion-content>
+
+

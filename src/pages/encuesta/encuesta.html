@@ -1,118 +1,45 @@
 <ion-header>
-  <ion-navbar color='favorite'>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Nueva Encuesta</ion-title>
-  </ion-navbar>
-</ion-header>
+  
+    <ion-navbar>
+      <ion-title text-center>Alta Encuesta</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content class="fondo" padding>
+  
+    <ion-item class="fondo">
+      <ion-label>codigo:</ion-label>
+      <ion-input type="text" [(ngModel)]="codigo"></ion-input>
+  </ion-item>
+  
+    <ion-item class="fondo">
+        <ion-label>Pregunta:</ion-label>
+        <ion-input type="text" [(ngModel)]="pregunta"></ion-input>
+    </ion-item>
+  
+    <ion-item class="fondo">
+        <ion-label>Opcion1:</ion-label>
+        <ion-input type="text" [(ngModel)]="opcion1"></ion-input>
+    </ion-item>
+  
+    <ion-item class="fondo">
+        <ion-label>Opcion2:</ion-label>
+        <ion-input type="text" [(ngModel)]="opcion2"></ion-input>
+    </ion-item>
+    
+  <ion-item class="fondo">
+      <ion-label>Opcion3:</ion-label>
+      <ion-input type="text" [(ngModel)]="opcion3"></ion-input>
+  </ion-item>
 
-<ion-content padding class="fondo">
-
-  <ion-fab top right edge>
-    <button ion-fab mini>
-      <ion-icon name="add"></ion-icon>
-    </button>
-    <ion-fab-list>
-      <button ion-fab (click)="agregarPregunta()">
-        <ion-icon name="md-help"></ion-icon>
-      </button>
-    </ion-fab-list>
-  </ion-fab>
-
-  <div>
-    <!-- AGREGO EL NOMBRE DE LA ENCUESTA -->
-    <ion-card>
-      <ion-card-header>
-        <div style="color : rgb(26, 18, 92)">Datos:</div>
-      </ion-card-header>
-      <ion-card-content>
-
-        <ion-item>
-          <ion-input [(ngModel)]="encuesta.nombreEncuesta" type="text" placeholder="Nombre de la Encuesta"></ion-input>
-        </ion-item>
-
-        <ion-item>
-          <ion-label style="color : rgb(85, 158, 218)">Duracion(minutos)</ion-label>
-          <ion-select [(ngModel)]="encuesta.duracion">
-            <ion-option *ngFor="let d of duracion; let i = index" type="number" value="d.valor" [value]="d.valor">{{d.valor}}</ion-option>
-          </ion-select>
-        </ion-item>
-
-      </ion-card-content>
-    </ion-card>
-
-    <!-- AGREGO LOS CAMPOS DE LA PREGUNTA -->
-    <div *ngFor="let pregunta of encuesta.preguntas; let i = index">
-      <ion-card>
-        <ion-card-header (click)="pregunta.isOpen = !pregunta.isOpen">
-          <ion-icon (click)="eliminarPregunta(pregunta)" name="trash" style="float:right;"></ion-icon>
-          <div style="color : rgb(26, 18, 92)">Pregunta {{i+1}}</div>
-        </ion-card-header>
-
-        <ion-card-content [hidden]="pregunta.isOpen">
-          <ion-item>
-            <ion-input [(ngModel)]="pregunta.texto" placeholder="Ingrese la pregunta" type="text"></ion-input>
-          </ion-item>
-          <br>
-          <div style="color : rgb(26, 18, 92)">
-            <h2>Tipo de respuesta:</h2>
-          </div>
-
-          <ion-list radio-group [(ngModel)]="pregunta.tipoRespuesta">
-
-            <ion-item>
-              <ion-label style="color : rgb(85, 158, 218)">Opinion</ion-label>
-              <ion-radio (click)="tipoRespuestaSelected(pregunta)" value="OPINION"></ion-radio>
-            </ion-item>
-
-            <!--UNA SOLA RESPUESTA RADIO BUTTON -->
-            <ion-item>
-              <ion-label style="color : rgb(85, 158, 218)">Solo una respuesta</ion-label>
-              <ion-radio value="UNASOLARESPUESTA"></ion-radio>
-            </ion-item>
-
-            <ion-item [hidden]="pregunta.tipoRespuesta != 'UNASOLARESPUESTA'">
-              <ion-label style="color : rgb(85, 158, 218)">Cantidad de Opciones</ion-label>
-              <ion-select [(ngModel)]="pregunta.opcionesUnaSolaRespuesta" (ngModelChange)="generarItemsOpcionesParaUnaSolaRespuesta(pregunta)">
-                <ion-option *ngFor="let op of cantidadOpcionesDisponiblesSelect">{{op.valor}}</ion-option>
-              </ion-select>
-            </ion-item>
-
-            <ion-item [hidden]="pregunta.tipoRespuesta != 'UNASOLARESPUESTA'">
-              <ion-item *ngFor="let itemOp of pregunta.opciones; let i = index; trackBy:trackByIndex">
-                <ion-label style="color : rgb(85, 158, 218)">{{i+1}}-</ion-label>
-                <ion-input [(ngModel)]="pregunta.opciones[i]" type="text"></ion-input>
-              </ion-item>
-            </ion-item>
-
-            <!-- MAS DE UNA RESPUESTA CHECK BOX-->
-            <ion-item>
-              <ion-label style="color : rgb(85, 158, 218)">Varias respuestas</ion-label>
-              <ion-radio value="OPCIONES"></ion-radio>
-            </ion-item>
-
-            <ion-item [hidden]="pregunta.tipoRespuesta != 'OPCIONES'">
-              <ion-label style="color : rgb(85, 158, 218)">Cantidad de Opciones</ion-label>
-              <ion-select [(ngModel)]="pregunta.cantidadOpciones" (ngModelChange)="generarItemsOpciones(pregunta)">
-                <ion-option *ngFor="let op of opcionesSelect">{{op.valor}}</ion-option>
-              </ion-select>
-            </ion-item>
-
-            <ion-item [hidden]="pregunta.tipoRespuesta != 'OPCIONES'">
-              <ion-item *ngFor="let itemOp of pregunta.opciones; let i = index; trackBy:trackByIndex">
-                <ion-label style="color : rgb(85, 158, 218)">{{i+1}}-</ion-label>
-                <ion-input [(ngModel)]="pregunta.opciones[i]" type="text"></ion-input>
-              </ion-item>
-            </ion-item>
-
-          </ion-list>
-
-        </ion-card-content>
-      </ion-card>
-    </div>
-  </div>
-  <!--<button ion-button  (click)="guardarEncuesta()" round><ion-icon  name="md-archive"></ion-icon></button>-->
-  <button ion-button style="float:right;" class="btnEnv" (click)="siguiente()" round>Siguiente</button>
-
-</ion-content>
+  
+  <button ion-button class="btnAlumno" block (click)="ingresarEncuesta()">
+    NUEVA ENCUESTA
+  </button>
+  
+  
+  
+  </ion-content>
+  

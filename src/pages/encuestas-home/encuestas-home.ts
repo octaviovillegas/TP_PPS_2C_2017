@@ -6,10 +6,14 @@ import { EncuestasDataProvider } from '../../providers/encuestas-data/encuestas-
 import { Observable } from 'rxjs/Observable';
 //import { FirebaseListObservable } from 'angularfire2/database-deprecated';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { Storage } from '@ionic/storage';
+import { EncuestaDetPage } from "../../pages/encuesta-det/encuesta-det";
 
 import { EncuestaPage } from '../encuesta/encuesta';
 import { DatePipe } from '@angular/common';
 //import { RespuestaEncuestaDetallePage } from '../respuesta-encuesta-detalle/respuesta-encuesta-detalle';
+
+
 @IonicPage()
 @Component({
   selector: 'page-encuestas-home',
@@ -17,9 +21,8 @@ import { DatePipe } from '@angular/common';
 })
 export class EncuestasHomePage {
 
-  //encuestas: FirebaseListObservable<any[]>;
   encuestas:FirebaseListObservable<any>;
-  
+  private listado:Array<string>;
     aulaMaterias = [];
   
     fechaActual: string;
@@ -29,7 +32,7 @@ export class EncuestasHomePage {
     public modalCtrl: ModalController, public alertCtrl: AlertController
     , public datePipeCtrl: DatePipe) {
   
-     this.encuestas = this.eDataProvider.getEncuestas();    
+   //   this.encuestas = this.eDataProvider.getEncuestas();    
   
      this.fechaActual = this.datePipeCtrl.transform(Date.now(), 'yyyy-MM-dd');
   
@@ -37,19 +40,22 @@ export class EncuestasHomePage {
      
     }
   
-    enviarEncuesta(e){
-      e.enviada=true;
-      this.enviarEncuestaFB(e).then(res=>{
-        this.showAlerOK("La encuesta se envio exitosamente");
+    ionViewDidLoad() {
+      this.listado = new Array<string>();
+      this.eDataProvider.getEncuestasLista().subscribe(lista=>{
+        this.listado = lista;
+        console.log('lista alumnos: ', this.listado);
       })
-    }
   
-    enviarEncuestaFB(e){
-      return this.eDataProvider.enviarEncuestaGuardadaFB(e);
     }
-  
+    abrirModalView(alumno){
+      console.log(alumno);
+      let consultaView = this.modalCtrl.create('ConsultarBajaModifPage', {'alumno':alumno});
+      consultaView.present();
+    }
+
     generarEncuesta(){
-      this.navCtrl.push(EncuestaPage);
+      this.navCtrl.push(EncuestaDetPage);
     }
   
     modificarEncuesta(encuesta){
@@ -71,7 +77,7 @@ export class EncuestasHomePage {
           {
             text: 'Ok',
             handler: () => {
-              this.eDataProvider.eliminarEncuesta(encuesta);
+              //this.eDataProvider.eliminarEncuesta(encuesta);
             }
           }
         ]

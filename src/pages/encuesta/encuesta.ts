@@ -7,6 +7,9 @@ import { EncuestasDataProvider } from '../../providers/encuestas-data/encuestas-
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { Encuesta } from "../../clases/encuesta";
+import { EncuestasHomePage } from '../encuestas-home/encuestas-home';
+import { Alumno } from "../../clases/alumno";
 
 /**
  * Generated class for the Encuesta page.
@@ -21,8 +24,24 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 })
 export class EncuestaPage {
 
+  private codigo:string;
+  private pregunta:string;
+  private opcion1:string;
+  private opcion2:string;
+  private opcion3:string;
+  private encuesta:Encuesta;
+  private fechaE:string;
+  private fechaI:string;
+  private alumno:Alumno;
   
-  encuesta = { nombreEncuesta: '', duracion: 0, autor: '', respondida: false, enviada: false, preguntas: [{isOpen: false, texto: '' }], destinatarios: [{}], fechaIngreso: '' };
+
+  /*
+  encuesta = { nombreEncuesta: '', duracion: 0, autor: '',
+   respondida: false, enviada: false, 
+   preguntas: [{isOpen: false, texto: '' }],
+    destinatarios: [{}], fechaIngreso: '' };*/
+
+
   opcionesSelect = [{ valor: '1' }, { valor: '2' }, { valor: '3' }, { valor: '4' }, { valor: '5' }, { valor: '6' }];
   cantidadOpcionesDisponiblesSelect = [{ valor: '1 a 2' }, { valor: '1 a 3' }];
   creadorDelaEncuesta = '';
@@ -40,7 +59,7 @@ export class EncuestaPage {
     public eDataProvider: EncuestasDataProvider, 
     public formBuilder: FormBuilder, public datePipeCtrl: DatePipe) {
     //this.creadorDelaEncuesta = this.getUser();
-    //console.log(this.creadorDelaEncuesta);      
+    /*  
     this.myForm = formBuilder.group({
       nombreEncuesta: ['', Validators.compose([Validators.required])],
       fechaIngreso: ['', Validators.compose([Validators.required])],
@@ -48,9 +67,10 @@ export class EncuestaPage {
       preguntaTexto: ['', Validators.compose([Validators.required])],
       tipoRespuesta: ['', Validators.compose([Validators.required])],
       cantidadOpciones: ['', Validators.compose([Validators.required])],
-      opciones: ['', Validators.compose([Validators.required])],
+      opciones: ['', Validators.compose([Validators.required])],*/
+      this.fechaE = this.datePipeCtrl.transform(Date.now(), 'yyyy-MM-dd');
 
-    });
+
 
     this.seModifica = this.navParams.get('data');
     if (this.seModifica) {
@@ -58,119 +78,43 @@ export class EncuestaPage {
       this.modificar = true;
     }
   }
+ 
 
-  getUser() {
-    return this.afAuth.auth.currentUser.email;
-  }
+  
 
-  trackByIndex(index: number, value: number) {
-    return index;
-  }
-
-  ionViewDidLoad() {
-  }
-
-  siguiente() {
-    let errorStr = '';
-    if (this.encuesta.nombreEncuesta == '') {
-      errorStr = errorStr + ' ' + 'Nombre de la Encuesta-';
-    } 
-    if (this.encuesta.duracion == 0) {
-      errorStr = errorStr + ' ' + 'Duracion-';
-    }
-    let band=0;
-    this.encuesta.preguntas.forEach(p=>{
-      if(p.texto == '' && band==0){
-        errorStr = errorStr + ' ' + 'Pregunta-';
-        band++;
-      }
-    });
-
-    if(errorStr != ''){
-      this.showAlertError('Debe completar los campos'+ errorStr);
-    }else{
-      var jsonEncuesta = { encuesta: this.encuesta, modificar: this.modificar };
-      this.navCtrl.push(EnviarEncuestaPage, jsonEncuesta);
-    }
+  
+  ingresarEncuesta(){
+    console.log('alumno form: ', this.codigo);
     
-  }
+    console.log('alumno form: ', this.fechaE);
+    console.log('alumno form: ', this.fechaI);
+    console.log('alumno form: ', this.pregunta);
+    console.log('alumno form: ', this.opcion1);
+    console.log('alumno form: ', this.opcion2);
+    console.log('alumno form: ', this.opcion3);
+    console.log('alumno form: ', this.encuesta); 
+    this.alumno.setLegajo(this.codigo);
+   /* this.encuesta.setfechaE(this.fechaE);
+    this.encuesta.setfechaI(this.fechaI);
+    this.encuesta.setPregunta(this.pregunta);
+    this.encuesta.setOpcion1(this.opcion1);
+    this.encuesta.setOpcion2(this.opcion2);
+    this.encuesta.setOpcion3(this.opcion3);
 
-  agregarPregunta() {
-    // this.encuesta.preguntas.push({texto:''});
-    //this.encuesta.preguntas.push({texto:'',isOpen: false });
-    this.encuesta.preguntas.forEach(pregunta => {
-      pregunta.isOpen = false;
-    });
-    this.encuesta.preguntas.push({ isOpen: false, texto: '' });
+    this.eDataProvider.guardarEncuesta(this.encuesta);*/
+    this.navCtrl.push(EncuestasHomePage);
 
-  }
 
-  tipoRespuestaSelected(pregunta) {
-    if (pregunta.tipoRespuesta == 'OPINION') {
-      pregunta.opciones = [];
-    } else if (pregunta.tipoRespuesta == 'UNASOLARESPUESTA') {
-      pregunta.opciones = [];
-    }
-  }
+}
 
-  generarItemsOpciones(pregunta) {
-    console.log(JSON.stringify(pregunta));
-    pregunta.opciones = [];
-    for (var i = 1; i <= pregunta.cantidadOpciones; i++) {
-      pregunta.opciones.push("");
-    }
-  }
-
-  generarItemsOpcionesParaUnaSolaRespuesta(pregunta) {
-    console.log(JSON.stringify(pregunta));
-    pregunta.opciones = [];
-    if (pregunta.opcionesUnaSolaRespuesta == '1 a 2') {
-      pregunta.opciones.push("", "");
-    } else if (pregunta.opcionesUnaSolaRespuesta == '1 a 3') {
-      pregunta.opciones.push("", "", "");
-    }
-  }
-
-  eliminarPregunta(pregunta) {
-    var preguntasAux = [];
-    this.encuesta.preguntas.forEach(preguntaItem => {
-      if (preguntaItem != pregunta) {
-        preguntasAux.push(preguntaItem);
-      }
-    })
-    this.encuesta.preguntas = preguntasAux;
-  }
-
-  showAlertError(mensaje: string) {
-    let alert = this.alertCtrl.create({
-      title: 'ERROR!',
-      subTitle: mensaje,
-      buttons: ['aceptar']
-    });
-    alert.present();
-  }
-
-  showAlerOK(mensaje: string) {
-    let alert = this.alertCtrl.create({
-      title: 'Info',
-      subTitle: mensaje,
-      buttons: ['aceptar']
-    });
-    alert.present();
-  }
-
-  validar() {
-    if (this.encuesta.nombreEncuesta == "") {
-      alert("Se deben completar el nombre de la encuesta")
-    }
-
-    let fecha = new Date();
-
-    console.log(fecha.getHours);
-    console.log(fecha.getMinutes);
-
-  }
-
+showAlertError(mensaje: string) {
+  let alert = this.alertCtrl.create({
+    title: 'ERROR!',
+    subTitle: mensaje,
+    buttons: ['aceptar']
+  });
+  alert.present();
+}
 
 
 }

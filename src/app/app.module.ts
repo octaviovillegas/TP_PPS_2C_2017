@@ -21,6 +21,7 @@ import { MostrarAsistenciasPage } from "../pages/mostrar-asistencias/mostrar-asi
 import { ProfesorAsistenciaPage } from "../pages/profesor-asistencia/profesor-asistencia";
 import { EncuestasHomePage } from "../pages/encuestas-home/encuestas-home";
 import { EnviarEncuestaPage } from "../pages/enviar-encuesta/enviar-encuesta";
+import { EncuestaDetPage } from "../pages/encuesta-det/encuesta-det";
 
 
 ////////SERVICIOS
@@ -41,6 +42,7 @@ import { LoginServiceProvider } from '../providers/login-service/login-service';
 import { Chart } from "chart.js";
 import { AlumnoServiceProvider } from '../providers/alumno-service/alumno-service';
 import { AsistenciasProvider } from '../providers/asistencias/asistencias';
+import { IonicStorageModule } from '@ionic/storage';
 
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
 import { ProfesorServiceProvider } from '../providers/profesor-service/profesor-service';
@@ -73,8 +75,8 @@ var firebaseAuth  = {
     AsistenciasPage,
     MostrarAsistenciasPage,
     ProfesorAsistenciaPage,
-    EncuestasHomePage,
-    EnviarEncuestaPage
+    //EncuestasHomePage,
+    EnviarEncuestaPage,EncuestaDetPage
 
    ],
   imports: [
@@ -82,6 +84,7 @@ var firebaseAuth  = {
     HttpModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseAuth),
+    IonicStorageModule.forRoot(),
      AngularFireDatabaseModule,
      AngularFireAuthModule,
      FormsModule,
@@ -102,8 +105,8 @@ var firebaseAuth  = {
     AsistenciasPage,
     MostrarAsistenciasPage,
     ProfesorAsistenciaPage,
-    EncuestasHomePage,
-    EnviarEncuestaPage
+   //EncuestasHomePage,
+    EnviarEncuestaPage,EncuestaDetPage
 
   ],
   providers: [

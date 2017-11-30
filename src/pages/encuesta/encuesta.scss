@@ -1,33 +1,60 @@
 page-encuesta {
 
+
     
-           .fondo{ background-image: url("../assets/img/fondo1.jpg");
-        background-size: 100%;
-        background-position-y: 50%;
-    
-        .btnEnv{
-            background-color: rgb(78, 240, 191);
-        }
-    
-        .btnChico{
-            width:50px;
-            height:30px;
-        }
-        .button1 {
-            background-color: 	#48D1CC; 
-            color: black;
-            border: 2px solid #008CBA;
-            font-size: 19px;
-        }
+    ion-title {
+        background-color:#EECD90;
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 0 90px 1px;
+        width: 100%;
+        height: 100%;
+        text-align: center;
         
-        .button1:hover {
-            background-color: #8B008B;
-            color: white;
-        }
-    
-        .center {
-            text-align: center;
-           
-        }
     }
-    }
+
+    .fondo {
+        
+                background-color:lightgreen;
+                
+            }
+
+    .fondo1 {
+                
+                background-color:#EECD90;
+                        
+            }
+
+    .btnAlumno {
+                background: #34d955;
+                background-image: -webkit-linear-gradient(top, #34d955, #ceebc8);
+                background-image: -moz-linear-gradient(top, #34d955, #ceebc8);
+                background-image: -ms-linear-gradient(top, #34d955, #ceebc8);
+                background-image: -o-linear-gradient(top, #34d955, #ceebc8);
+                background-image: linear-gradient(to bottom, #34d955, #ceebc8);
+                -webkit-border-radius: 26;
+                -moz-border-radius: 26;
+                border-radius: 26px;
+                font-family: Arial;
+                color: #ffffff;
+                font-size: 20px;
+                padding: 15px 20px 15px 20px;
+                border: solid #d0f5df 2px;
+                text-decoration: none;
+                position: absolute;
+                top: 80%;
+                width: 90%;
+                height: 15%;
+              }
+              
+    .btnAlumno:hover {
+                background: #3cb0fd;
+                background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+                background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+                background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+                background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+                background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+                text-decoration: none;
+              }
+            }

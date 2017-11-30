@@ -14,6 +14,7 @@ import {AsistenciasPage} from '../pages/asistencias/asistencias';
 import { MostrarAsistenciasPage } from "../pages/mostrar-asistencias/mostrar-asistencias";
 import { ProfesorAsistenciaPage } from "../pages/profesor-asistencia/profesor-asistencia";
 import { EncuestasHomePage } from "../pages/encuestas-home/encuestas-home";
+import { EncuestaDetPage } from "../pages/encuesta-det/encuesta-det";
 
 
 
@@ -30,9 +31,9 @@ export class MyApp {
 
     this.pages = [
         {titulo: 'Inicio', component:LoginPage},
-        {titulo: 'Perfil', component:PerfilPage},
+        //{titulo: 'Perfil', component:PerfilPage},
         {titulo: 'Asistencias', component:AsistenciasPage},
-        {titulo: 'Encuesta', component:EncuestaPage}
+        {titulo: 'Encuesta', component:EncuestasHomePage}
         
 
     ];

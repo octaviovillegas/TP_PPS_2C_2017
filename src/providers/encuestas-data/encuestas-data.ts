@@ -3,6 +3,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 //import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import * as firebase from 'firebase/app'
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { Encuesta } from "../../clases/encuesta";
 
 /*
   Generated class for the EncuestasDataProvider provider.
@@ -12,62 +13,24 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 */
 @Injectable()
 export class EncuestasDataProvider {
+
+  private listaEncuestas:FirebaseListObservable<any[]>;
+  
   
     constructor(public afAuth: AngularFireAuth, public afDB: AngularFireDatabase) {
     }
   
-    getEncuestas(){
-      return this.afDB.list('Encuestas/');
-    }
-  
-    saveEncuestaInFB(encuesta){
-    //  return this.afDB.database.ref('Encuestas/').push(encuesta);
-    return this.afDB.app.database().ref('/Encuestas/').set(encuesta);
-      
-    }
-  
-    enviarEncuestaGuardadaFB(encuesta){
-      return firebase.database().ref('Encuestas/' + encuesta.$key).update(encuesta);
-    } 
     
-    eliminarEncuesta(encuesta){
-      return this.afDB.database.ref('Encuestas/'+encuesta.$key).remove();
+   
+    public guardarEncuesta(_Encuesta:Encuesta):void
+    {
+      //this.db.app.database().ref('/alumnos').child(alumno.getLegajo()).push(alumno);
+      this.afDB.app.database().ref('/encuestas/'+_Encuesta.getCodigo()).set(_Encuesta);
     }
   
-    getProfesorMateria(){
-      return this.afDB.list('ProfesorMateria/');
+    public getEncuestasLista(){
+      this.listaEncuestas = this.afDB.list('/encuestas') as FirebaseListObservable<any[]>;
+      return this.listaEncuestas;
     }
   
-    enviarEncuestaRespuesta(respuesta){
-      return this.afDB.database.ref('EncuestaRespuesta/').push(respuesta);
-    }
-  
-    getEncuesta(key){
-      return this.afDB.list('Encuestas/'+key);
-    }
-  
-    getEncuestaRespuesta(encuestaKey){
-      return this.afDB.list('EncuestaRespuesta/',{
-        query: {
-          orderByChild: 'encuestaKey',
-          equalTo: encuestaKey
-        }
-      })
-    }
-  
-    enviarEncuestaMateria(encuesta,materias){
-      return this.afDB.database.ref('EncuestaMateria/'+encuesta.$key).push(materias);
-    }
-  
-    getMateriaAlumnos(){
-      return this.afDB.list('MateriasAlumnos/');
-    }
-  
-    actualizarEncuestaPorRespuesta(encuesta,key){
-      return firebase.database().ref('Encuestas/' + key).update({respondida: true});
-    } 
-  
-    getListaMatExcel(){
-      return this.afDB.list('listas/');
-    }
   }

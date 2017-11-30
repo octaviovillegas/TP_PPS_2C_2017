@@ -12,6 +12,7 @@ export class ListadoAlumnosPage {
 
   private foto:string;
   private listado:Array<string>;
+  
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private alumnoDB:AlumnoServiceProvider, public modalCtrl:ModalController
   ) {}
@@ -26,9 +27,13 @@ export class ListadoAlumnosPage {
 
   }
 
+  abrirModalView(alumno){
+    console.log(alumno);
+    let consultaView = this.modalCtrl.create('ConsultarBajaModifPage', {'alumno':alumno});
+    consultaView.present();
+  }
 
-
-  eliminar(alumno:any){
+  /* eliminar(alumno:any){
 
     console.log('modificar', alumno);
     let modalAlumno = this.modalCtrl.create('DatosAlumnosPage', {'alumno':alumno, 'boolDatos':true});
@@ -41,7 +46,7 @@ export class ListadoAlumnosPage {
     let modalAlumno = this.modalCtrl.create('DatosAlumnosPage', {'alumno':alumno, 'boolDatos':false});
     modalAlumno.present();
   }
-
+  */
 
 
 

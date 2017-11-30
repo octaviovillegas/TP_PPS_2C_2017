@@ -10,34 +10,41 @@
 
     
       
-  <ion-list>
+  <ion-list class="lista">
+      
     <ion-item class="itemMenu">
       <ion-thumbnail item-start>
         <img src="assets/imgs/alumno.png">
       </ion-thumbnail>
-      <h2>Alumno</h2>
-      <p>Perfil del alumno</p>
-      <button ion-button (click)="irAPerfil()" item-end>Ver</button>
+      <h2>Alumnos</h2>
+      <br>
+      <button ion-button color="secondary" (click)="irAPerfil()" item-bottom>Ver</button>
+      <button ion-button color="secondary" (click)="irAListaAlumnos()" item-bottom>ABM</button>
+      <button ion-button color="secondary" (click)="irAFormAlumnosQrPage()" item-bottom>QR</button>
     </ion-item>
+    <br>
     <br>
     <br>
     <ion-item class="itemMenu">
         <ion-thumbnail item-start>
           <img src="assets/imgs/profesor.png">
         </ion-thumbnail>
-        <h2>Profesor</h2>
-        <p>Perfil del Profesor</p>
-        <button ion-button item-end>Ver</button>
+        <h2>Profesores</h2>
+        <br>
+        <button ion-button color="secondary" (click)="irAFormProfesores()" item-bottom>Ver</button>
+        <button ion-button color="secondary" (click)="irABMProfesores()" item-bottom>ABM</button>
     </ion-item>
+    <br>
     <br>
     <br>
     <ion-item class="itemMenu">
         <ion-thumbnail item-start>
           <img src="assets/imgs/admin.png">
         </ion-thumbnail>
-        <h2>Administración</h2>
-        <p>Administración de documentos</p>
-        <button ion-button item-end>Ver</button>
+        <h2>Administración de Doc.</h2>
+        <br>
+        <button ion-button color="secondary" item-bottom>Ver</button>
+        <button ion-button color="secondary" (click)="irABMPEncuestas()" item-bottom>ABM de Encuestas</button>
     </ion-item>
 
   </ion-list>
