@@ -8,6 +8,7 @@ export class Alumno{
   private passw:string;
   private correo:string;
   private perfil:string;
+  private horario:string;
 
   constructor(){
     this.legajo="";
@@ -16,6 +17,7 @@ export class Alumno{
     this.nombre="";
     this.passw = "";
     this.perfil = "";
+    this.horario = "";
     this.aulas=new Array<string>();
     this.materias=new Array<string>();
   }
@@ -44,6 +46,11 @@ export class Alumno{
   public getPassword():string{
     return this.passw;
   }
+
+  public getHorario() : string {
+    return this.horario;
+  }
+
 
   public setLegajo(_legajo:string):void{
     this.legajo = _legajo;
@@ -80,7 +87,9 @@ export class Alumno{
   public setPerfil(_perfil:string):void{
     this.perfil = _perfil;
   }
-
+  public setHorario(_horario:string):void {
+    this.horario = _horario;
+  }
 
 
 
