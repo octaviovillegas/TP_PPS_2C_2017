@@ -14,13 +14,12 @@
       </ion-item>
 
       <ion-list>
-        <ion-item class="fondo" *ngFor="let profesor of listado">
+        <ion-item (click)="abrirModalView(profesor)" class="fondo" *ngFor="let profesor of listado">
           <ion-avatar item-start>
             <img *ngIf="profesor.foto!=''" [src]="profesor.foto">
           </ion-avatar>
           <h2>{{ profesor.nombre}}</h2>
           <p >DNI: {{ profesor.dni}}</p>
-          <button ion-button color="primary" (click)="abrirModalView(alumno)">Detalles</button>
         </ion-item>
 
       </ion-list>
