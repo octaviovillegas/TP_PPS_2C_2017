@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar color='favorite'>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Encuesta</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="fondo">
+
+  <button class="button button1" (click)="generarEncuesta()">
+    <ion-icon name="clipboard"></ion-icon> Nueva Encuesta</button>
+
+    <ion-list>
+      <ion-item (click)="abrirModalView(encuesta)" class="fondo" *ngFor="let encuesta of listado">
+        <ion-avatar item-start>
+        </ion-avatar>
+        <h2>{{ encuesta.pregunta}}</h2>
+        <p >Legajo: {{ encuesta.opcion1}}</p>
+        <!--<button ion-button (click)="eliminar(alumno)">
+          Baja
+        </button>
+        <button ion-button (click)="modificar(alumno)">
+          Modificar
+        </button>-->
+      </ion-item>
+  
+    </ion-list>
+
+
+</ion-content>
