@@ -32,8 +32,10 @@ export class ListaCursoPage {
   public loadImage(){
     this.pictures.getDownloadURL().then(url => {
       this.imagen = url;
-    }).catch(err => {
-    });
+      setTimeout(() => {
+        this.loadImage();
+      }, 1000);
+    }).catch(err => {});
   }
 
   public takePicture(): void {
@@ -46,7 +48,6 @@ export class ListaCursoPage {
     this.camera.getPicture(options).then(imageData => {
         let base64Image = 'data:image/jpeg;base64,' + imageData;
         this.pictures.putString(base64Image, 'data_url');
-        this.loadImage();
     });
   }
   
