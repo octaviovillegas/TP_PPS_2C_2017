@@ -67,7 +67,7 @@ var firebaseAuth  = {
 @NgModule({
   declarations: [
     MyApp,
-    //HomePage,
+    HomePage,
     LoginPage,
     //MateriasPage,
     //MateriaPrincipalPage,
@@ -79,8 +79,9 @@ var firebaseAuth  = {
     AsistenciasPage,
     MostrarAsistenciasPage,
     ProfesorAsistenciaPage,
-    //EncuestasHomePage,
-    EnviarEncuestaPage,EncuestaDetPage
+   // EnviarEncuestaPage,
+    EncuestaDetPage,
+    EncuestasHomePage
 
    ],
   imports: [
@@ -97,7 +98,7 @@ var firebaseAuth  = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    //HomePage,
+    HomePage,
     LoginPage,
     //MateriasPage,
     //MateriaPrincipalPage,
@@ -109,9 +110,9 @@ var firebaseAuth  = {
     AsistenciasPage,
     MostrarAsistenciasPage,
     ProfesorAsistenciaPage,
-   //EncuestasHomePage,
-    EnviarEncuestaPage,EncuestaDetPage
-
+   // EnviarEncuestaPage,
+    EncuestaDetPage,
+    EncuestasHomePage
   ],
   providers: [
     StatusBar,

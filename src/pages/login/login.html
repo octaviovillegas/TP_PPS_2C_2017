@@ -35,7 +35,7 @@
 
         <ion-item color="primary2">
           <ion-label floating>Password</ion-label>
-          <ion-input color="input1" type="password" (ionChange)="validarCantDigitos($event)" (keypress)="validarNum($event)" [(ngModel)]="passw"></ion-input>
+          <ion-input color="input1" type="password" (ionChange)="validarCantDigitos($event)" (keypress)="validarNum($event)" [(ngModel)]="passw" required></ion-input>
         </ion-item>
 
     </ion-list>

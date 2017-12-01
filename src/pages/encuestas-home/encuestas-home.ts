@@ -8,13 +8,16 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { Storage } from '@ionic/storage';
 import { EncuestaDetPage } from "../../pages/encuesta-det/encuesta-det";
+import { EnviarEncuestaPage } from "../../pages/enviar-encuesta/enviar-encuesta";
+import { HomePage } from '../../pages/home/home';
 
 import { EncuestaPage } from '../encuesta/encuesta';
 import { DatePipe } from '@angular/common';
 //import { RespuestaEncuestaDetallePage } from '../respuesta-encuesta-detalle/respuesta-encuesta-detalle';
+import { GraficosPage } from '../graficos/graficos';
 
 
-@IonicPage()
+//@IonicPage()
 @Component({
   selector: 'page-encuestas-home',
   templateUrl: 'encuestas-home.html',
@@ -39,7 +42,11 @@ export class EncuestasHomePage {
      console.log(this.fechaActual);
      
     }
-  
+    Grafico(encuesta)
+    {
+      let consultaView = this.modalCtrl.create(GraficosPage, {'encuesta':encuesta});
+      consultaView.present();
+    }
     ionViewDidLoad() {
       this.listado = new Array<string>();
       this.eDataProvider.getEncuestasLista().subscribe(lista=>{
@@ -48,9 +55,16 @@ export class EncuestasHomePage {
       })
   
     }
-    abrirModalView(alumno){
-      console.log(alumno);
-      let consultaView = this.modalCtrl.create('ConsultarBajaModifPage', {'alumno':alumno});
+    abrirModalView(encuesta){
+     // console.log(alumno);
+      let consultaView = this.modalCtrl.create('EnviarEncuestaPage', {'encuesta':encuesta});
+      consultaView.present();
+    }
+    
+    Votar(encuesta)
+    {
+     // console.log(alumno);
+      let consultaView = this.modalCtrl.create(HomePage, {'encuesta':encuesta});
       consultaView.present();
     }
 
@@ -61,6 +75,8 @@ export class EncuestasHomePage {
     modificarEncuesta(encuesta){
       this.navCtrl.push(EncuestaPage, {data : encuesta});
     }
+
+    
   
     eliminarEncuesta(encuesta){
       let alert = this.alertCtrl.create({

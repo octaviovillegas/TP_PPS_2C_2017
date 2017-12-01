@@ -20,7 +20,13 @@ export class EncuestasDataProvider {
     constructor(public afAuth: AngularFireAuth, public afDB: AngularFireDatabase) {
     }
   
-    
+    public borrarEncuesta(codigo:string){
+      this.afDB.app.database().ref('/encuestas/' + codigo).remove();
+    }
+  
+    public modificarEncuesta(encuesta:Encuesta){
+      this.afDB.app.database().ref('/encuestas/' + encuesta.getCodigo()).update(encuesta);
+    }
    
     public guardarEncuesta(_Encuesta:Encuesta):void
     {
