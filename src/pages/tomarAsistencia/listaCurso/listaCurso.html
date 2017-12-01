@@ -21,10 +21,11 @@
     </ion-card>
     <button ion-button block color="secondary" *ngIf="m.listo == 0" (click)="completarMateria(m.$key)" >Completar</button>
     <button ion-button block color="primary" *ngIf="m.listo == 1" (click)="reabrirMateria(m.$key)">Reabrir</button>
+    <div *ngIf="m.foto != 0" *ngIf="imagen">
+      Foto del curso:
+      <img [src]="imagen" *ngIf="imagen"/>
+    </div>
     <br>
     <br>
-    <button ion-button block (click)="takePicture()">Take a Picture</button>
-    Latest Picture:
-    <img [src]="base64Image" *ngIf="base64Image" />
   </ion-content>
 </ion-content>

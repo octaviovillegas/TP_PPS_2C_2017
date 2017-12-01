@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavParams, AlertController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import { Camera, CameraOptions } from '@ionic-native/camera';
+import { storage } from 'firebase';
+import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/camera';
 import 'rxjs/add/operator/map';
 
 @IonicPage()
@@ -13,7 +14,8 @@ export class ListaCursoPage {
 
   public materias: FirebaseListObservable<any[]>;
   public alumnos: FirebaseListObservable<any[]>;
-  public base64Image: string;
+  public pictures;
+  public imagen: string;
 
   constructor(public navParams: NavParams,
     public alertCtrl: AlertController,
@@ -23,18 +25,30 @@ export class ListaCursoPage {
       let curso = navParams.get('curso');
       this.filterAlumnos(nombre, curso);
       this.filterMaterias(nombre, curso);
+      this.pictures = storage().ref(nombre+curso);
+      this.loadImage();
+  }
+
+  public loadImage(){
+    this.pictures.getDownloadURL().then(url => {
+      console.log(url);
+      this.imagen = url;
+    }).catch(err => {
+      alert("t k bio");
+    });
   }
 
   public takePicture(): void {
     let options: CameraOptions = {
-      quality: 100,
+      quality: 50,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }
-    this.camera.getPicture(options).then((imageData) => {
-      alert("hola");
-      this.base64Image = 'data:image/jpeg;base64,' + imageData;
+    this.camera.getPicture(options).then(imageData => {
+        let base64Image = 'data:image/jpeg;base64,' + imageData;
+        this.pictures.putString(base64Image, 'data_url');
+        this.loadImage();
     });
   }
   
@@ -78,6 +92,7 @@ export class ListaCursoPage {
           this.materias.update(key, {
             listo: 1
           });
+          this.takePicture();
         }
       },
       {
