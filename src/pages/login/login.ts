@@ -71,6 +71,25 @@ export class LoginPage {
        });
   }
 
+  githubLogin(){
+    let loading = this.loadSpinner();
+    loading.present();
+    return this.authAf.auth.signInWithPopup(new firebase.auth.GithubAuthProvider())
+    .then( response => {
+          swal({
+            title: '¡Bienvenido!',
+            type: 'success',
+            timer: 1500
+          })
+        this.navCtrl.setRoot(HomePage);
+        console.log("GitHub Login correcto");
+         })
+        .catch((error) => { 
+          loading.dismiss();
+          console.log(error)
+      });
+  }
+
   async login(user: User) {
     this.allFilled();
     if(this.valid.value){
@@ -168,14 +187,14 @@ export class LoginPage {
   {
     let img = `<img src="../assets/images/escuela.gif">`;
 
-    this.safeSvg = this.sanitizer.bypassSecurityTrustHtml(img);
+    //this.safeSvg = this.sanitizer.bypassSecurityTrustHtml(img);
 
     let loader = this.loadingCtrl.create({
       dismissOnPageChange: true,
       spinner: 'hide',
       cssClass: 'loader',
-      content: this.safeSvg,
-      duration: 2500
+      content: img,
+      duration: 5000
     });
     return loader;
   }
