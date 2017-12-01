@@ -3,6 +3,8 @@ import { IonicPage, NavController, AlertController, ActionSheetController } from
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import 'rxjs/add/operator/map';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as admin from "firebase-admin";
 
 @IonicPage()
 @Component({
@@ -24,6 +26,7 @@ export class AbmAlumnoPage {
     public alertCtrl: AlertController, 
     public af: AngularFireDatabase,
     public actionSheetCtrl: ActionSheetController, 
+    private authAf: AngularFireAuth,
     private formBuilder: FormBuilder) {
       this.tab = "agregar";
       //Lista
@@ -44,14 +47,19 @@ export class AbmAlumnoPage {
   }
 
   //LISTA DE ALUMNOS
-  public eliminarAlumno(alumnoId: string, apellido: string): void {
+  public eliminarAlumno(alumnoId: string, apellido: string, email: string): void {
     let prompt = this.alertCtrl.create({
       title: 'Confirmar',
       message: "Seguro que queres eliminar al alumno " + apellido + "?",
       buttons: [{
         text: 'Si',
         role: 'destructive',
-        handler: data => { this.alumnos.remove(alumnoId); }
+        handler: data => { 
+          let uid = admin.auth().getUserByEmail(email).then(alumno => {
+            //admin.auth().deleteUser(alumno.uid);
+            this.alumnos.remove(alumnoId);
+          });
+        }
       },
       {
         text: 'No',
@@ -78,14 +86,19 @@ export class AbmAlumnoPage {
   //AGREGAR ALUMNO
   public agregarAlumno(): void{
     if(this.modifId == "") {
-      let prompt = this.alertCtrl.create({ title: 'Alumno agregado', buttons: [{ text: 'Ok',}] });
-      prompt.present();
       let data: {} = this.formAlta.value;
-      data["tipo"] = "alumno";
-      data["pres_Programacion"] = "0";
-      data["pres_Laboratorio"] = "0";
-      data["pres_Estadistica"] = "0";
-      this.af.list("/usuarios").push(data);
+      this.authAf.auth.createUserWithEmailAndPassword(data["email"], data["pass"]).then(r => {
+        let prompt = this.alertCtrl.create({ title: 'Alumno agregado', buttons: [{ text: 'Ok',}] });
+        prompt.present();
+        data["tipo"] = "alumno";
+        data["pres_Programacion"] = "0";
+        data["pres_Laboratorio"] = "0";
+        data["pres_Estadistica"] = "0";
+        this.af.list("/usuarios").push(data);
+        this.formAlta.reset();
+      }).catch(err => {
+        this.alertCtrl.create({ title: 'Mail o contraseña incorrecta', buttons: [{ text: 'Ok',}] }).present();
+      });
     } else {
       this.alumnos.update(this.modifId, {
         nombre: this.formAlta.controls['nombre'].value,
@@ -101,7 +114,6 @@ export class AbmAlumnoPage {
       prompt.present();
     }
     this.modifId = "";
-    this.formAlta.reset();
   }
 
   public onInput($event): void {

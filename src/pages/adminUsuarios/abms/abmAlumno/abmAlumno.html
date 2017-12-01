@@ -41,7 +41,7 @@
         </ion-item>
         <ion-row>
           <ion-col>
-            <button ion-button icon-left clear small (click)="eliminarAlumno(alumno.$key, alumno.apellido)">
+            <button ion-button icon-left clear small (click)="eliminarAlumno(alumno.$key, alumno.apellido, alumno.email)">
               <ion-icon name="md-close"></ion-icon>
               <div>Eliminar</div>
             </button>
@@ -77,7 +77,7 @@
             </ion-item>
             <ion-item>
               <ion-label>Contraseña</ion-label>
-              <ion-input type="password" formControlName="pass"></ion-input>
+              <ion-input type="password" [disabled]="modifId != ''" formControlName="pass"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label>Programacion</ion-label>
