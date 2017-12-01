@@ -87,6 +87,7 @@ export class ListaCursoPage {
       buttons: [{
         text: 'Si',
         handler: data => { 
+          alert("'guantel pako");
           this.takePicture();
           this.materias.update(key, {
             listo: 1
