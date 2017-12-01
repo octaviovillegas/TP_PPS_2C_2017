@@ -31,10 +31,8 @@ export class ListaCursoPage {
 
   public loadImage(){
     this.pictures.getDownloadURL().then(url => {
-      console.log(url);
       this.imagen = url;
     }).catch(err => {
-      alert("t k bio");
     });
   }
 
@@ -89,10 +87,10 @@ export class ListaCursoPage {
       buttons: [{
         text: 'Si',
         handler: data => { 
+          this.takePicture();
           this.materias.update(key, {
             listo: 1
           });
-          this.takePicture();
         }
       },
       {
