@@ -1,7 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, ModalOptions } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, ModalOptions, AlertController } from 'ionic-angular';
 
 import { AlumnoServiceProvider } from "../../providers/alumno-service/alumno-service";
+
+import { File } from "@ionic-native/file";
+import { FilePath } from "@ionic-native/file-path";
+import { FileChooser } from "@ionic-native/file-chooser";
+
+import { Alumno } from "../../clases/alumno";
 
 @IonicPage()
 @Component({
@@ -12,9 +18,11 @@ export class ListadoAlumnosPage {
 
   private foto:string;
   private listado:Array<string>;
-  
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              private alumnoDB:AlumnoServiceProvider, public modalCtrl:ModalController
+              private alumnoDB:AlumnoServiceProvider, public modalCtrl:ModalController,
+              public file:File, public fileChooser:FileChooser, public filePath:FilePath,
+              public alertCtrl:AlertController
   ) {}
 
   ionViewDidLoad() {
@@ -29,24 +37,93 @@ export class ListadoAlumnosPage {
 
   abrirModalView(alumno){
     console.log(alumno);
-    let consultaView = this.modalCtrl.create('ConsultarBajaModifPage', {'alumno':alumno});
-    consultaView.present();
+    //let consultaView = this.modalCtrl.create('ConsultarBajaModifPage', {'alumno':alumno});
+    //consultaView.present();
+    this.navCtrl.push('ConsultarBajaModifPage', {'alumno':alumno});
   }
 
-  /* eliminar(alumno:any){
-
-    console.log('modificar', alumno);
-    let modalAlumno = this.modalCtrl.create('DatosAlumnosPage', {'alumno':alumno, 'boolDatos':true});
-    modalAlumno.present();
+  addNuevoAlumno(){
+    this.navCtrl.push('AlumnosFormPage');
   }
 
-  modificar(alumno:any){
 
-    console.log('modificar', alumno);
-    let modalAlumno = this.modalCtrl.create('DatosAlumnosPage', {'alumno':alumno, 'boolDatos':false});
-    modalAlumno.present();
-  }
-  */
+  private cargarArchivos(){
+
+        this.fileChooser.open().then(path=>{
+          this.filePath.resolveNativePath(path).then(nativePath=>{
+
+            this.file.readAsText(this.extraerPath(nativePath), this.extraerNombreArchivo(nativePath)).then(texto=>{
+              this.procesarContenidoCSV(texto);
+
+            });
+
+          });
+
+        });
+      }
+
+      private procesarContenidoCSV(_texto:string){
+          let campoLegajo:string='';
+          let campoNombre:string='';
+          let campoHorario:string='';
+
+          let arrayListado:Array<string> = new Array<string>();
+
+          let cont:number = 0;
+
+            for (var i = 0; i < _texto.length; i++) {
+
+              if ((_texto[i]==';') || (_texto[i]=='\n' && cont==2)) {
+                cont += 1;
+              }
+
+              if (_texto[i]!=';') {
+                switch (cont) {
+                  case 0:
+                          campoLegajo += _texto[i];
+                  break;
+                  case 1:
+                          campoNombre += _texto[i];
+                  break;
+                  case 2:
+                          campoHorario += _texto[i];
+
+                  break;
+                  case 3:
+                      let alumno:Alumno = new Alumno();
+                      alumno.setNombre(campoNombre);
+                      alumno.setLegajo(campoLegajo);
+                      alumno.setHorario(campoHorario);
+                      alumno.setPerfil('alumno');
+                      this.alumnoDB.guardarAlumno(alumno);
+
+                      cont = 0;
+                      campoLegajo = '';
+                      campoNombre='';
+                      campoHorario='';
+                  break;
+                }//fin switch
+              }//fin if
+            }//fin for
+            this.navCtrl.pop();
+      }
+
+      private extraerPath(_path:string):string{
+        let path:string='';
+        let barraIDX:number = _path.lastIndexOf('/');
+        path = _path.substring(0,barraIDX);
+        path += '/';
+
+        return path;
+      }
+
+      private extraerNombreArchivo(_path:string):string{
+        let nombre:string='';
+        let barraIDX:number = _path.lastIndexOf('/');
+        nombre= _path.substring(barraIDX + 1);
+
+        return nombre;
+      }
 
 
 
