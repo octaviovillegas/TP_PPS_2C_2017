@@ -81,7 +81,7 @@ var firebaseAuth  = {
     ProfesorAsistenciaPage,
    // EnviarEncuestaPage,
     EncuestaDetPage,
-    EncuestasHomePage
+    //EncuestasHomePage
 
    ],
   imports: [
@@ -112,7 +112,7 @@ var firebaseAuth  = {
     ProfesorAsistenciaPage,
    // EnviarEncuestaPage,
     EncuestaDetPage,
-    EncuestasHomePage
+    //EncuestasHomePage
   ],
   providers: [
     StatusBar,

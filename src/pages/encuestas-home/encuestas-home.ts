@@ -17,11 +17,16 @@ import { DatePipe } from '@angular/common';
 import { GraficosPage } from '../graficos/graficos';
 
 
-//@IonicPage()
+@IonicPage(
+  {
+    name: 'EncuestasHomePage'
+  })
+
 @Component({
   selector: 'page-encuestas-home',
   templateUrl: 'encuestas-home.html',
 })
+
 export class EncuestasHomePage {
 
   encuestas:FirebaseListObservable<any>;
