@@ -1,5 +1,5 @@
 <ion-header>
-  
+
   <ion-navbar>
     <ion-title text-center>Escanear QR</ion-title>
   </ion-navbar>
@@ -11,18 +11,32 @@
 
   <img class="img" src="assets/imgs/qr.png" (click)="leerQR()">
 
-  <ion-label class="label">Description</ion-label>
-    <ion-textarea [(ngModel)]="listado">
+  <br><br><br><br><br><br><br><br>
 
-        <!--ion-textarea [(ngModel)]="listado" formControlName="listado">-->
+    <ion-label color="primary">LEGAJO/DNI</ion-label>
+    <ion-input type="text" placeholder="ingrese legajo o dni" [(ngModel)]="dato"></ion-input>
 
-    </ion-textarea>
- 
+    <ion-list radio-group ionChange="determinarTipo()"  [(ngModel)]="tipo" >
+      <ion-item class="fondo">
+        <ion-label color="secondary">Alumno</ion-label>
+        <ion-radio checked=true value="alumno"></ion-radio>
+      </ion-item>
 
-  <!--button ion-button block (click)="encodeData()">
-    Generar QR
-  </button>
+      <ion-item class="fondo">
+        <ion-label color="secondary">Profesor</ion-label>
+        <ion-radio value="profesor"></ion-radio>
+      </ion-item>
 
-  <img *ngIf="url" [src]="url" width="100" height="100"-->
+    </ion-list>
+
+    <button ion-button block (click)="encodeData()">
+      Generar QR
+    </button>
+
+  <br><br>
+  <img *ngIf="url" [src]="url" width="100" height="100">
+  <br><br>
+  <h2 *ngIf="listado!=''">{{listado}}</h2>
+
 
 </ion-content>

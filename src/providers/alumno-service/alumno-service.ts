@@ -58,8 +58,20 @@ export class AlumnoServiceProvider {
     return this.listaAlumnos;
   }
 
-  public getAlumnoPorCorreo(){
+  public getAlumnoPorCorreo(correo:string){
+    let _alumno:any;
+    let listado: Array<any> = new Array<any>();
+    if (this.listaAlumnos==undefined) {
+      this.db.list('/alumnos').subscribe(lista=>{
 
+        lista.forEach(alumno => {
+          if (alumno["correo"]==correo) {
+            _alumno = alumno;
+          }
+        });
+      });
+    }
+    return _alumno;
   }
 
   public getAlumnosPorMateria(materiaParam:string){

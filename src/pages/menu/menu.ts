@@ -25,7 +25,7 @@ export class MenuPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl:AlertController,public loadingCtrl:LoadingController,
-             
+
               public file:File, public filePath:FilePath, public fileChooser:FileChooser,
              /* public fileOpener:FileOpener,*/ private alumnoDB:AlumnoServiceProvider
 
@@ -51,7 +51,7 @@ export class MenuPage {
     if (this.datos["loginSocial"]==true) {
       this.navCtrl.push("PerfilPage", {"correo" : this.datos["correo"], "perfil":this.datos["perfil"], "nombre":this.datos["nombre"], "foto":this.datos["foto"], "isLoginSocial":this.datos["loginSocial"]});
     }else{
-      this.navCtrl.push("PerfilPage", {"correo" : this.datos["correo"], "perfil":this.datos["perfil"]});
+      this.navCtrl.push("PerfilPage", {"correo" : this.datos["correo"], "perfil":this.datos["perfil"], "nombre":this.datos["nombre"], "foto":this.datos["foto"], "isLoginSocial":this.datos["loginSocial"]});
     }
 
   }

@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { BarcodeScanner, BarcodeScannerOptions, BarcodeScanResult } from "@ionic-native/barcode-scanner";
 
 import { AlumnoServiceProvider } from "../../providers/alumno-service/alumno-service";
+import { ProfesorServiceProvider } from "../../providers/profesor-service/profesor-service";
 
 @IonicPage()
 @Component({
@@ -17,12 +18,16 @@ export class FormAlumnosQrPage {
   private perfil:string="";
   private listaMaterias:any[];
   private listaPorAlumno:any[];
+  private listaPorProfesor:any[];
   private objCode:{};
   private listado:string = "";
+  private dato:string="";
+  private tipo:string;
+  private listaMateriasProf:any[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public barcodeScanner:BarcodeScanner, public alertCtrl:AlertController,
-              private alumnoDB:AlumnoServiceProvider
+              private alumnoDB:AlumnoServiceProvider, private profesorDB:ProfesorServiceProvider
 
   ) {}
 
@@ -38,20 +43,26 @@ export class FormAlumnosQrPage {
     this.correo = this.navParams.get('correo');
     this.perfil = this.navParams.get('perfil');
 
-
-    switch (this.perfil) {
+    switch (this.tipo) {
       case 'alumno':
-                    this.alumnoDB.traerMateriasPorAlumno_Correo(this.correo).subscribe(lista=>{
-                      this.listaPorAlumno = lista[0].materias;
-                      //this.armarObjCodeAlumno();
-                      this.armarObjCodeTodosAlumnos();
-                    });
+
+
+      break;
+      case 'profesor':
+
 
       break;
 
       default:
         break;
-    }
+
+  }
+}
+
+
+  public determinarTipo(){
+    console.log(this.perfil);
+    console.log(this.tipo);
 
   }
 
@@ -96,11 +107,34 @@ export class FormAlumnosQrPage {
     return code;
   }
 
+  private armarObjCodeProfesor() {
+    let code:string = 'Materias y aulas: \n';
+    console.log(this.listaMaterias);
+
+
+    code+= "PROGRAMACION 3  Aula: lab 1";
+    return code;
+
+  }
+
 
   private encodeData(){
     console.log(this.armarObjCodeTodosAlumnos());
+    console.log(this.tipo);
     if (this.perfil == 'alumno') {
+      this.alumnoDB.traerMateriasPorAlumno_Correo(this.correo).subscribe(lista=>{
+        this.listaPorAlumno = lista[0].materias;
+        //this.armarObjCodeAlumno();
+        this.armarObjCodeTodosAlumnos();
+      });
       this.barcodeScanner.encode(this.barcodeScanner.Encode.TEXT_TYPE, this.armarObjCodeTodosAlumnos()).then((valor)=>{
+        this.url = valor.file;
+      });
+    }else{
+      console.log(this.armarObjCodeProfesor());
+      this.listaMateriasProf = this.profesorDB.getMateriasProfesorPorCorreo(this.correo);
+      console.log(this.listaMateriasProf);
+      this.barcodeScanner.encode(this.barcodeScanner.Encode.TEXT_TYPE, this.armarObjCodeProfesor()).then((valor)=>{
         this.url = valor.file;
       });
     }
