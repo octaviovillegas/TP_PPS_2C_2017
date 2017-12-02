@@ -50,7 +50,8 @@
     "sw-toolbox": "3.6.0",
     "sweetalert2": "^7.0.3",
     "timers": "^0.1.1",
-    "zone.js": "0.8.18"
+    "zone.js": "0.8.18",
+    "cordova-plugin-fcm": "^2.1.2"
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.0.1",
@@ -66,7 +67,8 @@
       "ionic-plugin-keyboard": {},
       "cordova-plugin-nativeaudio": {},
       "phonegap-plugin-barcodescanner": {},
-      "cordova-plugin-datepicker": {}
+      "cordova-plugin-datepicker": {},
+      "cordova-plugin-fcm": {}
     },
     "platforms": [
       "android"
