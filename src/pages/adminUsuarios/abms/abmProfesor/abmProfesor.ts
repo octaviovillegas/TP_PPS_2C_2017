@@ -3,6 +3,7 @@ import { IonicPage, NavController, AlertController, ActionSheetController } from
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import 'rxjs/add/operator/map';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @IonicPage()
 @Component({
@@ -24,6 +25,7 @@ export class AbmProfesorPage {
     public alertCtrl: AlertController, 
     public af: AngularFireDatabase,
     public actionSheetCtrl: ActionSheetController, 
+    private authAf: AngularFireAuth,
     private formBuilder: FormBuilder) {
       this.tab = "lista";
       //Lista
@@ -74,11 +76,25 @@ export class AbmProfesorPage {
   //AGREGAR PROFESOR
   public agregarProfesor(): void{
     if(this.modifId == "") {
-      let prompt = this.alertCtrl.create({ title: 'Profesor agregado', buttons: [{ text: 'Ok',}] });
-      prompt.present();
       let data: {} = this.formAlta.value;
-      data["tipo"] = "profe";
-      this.af.list("/usuarios").push(data);
+      this.authAf.auth.createUserWithEmailAndPassword(data["email"], data["pass"]).then(r => {
+        let prompt = this.alertCtrl.create({ title: 'Profesor agregado', buttons: [{ text: 'Ok',}] });
+        prompt.present();
+        data["tipo"] = "profe";
+        this.af.list("/usuarios").push(data);
+      }).catch(err => {
+        let message;
+        if((err as any).code == "auth/weak-password"){
+          message = "La contraseña es muy debil";
+        } else if((err as any).code == "auth/email-already-in-use"){
+          message = "Este mail ya se encuentra en uso";
+        } else if((err as any).code == "auth/invalid-email"){
+          message = "Email invalido";
+        } else if((err as any).code == "auth/operation-not-allowed"){
+          message = "Bardiamos fuerte...";
+        }
+        this.alertCtrl.create({ title: message, buttons: [{ text: 'Ok',}] }).present();
+      });
     } else {
       this.profesores.update(this.modifId, {
          nombre: this.formAlta.controls['nombre'].value,

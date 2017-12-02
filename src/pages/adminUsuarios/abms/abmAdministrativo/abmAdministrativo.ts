@@ -81,9 +81,19 @@ export class AbmAdministrativoPage {
         prompt.present();
         data["tipo"] = "admin";
         this.af.list("/usuarios").push(data);
+        this.formAlta.reset();
       }).catch(err => {
-        console.log(err);
-        this.alertCtrl.create({ title: 'Mail o contraseña incorrecta', buttons: [{ text: 'Ok',}] }).present();
+        let message;
+        if((err as any).code == "auth/weak-password"){
+          message = "La contraseña es muy debil";
+        } else if((err as any).code == "auth/email-already-in-use"){
+          message = "Este mail ya se encuentra en uso";
+        } else if((err as any).code == "auth/invalid-email"){
+          message = "Email invalido";
+        } else if((err as any).code == "auth/operation-not-allowed"){
+          message = "Bardiamos fuerte...";
+        }
+        this.alertCtrl.create({ title: message, buttons: [{ text: 'Ok',}] }).present();
       });
     } else {
       this.admins.update(this.modifId, {
@@ -97,7 +107,6 @@ export class AbmAdministrativoPage {
       prompt.present();
     }
     this.modifId = "";
-    this.formAlta.reset();
   }
 
   public onInput($event): void {

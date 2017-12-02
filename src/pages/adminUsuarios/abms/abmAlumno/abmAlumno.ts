@@ -46,7 +46,7 @@ export class AbmAlumnoPage {
   }
 
   //LISTA DE ALUMNOS
-  public eliminarAlumno(alumnoId: string, apellido: string, email: string): void {
+  public eliminarAlumno(alumnoId: string, apellido: string): void {
     let prompt = this.alertCtrl.create({
       title: 'Confirmar',
       message: "Seguro que queres eliminar al alumno " + apellido + "?",
@@ -94,20 +94,17 @@ export class AbmAlumnoPage {
         this.af.list("/usuarios").push(data);
         this.formAlta.reset();
       }).catch(err => {
-        console.log(err);
-        if(err != undefined) {
-          let message;
-          if(err[0].code == "auth/weak-password"){
-            message = "La contraseña es muy debil";
-          } else if(err[0].code == "auth/email-already-in-use"){
-            message = "Este mail ya se encuentra en uso";
-          } else if(err[0].code == "auth/invalid-email"){
-            message = "Email invalido";
-          } else if(err[0].code == "auth/operation-not-allowed"){
-            message = "Bardiamos fuerte...";
-          }
-          this.alertCtrl.create({ title: message, buttons: [{ text: 'Ok',}] }).present();
+        let message;
+        if((err as any).code == "auth/weak-password"){
+          message = "La contraseña es muy debil";
+        } else if((err as any).code == "auth/email-already-in-use"){
+          message = "Este mail ya se encuentra en uso";
+        } else if((err as any).code == "auth/invalid-email"){
+          message = "Email invalido";
+        } else if((err as any).code == "auth/operation-not-allowed"){
+          message = "Bardiamos fuerte...";
         }
+        this.alertCtrl.create({ title: message, buttons: [{ text: 'Ok',}] }).present();
       });
     } else {
       this.alumnos.update(this.modifId, {
@@ -122,6 +119,7 @@ export class AbmAlumnoPage {
       });
       let prompt = this.alertCtrl.create({ title: 'Alumno modificado', buttons: [{ text: 'Ok',}] });
       prompt.present();
+      this.formAlta.reset();
     }
     this.modifId = "";
   }
