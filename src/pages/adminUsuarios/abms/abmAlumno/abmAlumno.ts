@@ -56,7 +56,6 @@ export class AbmAlumnoPage {
         role: 'destructive',
         handler: data => { 
           let serviceAccount = require("../../../../app/ppsfsz-18b16-firebase-adminsdk-686lt-0a3e73b20b.json");
-          console.log(serviceAccount);
           admin.initializeApp({
             credential: admin.credential.cert(serviceAccount),
             databaseURL: "https://ppsfsz-18b16.firebaseio.com"
