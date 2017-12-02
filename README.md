@@ -86,17 +86,17 @@ Fecha inicio: 09/11/2017
 
 Fecha fin: 11/11/2017
 
-Branch: ABMAlumnos
+Branch: ABMAlumnos, CambiosEnABMs y CambiosABMs
 
 -------------------
 
-Módulo a desarrollar: • Navegación y estilos (I)
+Módulo a desarrollar: • Navegación y estilos (paleta de colores, splash, tipografia) (I)
 
 Fecha inicio: 13/11/2017
 
-Fecha fin: 13/11/2017
+Fecha fin: 01/12/2017
 
-Branch: NavegacionEnAPP
+Branch: NavegacionEnAPP y master.
 
 -------------------
 
@@ -108,7 +108,7 @@ Fecha inicio: 21/11/2017
 
 Fecha fin: 21/11/2017
 
-Branch: ninguno (master)
+Branch: master, CambiosEnABMs y CambiosABMs
 
 -------------------
 
@@ -116,9 +116,9 @@ Módulo a desarrollar: • Toma de lista (A)
 
 Fecha inicio: 21/11/2017
 
-Fecha fin: 23/11/2017
+Fecha fin: 30/11/2017
 
-Branch: TomaLista
+Branch: TomaLista, ModifTomaLista
 
 -------------------
 
@@ -128,6 +128,6 @@ Módulo a desarrollar: • Encuestas (B)
 
 Fecha inicio: 24/11/2017
 
-Fecha fin: 24/11/2017
+Fecha fin: 01/12/2017
 
-Branch: Encuestas
+Branch: Encuestas, ModifEncuesta
