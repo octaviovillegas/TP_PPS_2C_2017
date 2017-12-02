@@ -1,8 +1,8 @@
 <ion-header>
     <ion-navbar>
         <ion-buttons left>
-          <button class="btnSalir" (click)="salir()">
-            <img class="imagen" src="assets/icon/salir1.png">
+          <button class="btnSalir">
+            <img (click)="salir()" class="imagen" src="assets/icon/salir1.png">
           </button>
         </ion-buttons>
         <ion-title>
@@ -39,12 +39,12 @@
         </ion-item>
 
     </ion-list>
-      
-      
+
+
       <button ion-button class= "btnIngresar" color="secondary" (click)="login()">INGRESAR</button>
-    
+
       <button ion-button class= "btnAlumno" round color="primary" (click)="crearAlumno()">NUEVO ALUMNO</button>
-    
+
 
       <button *ngIf="datosLoginGitHub!=undefined" ion-button block color="secondary">
         Credenciales correctas. Ir a Menu
@@ -53,8 +53,9 @@
     <ion-footer>
       <!--img src="assets/imgs/googleplus.png" width="50" height="50"-->
       <p><img src="assets/imgs/github.png" width="50" height="50" (click)="logearEnGitHub()">
-      &nbsp;&nbsp;&nbsp;&nbsp;Grupo IONIC - Facultad UTN</p>
+      &nbsp;&nbsp;&nbsp;&nbsp;Creado por IonicGroup - Facultad UTN</p>
       <!--img src="assets/imgs/facebook.png" width="50" height="50"-->
+      <button *ngIf="ingresa" ion-button color="secondary" (click)="ingresoGitHub()">Ingresar</button>
     </ion-footer>
 
 </ion-content>

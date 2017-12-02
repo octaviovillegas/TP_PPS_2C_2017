@@ -13,7 +13,7 @@
 </ion-header>
 <ion-content class="fondo" padding>  
   <ion-card class="fondo" *ngIf="filtro=='filtroBotones'">
-  <!-- <ion-card-header class="fondo1">Filtrar Comision por</ion-card-header>-->
+   <ion-card-header class="fondo1">Filtro</ion-card-header>
     <ion-card-content class="fondo">  
       <button  ion-button class= "btnIngresar"   (click)="filtrarPor('DIA')">DIA</button>
       
@@ -21,6 +21,10 @@
     </ion-card-content>
   </ion-card>  
 
+  <button class="btn" ion-button block (click)="DiaSemana()">DIA</button>
+  
+  <p>Hoy es {{DiaSem}} con el profe {{profesor}}</p> 
+  
 <ion-card>  
  
  

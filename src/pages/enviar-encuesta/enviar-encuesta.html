@@ -54,17 +54,19 @@
      
   
       <br><br>
-      <button class="btn" ion-button full color="light" (click)="cancelarOpe()">
+      <button class="btnCancelar" ion-button full color="light" (click)="cancelarOpe()">
         Cancelar
       </button>
       <br>
       <!--*ngIf="mostrarDatos" -->
-      <button ion-button class="btn1" full   (click)="eliminarEncuesta()">
+      <button class="btnModificar" ion-button full *ngIf="!mostrarDatos" (click)="modificarEncuesta()">
+        Modificar Encuesta
+      </button>
+      
+      <button class="btnEliminar" ion-button full (click)="eliminarEncuesta()">
         Eliminar Encuesta
       </button>
   
-      <button ion-button class="btn1" full *ngIf="!mostrarDatos" (click)="modificarEncuesta()">
-        Modificar Encuesta
-      </button>
+      
   
   

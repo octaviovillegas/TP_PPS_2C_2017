@@ -10,6 +10,8 @@ import { Usuario } from "../../clases/usuario";
 import { AngularFireAuth } from 'angularfire2/auth';
 import firebase from "firebase";
 
+import { MenuPage } from "../menu/menu";
+
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -29,6 +31,7 @@ export class LoginPage {
     perfil:'alumno',
     loggedin:false
   }
+  private ingresa:boolean=false;
 
   constructor(public navCtrl: NavController,public toastCtrl: ToastController, public navParams: NavParams,
               public alertCtrl:AlertController, public loadingCtrl:LoadingController,
@@ -53,16 +56,16 @@ export class LoginPage {
   login():void{
     if(this.correo =="" )
     {
-    
+
       let toast = this.toastCtrl.create({
         message: ' Error Acceso denegado.Verifique sus datos',
       position: 'middle',
       duration: 1000
     });
     toast.present();
-    
-       
-    
+
+
+
     }
     else
     {
@@ -74,21 +77,22 @@ export class LoginPage {
       loading.present();
       this.loginUsuario.setCorreo(this.correo);
       this.loginUsuario.setClave(this.passw);
-  
+      console.log(this.loginUsuario);
       this.auth.loginUser(this.loginUsuario.getCorreo(), this.loginUsuario.getClave().toString())
         .then(user=>{
-  
+
           this.listaUsuarios = this.servicioDB.getUsuariosLista();
           this.listaUsuarios.subscribe(lista=>{
             lista.forEach(usuario => {
               console.log(usuario);
-              if (usuario['correo'] == this.loginUsuario.getCorreo()) {
+              if (usuario.correo == this.loginUsuario.getCorreo()) {
                   this.loginUsuario.setPerfil(usuario['perfil']);
                   this.loginUsuario.setNombre(usuario['nombre']);
-                  console.log('set nombre: ', usuario['perfil']);
-                  this.loginUsuario.setPerfil(usuario['perfil']);
+                  //console.log('set nombre: ', usuario['perfil']);
+                  //this.loginUsuario.setPerfil(usuario['perfil']);
                   this.loginUsuario.setClave(-1); //no necesito guardar la passw
-                  this.navCtrl.push("MenuPage", JSON.stringify(this.loginUsuario));
+                  this.navCtrl.push('MenuPage', JSON.stringify(this.loginUsuario))
+
               }
             });
           });
@@ -98,11 +102,16 @@ export class LoginPage {
             buttons: ['Volver']
           });
         })
-      
-    }
 
     }
 
+    }
+
+
+    private ingresoGitHub(){
+      console.log(this.loginUsuario);
+      this.navCtrl.push("MenuPage", JSON.stringify(this.loginUsuario));
+    }
 
 
     private writePassw():void{
@@ -170,11 +179,10 @@ export class LoginPage {
     }
 
 
-   async logearEnGitHub(){
+   public logearEnGitHub(){
     let proveedor = new firebase.auth.GithubAuthProvider();
 
-        let res = await this.authe.auth.signInWithPopup(proveedor)
-
+        let res = this.authe.auth.signInWithPopup(proveedor)
           .then(res =>{
             console.log('res: '+ JSON.stringify(res));
 
@@ -183,8 +191,10 @@ export class LoginPage {
             this.loginUsuario.setNombre(res.user.displayName);
             this.loginUsuario.setFoto(res.user.photoURL);
             this.loginUsuario.setLoginSocial(true);
-            console.log('usuarios: ', this.loginUsuario);
-            this.navCtrl.push('MenuPage', JSON.stringify(this.loginUsuario));
+
+            this.ingresa = true;
+            //console.log('usuarios: ', this.loginUsuario);
+            //this.navCtrl.push(MenuPage, {'usuario':this.loginUsuario});
           });
 
 }

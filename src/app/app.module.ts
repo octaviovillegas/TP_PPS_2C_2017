@@ -22,6 +22,8 @@ import { ProfesorAsistenciaPage } from "../pages/profesor-asistencia/profesor-as
 import { EncuestasHomePage } from "../pages/encuestas-home/encuestas-home";
 import { EnviarEncuestaPage } from "../pages/enviar-encuesta/enviar-encuesta";
 import { EncuestaDetPage } from "../pages/encuesta-det/encuesta-det";
+import { ConsultarBajaModifPageModule } from "../pages/consultar-baja-modif/consultar-baja-modif.module";
+import { MenuPageModule } from "../pages/menu/menu.module";
 
 
 ////////SERVICIOS
@@ -93,7 +95,9 @@ var firebaseAuth  = {
      AngularFireDatabaseModule,
      AngularFireAuthModule,
      FormsModule,
-     ReactiveFormsModule
+     ReactiveFormsModule,
+     MenuPageModule,
+     ConsultarBajaModifPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -127,7 +131,7 @@ var firebaseAuth  = {
     AsistenciasProvider,
     BarcodeScanner,
     ProfesorServiceProvider,
-    EncuestasDataProvider ,  DatePipe,  
+    EncuestasDataProvider ,  DatePipe,
     File,
     FileChooser,
     FilePath

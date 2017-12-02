@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { AsistenciasProvider } from "../../providers/asistencias/asistencias";
 import { Camera, CameraOptions } from "@ionic-native/camera";
 import {storage, initializeApp}  from 'firebase';
+import { AlumnoServiceProvider } from "../../providers/alumno-service/alumno-service";
 
 import { Alumno } from "../../clases/alumno";
 /**
@@ -21,7 +22,7 @@ import { Alumno } from "../../clases/alumno";
 export class AsistenciasPage {
 
   mes;
-  dia;
+foto;
   anio;
 filtro = "filtroBotones";
 today = new Date();
@@ -44,7 +45,11 @@ profesores;
 legajo;
 materias;
 comisiones;  
-arrayAsistencia : Array<asistencia> = [];
+//arrayAsistencia : Array<asistencia> = [];
+dia = this.today.getDay();
+DiaSem = "";
+
+
 
 
  
@@ -61,12 +66,12 @@ restablecerValores()
   this.cantidadComisiones = 0;
   this.cantidadProfesores = 0;
   this.arrayPresentes = [];
-  this.arrayAsistencia = [];
+  //this.arrayAsistencia = [];
 
 }
 
 constructor(public navCtrl: NavController,
-            public navParams: NavParams,private camera:Camera,
+            public navParams: NavParams,private camera:Camera,private dbPersonas:AlumnoServiceProvider,
             public ARP:AsistenciasProvider,
           /*  private nativeAudio: NativeAudio,
             public vibration : Vibration,*/
@@ -80,10 +85,41 @@ public alertCtrl: AlertController) {
 ionViewDidLoad() {
 
   console.log('ionViewDidLoad Asistencias');
+  
 }
 
+DiaSemana () {
 
-
+let today:Date = new Date();
+let dia = today.getDay();
+console.log('dia',dia);
+  
+  switch (dia) {
+    case 0:
+      this.DiaSem = 'Domingo';
+      break;  
+    case 1:
+      this.DiaSem = 'Lunes';        
+      break;
+    case 2:
+      this.DiaSem = 'Martes';        
+      break;
+    case 3:
+      this.DiaSem = 'Miercoles';        
+      break;
+    case 4:
+      this.DiaSem = 'Jueves';        
+      break;
+    case 5:
+      this.DiaSem = 'viernes';        
+      break;
+    case 6:
+      this.DiaSem = 'Sabado';        
+      break;
+                
+  }
+  
+}
 
 
 
@@ -266,7 +302,7 @@ sacarFoto(){
     saveToPhotoAlbum:true,
     cameraDirection:this.camera.Direction.BACK
   };
-
+/*
   this.camera.getPicture(options).then((imagen)=>{
         let imagenData = 'data:image/jpeg;base64,'+ imagen;
         let upload = this.storageRef.child('alumnos/' + this.legajo + '.jpg').putString(imagen, 'base64');
@@ -283,7 +319,7 @@ sacarFoto(){
         );
       });
 }
-}
+}*/
 
 class asistencia {
   id_alumno: number;
@@ -296,4 +332,6 @@ class asistencia {
       this.fecha = fecha;
       this.estado = estado;
   }    
+}
+}
 }
