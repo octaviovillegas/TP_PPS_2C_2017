@@ -183,7 +183,6 @@ export class AbmAlumnoPage {
         let pictures = storage().ref('temp');
         this.imgName = "temp";
         pictures.putString(this.imgFile, 'data_url');
-        alert(this.imgName);
     });
   }
 
