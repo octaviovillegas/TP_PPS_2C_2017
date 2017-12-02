@@ -10,9 +10,6 @@
         <ion-segment-button value="agregar" (click)="cambiarDeTab()">
           Agregar 
         </ion-segment-button>
-        <ion-segment-button value="agregarLista" (click)="cambiarDeTab()">
-          Agregar Lista
-        </ion-segment-button>
       </ion-segment>
     </ion-toolbar>
   </ion-header>
@@ -82,10 +79,6 @@
         <br>
         <button ion-button block type="submit" [disabled]="!formAlta.valid">{{modifId == "" ? "Agregar" : "Modificar"}}</button>
       </form>
-  </ion-content>
-  
-  <ion-content *ngIf="tab == 'agregarLista'">
-    
   </ion-content>
     
 </ion-content>
