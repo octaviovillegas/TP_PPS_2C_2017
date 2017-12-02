@@ -4,7 +4,7 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import { storage } from 'firebase';
 import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/camera';
 import 'rxjs/add/operator/map';
-import { PushService } from "../../../services/push.service";
+//import { PushService } from "../../../services/push.service";
 
 @IonicPage()
 @Component({
