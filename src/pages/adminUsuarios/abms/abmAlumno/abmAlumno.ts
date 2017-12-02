@@ -57,16 +57,15 @@ export class AbmAlumnoPage {
 
   public loadImage(){
     setTimeout(() => {
-      alert(this.imgName);
       if(this.imgName != "") {
         storage().ref(this.imgName).getDownloadURL().then(url => {
           this.imgUrl = url;
-          this.loadImage();
         }).catch(err => {});
       } else {
         this.imgUrl = "";
       }
     }, 1000);
+    this.loadImage();
   }
 
   //LISTA DE ALUMNOS
