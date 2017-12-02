@@ -57,11 +57,14 @@ export class AbmAlumnoPage {
 
   public loadImage(){
     setTimeout(() => {
+      alert(this.imgName);
       if(this.imgName != "") {
         storage().ref(this.imgName).getDownloadURL().then(url => {
           this.imgUrl = url;
           this.loadImage();
         }).catch(err => {});
+      } else {
+        this.imgUrl = "";
       }
     }, 1000);
   }
@@ -111,6 +114,10 @@ export class AbmAlumnoPage {
         data["pres_Programacion"] = "0";
         data["pres_Laboratorio"] = "0";
         data["pres_Estadistica"] = "0";
+        data["tieneFoto"] = this.imgName == "" ? "0" : "1";
+        if(data["tieneFoto"] == "1") {
+          this.subirFoto(this.formAlta.value["email"]);
+        }
         this.af.list("/usuarios").push(data);
         this.formAlta.reset();
       }).catch(err => {
@@ -163,6 +170,9 @@ export class AbmAlumnoPage {
     let pictures = storage().ref(email);
     pictures.putString(this.imgFile, 'data_url');
     storage().ref('temp').delete();
+    this.imgFile = "";
+    this.imgName = "";
+    this.imgUrl = "";
   }
 
   public onInput($event): void {
