@@ -12,8 +12,6 @@ import { Facebook } from '@ionic-native/facebook';
 import firebase from 'firebase';
 import { DomSanitizer } from '@angular/platform-browser';
 
-//import { SocketService } from "../../services/socket.service";
- 
 @IonicPage()
 @Component({
   selector: 'page-login',

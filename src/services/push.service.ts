@@ -3,6 +3,8 @@ import { AngularFireDatabase } from "angularfire2/database";
 import { AngularFireAuth } from 'angularfire2/auth';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ToastController } from 'ionic-angular';
+import { FCM } from '@ionic-native/fcm';
+
 
 import * as firebase from "firebase";
 import "rxjs/add/operator/take";
@@ -12,7 +14,7 @@ export class PushService{
 
   messaging = firebase.messaging();
   currentMessage = new BehaviorSubject(null);
-  constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth, private toastService: ToastController) {
+  constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth, private toastService: ToastController, private fcm: FCM) {
   }
 
   updateToken(token) {
@@ -20,15 +22,18 @@ export class PushService{
       if (!user) return;
       const data = { [user.email.replace(".","")]: token }
       this.db.object('fcmTokens/').update(data);
-    });
+    }); 
   }
 
   getPermission() {
-    this.messaging.requestPermission()
+    /*
+        this.messaging.requestPermission()
       .then(() => {
         console.log('Notification permission granted.');
         return this.messaging.getToken();
       })
+    */
+    this.fcm.getToken()
       .then(token => {
         console.log(token);
         this.updateToken(token);
@@ -39,7 +44,7 @@ export class PushService{
   }
 
   receiveMessage() {
-    this.messaging.onMessage((payload) => {
+    this.fcm.onNotification().subscribe((payload) => {
       console.log("Mensaje recibido:", payload);
       this.toastService.create({
         message: "Mensaje de " + payload.notification.title + ":" + payload.notification.body,
@@ -50,6 +55,17 @@ export class PushService{
       }).present();
       this.currentMessage.next(payload);
     });
+    /*this.messaging.onMessage((payload) => {
+      console.log("Mensaje recibido:", payload);
+      this.toastService.create({
+        message: "Mensaje de " + payload.notification.title + ":" + payload.notification.body,
+        duration: 2500,
+        position: 'top',
+        showCloseButton: true,
+        closeButtonText: "Ok"
+      }).present();
+      this.currentMessage.next(payload);
+    });*/
   }
   
   sendMessageToAlumnos(mensaje: string, fromParam: string) {
@@ -96,7 +112,7 @@ export class PushService{
     tokens.take(1).forEach(t => {
       t.forEach(t2 => {
         this.db.object('avisoFaltas/' + messageID.replace(".", "")).update({
-          message: "El alumno " + alumnoEmail + "se excedió con las faltas.",
+          message: "El alumno " + alumnoEmail + "se excediÃ³ con las faltas.",
           from: "Sistema",
           title: "Aviso",
           receptor: alumnoEmail
