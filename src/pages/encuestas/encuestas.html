@@ -27,7 +27,7 @@
           Ya respondiste.
         </ion-item>
       </ion-card>
-      <h1 text-center>{{lastEncuesta.pregunta}}</h1>
+      <h1 text-center >{{lastEncuesta.pregunta}}</h1>
       <ion-card>
         <ion-item>
           <ion-select [(ngModel)]="respuesta" [disabled]="!puedoResponder">
@@ -47,7 +47,7 @@
     <div *ngIf="!hayEncuesta()">
       <ion-card text-center *ngIf="lastEncuesta != undefined">
         <ion-item>
-          No hay encuesta.
+          No hay encuesta activa.
         </ion-item>
       </ion-card>
     </div>
@@ -91,9 +91,8 @@
   </ion-content>
 
   <ion-content *ngIf="tab == 'estadisticas'">
-        <h1 text-center>Resultados</h1>
-        Pregunta:
-        <h1 text-center>{{lastEncuesta.pregunta}}</h1>
+        <h2 class="page-susbtitle">Ultima pregunta:</h2>
+        <h1 text-center class="page-title" >{{lastEncuesta.pregunta}}</h1>
         <canvas #tortaCanvas></canvas>
   </ion-content>
 
