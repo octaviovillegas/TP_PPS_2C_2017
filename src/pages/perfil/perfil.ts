@@ -51,6 +51,7 @@ export class PerfilPage {
       this.foto = this.navParams.get('foto');
     }else{
       this.perfil = this.navParams.get('perfil');
+      console.log(this.perfil);
       this.correo = this.navParams.get('correo');
 
       this.dbPersonas.getDatosPersona(this.correo, this.perfil).subscribe(valor=>{
@@ -60,7 +61,7 @@ export class PerfilPage {
                       //this.alumno = new Alumno();
 
                       if (valor[0]["nombre"] != null && valor[0]["nombre"] != undefined) {
-                        this.nombre = valor[0]["nombre"];
+                        //this.nombre = valor[0]["nombre"];
                       }else{
                         this.nombre = '';
                       }
@@ -68,6 +69,16 @@ export class PerfilPage {
                       this.legajo = valor[0]["legajo"];
                       this.materias = valor[0]["materias"];
                       console.log('this.materias:', this.materias);
+                break;
+                case 'profesor':
+                if (valor[0]["nombre"] != null && valor[0]["nombre"] != undefined) {
+                  this.nombre = valor[0]["nombre"];
+                  console.log(this.nombre);
+                }else{
+                  this.nombre = '';
+                }
+                this.foto = valor[0]["foto"];
+
                 break;
 
               default:
@@ -98,7 +109,7 @@ export class PerfilPage {
         },
         cssClass: 'alertDanger'
       }
-      
+
     ]
     });
     alertEmail.present();

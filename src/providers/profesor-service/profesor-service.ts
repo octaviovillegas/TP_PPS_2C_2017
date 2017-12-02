@@ -43,7 +43,21 @@ export class ProfesorServiceProvider {
   }
 
 
-
+  public getMateriasProfesorPorCorreo(id:string){
+    let lista:FirebaseListObservable<any[]>;
+    let listaMaterias:any[];
+    this.db.list('/profesores').subscribe(profesores=>{
+      profesores.forEach(profesor => {
+        console.log(profesor);
+        if (profesor["dni"]==id) {
+          listaMaterias = profesor["materias"];
+          console.log(listaMaterias);
+        }
+      });
+    });
+    console.log(listaMaterias);
+    return listaMaterias;
+  }
 
  public getProfesoresLista(){
     this.listaProfesores = this.db.list('/profesores') as FirebaseListObservable<any[]>;
