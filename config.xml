@@ -81,11 +81,7 @@
     <engine name="android" spec="^6.2.3" />
     <plugin name="cordova-plugin-camera" spec="^2.4.1" />
     <plugin name="cordova-plugin-device" spec="^1.1.4" />
-<<<<<<< HEAD
     <plugin name="cordova-plugin-file" spec="^5.0.0" />
-=======
-    <plugin name="cordova-plugin-file" spec="^4.3.3" />
->>>>>>> 4d24d7371777c21ecdf3bca368af5250968b3483
     <plugin name="cordova-plugin-file-opener2" spec="^2.0.19" />
     <plugin name="cordova-plugin-filechooser" spec="^1.0.1" />
     <plugin name="cordova-plugin-filepath" spec="^1.1.0" />
