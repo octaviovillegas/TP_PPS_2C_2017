@@ -69,7 +69,6 @@ export class MenuPage {
 
 
   private irAFormProfesores(){
-
     this.navCtrl.push("ProfesoresFormPage");
   }
 
