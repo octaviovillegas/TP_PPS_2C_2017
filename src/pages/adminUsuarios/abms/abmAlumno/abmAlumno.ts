@@ -5,7 +5,6 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import 'rxjs/add/operator/map';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as admin from "firebase-admin";
-import { FIREBASE_CONFIG } from '../../../../app/app.firebase.config';
 
 @IonicPage()
 @Component({
@@ -56,7 +55,12 @@ export class AbmAlumnoPage {
         text: 'Si',
         role: 'destructive',
         handler: data => { 
-          admin.initializeApp(FIREBASE_CONFIG);
+          let serviceAccount = require("../../../../app/ppsfsz-18b16-firebase-adminsdk-686lt-0a3e73b20b.json");
+          console.log(serviceAccount);
+          admin.initializeApp({
+            credential: admin.credential.cert(serviceAccount),
+            databaseURL: "https://ppsfsz-18b16.firebaseio.com"
+          });
           admin.auth().getUserByEmail(email).then(alumno => {
             admin.auth().deleteUser("alumno.uid");
             this.alumnos.remove(alumnoId);
