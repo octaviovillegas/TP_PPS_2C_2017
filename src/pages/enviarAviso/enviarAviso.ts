@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { PushService } from "../../services/push.service";
 import { AngularFireAuth } from "angularfire2/auth";
+import { UserService } from "../../services/user.service";
 
 @IonicPage()
 @Component({
@@ -10,7 +11,8 @@ import { AngularFireAuth } from "angularfire2/auth";
 })
 export class EnviarAvisoPage {
   mensaje: string;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private pushService: PushService, private auth: AngularFireAuth) {
+  tipo: string;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private pushService: PushService, private auth: AngularFireAuth, private userService: UserService) {
   }
 
   enviarATodos(): void {

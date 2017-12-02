@@ -23,6 +23,7 @@ import { Facebook } from '@ionic-native/facebook';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Camera } from '@ionic-native/camera';
 import { PushService } from "../services/push.service";
+import { UserService } from "../services/user.service";
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { PushService } from "../services/push.service";
     Facebook,
     BarcodeScanner,
     Camera,
-	PushService
+    PushService,
+    UserService
   ]
 })
 export class AppModule {}
