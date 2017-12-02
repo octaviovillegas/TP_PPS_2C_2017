@@ -12,22 +12,22 @@
         <ion-list inset>
   
         <ion-label class="myLabel">Email</ion-label>
-        <ion-item style="border-radius: 25px">
+        <ion-item>
           <ion-input  type="email" value="{{email}}" [(ngModel)]="email" [disabled]="true"></ion-input>
         </ion-item>
   
         <ion-label class="myLabel">Constraseña</ion-label>
-        <ion-item style="border-radius: 25px">
+        <ion-item>
           <ion-input  type="password" [(ngModel)]="oldPassword"></ion-input>
         </ion-item>
 
         <ion-label class="myLabel">Constraseña nueva</ion-label>
-        <ion-item style="border-radius: 25px">
+        <ion-item>
           <ion-input  type="password" [(ngModel)]="newPassword"></ion-input>
         </ion-item>
 
         <ion-label class="myLabel">Repetir constraseña nueva</ion-label>
-        <ion-item style="border-radius: 25px">
+        <ion-item>
           <ion-input  type="password" [(ngModel)]="repeatNewPassword"></ion-input>
         </ion-item>
 
@@ -37,15 +37,15 @@
 
       <ion-row class="fondo">
           <ion-col>
-            <div style= "width:12em; margin: 0 auto">
-              <button ion-button style="width:100%; margin: 0 auto; border-radius: 25px; background-color: #FF6A2F; color:#FFFFFF; font-weight: bold" class="login-button" (click)="actualizarDatos()">Actualizar datos</button>
+            <div>
+              <button ion-button class="our-btn" (click)="actualizarDatos()">Actualizar datos</button>
             </div>
           </ion-col>
         </ion-row>
         <ion-row class="fondo">
             <ion-col>
-              <div style= "width:12em; margin: 0 auto">
-                <button ion-button style="width:100%; margin: 0 auto; border-radius: 25px; background-color: #FF6A2F; color:#FFFFFF; font-weight: bold" class="login-button" (click)="cancelar()" >Cancelar</button>
+              <div>
+                <button ion-button class="our-btn" (click)="cancelar()" >Cancelar</button>
               </div>
             </ion-col>
           </ion-row>

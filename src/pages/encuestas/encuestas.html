@@ -36,7 +36,7 @@
           </ion-select>
         </ion-item>
       </ion-card>
-      <button ion-button block (click)="responderPreg()" [disabled]="!puedoResponder" >Responder</button>
+      <button class="our-btn" ion-button block (click)="responderPreg()" [disabled]="!puedoResponder" >Responder</button>
       <ion-card>
         <ion-item text-center>
           Termina el: <h1><b>{{lastEncuesta.fechaFin}}</b></h1>
@@ -47,7 +47,7 @@
     <div *ngIf="!hayEncuesta()">
       <ion-card text-center *ngIf="lastEncuesta != undefined">
         <ion-item>
-          Cargando...
+          No hay encuesta.
         </ion-item>
       </ion-card>
     </div>
@@ -86,7 +86,7 @@
         </ion-card-content>
       </ion-card>
       <br>
-      <button ion-button block type="submit" [disabled]="!formCrear.valid || isInvalidDate()" (click)="crearEncuesta()">Crear</button>
+      <button class="our-btn" ion-button block type="submit" [disabled]="!formCrear.valid || isInvalidDate()" (click)="crearEncuesta()">Crear</button>
     </form>
   </ion-content>
 
