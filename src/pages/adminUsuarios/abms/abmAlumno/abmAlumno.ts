@@ -64,14 +64,17 @@ export class AbmAlumnoPage {
         storage().ref(this.imgName).getDownloadURL().then(url => {
           this.imgUrl = url;
         }).catch(err => {
-          console.log("no uacho rompi to2");
-          this.imgName = "";
+          //alert("no uacho rompi to2");
+          if(this.imgName != "temp"){
+            this.imgName = "";
+          } else {
+            this.imgUrl = "http://thinkfuture.com/wp-content/uploads/2013/10/loading_spinner.gif";
+          }
+          
         });
-      } else {
-        this.imgUrl = "";
       }
       this.loadImage();
-    }, 1000);
+    }, 300);
   }
 
   //LISTA DE ALUMNOS
@@ -121,7 +124,6 @@ export class AbmAlumnoPage {
         data["pres_Programacion"] = "0";
         data["pres_Laboratorio"] = "0";
         data["pres_Estadistica"] = "0";
-        alert(this.imgName);
         data["tieneFoto"] = this.imgName == "" ? "0" : "1";
         if(data["tieneFoto"] == "1") {
           this.subirFoto(this.formAlta.value["email"]);
@@ -170,6 +172,7 @@ export class AbmAlumnoPage {
   }
 
   public takePicture(): void {
+    //this.imgName = "temp";
     let options: CameraOptions = {
       quality: 50,
       destinationType: this.camera.DestinationType.DATA_URL,
@@ -177,17 +180,18 @@ export class AbmAlumnoPage {
       mediaType: this.camera.MediaType.PICTURE
     }
     this.camera.getPicture(options).then(imageData => {
+        storage().ref('temp').delete();
         this.imgFile = 'data:image/jpeg;base64,' + imageData;
         let pictures = storage().ref('temp');
         this.imgName = "temp";
         pictures.putString(this.imgFile, 'data_url');
+        alert(this.imgName);
     });
   }
 
   public subirFoto(email: string) {
     let pictures = storage().ref(email);
     pictures.putString(this.imgFile, 'data_url');
-    storage().ref('temp').delete();
   }
 
   public onInput($event): void {
