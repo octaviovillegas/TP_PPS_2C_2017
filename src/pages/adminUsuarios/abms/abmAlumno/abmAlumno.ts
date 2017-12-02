@@ -4,6 +4,8 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import 'rxjs/add/operator/map';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/camera';
+import { storage } from 'firebase';
 
 @IonicPage()
 @Component({
@@ -14,10 +16,14 @@ export class AbmAlumnoPage {
   
   private tab;
   private alumnos: FirebaseListObservable<any[]>;
+  private userImg = "https://openclipart.org/image/2400px/svg_to_png/247319/abstract-user-flat-3.png";
   //Lista
   private searchValue: string;
   private filterType: string;
   private modifId: string;
+  private imgUrl: string;
+  private imgName: string;
+  private imgFile: string;
   //Alta
   private formAlta: FormGroup;
 
@@ -26,11 +32,14 @@ export class AbmAlumnoPage {
     public af: AngularFireDatabase,
     public actionSheetCtrl: ActionSheetController, 
     private authAf: AngularFireAuth,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private camera: Camera) {
       this.tab = "agregar";
       //Lista
       this.filterType = "Apellido";
       this.modifId = "";
+      this.imgUrl = "";
+      this.imgName = "";
       //Alta
       this.filterAlumno();
       this.formAlta = this.formBuilder.group({
@@ -43,6 +52,18 @@ export class AbmAlumnoPage {
         Laboratorio: ['', Validators.compose([Validators.required])],
         Estadistica: ['', Validators.compose([Validators.required])]
       });
+      this.loadImage();
+  }
+
+  public loadImage(){
+    setTimeout(() => {
+      if(this.imgName != "") {
+        storage().ref(this.imgName).getDownloadURL().then(url => {
+          this.imgUrl = url;
+          this.loadImage();
+        }).catch(err => {});
+      }
+    }, 1000);
   }
 
   //LISTA DE ALUMNOS
@@ -86,7 +107,6 @@ export class AbmAlumnoPage {
       this.authAf.auth.createUserWithEmailAndPassword(data["email"], data["pass"]).then(r => {
         let prompt = this.alertCtrl.create({ title: 'Alumno agregado', buttons: [{ text: 'Ok',}] });
         prompt.present();
-        console.log(r);
         data["tipo"] = "alumno";
         data["pres_Programacion"] = "0";
         data["pres_Laboratorio"] = "0";
@@ -124,6 +144,27 @@ export class AbmAlumnoPage {
     this.modifId = "";
   }
 
+  public takePicture(): void {
+    let options: CameraOptions = {
+      quality: 50,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+    this.camera.getPicture(options).then(imageData => {
+        this.imgFile = 'data:image/jpeg;base64,' + imageData;
+        let pictures = storage().ref('temp');
+        this.imgName = "temp";
+        pictures.putString(this.imgFile, 'data_url');
+    });
+  }
+
+  public subirFoto(email: string) {
+    let pictures = storage().ref(email);
+    pictures.putString(this.imgFile, 'data_url');
+    storage().ref('temp').delete();
+  }
+
   public onInput($event): void {
     this.filterAlumno();
   }
@@ -157,6 +198,8 @@ export class AbmAlumnoPage {
           handler: data => { 
             this.modifId = "";
             this.formAlta.reset();
+            this.imgUrl = "";
+            this.imgName = "";
           }
         },
         {

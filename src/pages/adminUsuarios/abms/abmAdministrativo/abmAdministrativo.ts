@@ -105,6 +105,7 @@ export class AbmAdministrativoPage {
       });
       let prompt = this.alertCtrl.create({ title: 'Administrativo modificado', buttons: [{ text: 'Ok',}] });
       prompt.present();
+      this.formAlta.reset();
     }
     this.modifId = "";
   }

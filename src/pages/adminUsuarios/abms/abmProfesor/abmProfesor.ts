@@ -82,6 +82,7 @@ export class AbmProfesorPage {
         prompt.present();
         data["tipo"] = "profe";
         this.af.list("/usuarios").push(data);
+        this.formAlta.reset();
       }).catch(err => {
         let message;
         if((err as any).code == "auth/weak-password"){
@@ -106,9 +107,9 @@ export class AbmProfesorPage {
        });
        let prompt = this.alertCtrl.create({ title: 'Profesor modificado', buttons: [{ text: 'Ok',}] });
        prompt.present();
+       this.formAlta.reset();
       }
     this.modifId = "";
-    this.formAlta.reset();
   }
 
   public onInput($event): void {
