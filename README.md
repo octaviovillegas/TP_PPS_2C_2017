@@ -29,7 +29,7 @@ Módulo a desarrollar:
 
 Fecha inicio: 26/11/2017
 
-Fecha fin: 26/11/2017
+Fecha fin: 27/11/2017
 
 Branch: LoginRedSocial
 
@@ -40,9 +40,9 @@ Módulo a desarrollar:
 
 Fecha inicio: 27/11/2017
 
-Fecha fin: 27/11/2017
+Fecha fin: 2/11/2017
 
-Branch: LoginRedSocial
+Branch: QRAlumnos
 
 -------------------
 
@@ -53,7 +53,7 @@ Fecha inicio: 28/11/2017
 
 Fecha fin: -
 
-Branch: LoginRedSocial
+Branch: QRProfesores
 
 -------------------
 
