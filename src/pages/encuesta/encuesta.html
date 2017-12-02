@@ -1,45 +1,20 @@
-<ion-header>
+<ion-content class="fondo" padding>
+  <h4>Seleccione la opción deseada</h4>
+  <h4> {{nombre}} </h4>
+  <br> 
+  <img class="imagen" *ngIf="foto!=undefined" [src]="foto" width="150px" height="150px">
+  <br>
   
-    <ion-navbar>
-      <ion-title text-center>Alta Encuesta</ion-title>
-    </ion-navbar>
-  
-  </ion-header>
-  
-  
-  <ion-content class="fondo" padding>
-  
-    <ion-item class="fondo">
-      <ion-label>codigo:</ion-label>
-      <ion-input type="text" [(ngModel)]="codigo"></ion-input>
-  </ion-item>
-  
-    <ion-item class="fondo">
-        <ion-label>Pregunta:</ion-label>
-        <ion-input type="text" [(ngModel)]="pregunta"></ion-input>
-    </ion-item>
-  
-    <ion-item class="fondo">
-        <ion-label>Opcion1:</ion-label>
-        <ion-input type="text" [(ngModel)]="opcion1"></ion-input>
-    </ion-item>
-  
-    <ion-item class="fondo">
-        <ion-label>Opcion2:</ion-label>
-        <ion-input type="text" [(ngModel)]="opcion2"></ion-input>
-    </ion-item>
-    
-  <ion-item class="fondo">
-      <ion-label>Opcion3:</ion-label>
-      <ion-input type="text" [(ngModel)]="opcion3"></ion-input>
-  </ion-item>
-
-  
-  <button ion-button class="btnAlumno" block (click)="ingresarEncuesta()">
-    NUEVA ENCUESTA
+  <button class="btn" ion-button (click)="cancelarOpe()">
+    Cancelar
   </button>
-  
-  
-  
-  </ion-content>
-  
+
+  <button class="btn1" ion-button (click)="modificar()">
+    Modificar
+  </button>
+
+  <button class="btn2" ion-button (click)="eliminar()">
+    Eliminar
+  </button>
+
+</ion-content>

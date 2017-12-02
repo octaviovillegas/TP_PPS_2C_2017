@@ -22,6 +22,8 @@ import { ProfesorAsistenciaPage } from "../pages/profesor-asistencia/profesor-as
 import { EncuestasHomePage } from "../pages/encuestas-home/encuestas-home";
 import { EnviarEncuestaPage } from "../pages/enviar-encuesta/enviar-encuesta";
 import { EncuestaDetPage } from "../pages/encuesta-det/encuesta-det";
+import { ConsultarBajaModifPageModule } from "../pages/consultar-baja-modif/consultar-baja-modif.module";
+import { MenuPageModule } from "../pages/menu/menu.module";
 
 
 ////////SERVICIOS
@@ -52,7 +54,7 @@ import { DatePipe } from '@angular/common';
 import { File } from "@ionic-native/file";
 import { FilePath } from "@ionic-native/file-path";
 import { FileChooser } from "@ionic-native/file-chooser";
-import { FileOpener } from "@ionic-native/file-opener";
+
 
 
 var firebaseAuth  = {
@@ -67,7 +69,7 @@ var firebaseAuth  = {
 @NgModule({
   declarations: [
     MyApp,
-    //HomePage,
+    HomePage,
     LoginPage,
     //MateriasPage,
     //MateriaPrincipalPage,
@@ -79,8 +81,9 @@ var firebaseAuth  = {
     AsistenciasPage,
     MostrarAsistenciasPage,
     ProfesorAsistenciaPage,
-    //EncuestasHomePage,
-    EnviarEncuestaPage,EncuestaDetPage
+   // EnviarEncuestaPage,
+    EncuestaDetPage,
+    //EncuestasHomePage
 
    ],
   imports: [
@@ -92,12 +95,14 @@ var firebaseAuth  = {
      AngularFireDatabaseModule,
      AngularFireAuthModule,
      FormsModule,
-     ReactiveFormsModule
+     ReactiveFormsModule,
+     MenuPageModule,
+     ConsultarBajaModifPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    //HomePage,
+    HomePage,
     LoginPage,
     //MateriasPage,
     //MateriaPrincipalPage,
@@ -109,9 +114,9 @@ var firebaseAuth  = {
     AsistenciasPage,
     MostrarAsistenciasPage,
     ProfesorAsistenciaPage,
-   //EncuestasHomePage,
-    EnviarEncuestaPage,EncuestaDetPage
-
+   // EnviarEncuestaPage,
+    EncuestaDetPage,
+    //EncuestasHomePage
   ],
   providers: [
     StatusBar,
@@ -126,11 +131,10 @@ var firebaseAuth  = {
     AsistenciasProvider,
     BarcodeScanner,
     ProfesorServiceProvider,
-    EncuestasDataProvider ,  DatePipe,  
+    EncuestasDataProvider ,  DatePipe,
     File,
     FileChooser,
-    FilePath,
-    FileOpener
+    FilePath
 
   ]
 })

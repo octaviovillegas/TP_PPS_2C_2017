@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, ModalController, ViewController } 
 
 import { ProfesorServiceProvider } from "../../providers/profesor-service/profesor-service";
 
+import { ConsultarBajaModifPage } from "../consultar-baja-modif/consultar-baja-modif";
+
 @IonicPage()
 @Component({
   selector: 'page-lista-profesores',
@@ -29,26 +31,16 @@ export class ListaProfesoresPage {
 
   abrirModalView(profesor){
     console.log(profesor);
-    let consultaView = this.modalCtrl.create('ConsultarBajaModifPage', {'profesor':profesor});
-    consultaView.present();
+    //let consultaView = this.modalCtrl.create('ConsultarBajaModifPage', {'profesor':profesor});
+    //consultaView.present();
+    this.navCtrl.push(ConsultarBajaModifPage, {'profesor':profesor});
   }
 
 
- /* eliminar(profesor:any){
 
-        console.log('modificar', profesor);
-        let modalAlumno = this.modalCtrl.create('DatosProfesoresPage', {'profesor':profesor, 'boolDatos':true});
-        modalAlumno.present();
+  public irAFormProfesor(){
+    this.navCtrl.push('ProfesoresFormPage');
   }
-
-  modificar(profesor:any){
-
-        console.log('modificar', profesor);
-        let modalAlumno = this.modalCtrl.create('DatosProfesoresPage', {'profesor':profesor, 'boolDatos':false});
-        modalAlumno.present();
-  }
-  */
-
 
 
 

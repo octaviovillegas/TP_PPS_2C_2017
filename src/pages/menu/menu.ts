@@ -4,12 +4,10 @@ import { Usuario } from "../../clases/usuario";
 import { ListadoAlumnosPage } from "../../pages/listado-alumnos/listado-alumnos";
 import { AlumnoServiceProvider } from "../../providers/alumno-service/alumno-service";
 import { EncuestasHomePage } from "../../pages/encuestas-home/encuestas-home";
-
 import { File } from "@ionic-native/file";
 import { FilePath } from "@ionic-native/file-path";
 import { FileChooser } from "@ionic-native/file-chooser";
 //import { FileOpener } from "@ionic-native/file-opener";
-
 import { Alumno } from "../../clases/alumno";
 
 
@@ -27,6 +25,7 @@ export class MenuPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl:AlertController,public loadingCtrl:LoadingController,
+             
               public file:File, public filePath:FilePath, public fileChooser:FileChooser,
              /* public fileOpener:FileOpener,*/ private alumnoDB:AlumnoServiceProvider
 
@@ -58,63 +57,52 @@ export class MenuPage {
   }
 
   private irAFormAlumnos(){
-    const loading = this.loadingCtrl.create({
+    /*const loading = this.loadingCtrl.create({
       content: 'Ingresando. Espere...',
       dismissOnPageChange: true,
       spinner:"bubbles"
     });
-    loading.present();
+    loading.present();*/
 
     this.navCtrl.push("AlumnosFormPage");
   }
 
 
   private irAFormProfesores(){
-    const loading = this.loadingCtrl.create({
-      content: 'Ingresando. Espere...',
-      dismissOnPageChange: true,
-      spinner:"bubbles"
-    });
-    loading.present();
-    
     this.navCtrl.push("ProfesoresFormPage");
   }
 
   private irABMProfesores(){
-    const loading = this.loadingCtrl.create({
-      content: 'Ingresando. Espere...',
-      dismissOnPageChange: true,
-      spinner:"bubbles"
-    });
-    loading.present();
 
     this.navCtrl.push("ListaProfesoresPage");
   }
 
   private irAListaAlumnos(){
-    const loading = this.loadingCtrl.create({
+   /* const loading = this.loadingCtrl.create({
       content: 'Ingresando. Espere...',
       dismissOnPageChange: true,
       spinner:"bubbles"
     });
     loading.present();
-
+    */
     this.navCtrl.push('ListadoAlumnosPage');
   }
 
 
   private irAFormAlumnosQrPage(){
+    /*
     const loading = this.loadingCtrl.create({
       content: 'Ingresando. Espere...',
       dismissOnPageChange: true,
       spinner:"bubbles"
     });
-    loading.present();
+    loading.present();*/
 
     console.log(this.datos["correo"]);
     console.log(this.datos["perfil"]);
     this.navCtrl.push('FormAlumnosQrPage', {'correo':this.datos["correo"], 'perfil':this.datos["perfil"]});
   }
+
 
   irABMPEncuestas()
   {
@@ -209,5 +197,6 @@ export class MenuPage {
 
     return nombre;
   }
+
 
 }

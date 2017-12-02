@@ -21,7 +21,7 @@ export class DatosProfesoresPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public view:ViewController, private profesorDB:ProfesorServiceProvider
-              
+
 
   ) {}
 
@@ -35,6 +35,7 @@ export class DatosProfesoresPage {
     console.log('this.listaMaterias', this.listaMaterias);
     this.nombre = this.profesor.nombre;
     this.dni = this.profesor.dni;
+    console.log(this.dni);
     this.correo = this.profesor.correo;
     this.foto = this.profesor.foto;
 
@@ -47,7 +48,7 @@ export class DatosProfesoresPage {
   }
 
   eliminarMateria(materia:string){
-    
+
       console.log('mate', materia);
       this.profesorDB.traerListadoMateriasPorProfesor().subscribe(lista=>{
         console.log('lista', lista);

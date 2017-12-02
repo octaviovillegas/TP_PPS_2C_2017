@@ -1,8 +1,8 @@
 <ion-header>
     <ion-navbar>
         <ion-buttons left>
-          <button class="btnSalir" (click)="salir()">
-            <img class="imagen" src="assets/icon/salir1.png">
+          <button class="btnSalir">
+            <img (click)="salir()" class="imagen" src="assets/icon/salir1.png">
           </button>
         </ion-buttons>
         <ion-title>
@@ -35,16 +35,16 @@
 
         <ion-item color="primary2">
           <ion-label floating>Password</ion-label>
-          <ion-input color="input1" type="password" (ionChange)="validarCantDigitos($event)" (keypress)="validarNum($event)" [(ngModel)]="passw"></ion-input>
+          <ion-input color="input1" type="password" (ionChange)="validarCantDigitos($event)" (keypress)="validarNum($event)" [(ngModel)]="passw" required></ion-input>
         </ion-item>
 
     </ion-list>
-      
-      
+
+
       <button ion-button class= "btnIngresar" color="secondary" (click)="login()">INGRESAR</button>
-    
+
       <button ion-button class= "btnAlumno" round color="primary" (click)="crearAlumno()">NUEVO ALUMNO</button>
-    
+
 
       <button *ngIf="datosLoginGitHub!=undefined" ion-button block color="secondary">
         Credenciales correctas. Ir a Menu

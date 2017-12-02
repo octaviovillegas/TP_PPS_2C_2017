@@ -1,14 +1,43 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
-</ion-content>
+  
+    <ion-navbar>
+       <button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Encuesta</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+  
+    <div>
+    <ion-card>
+          <ion-card-header>{{pregunta}}</ion-card-header>
+          <ion-card-content>          
+          <ion-list radio-group [(ngModel)]="Preg1Rb">               
+            <ion-item>
+              <ion-label>{{opcion1}}</ion-label>
+              <ion-radio checked="true" value="Buena" ></ion-radio>            
+            </ion-item>
+            <ion-item>
+              <ion-label>{{opcion2}}</ion-label>
+              <ion-radio  value="Regular"></ion-radio>
+            </ion-item>  
+            <ion-item>
+              <ion-label>{{opcion3}}</ion-label>
+              <ion-radio value="Mala"></ion-radio>
+            </ion-item>         
+          </ion-list>         
+          </ion-card-content>
+        </ion-card>  
+  
+ 
+  
+      
+    <button ion-button block type="submit" (click)="subirEncuesta()">Aceptar</button>
+    <button ion-button block type="submit" (click)="cancelarOpe()">Cancelar</button>
+  </div>
+  
+  </ion-content>
