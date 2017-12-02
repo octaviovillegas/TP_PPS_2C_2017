@@ -9,7 +9,7 @@
   
   <ion-content padding>
     
-  <button ion-button class="escanear" round full (click)="scanCode()">Escanear <ion-icon name="qr-scanner"></ion-icon></button>
+  <button ion-button class="our-btn" block (click)="scanCode()">Escanear  <ion-icon name="qr-scanner"></ion-icon></button>
   <div *ngFor="let usuario of profesores | async">
       <ion-input [hidden]="true" type="text" [(ngModel)]="materia" value={{usuario.materia}}></ion-input>
     <ion-card [hidden]="usuario.email != emailCodigo || usuario.tipo != 'profe'">
