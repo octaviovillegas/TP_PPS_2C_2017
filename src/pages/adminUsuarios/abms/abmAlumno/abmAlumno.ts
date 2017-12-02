@@ -4,7 +4,7 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import 'rxjs/add/operator/map';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/camera';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 import { storage } from 'firebase';
 
 @IonicPage()
@@ -64,8 +64,8 @@ export class AbmAlumnoPage {
       } else {
         this.imgUrl = "";
       }
+      this.loadImage();
     }, 1000);
-    this.loadImage();
   }
 
   //LISTA DE ALUMNOS
