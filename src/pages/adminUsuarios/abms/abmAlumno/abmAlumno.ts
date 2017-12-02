@@ -55,8 +55,8 @@ export class AbmAlumnoPage {
         text: 'Si',
         role: 'destructive',
         handler: data => { 
-          let uid = admin.auth().getUserByEmail(email).then(alumno => {
-            //admin.auth().deleteUser(alumno.uid);
+          admin.auth().getUserByEmail(email).then(alumno => {
+            admin.auth().deleteUser("alumno.uid");
             this.alumnos.remove(alumnoId);
           });
         }
@@ -90,6 +90,7 @@ export class AbmAlumnoPage {
       this.authAf.auth.createUserWithEmailAndPassword(data["email"], data["pass"]).then(r => {
         let prompt = this.alertCtrl.create({ title: 'Alumno agregado', buttons: [{ text: 'Ok',}] });
         prompt.present();
+        console.log(r);
         data["tipo"] = "alumno";
         data["pres_Programacion"] = "0";
         data["pres_Laboratorio"] = "0";
