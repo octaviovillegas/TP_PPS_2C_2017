@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "379598590595",
+    "firebase_url": "https://ppsfsz-18b16.firebaseio.com",
+    "project_id": "ppsfsz-18b16",
+    "storage_bucket": "ppsfsz-18b16.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:379598590595:android:e3519927e4450a84",
+        "android_client_info": {
+          "package_name": "com.finalpps.fafafermauro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "379598590595-1j4l6iujokajbikmddmhmg86e7k26iin.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB63wWiyV4ISVimaJ6NzYOqGm3CMZ9V22A"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

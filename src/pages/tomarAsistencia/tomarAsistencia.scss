@@ -1,0 +1,33 @@
+.completo {    
+    color: #00b07d;
+}
+
+.incompleto {
+    color: #4a86ef;
+}
+
+ion-item:active {
+    background-color: #c3c3c3;
+}
+
+.disabled {
+    background: #d8d8d8;
+    box-shadow: none;
+}
+
+.disabled ion-item {
+    color: #aaabac;
+}
+
+.disabled ion-item:active {
+    background: #d8d8d8 !important;
+}
+
+.titulo-lista {
+    color: white !important;
+} 
+
+.img-curso {
+    width: 100%;
+    height: 100%;
+}

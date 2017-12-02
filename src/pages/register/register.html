@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Registro</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content scroll="false">
+  <div style="width:50%; margin: 0 auto">
+    <ion-row>
+      <ion-col>
+        <img style="margin: 0 auto;" src="assets/images/icon.png" />
+      </ion-col>
+    </ion-row>
+    <h4 style="width: 100%; margin: 0 auto;"><strong>ESCUELA FSZ</strong></h4>
+  </div>
+  <div style="width: 80%; margin: 0 auto;">
+    <ion-label class="myLabel">Email</ion-label>
+    <ion-item style="border-radius: 25px">
+      <ion-input  type="email" [(ngModel)]="user.email" required></ion-input>
+    </ion-item>
+    
+    <ion-label class="myLabel">Constraseña</ion-label>
+    <ion-item style="border-radius: 25px">
+      <ion-input  type="password" [(ngModel)]="user.password" required></ion-input>
+    </ion-item>
+    
+    <ion-label class="myLabel">Repita Contraseña</ion-label>
+    <ion-item style="border-radius: 25px">
+      <ion-input type="password" [(ngModel)]="passRepetido"></ion-input>
+    </ion-item>
+  </div>   
+  <br>
+  <br>
+  <div style="width:80%; margin:0 auto;">
+    <button style="width:100%; margin:0 auto; border-radius: 25px" ion-button (click)="register(user, passRepetido)">Registrarse</button>
+  </div>
+</ion-content>

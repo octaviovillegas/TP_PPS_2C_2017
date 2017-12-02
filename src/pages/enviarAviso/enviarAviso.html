@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Enviar Aviso</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      Acciones
+    </ion-card-header>
+    <ion-input type="text" [(ngModel)]="mensaje"></ion-input>
+    <ion-list>
+        <button ion-item (click)="enviarATodos()">
+          <ion-icon name="todos" item-start></ion-icon>
+          Enviar mensaje a todos
+        </button>
+    </ion-list>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,85 @@
+<ion-header>
+  
+    <ion-navbar>
+      <ion-title>QR Profesor</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+    
+  <button ion-button class="escanear" round full (click)="scanCode()">Escanear <ion-icon name="qr-scanner"></ion-icon></button>
+  <div *ngFor="let usuario of profesores | async">
+      <ion-input [hidden]="true" type="text" [(ngModel)]="materia" value={{usuario.materia}}></ion-input>
+    <ion-card [hidden]="usuario.email != emailCodigo || usuario.tipo != 'profe'">
+      <ion-item >
+      
+          <h2>{{usuario.apellido}}, {{usuario.nombre}}</h2>
+          <p>Legajo: <b>{{usuario.legajo}}</b></p>
+          <!-- <p>Email lista profesores: <b>{{usuario.email}}</b></p>
+          <p>Email logueado: {{email}}</p> -->
+          <p>Materia: {{usuario.materia}}</p>
+   
+      </ion-item>
+    </ion-card> 
+
+    <ion-card> 
+      <ion-item [hidden]="emailCodigo == undefined || usuario.tipo != tipo || usuario.Estadistica == ninguno || usuario.Laboratorio == ninguno || usuario.Programacion == ninguno">
+          <p>Alumno:</p>
+          <h2>{{usuario.apellido}}, {{usuario.nombre}}</h2>
+          <p>Legajo: <b>{{usuario.legajo}}</b></p>
+          <p [hidden]="materia != 'Estadistica'">Estadística: {{usuario.Estadistica}}</p>
+          <p [hidden]="materia != 'Laboratorio'">Laboratorio: {{usuario.Laboratorio}}</p>
+          <p [hidden]="materia != 'Programacion'">Programación: {{usuario.Programacion}}</p>
+      </ion-item>
+    </ion-card> 
+
+  </div>    
+
+
+  <ion-card>
+      <ion-item [hidden]="estadistica != true">
+      
+          <!-- <h2>{{alumno.apellido}}, {{alumno.nombre}}</h2>
+          <p>Legajo: <b>{{alumno.legajo}}</b></p>
+          <p>Estadística: {{alumno.Estadistica}}</p>
+          <p>Laboratorio: {{alumno.Laboratorio}}</p> -->
+          <p>Aula 301</p>
+          <p>Estadística "B"</p>
+          <img src="assets/images/ubicacionAulaEstadistica.jpg" alt="Ubicación del aula estadistica">
+  
+      </ion-item>
+    </ion-card>     
+  
+    <ion-card>
+      <ion-item [hidden]="laboratorio != true">
+      
+          <!-- <h2>{{alumno.apellido}}, {{alumno.nombre}}</h2>
+          <p>Legajo: <b>{{alumno.legajo}}</b></p>
+          <p>Estadística: {{alumno.Estadistica}}</p>
+          <p>Laboratorio: {{alumno.Laboratorio}}</p> -->
+          <p>Aula 302 (Laboratorio V)</p>
+          <p>Laboratorio "A"</p>
+          <img src="assets/images/ubicacionAula.gif" alt="Ubicación del aula laboratorio">
+  
+      </ion-item>
+    </ion-card> 
+  
+    <ion-card>
+      <ion-item [hidden]="programacion != true">
+      
+          <!-- <h2>{{alumno.apellido}}, {{alumno.nombre}}</h2>
+          <p>Legajo: <b>{{alumno.legajo}}</b></p>
+          <p>Estadística: {{alumno.Estadistica}}</p>
+          <p>Laboratorio: {{alumno.Laboratorio}}</p> -->
+          <p>Aula 303 (Laboratorio II)</p>
+          <p>Programación "B"</p>
+          <img src="assets/images/ubicacionAulaProgramacion.jpg" alt="Ubicación del aula programacion">
+  
+      </ion-item>
+    </ion-card> 
+
+  
+  </ion-content>
+  

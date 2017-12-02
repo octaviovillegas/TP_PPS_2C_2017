@@ -1,0 +1,86 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>Administrativos</ion-title>
+    </ion-navbar>
+    <ion-toolbar>
+      <ion-segment [(ngModel)]="tab" color="primary">
+        <ion-segment-button value="lista" (click)="cambiarDeTab()">
+          Lista
+        </ion-segment-button>
+        <ion-segment-button value="agregar" (click)="cambiarDeTab()">
+          Agregar 
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+  </ion-header>
+  
+<ion-content padding>
+
+  <ion-content *ngIf="tab == 'lista'">
+      <h1>Lista de administrativos</h1>
+      <ion-searchbar
+        [(ngModel)]="searchValue"
+        (ionInput)="onInput($event)">
+      </ion-searchbar>
+      <ion-item>
+        <ion-select [(ngModel)]="filterType">
+          <ion-option>Nombre</ion-option>
+          <ion-option>Apellido</ion-option>
+          <ion-option>Legajo</ion-option>
+          <ion-option>Email</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-card *ngFor="let admin of admins | async">
+        <ion-item>
+          <h2>{{admin.apellido}}, {{admin.nombre}}</h2>
+          <p>Legajo: <b>{{admin.legajo}}</b></p>
+          <p>Email: <b>{{admin.email}}</b></p>
+        </ion-item>
+        <ion-row>
+          <ion-col>
+            <button ion-button icon-left clear small (click)="eliminarAdmin(admin.$key, admin.apellido)">
+              <ion-icon name="md-close"></ion-icon>
+              <div>Eliminar</div>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button icon-left clear small (click)="modificarAdmin(admin)">
+              <ion-icon name="md-build"></ion-icon>
+              <div>Editar</div>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-card>      
+  </ion-content>
+  
+  <ion-content *ngIf="tab == 'agregar'">
+      <h1>Agregar Administrativo</h1>
+      <img class="img-login" [src]="imgUrl != '' ? imgUrl : userImg"/>
+      <button ion-button (click)="takePicture()">Tomar foto</button>
+      <form [formGroup]="formAlta" (ngSubmit)="agregarAdmin()">
+        <ion-item>
+          <ion-label>Nombre</ion-label>
+          <ion-input type="text" formControlName="nombre"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Apellido</ion-label>
+          <ion-input type="text" formControlName="apellido"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Legajo</ion-label>
+          <ion-input type="text" formControlName="legajo"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Email</ion-label>
+          <ion-input type="email" [disabled]="modifId != ''" formControlName="email" email></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Contraseña</ion-label>
+          <ion-input type="password" [disabled]="modifId != ''" formControlName="pass"></ion-input>
+        </ion-item>
+        <br>
+        <button ion-button block type="submit" [disabled]="!formAlta.valid">{{modifId == "" ? "Agregar" : "Modificar"}}</button>
+      </form>
+  </ion-content>
+    
+</ion-content>
