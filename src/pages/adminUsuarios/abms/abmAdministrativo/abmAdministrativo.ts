@@ -4,6 +4,7 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import * as firebase from 'firebase/app'; 
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import 'rxjs/add/operator/map';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @IonicPage()
 @Component({
@@ -25,6 +26,7 @@ export class AbmAdministrativoPage {
     public alertCtrl: AlertController, 
     public af: AngularFireDatabase,
     public actionSheetCtrl: ActionSheetController, 
+    private authAf: AngularFireAuth,
     private formBuilder: FormBuilder) {
       this.tab = "lista";
       //Lista
