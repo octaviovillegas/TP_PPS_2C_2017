@@ -70,7 +70,6 @@ export class AbmAlumnoPage {
           } else {
             this.imgUrl = "http://thinkfuture.com/wp-content/uploads/2013/10/loading_spinner.gif";
           }
-          
         });
       }
       this.loadImage();
@@ -172,7 +171,6 @@ export class AbmAlumnoPage {
   }
 
   public takePicture(): void {
-    this.imgName = "temp";
     let options: CameraOptions = {
       quality: 50,
       destinationType: this.camera.DestinationType.DATA_URL,

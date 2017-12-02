@@ -54,6 +54,8 @@
 
 <ion-content *ngIf="tab == 'agregar'">
     <h1>Agregar profesor</h1>
+    <img class="img-login" [src]="imgUrl != '' ? imgUrl : userImg"/>
+    <button ion-button (click)="takePicture()">Tomar foto</button>
     <form [formGroup]="formAlta" (ngSubmit)="agregarProfesor()">
       <ion-item>
         <ion-label>Nombre</ion-label>

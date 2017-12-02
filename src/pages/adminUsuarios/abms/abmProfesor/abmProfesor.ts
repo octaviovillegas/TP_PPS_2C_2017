@@ -4,6 +4,8 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import 'rxjs/add/operator/map';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { storage } from 'firebase';
 
 @IonicPage()
 @Component({
@@ -14,10 +16,15 @@ export class AbmProfesorPage {
   
   private tab;
   private profesores: FirebaseListObservable<any[]>;
+  private userImg = "https://openclipart.org/image/2400px/svg_to_png/247319/abstract-user-flat-3.png";
   //Lista
   private searchValue: string;
   private filterType: string;
   private modifId: string;
+  private modifHasImg: string;
+  private imgUrl: string;
+  private imgName: string;
+  private imgFile: string;
   //Alta
   private formAlta: FormGroup;
 
@@ -26,11 +33,16 @@ export class AbmProfesorPage {
     public af: AngularFireDatabase,
     public actionSheetCtrl: ActionSheetController, 
     private authAf: AngularFireAuth,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private camera: Camera) {
       this.tab = "lista";
       //Lista
       this.filterType = "Apellido";
       this.modifId = "";
+      this.modifHasImg = "";
+      this.imgUrl = "";
+      this.imgName = "";
+      this.imgFile = "";
       //Alta
       this.filterProfesor();
       this.formAlta = this.formBuilder.group({
@@ -41,6 +53,25 @@ export class AbmProfesorPage {
         materia: ['', Validators.compose([Validators.required])],
         curso: ['', Validators.compose([Validators.required])]
       });
+      this.loadImage();
+  }
+
+  public loadImage(){
+    setTimeout(() => {
+      if(this.imgName != "") {
+        storage().ref(this.imgName).getDownloadURL().then(url => {
+          this.imgUrl = url;
+        }).catch(err => {
+          //alert("no uacho rompi to2");
+          if(this.imgName != "temp"){
+            this.imgName = "";
+          } else {
+            this.imgUrl = "http://thinkfuture.com/wp-content/uploads/2013/10/loading_spinner.gif";
+          }
+        });
+      }
+      this.loadImage();
+    }, 300);
   }
 
   //LISTA DE PROFESORES
@@ -70,6 +101,8 @@ export class AbmProfesorPage {
        this.formAlta.controls['materia'].setValue(profesor.materia);
        this.formAlta.controls['curso'].setValue(profesor.curso);
        this.modifId = profesor.$key;
+       this.imgName = profesor.email;
+       this.modifHasImg = profesor.tieneFoto;
        this.tab = "agregar";
   }
 
@@ -81,6 +114,10 @@ export class AbmProfesorPage {
         let prompt = this.alertCtrl.create({ title: 'Profesor agregado', buttons: [{ text: 'Ok',}] });
         prompt.present();
         data["tipo"] = "profe";
+        data["tieneFoto"] = this.imgName == "" ? "0" : "1";
+        if(data["tieneFoto"] == "1") {
+          this.subirFoto(this.formAlta.value["email"]);
+        }
         this.af.list("/usuarios").push(data);
         this.formAlta.reset();
       }).catch(err => {
@@ -105,11 +142,40 @@ export class AbmProfesorPage {
          materia: this.formAlta.controls['materia'].value,
          curso: this.formAlta.controls['curso'].value
        });
+       if(this.modifHasImg == "1" && this.imgFile != "") {
+        this.subirFoto(this.formAlta.controls['email'].value);
+       }
        let prompt = this.alertCtrl.create({ title: 'Profesor modificado', buttons: [{ text: 'Ok',}] });
        prompt.present();
        this.formAlta.reset();
+       this.imgFile = "";
+       this.imgName = "";
+       this.imgUrl = "";
       }
     this.modifId = "";
+    this.modifHasImg = "";
+  }
+
+  public takePicture(): void {
+    let options: CameraOptions = {
+      quality: 50,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+    this.camera.getPicture(options).then(imageData => {
+        storage().ref('temp').delete();
+        this.imgFile = 'data:image/jpeg;base64,' + imageData;
+        let pictures = storage().ref('temp');
+        this.imgName = "temp";
+        pictures.putString(this.imgFile, 'data_url');
+        alert(this.imgName);
+    });
+  }
+
+  public subirFoto(email: string) {
+    let pictures = storage().ref(email);
+    pictures.putString(this.imgFile, 'data_url');
   }
 
   public onInput($event): void {
@@ -143,6 +209,9 @@ export class AbmProfesorPage {
           handler: data => { 
             this.modifId = "";
             this.formAlta.reset();
+            this.imgUrl = "";
+            this.imgName = "";
+            this.modifHasImg = "";
           }
         },
         {
