@@ -75,11 +75,16 @@ export class AbmAdministrativoPage {
   //AGREGAR ADMINISTRATIVO
   public agregarAdmin(): void{
     if(this.modifId == "") {
-      let prompt = this.alertCtrl.create({ title: 'Admin agregado', buttons: [{ text: 'Ok',}] });
-      prompt.present();
       let data: {} = this.formAlta.value;
-      data["tipo"] = "admin";
-      this.af.list("/usuarios").push(data);
+      this.authAf.auth.createUserWithEmailAndPassword(data["email"], data["pass"]).then(r => {
+        let prompt = this.alertCtrl.create({ title: 'Admin agregado', buttons: [{ text: 'Ok',}] });
+        prompt.present();
+        data["tipo"] = "admin";
+        this.af.list("/usuarios").push(data);
+      }).catch(err => {
+        console.log(err);
+        this.alertCtrl.create({ title: 'Mail o contraseña incorrecta', buttons: [{ text: 'Ok',}] }).present();
+      });
     } else {
       this.admins.update(this.modifId, {
         nombre: this.formAlta.controls['nombre'].value,

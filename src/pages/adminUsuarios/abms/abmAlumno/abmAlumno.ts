@@ -4,7 +4,6 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import 'rxjs/add/operator/map';
 import { AngularFireAuth } from 'angularfire2/auth';
-import * as admin from "firebase-admin";
 
 @IonicPage()
 @Component({
@@ -55,15 +54,7 @@ export class AbmAlumnoPage {
         text: 'Si',
         role: 'destructive',
         handler: data => { 
-          let serviceAccount = require("../../../../app/ppsfsz-18b16-firebase-adminsdk-686lt-0a3e73b20b.json");
-          admin.initializeApp({
-            credential: admin.credential.cert(serviceAccount),
-            databaseURL: "https://ppsfsz-18b16.firebaseio.com"
-          });
-          admin.auth().getUserByEmail(email).then(alumno => {
-            admin.auth().deleteUser("alumno.uid");
-            this.alumnos.remove(alumnoId);
-          });
+          this.alumnos.remove(alumnoId);
         }
       },
       {
@@ -103,7 +94,20 @@ export class AbmAlumnoPage {
         this.af.list("/usuarios").push(data);
         this.formAlta.reset();
       }).catch(err => {
-        this.alertCtrl.create({ title: 'Mail o contraseña incorrecta', buttons: [{ text: 'Ok',}] }).present();
+        console.log(err);
+        if(err != undefined) {
+          let message;
+          if(err[0].code == "auth/weak-password"){
+            message = "La contraseña es muy debil";
+          } else if(err[0].code == "auth/email-already-in-use"){
+            message = "Este mail ya se encuentra en uso";
+          } else if(err[0].code == "auth/invalid-email"){
+            message = "Email invalido";
+          } else if(err[0].code == "auth/operation-not-allowed"){
+            message = "Bardiamos fuerte...";
+          }
+          this.alertCtrl.create({ title: message, buttons: [{ text: 'Ok',}] }).present();
+        }
       });
     } else {
       this.alumnos.update(this.modifId, {
