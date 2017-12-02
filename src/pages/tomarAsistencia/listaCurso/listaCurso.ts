@@ -4,6 +4,7 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import { storage } from 'firebase';
 import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/camera';
 import 'rxjs/add/operator/map';
+import { PushService } from "../../../services/push.service";
 
 @IonicPage()
 @Component({
@@ -20,7 +21,8 @@ export class ListaCursoPage {
   constructor(public navParams: NavParams,
     public alertCtrl: AlertController,
     public af: AngularFireDatabase,
-    private camera: Camera) {
+    private camera: Camera,
+    private pushService: PushService) {
       let nombre = navParams.get('nombre');
       let curso = navParams.get('curso');
       this.filterAlumnos(nombre, curso);
@@ -74,10 +76,15 @@ export class ListaCursoPage {
   }
 
   public setPresente(alumno: any, materia: string, listo: number): void {
-    if(listo == 0) {
+    if (listo == 0) {
+      let isPresente: boolean;
+      isPresente = this.alumnoPresente(alumno, materia);
       this.alumnos.update(alumno.$key, {
-        ["pres_" + materia]: this.alumnoPresente(alumno, materia) ? 0 : 1
+        ["pres_" + materia]: isPresente ? 0 : 1
       });
+      if (!isPresente) {
+        this.pushService.avisarDeFaltas(alumno.email);
+      }
     }
   }
 
