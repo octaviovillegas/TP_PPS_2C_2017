@@ -25,7 +25,10 @@
     "@ionic-native/core": "4.3.2",
     "@ionic-native/date-picker": "^4.4.2",
     "@ionic-native/facebook": "^4.4.2",
+<<<<<<< HEAD
     "@ionic-native/fcm": "^4.4.2",
+=======
+>>>>>>> parent of c40b241... Correcion en notificaciones
     "@ionic-native/native-audio": "^4.4.2",
     "@ionic-native/splash-screen": "4.3.2",
     "@ionic-native/status-bar": "4.3.2",
@@ -36,7 +39,10 @@
     "cordova-plugin-compat": "^1.0.0",
     "cordova-plugin-datepicker": "^0.9.3",
     "cordova-plugin-device": "^1.1.4",
+<<<<<<< HEAD
     "cordova-plugin-fcm": "^2.1.2",
+=======
+>>>>>>> parent of c40b241... Correcion en notificaciones
     "cordova-plugin-ionic-webview": "^1.1.11",
     "cordova-plugin-nativeaudio": "^3.0.9",
     "cordova-plugin-splashscreen": "^4.0.3",
@@ -52,7 +58,12 @@
     "sw-toolbox": "3.6.0",
     "sweetalert2": "^7.0.3",
     "timers": "^0.1.1",
+<<<<<<< HEAD
     "zone.js": "0.8.18"
+=======
+    "zone.js": "0.8.18",
+    "cordova-plugin-fcm": "^2.1.2"
+>>>>>>> parent of c40b241... Correcion en notificaciones
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.0.1",

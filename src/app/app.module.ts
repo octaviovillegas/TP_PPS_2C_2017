@@ -23,7 +23,6 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Camera } from '@ionic-native/camera';
 import { PushService } from "../services/push.service";
 import { UserService } from "../services/user.service";
-import { FCM } from '@ionic-native/fcm';
 
 @NgModule({
   declarations: [
@@ -56,8 +55,7 @@ import { FCM } from '@ionic-native/fcm';
     BarcodeScanner,
     Camera,
     PushService,
-    UserService,
-    FCM
+    UserService
   ]
 })
 export class AppModule {}
