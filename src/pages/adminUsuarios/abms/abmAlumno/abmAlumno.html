@@ -60,7 +60,7 @@
       <h1>Agregar alumno</h1>
       <form [formGroup]="formAlta" (ngSubmit)="agregarAlumno()">
         <img class="img-login" [src]="imgUrl != '' ? imgUrl : userImg"/>
-        <button ion-button (click)="takePicture()">Tomar foto</button>
+        <button type="button" (click)="takePicture()">Tomar foto</button>
         <ion-item>
           <ion-label>Nombre</ion-label>
             <ion-input type="text" formControlName="nombre"></ion-input>
