@@ -55,7 +55,7 @@ export class HomePage {
 
   subirEncuesta(){
     
-         let respuestas={pregunta:"pregunta",respuesta1:this.Preg1Rb};
+         let respuestas={pregunta:"pregunta1",respuesta1:this.Preg1Rb,codigo:this.codigo};
         // this.afDB.app.database().ref('/profesores').child(profesor.getDNI()).set(profesor);
          
           this.fireDB.push(respuestas);               

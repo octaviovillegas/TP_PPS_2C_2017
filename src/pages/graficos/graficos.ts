@@ -40,28 +40,47 @@ export class GraficosPage {
    private opcion1:string="";
    private opcion2:string="";
    private opcion3:string="";
+   private listaMaterias:FirebaseListObservable<any[]>;
+   
+   
+   public traervotacionporcodigo(correo:string):FirebaseListObservable<any[]>{
+    this.listaMaterias = this.af.list('/encuesta', {
+      query:{
+        orderByChild:'codigo',
+        equalTo:correo
+      }
+    }) as FirebaseListObservable<any[]>
+   // console.log('materias por alumno: ', this.listaMaterias);
+    return this.listaMaterias;
+  }
    
   constructor(public navCtrl: NavController,public view:ViewController, public navParams: NavParams, public af: AngularFireDatabase) 
   {
+    this.encuesta = this.navParams.get('encuesta');
+    this.codigo=this.encuesta.codigo;
     
 
-    this.fireDB = af.list('/encuesta');
-
+    //this.fireDB = af.list('/encuesta');
+      this.fireDB = this.traervotacionporcodigo(this.codigo);
+      console.log ("coe");
+      console.log(this.listaMaterias);
+      
+      
     this.fireDB.subscribe(dato => {dato.forEach(item => {
-        
-    if(item.respuesta1 == "Buena" && item.pregunta1 == "pregunta1")
+        console.log (item.respuesta1);
+    if(item.respuesta1 == "Buena" )
     {
       this.cantB += 1;
       console.log("buena",this.cantB);
       
     }
-    if(item.respuesta1 == "Regular" && item.pregunta1 == "pregunta1")
+    if(item.respuesta1 == "Regular"  )
     {
       this.cantRe += 1;
       console.log("regular",this.cantRe);
       
     }
-    if(item.respuesta1 == "Mala" && item.pregunta1 == "pregunta1")
+    if(item.respuesta1 == "Mala" )
     {
       this.cantM += 1;
       console.log("mala",this.cantM);

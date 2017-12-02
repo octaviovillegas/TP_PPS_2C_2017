@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { AsistenciasProvider } from "../../providers/asistencias/asistencias";
+import { Camera, CameraOptions } from "@ionic-native/camera";
+import {storage, initializeApp}  from 'firebase';
 
 import { Alumno } from "../../clases/alumno";
 /**
@@ -18,6 +20,9 @@ import { Alumno } from "../../clases/alumno";
 
 export class AsistenciasPage {
 
+  mes;
+  dia;
+  anio;
 filtro = "filtroBotones";
 today = new Date();
 fecha : string;
@@ -36,6 +41,7 @@ cantidadMaterias = 0;
 cantidadComisiones = 0;
 cantidadProfesores = 0;  
 profesores;
+legajo;
 materias;
 comisiones;  
 arrayAsistencia : Array<asistencia> = [];
@@ -60,15 +66,15 @@ restablecerValores()
 }
 
 constructor(public navCtrl: NavController,
-            public navParams: NavParams,
+            public navParams: NavParams,private camera:Camera,
             public ARP:AsistenciasProvider,
           /*  private nativeAudio: NativeAudio,
             public vibration : Vibration,*/
 public alertCtrl: AlertController) {
               this.fecha= this.today.getDate()+'/'+(this.today.getUTCMonth()+1)+'/'+this.today.getFullYear();
               this.mostrar=false;
-           /*   this.nativeAudio.preloadSimple('Okay', 'assets/sonidos/ok.mp3');
-              this.nativeAudio.preloadSimple('Error', 'assets/sonidos/fail.mp3');*/
+              this.dia =  this.today.getDate();
+    
             }
 
 ionViewDidLoad() {
@@ -93,6 +99,8 @@ subirAsistencias()
                               buttons: ['Aceptar']
                             });
                             alert.present();
+                            this.navCtrl.push(AsistenciasPage);
+                            
 }
 
 filtrarPor(filtroEntrante)
@@ -101,8 +109,12 @@ filtrarPor(filtroEntrante)
   this.mostrar=true;
   switch (filtroEntrante) {
     case 'DIA':
-      this.filtro = 'Dia';        
-      break;  
+
+    this.filtrarPorDia(this.dia);
+    console.log(this.dia);
+    this.filtrarPorDia(this.dia);
+  
+    break;
 
     case 'AULA':
       this.filtro = 'Aula';
@@ -240,6 +252,36 @@ showAlert(criterioBusqueda) {
     buttons: ['OK']
   });
   alert.present();
+}
+
+sacarFoto(){
+  let options:CameraOptions ={
+    quality: 100,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType:this.camera.EncodingType.JPEG,
+    mediaType:this.camera.MediaType.PICTURE,
+    targetHeight:600,
+    targetWidth:600,
+    correctOrientation:true,
+    saveToPhotoAlbum:true,
+    cameraDirection:this.camera.Direction.BACK
+  };
+
+  this.camera.getPicture(options).then((imagen)=>{
+        let imagenData = 'data:image/jpeg;base64,'+ imagen;
+        let upload = this.storageRef.child('alumnos/' + this.legajo + '.jpg').putString(imagen, 'base64');
+
+        upload.then((snapshot=>{
+              this.dbPersonas.guardarLinkFoto(snapshot.downloadURL, this.legajo);
+              this.foto=snapshot.downloadURL;
+              let msjOK = this.alertCtrl.create({
+                subTitle: 'Imagen guardada',
+                buttons: ['Aceptar']
+               });
+               msjOK.present();
+        })
+        );
+      });
 }
 }
 

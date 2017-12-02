@@ -49,7 +49,7 @@ export class EncuestasHomePage {
     }
     Grafico(encuesta)
     {
-      let consultaView = this.modalCtrl.create(GraficosPage, {'encuesta':encuesta});
+      let consultaView = this.modalCtrl.create('GraficosPage', {'encuesta':encuesta});
       consultaView.present();
     }
     ionViewDidLoad() {

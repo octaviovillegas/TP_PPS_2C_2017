@@ -23,11 +23,13 @@ export class MenuPage {
 
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-              public alertCtrl:AlertController,public loadingCtrl:LoadingController,
-             
-              public file:File, public filePath:FilePath, public fileChooser:FileChooser,
-             /* public fileOpener:FileOpener,*/ private alumnoDB:AlumnoServiceProvider
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              public alertCtrl:AlertController,
+              public loadingCtrl:LoadingController,
+              public file:File, public filePath:FilePath, 
+              public fileChooser:FileChooser,
+              private alumnoDB:AlumnoServiceProvider
 
   ) { }
 
