@@ -7,7 +7,6 @@ import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
-import { RegisterPage } from '../pages/register/register';
 import { ListPage } from '../pages/list/list';
 
 import { AngularFireModule } from 'angularfire2';
@@ -30,8 +29,7 @@ import { UserService } from "../services/user.service";
     MyApp,
     HomePage,
     LoginPage,
-    ListPage,
-    RegisterPage
+    ListPage
   ],
 
   imports: [
@@ -44,7 +42,6 @@ import { UserService } from "../services/user.service";
   bootstrap: [IonicApp],
   entryComponents: [
     LoginPage,
-    RegisterPage,
     HomePage,
     ListPage
   ],

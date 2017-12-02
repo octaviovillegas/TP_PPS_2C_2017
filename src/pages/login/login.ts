@@ -7,7 +7,6 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import swal from 'sweetalert2';
 
 import { HomePage } from '../home/home';
-import { RegisterPage } from '../register/register';
 import { Facebook } from '@ionic-native/facebook';
 import firebase from 'firebase';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -146,9 +145,6 @@ export class LoginPage {
       duration: 2000
     }).present();
   }  
-  register(){
-    this.navCtrl.push(RegisterPage);
-  }
 
   private allFilled(): void {
     this.valid.next(this.user.email != "" && this.user.password != "");
