@@ -58,6 +58,8 @@
   
   <ion-content *ngIf="tab == 'agregar'">
       <h1>Agregar alumno</h1>
+      <img class="img-login" [src]="imgUrl != '' ? imgUrl : userImg"/>
+      <button ion-button (click)="takePicture()">Tomar foto</button>
       <form [formGroup]="formAlta" (ngSubmit)="agregarAlumno()">
         <ion-item>
           <ion-label>Nombre</ion-label>
@@ -77,7 +79,7 @@
             </ion-item>
             <ion-item>
               <ion-label>Contraseña</ion-label>
-              <ion-input type="password" formControlName="pass"></ion-input>
+              <ion-input type="password" [disabled]="modifId != ''" formControlName="pass"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label>Programacion</ion-label>

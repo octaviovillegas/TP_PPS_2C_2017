@@ -77,7 +77,7 @@
         </ion-item>
         <ion-item>
           <ion-label>Contraseña</ion-label>
-          <ion-input type="password" formControlName="pass"></ion-input>
+          <ion-input type="password" [disabled]="modifId != ''" formControlName="pass"></ion-input>
         </ion-item>
         <br>
         <button ion-button block type="submit" [disabled]="!formAlta.valid">{{modifId == "" ? "Agregar" : "Modificar"}}</button>

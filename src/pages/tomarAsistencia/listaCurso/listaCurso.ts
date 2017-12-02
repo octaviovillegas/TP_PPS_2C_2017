@@ -36,7 +36,7 @@ export class ListaCursoPage {
       this.imagen = url;
       setTimeout(() => {
         this.loadImage();
-      }, 1000);
+      }, 300);
     }).catch(err => {});
   }
 

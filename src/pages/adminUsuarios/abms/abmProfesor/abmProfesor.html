@@ -72,7 +72,7 @@
           </ion-item>
           <ion-item>
             <ion-label>Contraseña</ion-label>
-            <ion-input type="password" formControlName="pass"></ion-input>
+            <ion-input type="password" [disabled]="modifId != ''" formControlName="pass"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label>Materia y curso</ion-label>

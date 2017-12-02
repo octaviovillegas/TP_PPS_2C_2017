@@ -3,6 +3,9 @@ import { IonicPage, NavController, AlertController, ActionSheetController } from
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import 'rxjs/add/operator/map';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { storage } from 'firebase';
 
 @IonicPage()
 @Component({
@@ -13,10 +16,15 @@ export class AbmAlumnoPage {
   
   private tab;
   private alumnos: FirebaseListObservable<any[]>;
+  private userImg = "https://openclipart.org/image/2400px/svg_to_png/247319/abstract-user-flat-3.png";
   //Lista
   private searchValue: string;
   private filterType: string;
   private modifId: string;
+  private modifHasImg: string;
+  private imgUrl: string;
+  private imgName: string;
+  private imgFile: string;
   //Alta
   private formAlta: FormGroup;
 
@@ -24,11 +32,17 @@ export class AbmAlumnoPage {
     public alertCtrl: AlertController, 
     public af: AngularFireDatabase,
     public actionSheetCtrl: ActionSheetController, 
-    private formBuilder: FormBuilder) {
+    private authAf: AngularFireAuth,
+    private formBuilder: FormBuilder,
+    private camera: Camera) {
       this.tab = "agregar";
       //Lista
       this.filterType = "Apellido";
       this.modifId = "";
+      this.modifHasImg = "";
+      this.imgUrl = "";
+      this.imgName = "";
+      this.imgFile = "";
       //Alta
       this.filterAlumno();
       this.formAlta = this.formBuilder.group({
@@ -41,6 +55,26 @@ export class AbmAlumnoPage {
         Laboratorio: ['', Validators.compose([Validators.required])],
         Estadistica: ['', Validators.compose([Validators.required])]
       });
+      this.loadImage();
+  }
+
+  public loadImage(){
+    setTimeout(() => {
+      if(this.imgName != "") {
+        storage().ref(this.imgName).getDownloadURL().then(url => {
+          this.imgUrl = url;
+        }).catch(err => {
+          //alert("no uacho rompi to2");
+          if(this.imgName != "temp"){
+            this.imgName = "";
+          } else {
+            this.imgUrl = "http://thinkfuture.com/wp-content/uploads/2013/10/loading_spinner.gif";
+          }
+          
+        });
+      }
+      this.loadImage();
+    }, 300);
   }
 
   //LISTA DE ALUMNOS
@@ -51,7 +85,9 @@ export class AbmAlumnoPage {
       buttons: [{
         text: 'Si',
         role: 'destructive',
-        handler: data => { this.alumnos.remove(alumnoId); }
+        handler: data => { 
+          this.alumnos.remove(alumnoId);
+        }
       },
       {
         text: 'No',
@@ -72,20 +108,44 @@ export class AbmAlumnoPage {
        this.formAlta.controls['email'].setValue(alumno.email);
        this.formAlta.controls['pass'].setValue(alumno.pass);
        this.modifId = alumno.$key;
+       this.imgName = alumno.email;
+       this.modifHasImg = alumno.tieneFoto;
        this.tab = "agregar";
   }
 
   //AGREGAR ALUMNO
   public agregarAlumno(): void{
     if(this.modifId == "") {
-      let prompt = this.alertCtrl.create({ title: 'Alumno agregado', buttons: [{ text: 'Ok',}] });
-      prompt.present();
       let data: {} = this.formAlta.value;
-      data["tipo"] = "alumno";
-      data["pres_Programacion"] = "0";
-      data["pres_Laboratorio"] = "0";
-      data["pres_Estadistica"] = "0";
-      this.af.list("/usuarios").push(data);
+      this.authAf.auth.createUserWithEmailAndPassword(data["email"], data["pass"]).then(r => {
+        let prompt = this.alertCtrl.create({ title: 'Alumno agregado', buttons: [{ text: 'Ok',}] });
+        prompt.present();
+        data["tipo"] = "alumno";
+        data["pres_Programacion"] = "0";
+        data["pres_Laboratorio"] = "0";
+        data["pres_Estadistica"] = "0";
+        data["tieneFoto"] = this.imgName == "" ? "0" : "1";
+        if(data["tieneFoto"] == "1") {
+          this.subirFoto(this.formAlta.value["email"]);
+        }
+        this.imgFile = "";
+        this.imgName = "";
+        this.imgUrl = "";
+        this.af.list("/usuarios").push(data);
+        this.formAlta.reset();
+      }).catch(err => {
+        let message;
+        if((err as any).code == "auth/weak-password"){
+          message = "La contraseña es muy debil";
+        } else if((err as any).code == "auth/email-already-in-use"){
+          message = "Este mail ya se encuentra en uso";
+        } else if((err as any).code == "auth/invalid-email"){
+          message = "Email invalido";
+        } else if((err as any).code == "auth/operation-not-allowed"){
+          message = "Bardiamos fuerte...";
+        }
+        this.alertCtrl.create({ title: message, buttons: [{ text: 'Ok',}] }).present();
+      });
     } else {
       this.alumnos.update(this.modifId, {
         nombre: this.formAlta.controls['nombre'].value,
@@ -97,11 +157,41 @@ export class AbmAlumnoPage {
         Laboratorio: this.formAlta.controls['Laboratorio'].value,
         Estadistica: this.formAlta.controls['Estadistica'].value
       });
+      if(this.modifHasImg == "1" && this.imgFile != "") {
+        this.subirFoto(this.formAlta.controls['email'].value);
+      }
       let prompt = this.alertCtrl.create({ title: 'Alumno modificado', buttons: [{ text: 'Ok',}] });
       prompt.present();
+      this.formAlta.reset();
+      this.imgFile = "";
+      this.imgName = "";
+      this.imgUrl = "";
     }
+    this.modifHasImg = "";
     this.modifId = "";
-    this.formAlta.reset();
+  }
+
+  public takePicture(): void {
+    this.imgName = "temp";
+    let options: CameraOptions = {
+      quality: 50,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+    this.camera.getPicture(options).then(imageData => {
+        storage().ref('temp').delete();
+        this.imgFile = 'data:image/jpeg;base64,' + imageData;
+        let pictures = storage().ref('temp');
+        this.imgName = "temp";
+        pictures.putString(this.imgFile, 'data_url');
+        alert(this.imgName);
+    });
+  }
+
+  public subirFoto(email: string) {
+    let pictures = storage().ref(email);
+    pictures.putString(this.imgFile, 'data_url');
   }
 
   public onInput($event): void {
@@ -137,6 +227,9 @@ export class AbmAlumnoPage {
           handler: data => { 
             this.modifId = "";
             this.formAlta.reset();
+            this.imgUrl = "";
+            this.imgName = "";
+            this.modifHasImg = "";
           }
         },
         {

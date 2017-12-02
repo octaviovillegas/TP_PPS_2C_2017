@@ -86,7 +86,6 @@ export class LoginPage {
          })
         .catch((error) => { 
           loading.dismiss();
-          console.log(error)
       });
   }
 

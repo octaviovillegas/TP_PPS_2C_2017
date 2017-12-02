@@ -4,6 +4,7 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import * as firebase from 'firebase/app'; 
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import 'rxjs/add/operator/map';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @IonicPage()
 @Component({
@@ -25,6 +26,7 @@ export class AbmAdministrativoPage {
     public alertCtrl: AlertController, 
     public af: AngularFireDatabase,
     public actionSheetCtrl: ActionSheetController, 
+    private authAf: AngularFireAuth,
     private formBuilder: FormBuilder) {
       this.tab = "lista";
       //Lista
@@ -73,11 +75,26 @@ export class AbmAdministrativoPage {
   //AGREGAR ADMINISTRATIVO
   public agregarAdmin(): void{
     if(this.modifId == "") {
-      let prompt = this.alertCtrl.create({ title: 'Admin agregado', buttons: [{ text: 'Ok',}] });
-      prompt.present();
       let data: {} = this.formAlta.value;
-      data["tipo"] = "admin";
-      this.af.list("/usuarios").push(data);
+      this.authAf.auth.createUserWithEmailAndPassword(data["email"], data["pass"]).then(r => {
+        let prompt = this.alertCtrl.create({ title: 'Admin agregado', buttons: [{ text: 'Ok',}] });
+        prompt.present();
+        data["tipo"] = "admin";
+        this.af.list("/usuarios").push(data);
+        this.formAlta.reset();
+      }).catch(err => {
+        let message;
+        if((err as any).code == "auth/weak-password"){
+          message = "La contraseña es muy debil";
+        } else if((err as any).code == "auth/email-already-in-use"){
+          message = "Este mail ya se encuentra en uso";
+        } else if((err as any).code == "auth/invalid-email"){
+          message = "Email invalido";
+        } else if((err as any).code == "auth/operation-not-allowed"){
+          message = "Bardiamos fuerte...";
+        }
+        this.alertCtrl.create({ title: message, buttons: [{ text: 'Ok',}] }).present();
+      });
     } else {
       this.admins.update(this.modifId, {
         nombre: this.formAlta.controls['nombre'].value,
@@ -88,9 +105,9 @@ export class AbmAdministrativoPage {
       });
       let prompt = this.alertCtrl.create({ title: 'Administrativo modificado', buttons: [{ text: 'Ok',}] });
       prompt.present();
+      this.formAlta.reset();
     }
     this.modifId = "";
-    this.formAlta.reset();
   }
 
   public onInput($event): void {
