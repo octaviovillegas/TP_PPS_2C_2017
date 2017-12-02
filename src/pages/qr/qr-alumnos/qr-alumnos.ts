@@ -24,6 +24,12 @@ export class QrAlumnosPage implements OnInit {
   photoUrl;
   uid;
   emailVerified;
+  tipo: string = "alumno";
+  ninguno: string = "Ninguno";
+  estadistica: boolean = false;
+  laboratorio: boolean = false;
+  programacion: boolean = false;
+  aulaMaterias: boolean = false;
 
   scannedCode: string;
   scannedCodes: Array<string>;
@@ -54,9 +60,29 @@ export class QrAlumnosPage implements OnInit {
   async scanCode(){
     const result = await this.barcodeScanner.scan();
     this.scannedCode = await result.text;
-    if (this.scannedCode == "alumno") {
+    if (this.scannedCode == "materiasPorAula") {
       this.emailCodigo = this.email;
+      this.aulaMaterias = true;
     }
+    if (this.scannedCode == "programacion") {
+      this.programacion = true;
+      this.laboratorio = false;
+      this.estadistica = false;
+    }
+    if (this.scannedCode == "laboratorio") {
+      this.programacion = false;
+      this.laboratorio = true;
+      this.estadistica = false;
+    }
+    if (this.scannedCode == "estadistica") {
+      this.programacion = false;
+      this.laboratorio = false;
+      this.estadistica = true;
+    }
+    // if (this.scannedCode == "alumnoUbicacionMaterias") {
+    //   this.emailCodigo = this.email;
+    //   this.aulaMaterias = true;
+    // }
     if (this.scannedCode == "profesor") {
       swal({
         title: 'Error',
@@ -65,7 +91,8 @@ export class QrAlumnosPage implements OnInit {
         timer: 5000
       })
     }
-    if (this.scannedCode != "alumno" && this.scannedCode != "profesor") {
+    if (this.scannedCode != "alumnoUbicacionMaterias" && this.scannedCode != "profesor" && this.scannedCode != "programacion" && 
+        this.scannedCode != "laboratorio" && this.scannedCode != "estadistica" && this.scannedCode != "materiasPorAula") {
       swal({
         title: 'Error',
         text: 'QR inválido.',
@@ -75,20 +102,4 @@ export class QrAlumnosPage implements OnInit {
     }
   }
   
-
-//   public informacion(alumno: any): void {
-//     this.formAlta.controls['nombre'].setValue(alumno.nombre);
-//     this.formAlta.controls['apellido'].setValue(alumno.apellido);
-//     this.formAlta.controls['legajo'].setValue(alumno.legajo);
-//     this.formAlta.controls['Programacion'].setValue(alumno.Programacion);
-//     this.formAlta.controls['Laboratorio'].setValue(alumno.Laboratorio);
-//     this.formAlta.controls['Estadistica'].setValue(alumno.Estadistica);
-//     this.formAlta.controls['email'].setValue(alumno.email);
-//     this.formAlta.controls['pass'].setValue(alumno.pass);
-//     this.modifId = alumno.$key;
-
-// }
-
-
-
 }

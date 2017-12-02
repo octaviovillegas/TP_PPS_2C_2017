@@ -9,18 +9,63 @@
 
 <ion-content padding>
 
-  <ion-card *ngFor="let alumno of alumnos | async">
-    <ion-item [hidden]="alumno.email != emailCodigo">
+  <button ion-button class="escanear" round full (click)="scanCode()">Escanear <ion-icon name="qr-scanner"></ion-icon></button>
+
+  <ion-card>
+    <ion-item [hidden]="estadistica != true">
     
-        <h2>{{alumno.apellido}}, {{alumno.nombre}}</h2>
+        <!-- <h2>{{alumno.apellido}}, {{alumno.nombre}}</h2>
         <p>Legajo: <b>{{alumno.legajo}}</b></p>
         <p>Estadística: {{alumno.Estadistica}}</p>
-        <p>Laboratorio: {{alumno.Laboratorio}}</p>
-        <p>Programación: {{alumno.Programacion}}</p>
-   
+        <p>Laboratorio: {{alumno.Laboratorio}}</p> -->
+        <p>Aula 301</p>
+        <p>Estadística "B"</p>
+        <img src="assets/images/ubicacionAulaEstadistica.jpg" alt="Ubicación del aula estadistica">
+
     </ion-item>
   </ion-card>     
 
-  <button ion-button class="escanear" round full (click)="scanCode()">Escanear <ion-icon name="qr-scanner"></ion-icon></button>
+  <ion-card>
+    <ion-item [hidden]="laboratorio != true">
+    
+        <!-- <h2>{{alumno.apellido}}, {{alumno.nombre}}</h2>
+        <p>Legajo: <b>{{alumno.legajo}}</b></p>
+        <p>Estadística: {{alumno.Estadistica}}</p>
+        <p>Laboratorio: {{alumno.Laboratorio}}</p> -->
+        <p>Aula 302 (Laboratorio V)</p>
+        <p>Laboratorio "A"</p>
+        <img src="assets/images/ubicacionAula.gif" alt="Ubicación del aula laboratorio">
+
+    </ion-item>
+  </ion-card> 
+
+  <ion-card>
+    <ion-item [hidden]="programacion != true">
+    
+        <!-- <h2>{{alumno.apellido}}, {{alumno.nombre}}</h2>
+        <p>Legajo: <b>{{alumno.legajo}}</b></p>
+        <p>Estadística: {{alumno.Estadistica}}</p>
+        <p>Laboratorio: {{alumno.Laboratorio}}</p> -->
+        <p>Aula 303 (Laboratorio II)</p>
+        <p>Programación "B"</p>
+        <img src="assets/images/ubicacionAulaProgramacion.jpg" alt="Ubicación del aula programacion">
+
+    </ion-item>
+  </ion-card> 
+
+  <ion-card *ngFor="let alumno of alumnos | async">
+    <ion-item [hidden]="alumno.email != emailCodigo || aulaMaterias != true || alumno.tipo != tipo">
+    
+        <h2>{{alumno.apellido}}, {{alumno.nombre}}</h2>
+         <p>Legajo: <b>{{alumno.legajo}}</b></p> 
+        <p>Estás anotado en:</p>
+        <p>Estadística: {{alumno.Estadistica}} Aula 301</p>
+        <p>Laboratorio: {{alumno.Laboratorio}} Aula 302 (Laboratorio V)</p>
+        <p>Programación: {{alumno.Programacion}} Aula 303 (Laboratorio II)</p>
+
+    </ion-item>
+  </ion-card>     
+
+
 
 </ion-content>
