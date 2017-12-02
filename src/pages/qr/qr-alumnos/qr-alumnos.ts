@@ -4,6 +4,7 @@ import { FirebaseListObservable } from 'angularfire2/database';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
+import swal from 'sweetalert2';
 
 @IonicPage()
 @Component({
@@ -23,6 +24,12 @@ export class QrAlumnosPage implements OnInit {
   photoUrl;
   uid;
   emailVerified;
+  tipo: string = "alumno";
+  ninguno: string = "Ninguno";
+  estadistica: boolean = false;
+  laboratorio: boolean = false;
+  programacion: boolean = false;
+  aulaMaterias: boolean = false;
 
   scannedCode: string;
   scannedCodes: Array<string>;
@@ -51,35 +58,48 @@ export class QrAlumnosPage implements OnInit {
     }
 
   async scanCode(){
-    const result = await this.barcodeScanner.scan({showTorchButton: true});
+    const result = await this.barcodeScanner.scan();
     this.scannedCode = await result.text;
-    if (this.scannedCode == "alumno") {
-      //this.informacion(this.alumno);
+    if (this.scannedCode == "materiasPorAula") {
       this.emailCodigo = this.email;
-      //this.scannedCodes.push("100");
+      this.aulaMaterias = true;
     }
-    if (this.scannedCode == "ae338e4e0cbb4e4bcffaf9ce5b409feb8edd5172") {
-      this.scannedCodes.push("50");
+    if (this.scannedCode == "programacion") {
+      this.programacion = true;
+      this.laboratorio = false;
+      this.estadistica = false;
     }
-    if (this.scannedCode == "2786f4877b9091dcad7f35751bfcf5d5ea712b2f") {
-      this.scannedCodes.push("10");
+    if (this.scannedCode == "laboratorio") {
+      this.programacion = false;
+      this.laboratorio = true;
+      this.estadistica = false;
+    }
+    if (this.scannedCode == "estadistica") {
+      this.programacion = false;
+      this.laboratorio = false;
+      this.estadistica = true;
+    }
+    // if (this.scannedCode == "alumnoUbicacionMaterias") {
+    //   this.emailCodigo = this.email;
+    //   this.aulaMaterias = true;
+    // }
+    // if (this.scannedCode == "profesor") {
+    //   swal({
+    //     title: 'Error',
+    //     text: 'QR válido solamente para profesores.',
+    //     type: 'error',
+    //     timer: 5000
+    //   })
+    // }
+    if (this.scannedCode != "programacion" && this.scannedCode != "laboratorio" &&
+    this.scannedCode != "estadistica" && this.scannedCode != "materiasPorAula") {
+      swal({
+        title: 'Error',
+        text: 'QR inválido.',
+        type: 'error',
+        timer: 5000
+      })
     }
   }
   
-
-//   public informacion(alumno: any): void {
-//     this.formAlta.controls['nombre'].setValue(alumno.nombre);
-//     this.formAlta.controls['apellido'].setValue(alumno.apellido);
-//     this.formAlta.controls['legajo'].setValue(alumno.legajo);
-//     this.formAlta.controls['Programacion'].setValue(alumno.Programacion);
-//     this.formAlta.controls['Laboratorio'].setValue(alumno.Laboratorio);
-//     this.formAlta.controls['Estadistica'].setValue(alumno.Estadistica);
-//     this.formAlta.controls['email'].setValue(alumno.email);
-//     this.formAlta.controls['pass'].setValue(alumno.pass);
-//     this.modifId = alumno.$key;
-
-// }
-
-
-
 }

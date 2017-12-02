@@ -8,6 +8,7 @@ import { EnviarAvisoPage } from '../pages/enviarAviso/enviarAviso';
 import { MiPerfilPage } from '../pages/miPerfil/miPerfil';
 import { TomarAsistenciaPage } from '../pages/tomarAsistencia/tomarAsistencia';
 import { QrAlumnosPage } from '../pages/qr/qr-alumnos/qr-alumnos';
+import { QrProfesoresPage } from '../pages/qr/qr-profesores/qr-profesores';
 
 export enum PageType {
     Listable,
@@ -28,7 +29,8 @@ export class PagesService{
         if (usrType == "Profesor") {
             return [ 
                 this.inicioPage, 
-                this.listPage
+                this.listPage,
+                this.QrProfesoresPage
             ];
         }
 
@@ -49,7 +51,8 @@ export class PagesService{
                 this.adminUsuariosPage,
                 this.miPerfilPage,
                 this.configuracionPage,
-                this.QrAlumnosPage                
+                this.QrAlumnosPage ,
+                this.QrProfesoresPage               
             ];
         }
     }
@@ -120,6 +123,14 @@ export class PagesService{
         title: 'QR Alumno', 
         component: QrAlumnosPage,
         route: 'QrAlumnos',
+        type: PageType.Listable,
+        icon: "md-qr-scanner"
+    };
+
+    public QrProfesoresPage = { 
+        title: 'QR Profesor', 
+        component: QrProfesoresPage,
+        route: 'QrProfesores',
         type: PageType.Listable,
         icon: "md-qr-scanner"
     };

@@ -7,7 +7,7 @@ Módulo a desarrollar:
 
 Fecha inicio: 03/11/2017
 
-Fecha fin:
+Fecha fin: 02/12/2017
 
 Branch: Styles
 
@@ -29,9 +29,31 @@ Módulo a desarrollar:
 
 Fecha inicio: 26/11/2017
 
-Fecha fin: 26/11/2017
+Fecha fin: 27/11/2017
 
 Branch: LoginRedSocial
+
+-------------------
+
+Módulo a desarrollar:
+• QR para Alumnos (Punto M)
+
+Fecha inicio: 27/11/2017
+
+Fecha fin: 02/11/2017
+
+Branch: QRAlumnos
+
+-------------------
+
+Módulo a desarrollar:
+• QR para Profesores (Punto N)
+
+Fecha inicio: 28/11/2017
+
+Fecha fin: 02/11/2017
+
+Branch: QRProfesores
 
 -------------------
 
@@ -78,9 +100,9 @@ Branch: NavegacionEnAPP
 
 -------------------
 
-Módulo a desarrollar: • ABM Administrativo 
+Módulo a desarrollar: 
 
-• ABM Profesor (J)
+• ABM Administrativo y Profesor (J)
 
 Fecha inicio: 21/11/2017
 
