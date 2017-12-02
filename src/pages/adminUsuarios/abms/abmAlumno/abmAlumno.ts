@@ -172,7 +172,7 @@ export class AbmAlumnoPage {
   }
 
   public takePicture(): void {
-    //this.imgName = "temp";
+    this.imgName = "temp";
     let options: CameraOptions = {
       quality: 50,
       destinationType: this.camera.DestinationType.DATA_URL,
