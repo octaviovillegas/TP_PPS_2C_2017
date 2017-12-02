@@ -26,9 +26,14 @@ export class QrProfesoresPage implements OnInit {
   emailVerified;
   tipo: string = "alumno";
   ninguno: string = "Ninguno";
-  estadistica: string = "Estadistica";
-  laboratorio: string = "Laboratorio";
-  programacion: string = "Programacion";
+  estadistica: boolean = false;
+  laboratorio: boolean = false;
+  programacion: boolean = false;
+  aulaMaterias: boolean = false;
+  materia: string = ""
+  // stringEstadistica: string = "Estadistica";
+  // stringLaboratorio: string = "Laboratorio";
+  // stringProgramacion: string = "Programacion";
 
   scannedCode: string;
   scannedCodes: Array<string>;
@@ -59,10 +64,60 @@ export class QrProfesoresPage implements OnInit {
   async scanCode(){
     const result = await this.barcodeScanner.scan();
     this.scannedCode = await result.text;
-    if (this.scannedCode == "profesor") {
-      //this.informacion(this.alumno);
+    if (this.scannedCode == "materiasPorAula") {
       this.emailCodigo = this.email;
-      //this.scannedCodes.push("100");
+      this.aulaMaterias = true;
+      this.programacion = false;
+      this.laboratorio = false;
+      this.estadistica = false;
+    }
+    if (this.scannedCode == "programacion") {
+      if (this.materia == "Programacion") {
+        this.programacion = true;
+        this.laboratorio = false;
+        this.estadistica = false;
+      }
+      else
+      {
+        swal({
+          title: 'Error',
+          text: 'QR válido solamente para profesores de programación.',
+          type: 'error',
+          timer: 5000
+        })
+      }
+    }
+    if (this.scannedCode == "laboratorio") {
+      if (this.materia == "Laboratorio") {
+        this.programacion = false;
+        this.laboratorio = true;
+        this.estadistica = false;
+      }
+      else
+      {
+        swal({
+          title: 'Error',
+          text: 'QR válido solamente para profesores de laboratorio.',
+          type: 'error',
+          timer: 5000
+        })
+      }
+    }
+    if (this.scannedCode == "estadistica") {
+      if (this.materia == "Estadistica") {
+        this.programacion = false;
+        this.laboratorio = false;
+        this.estadistica = true;
+      }
+      else
+      {
+        swal({
+          title: 'Error',
+          text: 'QR válido solamente para profesores de estadistica.',
+          type: 'error',
+          timer: 5000
+        })
+      }
     }
     if (this.scannedCode == "alumno") {
       swal({
@@ -72,14 +127,15 @@ export class QrProfesoresPage implements OnInit {
         timer: 5000
       })
     }
-    if (this.scannedCode != "alumno" && this.scannedCode != "profesor") {
-      swal({
-        title: 'Error',
-        text: 'QR inválido.',
-        type: 'error',
-        timer: 5000
-      })
-    }
+    if (this.scannedCode != "programacion" && this.scannedCode != "laboratorio" &&
+    this.scannedCode != "estadistica" && this.scannedCode != "materiasPorAula") {
+  swal({
+    title: 'Error',
+    text: 'QR inválido.',
+    type: 'error',
+    timer: 5000
+  })
+}
   }
   
 

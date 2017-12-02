@@ -83,16 +83,16 @@ export class QrAlumnosPage implements OnInit {
     //   this.emailCodigo = this.email;
     //   this.aulaMaterias = true;
     // }
-    if (this.scannedCode == "profesor") {
-      swal({
-        title: 'Error',
-        text: 'QR válido solamente para profesores.',
-        type: 'error',
-        timer: 5000
-      })
-    }
-    if (this.scannedCode != "alumnoUbicacionMaterias" && this.scannedCode != "profesor" && this.scannedCode != "programacion" && 
-        this.scannedCode != "laboratorio" && this.scannedCode != "estadistica" && this.scannedCode != "materiasPorAula") {
+    // if (this.scannedCode == "profesor") {
+    //   swal({
+    //     title: 'Error',
+    //     text: 'QR válido solamente para profesores.',
+    //     type: 'error',
+    //     timer: 5000
+    //   })
+    // }
+    if (this.scannedCode != "programacion" && this.scannedCode != "laboratorio" &&
+    this.scannedCode != "estadistica" && this.scannedCode != "materiasPorAula") {
       swal({
         title: 'Error',
         text: 'QR inválido.',
