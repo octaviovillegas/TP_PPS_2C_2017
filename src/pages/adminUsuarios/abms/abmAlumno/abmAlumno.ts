@@ -99,6 +99,7 @@ export class AbmAlumnoPage {
        this.formAlta.controls['email'].setValue(alumno.email);
        this.formAlta.controls['pass'].setValue(alumno.pass);
        this.modifId = alumno.$key;
+       this.imgName = alumno.email;
        this.tab = "agregar";
   }
 
