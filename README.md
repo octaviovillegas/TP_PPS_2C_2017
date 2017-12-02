@@ -46,6 +46,16 @@ Fecha fin: 03/11/2017
 Branch: Login
 
 -------------------
+Módulo a desarrollar:
+• Servicio para push Notifications
+
+Fecha inicio: 27/11/2017
+
+Fecha fin: 01/12/2017
+
+Branch: PushNotis
+
+-------------------
 
 # Juan Manuel Barreda Fafasuli
 Módulo a desarrollar: • ABM de Alumnos (G)

@@ -4,7 +4,6 @@ import { PagesService, PageType } from '../../services/pages.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { LoginPage } from '../login/login';
 import { NativeAudio } from '@ionic-native/native-audio';
-//import { SocketService } from "../../services/socket.service";
 
 @Component({
   selector: 'page-home',
@@ -19,8 +18,7 @@ export class HomePage {
   constructor(public navCtrl: NavController,
     public authAf: AngularFireAuth,
     private alertCtrl: AlertController,
-    private nativeAudio: NativeAudio,
-	  /*private socketService: SocketService*/) {    var pagesService = new PagesService();
+    private nativeAudio: NativeAudio,) {    var pagesService = new PagesService();
     this.pages = pagesService.getByUserType(this.user);
   }
 
