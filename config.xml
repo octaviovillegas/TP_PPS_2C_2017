@@ -78,6 +78,7 @@
         <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
     </platform>
     <allow-navigation href="http://192.168.0.23:8100" />
+    <allow-navigation href="http://192.168.0.13:8100" />
     <engine name="android" spec="^6.2.3" />
     <plugin name="cordova-plugin-datepicker" spec="^0.9.3" />
     <plugin name="cordova-plugin-device" spec="^1.1.4" />

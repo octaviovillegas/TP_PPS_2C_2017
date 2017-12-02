@@ -44,17 +44,16 @@ export class PushService{
   }
 
   receiveMessage() {
-    this.fcm.onNotification().subscribe((payload) => {
-      console.log("Mensaje recibido:", payload);
-      this.toastService.create({
-        message: "Mensaje de " + payload.notification.title + ":" + payload.notification.body,
-        duration: 2500,
-        position: 'top',
-        showCloseButton: true,
-        closeButtonText: "Ok"
-      }).present();
-      this.currentMessage.next(payload);
-    });
+      this.fcm.onNotification().subscribe((notification) => {
+        console.log("Mensaje recibido:", notification);
+        this.toastService.create({
+          message: "Mensaje de " + notification.title + ":" + notification.body,
+          duration: 2500,
+          position: 'top',
+          showCloseButton: true,
+          closeButtonText: "Ok"
+        }).present();
+      });
     /*this.messaging.onMessage((payload) => {
       console.log("Mensaje recibido:", payload);
       this.toastService.create({
