@@ -17,7 +17,6 @@ import { EncuestasHomePage } from "../pages/encuestas-home/encuestas-home";
 import { EncuestaDetPage } from "../pages/encuesta-det/encuesta-det";
 
 
-
 @Component({
   templateUrl: 'app.html'
 })
@@ -34,7 +33,7 @@ export class MyApp {
         //{titulo: 'Perfil', component:PerfilPage},
         {titulo: 'Asistencias', component:AsistenciasPage},
         {titulo: 'Encuesta', component:EncuestasHomePage}
-        
+
 
     ];
 

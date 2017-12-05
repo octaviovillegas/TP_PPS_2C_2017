@@ -22,7 +22,7 @@ export class PerfilPage {
   private imagen:string;
   private perfil:string;
   private correo:string;
-  private foto:string;
+  private foto:string='';
   private nombre:string;
   private materias:Array<string>;
   private legajo:string;
@@ -44,6 +44,7 @@ export class PerfilPage {
          this.nombre = '';
        }else{
         this.nombre = this.navParams.get('nombre');
+        console.log(this.nombre);
        }
 
       this.correo = this.navParams.get('correo');

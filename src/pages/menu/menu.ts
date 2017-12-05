@@ -11,6 +11,8 @@ import { FileChooser } from "@ionic-native/file-chooser";
 import { Alumno } from "../../clases/alumno";
 
 
+
+
 @IonicPage()
 @Component({
   selector: 'page-menu',
@@ -18,8 +20,9 @@ import { Alumno } from "../../clases/alumno";
 })
 export class MenuPage {
 
-  private datos:{};
-
+  private datos:any;
+  private perfil:string='';
+  private segmentAlumno:string;
 
 
 
@@ -33,13 +36,16 @@ export class MenuPage {
 
   ionViewDidLoad() {
 
+
     this.datos = JSON.parse(this.navParams.data);
-    console.log(this.navParams.data);
+
+    this.perfil = this.datos["perfil"];
+    console.log(this.perfil);
 
   }
 
 
-  private irAPerfil():void{
+ /* private irAPerfil():void{
 
     const loading = this.loadingCtrl.create({
       content: 'Ingresando. Espere...',
@@ -54,7 +60,7 @@ export class MenuPage {
       this.navCtrl.push("PerfilPage", {"correo" : this.datos["correo"], "perfil":this.datos["perfil"], "nombre":this.datos["nombre"], "foto":this.datos["foto"], "isLoginSocial":this.datos["loginSocial"]});
     }
 
-  }
+  }*/
 
   private irAFormAlumnos(){
     /*const loading = this.loadingCtrl.create({
@@ -89,19 +95,19 @@ export class MenuPage {
   }
 
 
-  private irAFormAlumnosQrPage(){
-    /*
+  /*private irAFormAlumnosQrPage(){
+
     const loading = this.loadingCtrl.create({
       content: 'Ingresando. Espere...',
       dismissOnPageChange: true,
       spinner:"bubbles"
     });
-    loading.present();*/
+    loading.present();
 
     console.log(this.datos["correo"]);
     console.log(this.datos["perfil"]);
     this.navCtrl.push('FormAlumnosQrPage', {'correo':this.datos["correo"], 'perfil':this.datos["perfil"]});
-  }
+}*/
 
 
   irABMPEncuestas()
@@ -197,6 +203,15 @@ export class MenuPage {
 
     return nombre;
   }
+
+
+  segmentChanged(event){
+    console.log(event.value);
+
+  }
+
+
+
 
 
 }

@@ -1,0 +1,34 @@
+
+<h3 text-center color="secondary">Perfil</h3>
+
+  <img *ngIf="foto!=''" [src]="foto" class="foto">
+  &nbsp;&nbsp;&nbsp;<img width="40" height="40" (click)="sacarFoto()" src="assets/icon/camara.png">
+  <ion-item class="itemMenu">
+      <!-- <ion-icon ios="ios-camera" md="md-camera" (click)="sacarFoto()"></ion-icon> -->
+  </ion-item>
+
+
+  <form #formPerfil="ngForm">
+
+    <ion-item class="itemMenu">
+      <ion-label color="primary" >Nombre:  {{ nombre }}</ion-label>
+    </ion-item>
+
+    <ion-item class="itemMenu">
+      <ion-label color="primary" >Correo:  {{ correo }}</ion-label>
+      <!--ion-label (click)="cambiarCorreo()" color="primary" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Modificar</ion-label-->
+    </ion-item>
+
+
+    <ion-item *ngIf="perfil=='alumno'" color="verdeclaro">
+        <ion-label floating>Legajo:</ion-label>
+        <ion-input  [ngModelOptions]="{standalone: true}" disabled="true" type="text" [(ngModel)]="legajo"></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="perfil!='alumno'" color="verdeclaro">
+        <ion-label floating>DNI:</ion-label>
+        <ion-input  [ngModelOptions]="{standalone: true}" disabled="true" type="text" [(ngModel)]="dni"></ion-input>
+    </ion-item>
+
+
+  </form>

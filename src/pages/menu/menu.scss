@@ -1,5 +1,6 @@
 page-menu {
 
+
 ion-title {
     background-color:#EECD90;
     position: absolute;
@@ -11,21 +12,25 @@ ion-title {
     text-align: center;
  }
 
+ .fondoSegment{
+  background-color:#EECD90;
+ }
+
 .fondoMenu {
-    
+
     background-color:lightgreen;
-            
+
  }
 
 .itemMenu {
     background-color:lightgreen;
-    
+
  }
 
 .lista {
     position: absolute;
     top: 10%;
-    
+
  }
 
 }
