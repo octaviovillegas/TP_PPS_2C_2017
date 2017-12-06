@@ -9,7 +9,7 @@ import swal from 'sweetalert2';
 import { HomePage } from '../home/home';
 import { Facebook } from '@ionic-native/facebook';
 import firebase from 'firebase';
-import { DomSanitizer } from '@angular/platform-browser';
+//import { DomSanitizer } from '@angular/platform-browser';
 
 //import { SocketService } from "../../services/socket.service";
  
@@ -35,7 +35,6 @@ export class LoginPage {
     public navParams: NavParams,
     public loadingCtrl: LoadingController,
     public facebook: Facebook,
-    private sanitizer: DomSanitizer
     //public socketService: SocketService
   ) {
     

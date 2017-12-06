@@ -1,5 +1,4 @@
 import { HomePage } from '../pages/home/home';
-import { LoginPage } from '../pages/login/login';
 import { ListPage } from '../pages/list/list';
 import { AdminUsuariosPage } from '../pages/adminUsuarios/adminUsuarios';
 import { ConfiguracionPage } from '../pages/configuracion/configuracion';

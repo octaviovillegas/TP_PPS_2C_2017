@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Chart } from 'chart.js';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { setInterval, setTimeout } from 'timers';
+import { setTimeout } from 'timers';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 @IonicPage()
@@ -139,7 +139,7 @@ export class EncuestasPage {
         }
       });
     });
-    let id = this.authAf.auth.currentUser;
+    //let id = this.authAf.auth.currentUser;
     this.tab = "estadisticas";
     this.loadEstadisticas();
   }

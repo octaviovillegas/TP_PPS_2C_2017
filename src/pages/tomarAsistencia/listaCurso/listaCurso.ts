@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavParams, AlertController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { storage } from 'firebase';
-import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/camera';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 import 'rxjs/add/operator/map';
-//import { PushService } from "../../../services/push.service";
+import { PushService } from "../../../services/push.service";
 
 @IonicPage()
 @Component({

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, AlertController, ActionSheetController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import * as firebase from 'firebase/app'; 
+//import * as firebase from 'firebase/app'; 
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import 'rxjs/add/operator/map';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -17,7 +17,7 @@ export class AbmAdministrativoPage {
   
   private tab;
   private admins: FirebaseListObservable<any[]>;
-  private userImg = "https://openclipart.org/image/2400px/svg_to_png/247319/abstract-user-flat-3.png";
+  //private userImg = "https://openclipart.org/image/2400px/svg_to_png/247319/abstract-user-flat-3.png";
   //Lista
   private searchValue: string;
   private filterType: string;
