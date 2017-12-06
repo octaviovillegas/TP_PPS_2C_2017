@@ -1,0 +1,26 @@
+
+    <ion-item class="fondo">
+        <p><img (click)="addNuevoAlumno()" src="assets/imgs/add.png" width="40" height="40" align="left">
+           <img (click)="cargarArchivos()" src="assets/imgs/excel.png" width="40" height="40" align="right"></p>
+           <ion-grid>
+            <!--ion-row text-center>
+                <ion-col width-6>
+                  <p>Agregar Alumno</p>
+                </ion-col>
+                <ion-col width-6>
+                  <p>Subir Archivos</p>
+                </ion-col>
+            </ion-row-->
+        </ion-grid>
+    </ion-item>
+    <img src="assets/imgs/linea.png" width="40" height="10">
+    <ion-list>
+      <ion-item (click)="abrirModalView(alumno)"  class="fondo" *ngFor="let alumno of listado">
+          <ion-avatar item-start>
+            <img *ngIf="alumno.foto!=''" [src]="alumno.foto">
+          </ion-avatar>
+        <h2>{{ alumno.nombre}}</h2>
+        <p>Legajo: {{ alumno.legajo}}</p>
+      </ion-item>
+
+    </ion-list>

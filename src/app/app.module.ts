@@ -55,6 +55,9 @@ import { File } from "@ionic-native/file";
 import { FilePath } from "@ionic-native/file-path";
 import { FileChooser } from "@ionic-native/file-chooser";
 
+import { ComponentsModule } from "../components/components.module";
+import { LectorQrComponent } from "../components/lector-qr/lector-qr";
+
 
 
 var firebaseAuth  = {
@@ -82,7 +85,7 @@ var firebaseAuth  = {
     MostrarAsistenciasPage,
     ProfesorAsistenciaPage,
    // EnviarEncuestaPage,
-    EncuestaDetPage,
+    EncuestaDetPage
     //EncuestasHomePage
 
    ],
@@ -97,7 +100,9 @@ var firebaseAuth  = {
      FormsModule,
      ReactiveFormsModule,
      MenuPageModule,
-     ConsultarBajaModifPageModule
+     ConsultarBajaModifPageModule,
+     ComponentsModule
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -115,7 +120,7 @@ var firebaseAuth  = {
     MostrarAsistenciasPage,
     ProfesorAsistenciaPage,
    // EnviarEncuestaPage,
-    EncuestaDetPage,
+    EncuestaDetPage
     //EncuestasHomePage
   ],
   providers: [
