@@ -39,7 +39,14 @@ export class PushService {
       this.messaging.requestPermission()
         .then(() => {
           console.log('Notification permission granted.');
-          return this.messaging.getToken();
+          return this.messaging.getToken()
+        })
+        .then(token => {
+          console.log(token)
+          this.updateToken(token)
+        })
+        .catch((err) => {
+          console.log('Unable to get permission to notify.', err);
         });
     }
   }
@@ -115,7 +122,7 @@ export class PushService {
     tokens.take(1).forEach(t => {
       t.forEach(t2 => {
         this.db.object('avisoFaltas/' + messageID.replace(".", "")).update({
-          message: "El alumno " + alumnoEmail + "se excedió con las faltas.",
+          message: "El alumno " + alumnoEmail + "se excediÃ³ con las faltas.",
           from: "Sistema",
           title: "Aviso",
           receptor: alumnoEmail

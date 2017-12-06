@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, AlertController, ActionSheetController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import 'rxjs/add/operator/map';
 
 @IonicPage()
@@ -27,8 +26,7 @@ export class TomarAsistenciaPage {
   constructor(public navCtrl: NavController, 
     public alertCtrl: AlertController, 
     public af: AngularFireDatabase,
-    public actionSheetCtrl: ActionSheetController, 
-    private formBuilder: FormBuilder) {
+    public actionSheetCtrl: ActionSheetController) {
       this.tab = "materias";
       //Materias
       this.filterType = "Apellido";
