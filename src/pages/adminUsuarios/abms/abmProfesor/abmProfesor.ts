@@ -16,7 +16,7 @@ export class AbmProfesorPage {
   
   private tab;
   private profesores: FirebaseListObservable<any[]>;
-  private userImg = "https://openclipart.org/image/2400px/svg_to_png/247319/abstract-user-flat-3.png";
+  //private userImg = "https://openclipart.org/image/2400px/svg_to_png/247319/abstract-user-flat-3.png";
   //Lista
   private searchValue: string;
   private filterType: string;

@@ -14,7 +14,6 @@ import swal from 'sweetalert2';
 export class QrAlumnosPage implements OnInit {
 
   private alumnos: FirebaseListObservable<any[]>;
-  private listAlumnos: any = []; 
   apellido;
 
   user = this.authAf.auth.currentUser;
