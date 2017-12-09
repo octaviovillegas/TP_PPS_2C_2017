@@ -1,11 +1,32 @@
 <ion-header>
     <ion-navbar>
         <ion-title>QR Profesor</ion-title>
-    </ion-navbar>
+    </ion-navbar>    
 </ion-header>
-    
-    
 <ion-content padding>
-          
+      
+    <button ion-button class="our-btn" block (click)="scanCode()">Escanear  <ion-icon style="margin-left: 5px;" name="qr-scanner"></ion-icon></button>
+    <div *ngFor="let usuario of profesores | async">
+        <ion-input [hidden]="true" type="text" [(ngModel)]="materia" value={{usuario.materia}}></ion-input>
+        <ion-card [hidden]="usuario.email != emailCodigo || usuario.tipo != 'profe'">
+            <ion-item>
+                <h2>{{usuario.apellido}}, {{usuario.nombre}}</h2>
+                <p>Legajo: <b>{{usuario.legajo}}</b></p>
+                <p>Materia: {{usuario.materia}}</p>
+            </ion-item>
+        </ion-card> 
+    
+        <ion-card> 
+            <ion-item [hidden]="emailCodigo == undefined || usuario.tipo != tipo || usuario.Estadistica == ninguno || usuario.Laboratorio == ninguno || usuario.Programacion == ninguno">
+                <p>Alumno:</p>
+                <h2>{{usuario.apellido}}, {{usuario.nombre}}</h2>
+                <p>Legajo: <b>{{usuario.legajo}}</b></p>
+                <p [hidden]="materia != 'Estadistica'">Estadística: {{usuario.Estadistica}}</p>
+                <p [hidden]="materia != 'Laboratorio'">Laboratorio: {{usuario.Laboratorio}}</p>
+                <p [hidden]="materia != 'Programacion'">Programación: {{usuario.Programacion}}</p>
+            </ion-item>
+        </ion-card> 
+    </div>    
+    
 </ion-content>
     
