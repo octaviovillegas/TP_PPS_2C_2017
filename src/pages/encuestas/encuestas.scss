@@ -1,18 +1,15 @@
 .ios, .md {
+    page-home {
+        .scroll-content {
+            background-color: map-get($colors, light);
+        }
     
-       page-home {
+        ion-card-header {
+            font-weight: bold;
+        }
     
-           .scroll-content {
-               background-color: map-get($colors, light);
-           }
-    
-           ion-card-header {
-               font-weight: bold;
-           }
-    
-       }
-    
-   }
+    }    
+}
 
    canvas {
     display: block;
