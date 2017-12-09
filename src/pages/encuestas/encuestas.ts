@@ -56,7 +56,6 @@ export class EncuestasPage {
   
   public isInvalidDate(): boolean {
     if(this.formCrear != undefined) {
-      console.log(this.formCrear.value);
       let inicioStr = this.formCrear.value["fechaInicio"];
       let finStr = this.formCrear.value["fechaFin"];
       if(inicioStr != "" && inicioStr != null && inicioStr != undefined

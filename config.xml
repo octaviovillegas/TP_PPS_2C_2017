@@ -80,6 +80,7 @@
     <allow-navigation href="http://192.168.0.23:8100" />
     <allow-navigation href="http://192.168.0.13:8100" />
     <engine name="android" spec="^6.2.3" />
+    <engine name="ios" spec="~4.5.4" />
     <plugin name="cordova-plugin-device" spec="^1.1.4" />
     <plugin name="cordova-plugin-ionic-webview" spec="^1.1.11" />
     <plugin name="cordova-plugin-splashscreen" spec="^4.0.3" />

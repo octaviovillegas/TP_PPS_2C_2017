@@ -6,7 +6,7 @@ import { FormBuilder } from '@angular/forms';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { LoginPage } from '../pages/login/login';
+import { LoginPageModule } from '../pages/login/login.module';
 import { ListPage } from '../pages/list/list';
 
 import { AngularFireModule } from 'angularfire2';
@@ -29,7 +29,6 @@ import { FCM } from '@ionic-native/fcm';
   declarations: [
     MyApp,
     HomePage,
-    LoginPage,
     ListPage
   ],
 
@@ -38,11 +37,11 @@ import { FCM } from '@ionic-native/fcm';
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireAuthModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    LoginPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    LoginPage,
     HomePage,
     ListPage
   ],
