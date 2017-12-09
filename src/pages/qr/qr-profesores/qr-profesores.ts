@@ -24,6 +24,7 @@ export class QrProfesoresPage implements OnInit {
         public af: AngularFireDatabase,
         public barcodeScanner: BarcodeScanner) 
     {
+        alert("fasd");
     }
 
     public ngOnInit(){
@@ -35,30 +36,35 @@ export class QrProfesoresPage implements OnInit {
     }
 
     public async scanCode(){
+        alert("fasdfasdfasdfa");
         this.isMan();
         let promise = await this.barcodeScanner.scan();
         let result = await promise.text;
         this.processScan(result);
+        alert(result);
     }
 
     private processScan(result: string): void{
         let obj: any = JSON.parse(result);   
         if(obj.tipo = "aula"){
             let numero = obj.numero;
-            let is
             this.af.database.ref("/aulas/").on('value', aulas => {
                 let props = Object.getOwnPropertyNames(aulas.val());
                 props.forEach(p => {
                     let aul = aulas.val()[p];
                     if(aul.numero == numero){
                         if(this.isMan()) {
-
+                            this.cargarInfo(aul["matMan"]);
+                            alert("Maniana");
+                        } else {
+                            this.cargarInfo(aul["matTar"]);
+                            alert("Tarde");
                         }
                     }
                 });
             });
         } else {
-            //mensaje de error
+            
         }
     }
 
@@ -70,4 +76,13 @@ export class QrProfesoresPage implements OnInit {
             return false;
         }
     }
+
+    private cargarInfo(materia: string){
+        this.mostrarAlumnosYFiltrar(materia);
+    }
+
+    private mostrarAlumnosYFiltrar(materia: string): void{
+
+    }
+
 }
