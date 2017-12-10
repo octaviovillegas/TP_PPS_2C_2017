@@ -23,6 +23,8 @@ import { Camera } from '@ionic-native/camera';
 import { PushService } from "../services/push.service";
 import { UserService } from "../services/user.service";
 import { FCM } from '@ionic-native/fcm';
+import { PagesService } from '../services/pages.service';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 
 @NgModule({
@@ -56,8 +58,9 @@ import { FCM } from '@ionic-native/fcm';
     Camera,
     PushService,
     UserService,
-    FCM
-
+    FCM,
+    AngularFireAuth,
+    PagesService
   ]
 })
 export class AppModule {}

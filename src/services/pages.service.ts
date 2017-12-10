@@ -18,34 +18,17 @@ export enum PageType {
 
 export class PagesService {
 
-    private userType: string;
-
-    public constructor(public af: AngularFireDatabase,
-        public authAf: AngularFireAuth) {
-        af.database.ref("/usuarios/").on('value', usuarios => {
-            let props = Object.getOwnPropertyNames(usuarios.val());
-            props.forEach(p => {
-                let usr = usuarios.val()[p];
-                if(usr.email == this.authAf.auth.currentUser.email){
-                    this.userType = usr.tipo;
-                }
-            });
-        });
-    }
-
-    public getByUserType(): Array<any>{
+    public getByUserType(userType: string): Array<any>{
         let lista = new Array<any>();
         lista.push(this.inicioPage);
         lista.push(this.listPage);
-        lista.push(this.miPerfilPage);
-        lista.push(this.configuracionPage);
-        
-        if (this.userType == "Alumno") {
-            lista.push(QrAlumnosPage);
+
+        if (userType == "alumno") {
+            lista.push(this.QrAlumnosPage);
             lista.push(this.encuestasPage);
         }
 
-        if (this.userType == "Profesor") {
+        if (userType == "profesor") {
             lista.push(this.tomarAsistenciaPage);
             lista.push(this.encuestasPage);
             lista.push(this.enviarAvisoPage);
@@ -53,10 +36,10 @@ export class PagesService {
             lista.push(this.QrProfesoresPage);
         }
 
-        if (this.userType == "Administrativo") {
+        if (userType == "administrativo") {
         }
 
-        if (this.userType == "Administrador") {
+        if (userType == "administrador") {
             lista.push(this.tomarAsistenciaPage);
             lista.push(this.encuestasPage);
             lista.push(this.enviarAvisoPage);
@@ -64,6 +47,9 @@ export class PagesService {
             lista.push(this.QrAlumnosPage);
             lista.push(this.QrProfesoresPage);            
         }
+
+        lista.push(this.miPerfilPage);
+        lista.push(this.configuracionPage);
         return lista;
     }
 
