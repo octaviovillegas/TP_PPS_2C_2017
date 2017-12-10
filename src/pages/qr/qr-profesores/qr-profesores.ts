@@ -17,7 +17,7 @@ export class QrProfesoresPage implements OnInit {
     public scannedCodes: Array<string>;
     
     public showListado: boolean = false;
-    public showInfo: boolean = true;
+    public showInfo: boolean = false;
     public currentAula: any;
     public currentMateria: any;
     public esSuyaMan: boolean = false;
@@ -38,7 +38,7 @@ export class QrProfesoresPage implements OnInit {
                 this.currentProfesor = usr;
             }
         })).subscribe();
-        this.cargarInfo("aula");
+        //this.cargarInfo("aula");
     }
 
     async scanCode(){

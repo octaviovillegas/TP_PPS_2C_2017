@@ -4,10 +4,25 @@
     </ion-navbar>    
 </ion-header>
 <ion-content padding>
-    <button ion-button class="our-btn" block (click)="scanCode()">Escanear  <ion-icon style="margin-left: 5px;" name="qr-scanner"></ion-icon></button>
+
+    <ion-content *ngIf="!showInfo">
+        <ion-card>
+            <img src="assets/qr.png"/>
+            <ion-card-content>
+                <ion-card-title>
+                Escanear QR
+                </ion-card-title>
+                <p>
+                Escaneando el código QR que está en cada aula podés obtener información
+                de las materias que se adan en cada horario.
+                </p>
+            </ion-card-content>
+        </ion-card>
+        <button ion-button class="our-btn" block (click)="scanCode()">Escanear  <ion-icon style="margin-left: 5px;" name="qr-scanner"></ion-icon></button>
+    </ion-content>
 
     <ion-content *ngIf="showInfo">
-
+        <button ion-button class="our-btn" block (click)="scanCode()">Escanear  <ion-icon style="margin-left: 5px;" name="qr-scanner"></ion-icon></button>
         <ion-card>
             <ion-item>
                 <h1>Información <ion-icon name="ios-information-circle-outline"></ion-icon></h1>
