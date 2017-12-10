@@ -62,20 +62,3 @@ export class HomePage {
   }
 
 }
-
-  // var user = firebase.auth().currentUser;
-
-  // if (user) {
-  //   // User is signed in.
-  // } else {
-  //   // No user is signed in.
-  // }
-  // asd(){
-  // this.authAf.auth.onAuthStateChanged(this.usera);
-  //   if (this.usera) {
-  //     console.log(this.usera + "Logueado");
-  //   } else {
-  //     console.log(this.usera + "No logueado");
-  //   }
-  // }
-// }

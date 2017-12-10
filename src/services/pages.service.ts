@@ -8,52 +8,63 @@ import { MiPerfilPage } from '../pages/miPerfil/miPerfil';
 import { TomarAsistenciaPage } from '../pages/tomarAsistencia/tomarAsistencia';
 import { QrAlumnosPage } from '../pages/qr/qr-alumnos/qr-alumnos';
 import { QrProfesoresPage } from '../pages/qr/qr-profesores/qr-profesores';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 export enum PageType {
     Listable,
     NotListable
 }
 
-export class PagesService{
+export class PagesService {
 
-    public getByUserType(usrType: string): Array<any>{
-        if (usrType == "Alumno") {
-            return [ 
-                this.inicioPage, 
-                this.listPage,
-                this.QrAlumnosPage
-            ];
+    private userType: string;
+
+    public constructor(public af: AngularFireDatabase,
+        public authAf: AngularFireAuth) {
+        af.database.ref("/usuarios/").on('value', usuarios => {
+            let props = Object.getOwnPropertyNames(usuarios.val());
+            props.forEach(p => {
+                let usr = usuarios.val()[p];
+                if(usr.email == this.authAf.auth.currentUser.email){
+                    this.userType = usr.tipo;
+                }
+            });
+        });
+    }
+
+    public getByUserType(): Array<any>{
+        let lista = new Array<any>();
+        lista.push(this.inicioPage);
+        lista.push(this.listPage);
+        lista.push(this.miPerfilPage);
+        lista.push(this.configuracionPage);
+        
+        if (this.userType == "Alumno") {
+            lista.push(QrAlumnosPage);
+            lista.push(this.encuestasPage);
         }
 
-        if (usrType == "Profesor") {
-            return [ 
-                this.inicioPage, 
-                this.listPage,
-                this.QrProfesoresPage
-            ];
+        if (this.userType == "Profesor") {
+            lista.push(this.tomarAsistenciaPage);
+            lista.push(this.encuestasPage);
+            lista.push(this.enviarAvisoPage);
+            lista.push(this.adminUsuariosPage);
+            lista.push(this.QrProfesoresPage);
         }
 
-        if (usrType == "Administrativo") {
-            return [ 
-                this.inicioPage, 
-                this.listPage
-            ];
+        if (this.userType == "Administrativo") {
         }
 
-        if (usrType == "Administrador") {
-            return [
-                this.listPage,
-                this.inicioPage,
-                this.tomarAsistenciaPage,
-                this.encuestasPage,
-                this.enviarAvisoPage,
-                this.adminUsuariosPage,
-                this.miPerfilPage,
-                this.configuracionPage,
-                this.QrAlumnosPage ,
-                this.QrProfesoresPage               
-            ];
+        if (this.userType == "Administrador") {
+            lista.push(this.tomarAsistenciaPage);
+            lista.push(this.encuestasPage);
+            lista.push(this.enviarAvisoPage);
+            lista.push(this.adminUsuariosPage);
+            lista.push(this.QrAlumnosPage);
+            lista.push(this.QrProfesoresPage);            
         }
+        return lista;
     }
 
     public inicioPage = { 
