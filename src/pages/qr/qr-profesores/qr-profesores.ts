@@ -20,7 +20,8 @@ export class QrProfesoresPage implements OnInit {
     public showInfo: boolean = true;
     public currentAula: any;
     public currentMateria: any;
-    public esSuClase: boolean;
+    public esSuyaMan: boolean = false;
+    public esSuyaTar: boolean = false;
     public alumnos: FirebaseListObservable<any[]> = this.af.list('/usuarios');
 
     constructor(public navCtrl: NavController,
@@ -104,7 +105,7 @@ export class QrProfesoresPage implements OnInit {
             this.showListado = true;
         } 
         this.showInfo = true;
-        this.mostrarSiEsSuClase();
+        this.mostrarSiEsSuClase(aula);
     }
 
     private getDiaProp(): string {
@@ -123,12 +124,16 @@ export class QrProfesoresPage implements OnInit {
         return diaProp;
     }
 
-    private mostrarSiEsSuClase() {
-        this.esSuClase = true;
+    private mostrarSiEsSuClase(aula: any) {
+        if(this.currentProfesor) {
+            this.esSuyaMan = true;
+            this.esSuyaTar = true;
+        }
     }
 
     public filtrarAlumnos(turno: string, materia: string) {
         this.showListado = true;
+        this.currentMateria = materia;
         let diaProp = this.getDiaProp();
         this.alumnos = this.af.list('/usuarios').map(usr => usr.filter( usr => {
             if(usr.tipo == "alumno" && usr.turno == turno && usr[diaProp] == materia){
