@@ -12,11 +12,12 @@ import swal from 'sweetalert2';
 })
 export class QrProfesoresPage implements OnInit {
 
+    public showAlumnos: boolean = false;
     public currentProfesor: any;
-    public tipo: string = "alumno";
-    public ninguno: string = "Ninguno";
     public scannedCode: string;
     public scannedCodes: Array<string>;
+
+    public alumnos: FirebaseListObservable<any[]> = this.af.list('/usuarios');
 
     constructor(public navCtrl: NavController,
         public navParams: NavParams,
@@ -24,7 +25,6 @@ export class QrProfesoresPage implements OnInit {
         public af: AngularFireDatabase,
         public barcodeScanner: BarcodeScanner) 
     {
-        alert("fasd");
     }
 
     public ngOnInit(){
@@ -35,17 +35,14 @@ export class QrProfesoresPage implements OnInit {
         })).subscribe();
     }
 
-    public async scanCode(){
-        alert("fasdfasdfasdfa");
-        this.isMan();
-        let promise = await this.barcodeScanner.scan();
-        let result = await promise.text;
-        this.processScan(result);
-        alert(result);
+    async scanCode(){
+        const result = await this.barcodeScanner.scan();
+        this.scannedCode = await result.text;
+        this.processScan();
     }
 
-    private processScan(result: string): void{
-        let obj: any = JSON.parse(result);   
+    private processScan(): void{
+        let obj: any = JSON.parse(this.scannedCode);   
         if(obj.tipo = "aula"){
             let numero = obj.numero;
             this.af.database.ref("/aulas/").on('value', aulas => {
@@ -54,17 +51,20 @@ export class QrProfesoresPage implements OnInit {
                     let aul = aulas.val()[p];
                     if(aul.numero == numero){
                         if(this.isMan()) {
-                            this.cargarInfo(aul["matMan"]);
-                            alert("Maniana");
+                            this.cargarInfo(aul);
                         } else {
-                            this.cargarInfo(aul["matTar"]);
-                            alert("Tarde");
+                            this.cargarInfo(aul);
                         }
                     }
                 });
             });
         } else {
-            
+            swal({
+                title: 'Error',
+                text: 'QR inválido.',
+                type: 'error',
+                timer: 5000
+            });
         }
     }
 
@@ -77,12 +77,33 @@ export class QrProfesoresPage implements OnInit {
         }
     }
 
-    private cargarInfo(materia: string){
-        this.mostrarAlumnosYFiltrar(materia);
-    }
+    private cargarInfo(aula: any): void{
+        let turno = this.isMan() ? "Man" : "Tar";
+        let dia: string;
+        let diaProp: string;
+        switch(new Date().getDay()){
+            case 2:
+                dia = "Martes";
+                diaProp = "matMar";
+                break;
+            case 5:
+                dia = "Viernes";
+                diaProp = "matVier";
+                break;
+            case 6:
+                dia = "Sabado";
+                diaProp = "matSab";
+                break;
+        }
 
-    private mostrarAlumnosYFiltrar(materia: string): void{
-
+        if(aula["dia" + turno] == dia){
+            this.alumnos = this.af.list('/usuarios').map(usr => usr.filter( usr => {
+                if(usr.tipo == "alumno" && usr.turno == turno && usr[diaProp] == aula.materia){
+                    return true;
+                }
+            })) as FirebaseListObservable<any[]>;
+            this.showAlumnos = true;
+        }
     }
 
 }
