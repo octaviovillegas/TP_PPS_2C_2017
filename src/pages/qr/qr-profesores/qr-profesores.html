@@ -6,13 +6,39 @@
 <ion-content padding>
     <button ion-button class="our-btn" block (click)="scanCode()">Escanear  <ion-icon style="margin-left: 5px;" name="qr-scanner"></ion-icon></button>
 
+    <ion-content *ngIf="showInfo">
+        <!-- <ion-card>
+            <ion-card-content>
+                <ion-card-title>
+                    <b>{{currentAula.matMan}}</b>
+                </ion-card-title>
+                <p>
+                    <b>{{currentAula.diaMan}}</b> en el Turno Mañana (8 a 12).
+                </p>
+            </ion-card-content>
+        </ion-card>
+        <ion-card>
+            <ion-card-content>
+                <ion-card-title>
+                    <b>{{currentAula.matTar}}</b>
+                </ion-card-title>
+                <p>
+                    <b>{{currentAula.diaTar}}</b> en el Turno Tarde (8 a 12).
+                </p>
+            </ion-card-content>
+        </ion-card> -->
 
-    <ion-content *ngIf="showAlumnos">
         <ion-card>
             <ion-item>
-                Listado de Programacion I
+                <h1>Información <ion-icon name="ios-information-circle-outline"></ion-icon></h1>
             </ion-item>
+            <ion-card-content>
+                <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+            </ion-card-content>
         </ion-card>
+
+
+        <h1>Listado de alumnos</h1>
         <ion-card *ngFor="let alumno of alumnos | async">
             <ion-item>
                 <h2>{{alumno.apellido}}, {{alumno.nombre}}</h2>
