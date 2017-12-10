@@ -14,16 +14,34 @@
             </ion-item>
             <ion-card-content>
                 <b>{{currentAula.matMan}}</b><br>
-                <b>{{currentAula.diaMan}}</b> en el Turno Mañana (8 a 12).
+                <b>{{currentAula.diaMan}}</b> en el Turno Mañana (8:30 a 12:30).
             </ion-card-content>
+            <ion-row>
+                <ion-col>
+                    <button ion-button icon-left clear small (click)="filtrarAlumnos('man', currentAula.matMan)">
+                        <ion-icon name="ios-list"></ion-icon>
+                        <div>Mostrar listado</div>
+                    </button>
+                </ion-col>
+            </ion-row>
             <ion-card-content>
-                <b>{{currentAula.matMan}}</b><br>
-                <b>{{currentAula.diaMan}}</b> en el Turno Mañana (8 a 12).
+                <b>{{currentAula.matTar}}</b><br>
+                <b>{{currentAula.diaTar}}</b> en el Turno Tarde (18:30 a 22:30).
             </ion-card-content>
+            <ion-row>
+                <ion-col>
+                    <button ion-button icon-left clear small (click)="filtrarAlumnos('man', currentAula.matMan)">
+                        <ion-icon name="ios-list"></ion-icon>
+                        <div>Mostrar listado</div>
+                    </button>
+                </ion-col>
+            </ion-row>
         </ion-card>
 
+        <button ion-button block color="danger">Tu clase empieza en 30 minutos</button>
+
         <div *ngIf="showListado">
-            <h1><b>Listado de alumnos</b></h1>
+            <h1><b>Alumnos de {{currentMateria}}</b></h1>
             <ion-card *ngFor="let alumno of alumnos | async">
                 <ion-item>
                     <h2>{{alumno.apellido}}, {{alumno.nombre}}</h2>

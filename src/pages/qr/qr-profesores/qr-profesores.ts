@@ -11,15 +11,16 @@ import swal from 'sweetalert2';
   templateUrl: 'qr-profesores.html',
 })
 export class QrProfesoresPage implements OnInit {
-
+    
     public currentProfesor: any;
     public scannedCode: string;
     public scannedCodes: Array<string>;
     
     public showListado: boolean = false;
-    public showInfo: boolean = false;
-    public currentMateria: string;
+    public showInfo: boolean = true;
     public currentAula: any;
+    public currentMateria: any;
+    public esSuClase: boolean;
     public alumnos: FirebaseListObservable<any[]> = this.af.list('/usuarios');
 
     constructor(public navCtrl: NavController,
@@ -80,41 +81,61 @@ export class QrProfesoresPage implements OnInit {
     private cargarInfo(aula: any): void {
         let turno = this.isMan() ? "Man" : "Tar";
         let dia: string = "Sabado";
-        let diaProp: string;
+        let diaProp: string = this.getDiaProp();
         switch(new Date().getDay()){
             case 2:
                 dia = "Martes";
-                diaProp = "matMar";
                 break;
             case 5:
                 dia = "Viernes";
-                diaProp = "matVier";
                 break;
             case 6:
                 dia = "Sabado";
-                diaProp = "matSab";
                 break;
         }
-        dia = "Sabado";
-        diaProp = "matSab";
-        this.currentMateria = "Practica Supervisada";//aula["mat" + turno];
-        //this.currentAula = aula;
-        this.currentAula = {
-            diaMan: "Martes",
-            diaTar: "Sabado",
-            matMan: "Estadistica",
-            matTar: "Practica Supervisada"
-        }
-        console.log(turno);
-        if(/*aula["dia" + turno]*/ "Sabado" == dia){
+        this.currentAula = aula;
+        this.currentMateria = aula["mat" + turno];
+        if(aula["dia" + turno] == dia){
             this.alumnos = this.af.list('/usuarios').map(usr => usr.filter( usr => {
-                if(usr.tipo == "alumno" && usr.turno == turno && usr[diaProp] == "Practica Supervisada"/*aula["mat" + turno]*/){
+                if(usr.tipo == "alumno" && usr.turno == turno && usr[diaProp] == aula["mat" + turno]){
                     return true;
                 }
             })) as FirebaseListObservable<any[]>;
             this.showListado = true;
         } 
         this.showInfo = true;
+        this.mostrarSiEsSuClase();
     }
+
+    private getDiaProp(): string {
+        let diaProp: string;
+        switch(new Date().getDay()){
+            case 2:
+                diaProp = "matMar";
+                break;
+            case 5:
+                diaProp = "matVier";
+                break;
+            case 6:
+                diaProp = "matSab";
+                break;
+        }
+        return diaProp;
+    }
+
+    private mostrarSiEsSuClase() {
+        this.esSuClase = true;
+    }
+
+    public filtrarAlumnos(turno: string, materia: string) {
+        this.showListado = true;
+        let diaProp = this.getDiaProp();
+        this.alumnos = this.af.list('/usuarios').map(usr => usr.filter( usr => {
+            if(usr.tipo == "alumno" && usr.turno == turno && usr[diaProp] == materia){
+                return true;
+            }
+        })) as FirebaseListObservable<any[]>;
+    }
+
 
 }
