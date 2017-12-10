@@ -77,9 +77,9 @@ export class QrProfesoresPage implements OnInit {
         }
     }
 
-    private cargarInfo(aula: any): void{
+    private cargarInfo(aula: any): void {
         let turno = this.isMan() ? "Man" : "Tar";
-        let dia: string;
+        let dia: string = "Sabado";
         let diaProp: string;
         switch(new Date().getDay()){
             case 2:
@@ -95,6 +95,8 @@ export class QrProfesoresPage implements OnInit {
                 diaProp = "matSab";
                 break;
         }
+        dia = "Sabado";
+        diaProp = "matSab";
         this.currentMateria = "Practica Supervisada";//aula["mat" + turno];
         //this.currentAula = aula;
         this.currentAula = {
@@ -103,6 +105,7 @@ export class QrProfesoresPage implements OnInit {
             matMan: "Estadistica",
             matTar: "Practica Supervisada"
         }
+        console.log(turno);
         if(/*aula["dia" + turno]*/ "Sabado" == dia){
             this.alumnos = this.af.list('/usuarios').map(usr => usr.filter( usr => {
                 if(usr.tipo == "alumno" && usr.turno == turno && usr[diaProp] == "Practica Supervisada"/*aula["mat" + turno]*/){

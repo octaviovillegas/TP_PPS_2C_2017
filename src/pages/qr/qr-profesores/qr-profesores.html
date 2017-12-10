@@ -7,45 +7,31 @@
     <button ion-button class="our-btn" block (click)="scanCode()">Escanear  <ion-icon style="margin-left: 5px;" name="qr-scanner"></ion-icon></button>
 
     <ion-content *ngIf="showInfo">
-        <!-- <ion-card>
-            <ion-card-content>
-                <ion-card-title>
-                    <b>{{currentAula.matMan}}</b>
-                </ion-card-title>
-                <p>
-                    <b>{{currentAula.diaMan}}</b> en el Turno Mañana (8 a 12).
-                </p>
-            </ion-card-content>
-        </ion-card>
-        <ion-card>
-            <ion-card-content>
-                <ion-card-title>
-                    <b>{{currentAula.matTar}}</b>
-                </ion-card-title>
-                <p>
-                    <b>{{currentAula.diaTar}}</b> en el Turno Tarde (8 a 12).
-                </p>
-            </ion-card-content>
-        </ion-card> -->
 
         <ion-card>
             <ion-item>
                 <h1>Información <ion-icon name="ios-information-circle-outline"></ion-icon></h1>
             </ion-item>
             <ion-card-content>
-                <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+                <b>{{currentAula.matMan}}</b><br>
+                <b>{{currentAula.diaMan}}</b> en el Turno Mañana (8 a 12).
+            </ion-card-content>
+            <ion-card-content>
+                <b>{{currentAula.matMan}}</b><br>
+                <b>{{currentAula.diaMan}}</b> en el Turno Mañana (8 a 12).
             </ion-card-content>
         </ion-card>
 
-
-        <h1>Listado de alumnos</h1>
-        <ion-card *ngFor="let alumno of alumnos | async">
-            <ion-item>
-                <h2>{{alumno.apellido}}, {{alumno.nombre}}</h2>
-                <p>Legajo: <b>{{alumno.legajo}}</b></p>
-                <p>Email: <b>{{alumno.email}}</b></p>
-            </ion-item>
-        </ion-card>
+        <div *ngIf="showListado">
+            <h1><b>Listado de alumnos</b></h1>
+            <ion-card *ngFor="let alumno of alumnos | async">
+                <ion-item>
+                    <h2>{{alumno.apellido}}, {{alumno.nombre}}</h2>
+                    <p>Legajo: <b>{{alumno.legajo}}</b></p>
+                    <p>Email: <b>{{alumno.email}}</b></p>
+                </ion-item>
+            </ion-card>
+        </div>
     </ion-content>
 
 </ion-content>
