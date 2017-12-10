@@ -72,7 +72,7 @@ export class QrProfesoresPage implements OnInit {
 
     private isMan(): boolean{
         let time = new Date().getHours();
-        if(time <= 12){
+        if(time <= 12 || time >= 22){
             return true;
         } else {
             return false;
