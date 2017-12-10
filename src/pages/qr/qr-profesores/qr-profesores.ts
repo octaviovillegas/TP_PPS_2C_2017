@@ -17,7 +17,7 @@ export class QrProfesoresPage implements OnInit {
     public scannedCodes: Array<string>;
     
     public showListado: boolean = false;
-    public showInfo: boolean = true;
+    public showInfo: boolean = false;
     public currentAula: any;
     public currentMateria: any;
     public esSuyaMan: boolean = false;
@@ -38,7 +38,6 @@ export class QrProfesoresPage implements OnInit {
                 this.currentProfesor = usr;
             }
         })).subscribe();
-        //this.cargarInfo("aula");
     }
 
     async scanCode(){
@@ -81,21 +80,12 @@ export class QrProfesoresPage implements OnInit {
 
     private cargarInfo(aula: any): void {
         let turno = this.isMan() ? "Man" : "Tar";
-        let dia: string = "Sabado";
-        let diaProp: string = this.getDiaProp();
-        switch(new Date().getDay()){
-            case 2:
-                dia = "Martes";
-                break;
-            case 5:
-                dia = "Viernes";
-                break;
-            case 6:
-                dia = "Sabado";
-                break;
-        }
+        let dayNum = new Date().getDay();
+        let dia = dayNum == 2 ? "Martes" : (dayNum == 5 ? "Viernes" : "Sabado");
+        let diaProp = dayNum == 2 ? "matMar" : (dayNum == 5 ? "matVier" : "matSab");
         this.currentAula = aula;
         this.currentMateria = aula["mat" + turno];
+        alert(aula["dia" + turno]);
         if(aula["dia" + turno] == dia){
             this.alumnos = this.af.list('/usuarios').map(usr => usr.filter( usr => {
                 if(usr.tipo == "alumno" && usr.turno == turno && usr[diaProp] == aula["mat" + turno]){
@@ -108,22 +98,6 @@ export class QrProfesoresPage implements OnInit {
         this.mostrarSiEsSuClase(aula);
     }
 
-    private getDiaProp(): string {
-        let diaProp: string;
-        switch(new Date().getDay()){
-            case 2:
-                diaProp = "matMar";
-                break;
-            case 5:
-                diaProp = "matVier";
-                break;
-            case 6:
-                diaProp = "matSab";
-                break;
-        }
-        return diaProp;
-    }
-
     private mostrarSiEsSuClase(aula: any) {
         if(this.currentProfesor) {
             this.esSuyaMan = true;
@@ -131,16 +105,14 @@ export class QrProfesoresPage implements OnInit {
         }
     }
 
-    public filtrarAlumnos(turno: string, materia: string) {
+    public filtrarAlumnos(turno: string, materia: string, dia: string) {
         this.showListado = true;
         this.currentMateria = materia;
-        let diaProp = this.getDiaProp();
+        let diaProp: string = dia == "Martes" ? "matMar" : (dia == "Viernes" ? "matVier" : "matSab");
         this.alumnos = this.af.list('/usuarios').map(usr => usr.filter( usr => {
             if(usr.tipo == "alumno" && usr.turno == turno && usr[diaProp] == materia){
                 return true;
             }
         })) as FirebaseListObservable<any[]>;
     }
-
-
 }
