@@ -17,7 +17,7 @@ export class QrProfesoresPage implements OnInit {
     public scannedCodes: Array<string>;
     
     public showListado: boolean = false;
-    public showInfo: boolean = false;
+    public showInfo: boolean = true;
     public currentAula: any;
     public currentMateria: any;
     public esSuyaMan: boolean = false;
