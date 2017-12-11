@@ -48,7 +48,7 @@
         </ion-card>
 
         <div *ngIf="showListado">
-            <h1><b>Alumnos de {{currentMateria}}</b></h1>
+            <h1><b>Alumnos de {{currentMateria}} (T{{currentTurno}})</b></h1>
             <ion-card *ngFor="let alumno of alumnos | async">
                 <ion-item>
                     <h2>{{alumno.apellido}}, {{alumno.nombre}}</h2>

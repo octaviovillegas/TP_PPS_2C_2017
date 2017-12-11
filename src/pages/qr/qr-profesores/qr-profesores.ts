@@ -19,7 +19,8 @@ export class QrProfesoresPage implements OnInit {
     public showListado: boolean = false;
     public showInfo: boolean = false;
     public currentAula: any;
-    public currentMateria: any;
+    public currentMateria: string;
+    public currentTurno: string;
     public esSuyaMan: boolean = false;
     public esSuyaTar: boolean = false;
     public alumnos: FirebaseListObservable<any[]> = this.af.list('/usuarios');
@@ -84,10 +85,13 @@ export class QrProfesoresPage implements OnInit {
         let dia = dayNum == 2 ? "Martes" : (dayNum == 5 ? "Viernes" : "Sabado");
         this.currentAula = aula;
         this.currentMateria = aula["mat" + turno];
+        this.currentTurno = turno == "Man" ? "M" : "T";
         alert(aula["dia" + turno]);
         if(aula["dia" + turno] == dia) {
             this.filtrarAlumnos(turno, aula["mat" + turno], dia);
-        } 
+        } else {
+            this.filtrarAlumnos(turno, aula.matMan, dia);
+        }
         this.showInfo = true;
         this.mostrarSiEsSuClase(aula);
     }
@@ -101,6 +105,7 @@ export class QrProfesoresPage implements OnInit {
 
     public filtrarAlumnos(turno: string, materia: string, dia: string) {
         this.currentMateria = materia;
+        this.currentTurno = turno == "Man" ? "M" : "T";
         let diaProp: string = dia == "Martes" ? "matMar" : (dia == "Viernes" ? "matVier" : "matSab");
         this.alumnos = this.af.list('/usuarios').map(usr => usr.filter( usr => {
             if(usr.tipo == "alumno" && usr.turno == turno && usr[diaProp] == materia){

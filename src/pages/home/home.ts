@@ -31,7 +31,6 @@ export class HomePage {
         props.forEach(p => {
             let usr = usuarios.val()[p];
             if(usr.email == this.authAf.auth.currentUser.email){
-              alert(usr.tipo);
               this.pages = pagesService.getByUserType(usr.tipo);
             }
         });

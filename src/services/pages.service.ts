@@ -28,7 +28,7 @@ export class PagesService {
             lista.push(this.encuestasPage);
         }
 
-        if (userType == "profesor") {
+        if (userType == "profe") {
             lista.push(this.tomarAsistenciaPage);
             lista.push(this.encuestasPage);
             lista.push(this.enviarAvisoPage);
