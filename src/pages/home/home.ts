@@ -6,6 +6,7 @@ import { LoginPage } from '../login/login';
 import { NativeAudio } from '@ionic-native/native-audio';
 import { PushService } from '../../services/push.service';
 import { Platform } from 'ionic-angular';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @Component({
   selector: 'page-home',
@@ -21,10 +22,19 @@ export class HomePage {
     public authAf: AngularFireAuth,
     private alertCtrl: AlertController,
     private nativeAudio: NativeAudio,
+    public af: AngularFireDatabase,
     private platform: Platform,
-    private pushService: PushService) {
-    var pagesService = new PagesService();
-    this.pages = pagesService.getByUserType(this.user);
+    private pushService: PushService,
+    private pagesService: PagesService) {
+    af.database.ref("/usuarios/").on('value', usuarios => {
+        let props = Object.getOwnPropertyNames(usuarios.val());
+        props.forEach(p => {
+            let usr = usuarios.val()[p];
+            if(usr.email == this.authAf.auth.currentUser.email){
+              this.pages = pagesService.getByUserType(usr.tipo);
+            }
+        });
+    });
     this.pushService.getPermission(this.platform);
     this.pushService.receiveMessage(this.platform);
   }
@@ -62,20 +72,3 @@ export class HomePage {
   }
 
 }
-
-  // var user = firebase.auth().currentUser;
-
-  // if (user) {
-  //   // User is signed in.
-  // } else {
-  //   // No user is signed in.
-  // }
-  // asd(){
-  // this.authAf.auth.onAuthStateChanged(this.usera);
-  //   if (this.usera) {
-  //     console.log(this.usera + "Logueado");
-  //   } else {
-  //     console.log(this.usera + "No logueado");
-  //   }
-  // }
-// }

@@ -1,85 +1,64 @@
 <ion-header>
-  
     <ion-navbar>
-      <ion-title>QR Profesor</ion-title>
-    </ion-navbar>
-  
-  </ion-header>
-  
-  
-  <ion-content padding>
+        <ion-title>QR Profesor</ion-title>
+    </ion-navbar>    
+</ion-header>
+<ion-content padding>
+
+    <ion-content *ngIf="!showInfo">
+        <ion-card>
+            <img src="assets/qr.png"/>
+            <ion-card-content>
+                <ion-card-title>
+                Escanear QR
+                </ion-card-title>
+                <p>
+                Escaneando el código QR que está en cada aula podés obtener información
+                de las materias que se adan en cada horario.
+                </p>
+            </ion-card-content>
+        </ion-card>
+        <button ion-button class="our-btn" block (click)="scanCode()">Escanear  <ion-icon style="margin-left: 5px;" name="qr-scanner"></ion-icon></button>
+    </ion-content>
+
+    <ion-content *ngIf="showInfo">
+        <button ion-button class="our-btn" block (click)="scanCode()">Escanear  <ion-icon style="margin-left: 5px;" name="qr-scanner"></ion-icon></button>
+        <ion-card>
+            <ion-item>
+                <h1><ion-icon name="ios-information-circle-outline"></ion-icon>  Aula Nº{{currentAula.numero}}</h1>
+            </ion-item>
+            <ion-card-content>
+                <h2><b>{{currentAula.matMan}}</b> <br></h2>
+                <b>{{currentAula.diaMan}}</b> en el Turno Mañana (8:30 a 12:30). <br>
+                <span *ngIf="esSuyaMan" class="empieza-clase"><b>Tenes asignada esta clase</b></span>
+                <button ion-button icon-left small (click)="filtrarAlumnos('Man', currentAula.matMan, currentAula.diaMan)">
+                    <ion-icon name="ios-list"></ion-icon>
+                    <div>Mostrar listado</div>
+                </button>
+            </ion-card-content>
+            <ion-card-content>
+                <b>{{currentAula.matNoch}}</b><br>
+                <b>{{currentAula.diaNoch}}</b> en el Turno Noche (18:30 a 22:30). <br>
+                <span *ngIf="esSuyaNoch" class="empieza-clase"><b>Tenes asignada esta clase</b></span>
+                <button ion-button icon-left small (click)="filtrarAlumnos('Noch', currentAula.matNoch, currentAula.diaNoch)">
+                    <ion-icon name="ios-list"></ion-icon>
+                    <div>Mostrar listado</div>
+                </button>
+            </ion-card-content>
+        </ion-card>
+
+        <div *ngIf="showListado">
+            <h1><b>Alumnos de {{currentMateria}} (T{{currentTurno}})</b></h1>
+            <ion-card *ngFor="let alumno of alumnos | async">
+                <ion-item>
+                    <h2>{{alumno.apellido}}, {{alumno.nombre}}</h2>
+                    <p>Legajo: <b>{{alumno.legajo}}</b></p>
+                    <p>Email: <b>{{alumno.email}}</b></p>
+                </ion-item>
+            </ion-card>
+        </div>
+    </ion-content>
+
+</ion-content>
+
     
-  <button ion-button class="our-btn" block (click)="scanCode()">Escanear  <ion-icon style="margin-left: 5px;" name="qr-scanner"></ion-icon></button>
-  <div *ngFor="let usuario of profesores | async">
-      <ion-input [hidden]="true" type="text" [(ngModel)]="materia" value={{usuario.materia}}></ion-input>
-    <ion-card [hidden]="usuario.email != emailCodigo || usuario.tipo != 'profe'">
-      <ion-item >
-      
-          <h2>{{usuario.apellido}}, {{usuario.nombre}}</h2>
-          <p>Legajo: <b>{{usuario.legajo}}</b></p>
-          <!-- <p>Email lista profesores: <b>{{usuario.email}}</b></p>
-          <p>Email logueado: {{email}}</p> -->
-          <p>Materia: {{usuario.materia}}</p>
-   
-      </ion-item>
-    </ion-card> 
-
-    <ion-card> 
-      <ion-item [hidden]="emailCodigo == undefined || usuario.tipo != tipo || usuario.Estadistica == ninguno || usuario.Laboratorio == ninguno || usuario.Programacion == ninguno">
-          <p>Alumno:</p>
-          <h2>{{usuario.apellido}}, {{usuario.nombre}}</h2>
-          <p>Legajo: <b>{{usuario.legajo}}</b></p>
-          <p [hidden]="materia != 'Estadistica'">Estadística: {{usuario.Estadistica}}</p>
-          <p [hidden]="materia != 'Laboratorio'">Laboratorio: {{usuario.Laboratorio}}</p>
-          <p [hidden]="materia != 'Programacion'">Programación: {{usuario.Programacion}}</p>
-      </ion-item>
-    </ion-card> 
-
-  </div>    
-
-
-  <ion-card>
-      <ion-item [hidden]="estadistica != true">
-      
-          <!-- <h2>{{alumno.apellido}}, {{alumno.nombre}}</h2>
-          <p>Legajo: <b>{{alumno.legajo}}</b></p>
-          <p>Estadística: {{alumno.Estadistica}}</p>
-          <p>Laboratorio: {{alumno.Laboratorio}}</p> -->
-          <p>Aula 301</p>
-          <p>Estadística "B"</p>
-          <img src="assets/images/ubicacionAulaEstadistica.jpg" alt="Ubicación del aula estadistica">
-  
-      </ion-item>
-    </ion-card>     
-  
-    <ion-card>
-      <ion-item [hidden]="laboratorio != true">
-      
-          <!-- <h2>{{alumno.apellido}}, {{alumno.nombre}}</h2>
-          <p>Legajo: <b>{{alumno.legajo}}</b></p>
-          <p>Estadística: {{alumno.Estadistica}}</p>
-          <p>Laboratorio: {{alumno.Laboratorio}}</p> -->
-          <p>Aula 302 (Laboratorio V)</p>
-          <p>Laboratorio "A"</p>
-          <img src="assets/images/ubicacionAula.gif" alt="Ubicación del aula laboratorio">
-  
-      </ion-item>
-    </ion-card> 
-  
-    <ion-card>
-      <ion-item [hidden]="programacion != true">
-      
-          <!-- <h2>{{alumno.apellido}}, {{alumno.nombre}}</h2>
-          <p>Legajo: <b>{{alumno.legajo}}</b></p>
-          <p>Estadística: {{alumno.Estadistica}}</p>
-          <p>Laboratorio: {{alumno.Laboratorio}}</p> -->
-          <p>Aula 303 (Laboratorio II)</p>
-          <p>Programación "B"</p>
-          <img src="assets/images/ubicacionAulaProgramacion.jpg" alt="Ubicación del aula programacion">
-  
-      </ion-item>
-    </ion-card> 
-
-  
-  </ion-content>
-  

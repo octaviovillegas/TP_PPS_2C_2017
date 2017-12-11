@@ -11,146 +11,106 @@ import swal from 'sweetalert2';
   templateUrl: 'qr-profesores.html',
 })
 export class QrProfesoresPage implements OnInit {
+    
+    public currentProfesor: any;
+    public scannedCode: string;
+    public scannedCodes: Array<string>;
+    
+    public showListado: boolean = false;
+    public showInfo: boolean = false;
+    public currentAula: any;
+    public currentMateria: string;
+    public currentTurno: string;
+    public esSuyaMan: boolean = false;
+    public esSuyaNoch: boolean = false;
+    public alumnos: FirebaseListObservable<any[]> = this.af.list('/usuarios');
 
-  private profesores: FirebaseListObservable<any[]>;
-  //private listAlumnos: FirebaseListObservable<any[]>; 
-  apellido;
-
-  user = this.authAf.auth.currentUser;
-  name;
-  email;
-  emailCodigo;
-  photoUrl;
-  uid;
-  emailVerified;
-  tipo: string = "alumno";
-  ninguno: string = "Ninguno";
-  estadistica: boolean = false;
-  laboratorio: boolean = false;
-  programacion: boolean = false;
-  aulaMaterias: boolean = false;
-  materia: string = ""
-  // stringEstadistica: string = "Estadistica";
-  // stringLaboratorio: string = "Laboratorio";
-  // stringProgramacion: string = "Programacion";
-
-  scannedCode: string;
-  scannedCodes: Array<string>;
-
-  constructor(public navCtrl: NavController,
-    public navParams: NavParams,
-    public authAf: AngularFireAuth,
-    public af: AngularFireDatabase,
-    public barcodeScanner: BarcodeScanner) 
+    constructor(public navCtrl: NavController,
+        public navParams: NavParams,
+        public authAf: AngularFireAuth,
+        public af: AngularFireDatabase,
+        public barcodeScanner: BarcodeScanner) 
     {
-      this.profesores = this.af.list('/usuarios');
     }
 
-    ngOnInit(): void {
-      this.datosUsuario();
+    public ngOnInit(){
+        this.af.list('/usuarios').map(usr => usr.filter( usr => {
+            if(usr.tipo == "profe" && usr.email == this.authAf.auth.currentUser.email){
+                this.currentProfesor = usr;
+            }
+        })).subscribe();
     }
 
-    datosUsuario(){
-      if (this.user != null) {
-        this.name = this.user.displayName;
-        this.email = this.user.email;
-        this.photoUrl = this.user.photoURL;
-        this.emailVerified = this.user.emailVerified;
-        this.uid = this.user.uid;
-      }
+    async scanCode(){
+        const result = await this.barcodeScanner.scan();
+        this.scannedCode = await result.text;
+        this.processScan();
     }
 
-  async scanCode(){
-    const result = await this.barcodeScanner.scan();
-    this.scannedCode = await result.text;
-    if (this.scannedCode == "materiasPorAula") {
-      this.emailCodigo = this.email;
-      this.aulaMaterias = true;
-      this.programacion = false;
-      this.laboratorio = false;
-      this.estadistica = false;
+    private processScan(): void{
+        let obj: any = JSON.parse(this.scannedCode);   
+        if(obj.tipo = "aula"){
+            let numero = obj.numero;
+            this.af.database.ref("/aulas/").on('value', aulas => {
+                let props = Object.getOwnPropertyNames(aulas.val());
+                props.forEach(p => {
+                    let aul = aulas.val()[p];
+                    if(aul.numero == numero){
+                        this.cargarInfo(aul);
+                    }
+                });
+            });
+        } else {
+            swal({
+                title: 'Error',
+                text: 'QR inválido.',
+                type: 'error',
+                timer: 5000
+            });
+        }
     }
-    if (this.scannedCode == "programacion") {
-      if (this.materia == "Programacion") {
-        this.programacion = true;
-        this.laboratorio = false;
-        this.estadistica = false;
-      }
-      else
-      {
-        swal({
-          title: 'Error',
-          text: 'QR válido solamente para profesores de programación.',
-          type: 'error',
-          timer: 5000
-        })
-      }
+
+    private isMan(): boolean{
+        let time = new Date().getHours();
+        if(time <= 12 || time >= 22){
+            return true;
+        } else {
+            return false;
+        }
     }
-    if (this.scannedCode == "laboratorio") {
-      if (this.materia == "Laboratorio") {
-        this.programacion = false;
-        this.laboratorio = true;
-        this.estadistica = false;
-      }
-      else
-      {
-        swal({
-          title: 'Error',
-          text: 'QR válido solamente para profesores de laboratorio.',
-          type: 'error',
-          timer: 5000
-        })
-      }
+
+    private cargarInfo(aula: any): void {
+        let turno = this.isMan() ? "Man" : "Noch";
+        let dayNum = new Date().getDay();
+        let dia = dayNum == 2 ? "Martes" : (dayNum == 5 ? "Viernes" : "Sabado");
+        this.currentAula = aula;
+        this.currentMateria = aula["mat" + turno];
+        this.currentTurno = turno == "Man" ? "M" : "N";
+        if(aula["dia" + turno] == dia) {
+            this.filtrarAlumnos(turno, aula["mat" + turno], dia);
+        } else {
+            this.filtrarAlumnos(turno, aula.matMan, dia);
+        }
+        this.showInfo = true;
+        this.mostrarSiEsSuClase(aula);
     }
-    if (this.scannedCode == "estadistica") {
-      if (this.materia == "Estadistica") {
-        this.programacion = false;
-        this.laboratorio = false;
-        this.estadistica = true;
-      }
-      else
-      {
-        swal({
-          title: 'Error',
-          text: 'QR válido solamente para profesores de estadistica.',
-          type: 'error',
-          timer: 5000
-        })
-      }
+
+    private mostrarSiEsSuClase(aula: any) {
+        if(this.currentProfesor) {
+            this.esSuyaMan = true;
+            this.esSuyaNoch = true;
+        }
     }
-    if (this.scannedCode == "alumno") {
-      swal({
-        title: 'Error',
-        text: 'QR válido solamente para alumnos.',
-        type: 'error',
-        timer: 5000
-      })
+
+    public filtrarAlumnos(turno: string, materia: string, dia: string) {
+        this.currentMateria = materia;
+        this.currentTurno = turno == "Man" ? "M" : "N";
+        let diaProp: string = dia == "Martes" ? "matMar" : (dia == "Viernes" ? "matVier" : "matSab");
+        this.alumnos = this.af.list('/usuarios').map(usr => usr.filter( usr => {
+            if(usr.tipo == "alumno" && usr.turno == turno && usr[diaProp] == materia){
+                return true;
+            }
+        })) as FirebaseListObservable<any[]>;
+        this.showListado = true;
     }
-    if (this.scannedCode != "programacion" && this.scannedCode != "laboratorio" &&
-    this.scannedCode != "estadistica" && this.scannedCode != "materiasPorAula") {
-  swal({
-    title: 'Error',
-    text: 'QR inválido.',
-    type: 'error',
-    timer: 5000
-  })
-}
-  }
-  
-
-//   public informacion(alumno: any): void {
-//     this.formAlta.controls['nombre'].setValue(alumno.nombre);
-//     this.formAlta.controls['apellido'].setValue(alumno.apellido);
-//     this.formAlta.controls['legajo'].setValue(alumno.legajo);
-//     this.formAlta.controls['Programacion'].setValue(alumno.Programacion);
-//     this.formAlta.controls['Laboratorio'].setValue(alumno.Laboratorio);
-//     this.formAlta.controls['Estadistica'].setValue(alumno.Estadistica);
-//     this.formAlta.controls['email'].setValue(alumno.email);
-//     this.formAlta.controls['pass'].setValue(alumno.pass);
-//     this.modifId = alumno.$key;
-
-// }
-
-
-
 }

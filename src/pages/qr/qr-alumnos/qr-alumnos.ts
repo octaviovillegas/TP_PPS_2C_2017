@@ -59,6 +59,7 @@ export class QrAlumnosPage implements OnInit {
   async scanCode(){
     const result = await this.barcodeScanner.scan();
     this.scannedCode = await result.text;
+    alert(this.scannedCode);
     if (this.scannedCode == "materiasPorAula") {
       this.emailCodigo = this.email;
       this.aulaMaterias = true;
@@ -78,18 +79,7 @@ export class QrAlumnosPage implements OnInit {
       this.laboratorio = false;
       this.estadistica = true;
     }
-    // if (this.scannedCode == "alumnoUbicacionMaterias") {
-    //   this.emailCodigo = this.email;
-    //   this.aulaMaterias = true;
-    // }
-    // if (this.scannedCode == "profesor") {
-    //   swal({
-    //     title: 'Error',
-    //     text: 'QR válido solamente para profesores.',
-    //     type: 'error',
-    //     timer: 5000
-    //   })
-    // }
+
     if (this.scannedCode != "programacion" && this.scannedCode != "laboratorio" &&
     this.scannedCode != "estadistica" && this.scannedCode != "materiasPorAula") {
       swal({

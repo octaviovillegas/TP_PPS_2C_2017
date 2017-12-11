@@ -8,52 +8,49 @@ import { MiPerfilPage } from '../pages/miPerfil/miPerfil';
 import { TomarAsistenciaPage } from '../pages/tomarAsistencia/tomarAsistencia';
 import { QrAlumnosPage } from '../pages/qr/qr-alumnos/qr-alumnos';
 import { QrProfesoresPage } from '../pages/qr/qr-profesores/qr-profesores';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 export enum PageType {
     Listable,
     NotListable
 }
 
-export class PagesService{
+export class PagesService {
 
-    public getByUserType(usrType: string): Array<any>{
-        if (usrType == "Alumno") {
-            return [ 
-                this.inicioPage, 
-                this.listPage,
-                this.QrAlumnosPage
-            ];
+    public getByUserType(userType: string): Array<any>{
+        let lista = new Array<any>();
+        lista.push(this.inicioPage);
+        lista.push(this.listPage);
+
+        if (userType == "alumno") {
+            lista.push(this.QrAlumnosPage);
+            lista.push(this.encuestasPage);
         }
 
-        if (usrType == "Profesor") {
-            return [ 
-                this.inicioPage, 
-                this.listPage,
-                this.QrProfesoresPage
-            ];
+        if (userType == "profe") {
+            lista.push(this.tomarAsistenciaPage);
+            lista.push(this.encuestasPage);
+            lista.push(this.enviarAvisoPage);
+            lista.push(this.adminUsuariosPage);
+            lista.push(this.QrProfesoresPage);
         }
 
-        if (usrType == "Administrativo") {
-            return [ 
-                this.inicioPage, 
-                this.listPage
-            ];
+        if (userType == "administrativo") {
         }
 
-        if (usrType == "Administrador") {
-            return [
-                this.listPage,
-                this.inicioPage,
-                this.tomarAsistenciaPage,
-                this.encuestasPage,
-                this.enviarAvisoPage,
-                this.adminUsuariosPage,
-                this.miPerfilPage,
-                this.configuracionPage,
-                this.QrAlumnosPage ,
-                this.QrProfesoresPage               
-            ];
+        if (userType == "administrador") {
+            lista.push(this.tomarAsistenciaPage);
+            lista.push(this.encuestasPage);
+            lista.push(this.enviarAvisoPage);
+            lista.push(this.adminUsuariosPage);
+            lista.push(this.QrAlumnosPage);
+            lista.push(this.QrProfesoresPage);            
         }
+
+        lista.push(this.miPerfilPage);
+        lista.push(this.configuracionPage);
+        return lista;
     }
 
     public inicioPage = { 
