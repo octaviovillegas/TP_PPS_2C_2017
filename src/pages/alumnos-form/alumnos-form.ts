@@ -47,7 +47,7 @@ export class AlumnosFormPage {
 
 
   ingresarAlumno(){
-        
+
     this.alumno.setNombre(this.nombre);
     this.alumno.setLegajo(this.legajo);
     this.alumno.setMateria(this.materiaCheck);
@@ -81,13 +81,8 @@ export class AlumnosFormPage {
           let upload = this.storageRef.child('alumnos/' + this.legajo + '.jpg').putString(imagen, 'base64');
 
           upload.then((snapshot=>{
-                this.dbPersonas.guardarLinkFoto(snapshot.downloadURL, this.legajo);
+              //  this.dbPersonas.guardarLinkFoto(snapshot.downloadURL, this.legajo, 'alumno');
                 this.foto=snapshot.downloadURL;
-                let msjOK = this.alertCtrl.create({
-                  subTitle: 'Imagen guardada',
-                  buttons: ['Aceptar']
-                 });
-                 msjOK.present();
           })
           );
         });

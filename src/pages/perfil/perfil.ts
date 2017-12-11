@@ -136,7 +136,7 @@ export class PerfilPage {
           let upload = this.storageRef.child('alumnos/' + this.legajo + '.jpg').putString(imagen, 'base64');
 
           upload.then((snapshot=>{
-                this.dbPersonas.guardarLinkFoto(snapshot.downloadURL, this.legajo);
+                //this.dbPersonas.guardarLinkFoto(snapshot.downloadURL, this.legajo, this.perfil);
                 let msjOK = this.alertCtrl.create({
                   subTitle: 'Imagen guardada',
                   buttons: ['Aceptar']

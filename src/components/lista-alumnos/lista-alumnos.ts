@@ -43,6 +43,7 @@ export class ListaAlumnosComponent implements OnInit {
   abrirModalView(alumno){
     console.log(alumno);
     let consultaView = this.modalCtrl.create('ConsultarBajaModifPage', {'alumno':alumno});
+    console.log(alumno);
     consultaView.present();
     //this.navCtrl.push(ConsultarBajaModifPage, {'alumno':alumno});
   }

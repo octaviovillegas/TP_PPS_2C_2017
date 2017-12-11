@@ -83,7 +83,7 @@ export class ProfesoresFormPage {
           let upload = this.storageRef.child('profesores/' + this.dni + '.jpg').putString(imagen, 'base64');
 
           upload.then((snapshot=>{
-                this.dbPersonas.guardarLinkFoto(snapshot.downloadURL, this.dni);
+                //this.dbPersonas.guardarLinkFoto(snapshot.downloadURL, this.dni, 'profesor');
                 this.foto=snapshot.downloadURL;
                 let msjOK = this.alertCtrl.create({
                   subTitle: 'Imagen guardada',

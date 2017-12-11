@@ -1,7 +1,18 @@
 
 <h3 text-center color="secondary">Perfil</h3>
 
-  <img *ngIf="foto!=''" [src]="foto" class="foto">
+  <img width="80" height="80" *ngIf="foto!=''" [src]="foto" class="foto">
+
+  <ion-list>
+    <ion-item>
+      <ion-label>Fotos</ion-label>
+      <ion-select (ionChange)="cambiarFoto($event)">
+        <ion-option *ngFor="let foto of fotos" value={{foto.foto}}>{{foto.foto}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <!--ion-text *ngIf="foto!=''" color="primary" (click)="almacenarFoto()">Guardar</ion-text-->
   &nbsp;&nbsp;&nbsp;<img width="40" height="40" (click)="sacarFoto()" src="assets/icon/camara.png">
   <ion-item class="itemMenu">
       <!-- <ion-icon ios="ios-camera" md="md-camera" (click)="sacarFoto()"></ion-icon> -->

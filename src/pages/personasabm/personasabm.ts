@@ -42,12 +42,12 @@ export class PersonasabmPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, private PersonaService: ServpersonaProvider,
     private alertCtrl: AlertController, public toastCtrl: ToastController, public actionSheetCtrl: ActionSheetController, public platform: Platform,
-    private camera: Camera, private storage: Storage,public database: AngularFireDatabase,private AngularAuth: AngularFireAuth) {
+    private camera: Camera, private storage: Storage, public database: AngularFireDatabase,private AngularAuth: AngularFireAuth) {
 
     this.user = this.database.list('/usuarios');
     //this.user = database.list('usuarios').valueChanges();
 
-    this.storage.get('userInfo').then((val) => {
+   this.storage.get('userInfo').then((val) => {
       this.rol = val.idRol;
     })
     this.estado = this.navParams.get("estado");
@@ -388,5 +388,7 @@ export class PersonasabmPage {
       });
     }
   }
+
+
 
 }

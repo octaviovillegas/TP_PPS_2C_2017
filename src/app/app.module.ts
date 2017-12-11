@@ -79,13 +79,13 @@ var firebaseAuth  = {
     //PersonasPage,
     //PersonasabmPage,
     //PerfilPage,
-    EncuestaPage,
+   // EncuestaPage,
    // GraficosPage,
-    AsistenciasPage,
-    MostrarAsistenciasPage,
-    ProfesorAsistenciaPage,
+    //AsistenciasPage,
+   // MostrarAsistenciasPage,
+    //ProfesorAsistenciaPage,
    // EnviarEncuestaPage,
-    EncuestaDetPage
+    //EncuestaDetPage
     //EncuestasHomePage
 
    ],
@@ -114,13 +114,13 @@ var firebaseAuth  = {
     //PersonasPage,
     //PersonasabmPage,
     //PerfilPage,
-    EncuestaPage,
+    //EncuestaPage,
     //GraficosPage,
-    AsistenciasPage,
-    MostrarAsistenciasPage,
-    ProfesorAsistenciaPage,
+    //AsistenciasPage,
+    //MostrarAsistenciasPage,
+    //ProfesorAsistenciaPage,
    // EnviarEncuestaPage,
-    EncuestaDetPage
+    //EncuestaDetPage
     //EncuestasHomePage
   ],
   providers: [

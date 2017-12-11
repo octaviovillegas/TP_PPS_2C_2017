@@ -32,7 +32,7 @@ export class ListadoAlumnosPage {
     this.foto="";
     this.alumnoDB.getAlumnosLista().subscribe(lista=>{
       this.listado = lista;
-      console.log('lista alumnos: ', this.listado);
+      console.log('lista alumnossss: ', this.listado);
     })
 
   }

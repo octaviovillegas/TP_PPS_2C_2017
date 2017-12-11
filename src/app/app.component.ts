@@ -26,7 +26,7 @@ export class MyApp {
 
   public pages: Array<{titulo: string, component:any}>;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
 
     this.pages = [
         {titulo: 'Inicio', component:LoginPage},
@@ -37,12 +37,18 @@ export class MyApp {
 
     ];
 
-    platform.ready().then(() => {
+    this.platform.ready().then(()=>{
+      setTimeout(()=>{
+        this.splashScreen.hide();
+      }, 100);
+    });
+
+   /* platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
-    });
+    });*/
   }
 
 
