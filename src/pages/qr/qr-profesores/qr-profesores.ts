@@ -35,7 +35,7 @@ export class QrProfesoresPage implements OnInit {
 
     public ngOnInit(){
         this.af.list('/usuarios').map(usr => usr.filter( usr => {
-            if(usr.tipo == "profesor" && usr.email == this.authAf.auth.currentUser.email){
+            if(usr.tipo == "profe" && usr.email == this.authAf.auth.currentUser.email){
                 this.currentProfesor = usr;
             }
         })).subscribe();
@@ -96,7 +96,6 @@ export class QrProfesoresPage implements OnInit {
     }
 
     private mostrarSiEsSuClase(aula: any) {
-        alert(this.currentProfesor);
         if(this.currentProfesor) {
             this.esSuyaMan = true;
             this.esSuyaNoch = true;
