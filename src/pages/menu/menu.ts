@@ -10,7 +10,7 @@ import { FileChooser } from "@ionic-native/file-chooser";
 //import { FileOpener } from "@ionic-native/file-opener";
 import { Alumno } from "../../clases/alumno";
 
-
+import { ProfesorServiceProvider } from "../../providers/profesor-service/profesor-service";
 
 
 @IonicPage()
@@ -30,7 +30,7 @@ export class MenuPage {
               public alertCtrl:AlertController,public loadingCtrl:LoadingController,
 
               public file:File, public filePath:FilePath, public fileChooser:FileChooser,
-             /* public fileOpener:FileOpener,*/ private alumnoDB:AlumnoServiceProvider
+              private alumnoDB:AlumnoServiceProvider, private profesorDB:ProfesorServiceProvider
 
   ) { }
 
@@ -41,7 +41,7 @@ export class MenuPage {
 
     this.perfil = this.datos["perfil"];
     console.log(this.perfil);
-
+    console.log(this.profesorDB.getProfesoresPorDia());
   }
 
 

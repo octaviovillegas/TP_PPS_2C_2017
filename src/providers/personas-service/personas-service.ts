@@ -4,6 +4,8 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable, AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth'
 
+import { AlertController } from "ionic-angular";
+
 import { Usuario } from '../../clases/usuario';
 import { Imagen } from "../../clases/imagen";
 
@@ -14,7 +16,8 @@ export class PersonasServiceProvider {
   private usuarios:FirebaseListObservable<Usuario[]>;
   private storageRef: any;
 
-  constructor(private db:AngularFireDatabase, private auth:AngularFireAuth
+  constructor(private db:AngularFireDatabase, private auth:AngularFireAuth,
+              public alertCtrl:AlertController
 
   ) { }
 
@@ -71,8 +74,14 @@ export class PersonasServiceProvider {
   }
 
 
-  guardarLinkFoto(path:string, legajo:string){
-    this.db.app.database().ref('/alumnos/' + legajo).update({"foto":path});
+  guardarLinkFoto(path:string, legajo:string, perfil:string, fotos:string[]){
+    let ruta:string = this.getPath(perfil) + '/' + legajo;
+    this.db.app.database().ref(ruta).update({'fotos':fotos});
+  }
+
+  public actualizarFotoPerfil(legajo:string, perfil:string, fotos:string[]){
+    let ruta:string = this.getPath(perfil) + '/' + legajo;
+    this.db.app.database().ref(ruta).update({fotos});
   }
 
 

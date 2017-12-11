@@ -16,8 +16,10 @@
     <img src="assets/imgs/linea.png" width="40" height="10">
     <ion-list>
       <ion-item (click)="abrirModalView(alumno)"  class="fondo" *ngFor="let alumno of listado">
-          <ion-avatar item-start>
-            <img *ngIf="alumno.foto!=''" [src]="alumno.foto">
+
+          <ion-avatar item-start *ngFor="let fotoo of alumno.fotos">
+            <img *ngIf="fotoo.activa" [src]="fotoo.foto">
+
           </ion-avatar>
         <h2>{{ alumno.nombre}}</h2>
         <p>Legajo: {{ alumno.legajo}}</p>
