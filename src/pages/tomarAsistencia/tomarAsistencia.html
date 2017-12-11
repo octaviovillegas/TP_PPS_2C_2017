@@ -15,13 +15,54 @@
   </ion-header>
   
 <ion-content padding>
+
   <ion-content *ngIf="tab == 'materias'">
+
+    <ion-card>
+      <ion-item>
+        <ion-select  (ionChange)="loadMaterias($event)">
+          <ion-option [selected]="true" value="Man">Mañana</ion-option>
+          <ion-option value="Noch">Noche</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-card>
+
     <ion-card>
       <ion-list>
         <ion-item color="primary">
-          <h1 class="titulo-lista">Materias</h1>
+          <h1 class="titulo-lista">Martes</h1>
         </ion-item>
-        <div *ngFor="let m of materias | async">
+        <div *ngFor="let m of materiasMartes | async">
+          <ion-item (click)="selectMateria(m.nombre, m.curso)">
+            <b>{{m.nombre}} {{m.curso}}</b>
+            <ion-icon class="incompleto" name="ios-arrow-forward" item-end *ngIf="m.listo == 0"></ion-icon>
+            <ion-icon class="completo" name="md-checkmark" item-end *ngIf="m.listo == 1"></ion-icon>
+          </ion-item>
+          </div>
+      </ion-list>
+    </ion-card>
+
+    <ion-card>
+      <ion-list>
+        <ion-item color="primary">
+          <h1 class="titulo-lista">Viernes</h1>
+        </ion-item>
+        <div *ngFor="let m of materiasViernes | async">
+          <ion-item (click)="selectMateria(m.nombre, m.curso)">
+            <b>{{m.nombre}} {{m.curso}}</b>
+            <ion-icon class="incompleto" name="ios-arrow-forward" item-end *ngIf="m.listo == 0"></ion-icon>
+            <ion-icon class="completo" name="md-checkmark" item-end *ngIf="m.listo == 1"></ion-icon>
+          </ion-item>
+          </div>
+      </ion-list>
+    </ion-card>
+
+    <ion-card>
+      <ion-list>
+        <ion-item color="primary">
+          <h1 class="titulo-lista">Sábados</h1>
+        </ion-item>
+        <div *ngFor="let m of materiasSabado | async">
           <ion-item (click)="selectMateria(m.nombre, m.curso)">
             <b>{{m.nombre}} {{m.curso}}</b>
             <ion-icon class="incompleto" name="ios-arrow-forward" item-end *ngIf="m.listo == 0"></ion-icon>

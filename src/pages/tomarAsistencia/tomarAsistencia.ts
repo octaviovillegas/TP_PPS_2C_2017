@@ -15,6 +15,11 @@ export class TomarAsistenciaPage {
   public materiaObj = new Array<any>();
   //Materias
   private materias: FirebaseListObservable<any[]>;
+
+  private materiasMartes: FirebaseListObservable<any[]>;
+  private materiasViernes: FirebaseListObservable<any[]>;
+  private materiasSabado: FirebaseListObservable<any[]>;
+
   private filterType: string;
   private modifId: string;
   //Buscar
@@ -31,7 +36,33 @@ export class TomarAsistenciaPage {
       //Materias
       this.filterType = "Apellido";
       this.modifId = "";
-      this.materias = this.alumnos = this.af.list("/materias");
+      this.materias = this.af.list("/materias");
+      this.loadMaterias("Man");
+  }
+
+  public onSelecTurnoChange(event: any) {
+    console.log(event);
+    this.loadMaterias(event.target.value);
+  }
+
+  public loadMaterias(turno: any) {
+    this.materiasMartes = this.af.list("/materias").map(materia => materia.filter(materia => {
+      if(materia.turno == turno && materia.dia == "Martes"){
+        return true;
+      }
+    })) as FirebaseListObservable<any[]>;
+
+    this.materiasViernes = this.af.list("/materias").map(materia => materia.filter(materia => {
+      if(materia.turno == turno && materia.dia == "Viernes"){
+        return true;
+      }
+    })) as FirebaseListObservable<any[]>;
+
+    this.materiasSabado = this.af.list("/materias").map(materia => materia.filter(materia => {
+      if(materia.turno == turno && materia.dia == "Sabado"){
+        return true;
+      }
+    })) as FirebaseListObservable<any[]>;
   }
 
   public selectMateria(nombre: string, curso: string): void {
