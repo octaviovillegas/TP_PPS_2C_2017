@@ -22,7 +22,7 @@ export class QrProfesoresPage implements OnInit {
     public currentMateria: string;
     public currentTurno: string;
     public esSuyaMan: boolean = false;
-    public esSuyaTar: boolean = false;
+    public esSuyaNoch: boolean = false;
     public alumnos: FirebaseListObservable<any[]> = this.af.list('/usuarios');
 
     constructor(public navCtrl: NavController,
@@ -80,13 +80,12 @@ export class QrProfesoresPage implements OnInit {
     }
 
     private cargarInfo(aula: any): void {
-        let turno = this.isMan() ? "Man" : "Tar";
+        let turno = this.isMan() ? "Man" : "Noch";
         let dayNum = new Date().getDay();
         let dia = dayNum == 2 ? "Martes" : (dayNum == 5 ? "Viernes" : "Sabado");
         this.currentAula = aula;
         this.currentMateria = aula["mat" + turno];
-        this.currentTurno = turno == "Man" ? "M" : "T";
-        alert(aula["dia" + turno]);
+        this.currentTurno = turno == "Man" ? "M" : "N";
         if(aula["dia" + turno] == dia) {
             this.filtrarAlumnos(turno, aula["mat" + turno], dia);
         } else {
@@ -97,15 +96,16 @@ export class QrProfesoresPage implements OnInit {
     }
 
     private mostrarSiEsSuClase(aula: any) {
+        alert(this.currentProfesor);
         if(this.currentProfesor) {
             this.esSuyaMan = true;
-            this.esSuyaTar = true;
+            this.esSuyaNoch = true;
         }
     }
 
     public filtrarAlumnos(turno: string, materia: string, dia: string) {
         this.currentMateria = materia;
-        this.currentTurno = turno == "Man" ? "M" : "T";
+        this.currentTurno = turno == "Man" ? "M" : "N";
         let diaProp: string = dia == "Martes" ? "matMar" : (dia == "Viernes" ? "matVier" : "matSab");
         this.alumnos = this.af.list('/usuarios').map(usr => usr.filter( usr => {
             if(usr.tipo == "alumno" && usr.turno == turno && usr[diaProp] == materia){

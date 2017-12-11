@@ -25,7 +25,7 @@
         <button ion-button class="our-btn" block (click)="scanCode()">Escanear  <ion-icon style="margin-left: 5px;" name="qr-scanner"></ion-icon></button>
         <ion-card>
             <ion-item>
-                <h1>Aula Nº{{currentAula.numero}} <ion-icon name="ios-information-circle-outline"></ion-icon></h1>
+                <h1><ion-icon name="ios-information-circle-outline"></ion-icon>  Aula Nº{{currentAula.numero}}</h1>
             </ion-item>
             <ion-card-content>
                 <h2><b>{{currentAula.matMan}}</b> <br></h2>
@@ -37,10 +37,10 @@
                 </button>
             </ion-card-content>
             <ion-card-content>
-                <b>{{currentAula.matTar}}</b><br>
-                <b>{{currentAula.diaTar}}</b> en el Turno Tarde (18:30 a 22:30). <br>
-                <span *ngIf="esSuyaTar" class="empieza-clase"><b>Tenes asignada esta clase</b></span>
-                <button ion-button icon-left small (click)="filtrarAlumnos('Tar', currentAula.matTar, currentAula.diaTar)">
+                <b>{{currentAula.matNoch}}</b><br>
+                <b>{{currentAula.diaNoch}}</b> en el Turno Noche (18:30 a 22:30). <br>
+                <span *ngIf="esSuyaNoch" class="empieza-clase"><b>Tenes asignada esta clase</b></span>
+                <button ion-button icon-left small (click)="filtrarAlumnos('Noch', currentAula.matNoch, currentAula.diaNoch)">
                     <ion-icon name="ios-list"></ion-icon>
                     <div>Mostrar listado</div>
                 </button>
