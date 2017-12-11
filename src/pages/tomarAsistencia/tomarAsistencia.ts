@@ -11,17 +11,10 @@ import 'rxjs/add/operator/map';
 export class TomarAsistenciaPage {
   
   private tab;
-  private alumnos: FirebaseListObservable<any[]>;
-  public materiaObj = new Array<any>();
   //Materias
-  private materias: FirebaseListObservable<any[]>;
-
   private materiasMartes: FirebaseListObservable<any[]>;
   private materiasViernes: FirebaseListObservable<any[]>;
   private materiasSabado: FirebaseListObservable<any[]>;
-
-  private filterType: string;
-  private modifId: string;
   //Buscar
   private searchValue: string;
   public buscarPor: string = "Aula";
@@ -33,16 +26,7 @@ export class TomarAsistenciaPage {
     public af: AngularFireDatabase,
     public actionSheetCtrl: ActionSheetController) {
       this.tab = "materias";
-      //Materias
-      this.filterType = "Apellido";
-      this.modifId = "";
-      this.materias = this.af.list("/materias");
       this.loadMaterias("Man");
-  }
-
-  public onSelecTurnoChange(event: any) {
-    console.log(event);
-    this.loadMaterias(event.target.value);
   }
 
   public loadMaterias(turno: any) {

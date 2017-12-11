@@ -19,6 +19,9 @@
   <ion-content *ngIf="tab == 'materias'">
 
     <ion-card>
+      <ion-card-header>
+        Elegir Turno:
+      </ion-card-header>
       <ion-item>
         <ion-select  (ionChange)="loadMaterias($event)">
           <ion-option [selected]="true" value="Man">Mañana</ion-option>
@@ -74,7 +77,7 @@
   </ion-content>
   
   <ion-content *ngIf="tab == 'buscar'">
-    <h1>Lista de alumnos</h1>
+    <h1>Buscar</h1>
     <ion-searchbar
       [(ngModel)]="searchValue"
       (ionInput)="onInput($event)">
