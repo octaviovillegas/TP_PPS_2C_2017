@@ -24,10 +24,10 @@ export class ListaCursoPage {
     private camera: Camera,
     private pushService: PushService) {
       let nombre = navParams.get('nombre');
-      let curso = navParams.get('curso');
-      this.filterAlumnos(nombre, curso);
-      this.filterMaterias(nombre, curso);
-      this.pictures = storage().ref(nombre+curso);
+      let turno = navParams.get('turno');
+      let dia = navParams.get('dia');
+      this.filter(nombre, turno, dia);
+      this.pictures = storage().ref(nombre+dia);
       this.loadImage();
   }
 
@@ -53,18 +53,17 @@ export class ListaCursoPage {
     });
   }
   
-  private filterAlumnos(nombre: string, curso: string): void {
+  private filter(nombre: string, turno: string, dia: string): void {
+    let diaProp = dia == "Martes" ? "matMar" : (dia == "Viernes" ? "matVier" : "matSab");
     this.alumnos = this.af.list("/usuarios").map(usr => usr.filter(usr => {
-      if(usr.tipo == "alumno" && usr[nombre] == curso) {
+      if(usr.tipo == "alumno" && usr.turno == turno && usr[diaProp] == nombre) {
         return true;
       } 
       return false;
     })) as FirebaseListObservable<any[]>;
-  }
 
-  private filterMaterias(nombre: string, curso: string): void {
     this.materias = this.af.list("/materias").map(materia => materia.filter(materia => {
-      if(materia.nombre == nombre && materia.curso == curso) {
+      if(materia.nombre == nombre && materia.turno == turno && materia.dia == dia) {
         return true;
       } 
       return false;

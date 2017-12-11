@@ -49,11 +49,12 @@ export class TomarAsistenciaPage {
     })) as FirebaseListObservable<any[]>;
   }
 
-  public selectMateria(nombre: string, curso: string): void {
+  public selectMateria(nombre: string, turno: string, dia: string): void {
     this.tab = "materias";
     this.navCtrl.push('ListaCursoPage', {
       nombre: nombre,
-      curso: curso
+      turno: turno,
+      dia: dia
     });
   }
 
@@ -67,7 +68,7 @@ export class TomarAsistenciaPage {
   }
 
   private filtrarMateriasPorAula(): void {
-    this.materiasFiltradas = this.materias.map(materia => materia.filter(materia => {
+    this.materiasFiltradas = this.af.list("/materias").map(materia => materia.filter(materia => {
       if(this.searchValue != "" && this.searchValue != undefined) {
         return materia.aula == this.searchValue;
       }

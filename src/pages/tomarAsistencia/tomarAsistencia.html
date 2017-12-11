@@ -1,6 +1,6 @@
 <ion-header>
     <ion-navbar>
-      <ion-title>Alumnos</ion-title>
+      <ion-title>Tomar Asistencia</ion-title>
     </ion-navbar>
     <ion-toolbar>
       <ion-segment [(ngModel)]="tab" color="primary">
@@ -36,7 +36,7 @@
           <h1 class="titulo-lista">Martes</h1>
         </ion-item>
         <div *ngFor="let m of materiasMartes | async">
-          <ion-item (click)="selectMateria(m.nombre, m.curso)">
+          <ion-item (click)="selectMateria(m.nombre, m.turno, m.dia)">
             <b>{{m.nombre}} {{m.curso}}</b>
             <ion-icon class="incompleto" name="ios-arrow-forward" item-end *ngIf="m.listo == 0"></ion-icon>
             <ion-icon class="completo" name="md-checkmark" item-end *ngIf="m.listo == 1"></ion-icon>
@@ -51,7 +51,7 @@
           <h1 class="titulo-lista">Viernes</h1>
         </ion-item>
         <div *ngFor="let m of materiasViernes | async">
-          <ion-item (click)="selectMateria(m.nombre, m.curso)">
+          <ion-item (click)="selectMateria(m.nombre, m.turno, m.dia)">
             <b>{{m.nombre}} {{m.curso}}</b>
             <ion-icon class="incompleto" name="ios-arrow-forward" item-end *ngIf="m.listo == 0"></ion-icon>
             <ion-icon class="completo" name="md-checkmark" item-end *ngIf="m.listo == 1"></ion-icon>
@@ -66,7 +66,7 @@
           <h1 class="titulo-lista">Sábados</h1>
         </ion-item>
         <div *ngFor="let m of materiasSabado | async">
-          <ion-item (click)="selectMateria(m.nombre, m.curso)">
+          <ion-item (click)="selectMateria(m.nombre, m.turno, m.dia)">
             <b>{{m.nombre}} {{m.curso}}</b>
             <ion-icon class="incompleto" name="ios-arrow-forward" item-end *ngIf="m.listo == 0"></ion-icon>
             <ion-icon class="completo" name="md-checkmark" item-end *ngIf="m.listo == 1"></ion-icon>
@@ -91,7 +91,7 @@
     
     <div *ngIf="buscarPor == 'Aula'">
       <ion-card *ngFor="let m of materiasFiltradas | async">
-        <ion-item (click)="selectMateria(m.nombre, m.curso)">
+        <ion-item (click)="selectMateria(m.nombre, m.turno, m.dia)">
           <h2>{{m.nombre}} {{m.curso}}</h2>
           <p>Aula: <b>{{m.aula}}</b></p>
           <ion-icon name="ios-arrow-forward" item-end></ion-icon>
