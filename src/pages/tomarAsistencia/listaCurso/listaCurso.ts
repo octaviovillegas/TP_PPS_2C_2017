@@ -15,7 +15,7 @@ export class ListaCursoPage {
 
   public materias: FirebaseListObservable<any[]>;
   public alumnos: FirebaseListObservable<any[]>;
-  public pictures;
+  public imagenName: string;
   public imagen: string;
 
   constructor(public navParams: NavParams,
@@ -27,16 +27,16 @@ export class ListaCursoPage {
       let turno = navParams.get('turno');
       let dia = navParams.get('dia');
       this.filter(nombre, turno, dia);
-      this.pictures = storage().ref(nombre+dia);
+      this.imagenName = nombre+dia;
       this.loadImage();
   }
 
   public loadImage(){
-    this.pictures.getDownloadURL().then(url => {
+    storage().ref(this.imagenName).getDownloadURL().then(url => {
       this.imagen = url;
       setTimeout(() => {
         this.loadImage();
-      }, 300);
+      }, 2000);
     }).catch(err => {});
   }
 
@@ -49,7 +49,7 @@ export class ListaCursoPage {
     }
     this.camera.getPicture(options).then(imageData => {
         let base64Image = 'data:image/jpeg;base64,' + imageData;
-        this.pictures.putString(base64Image, 'data_url');
+        storage().ref(this.imagenName).putString(base64Image, 'data_url');
     });
   }
   

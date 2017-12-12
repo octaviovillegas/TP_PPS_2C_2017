@@ -86,6 +86,7 @@
       <ion-select [(ngModel)]="buscarPor">
         <ion-option>Aula</ion-option>
         <ion-option>Profesor</ion-option>
+        <ion-option>Alumno</ion-option>
       </ion-select>
     </ion-item>
     
@@ -101,13 +102,48 @@
 
     <div *ngIf="buscarPor == 'Profesor'">
       <ion-card *ngFor="let p of profesores | async">
-        <ion-item (click)="selectMateria(p.materia, m.curso)">
+        <ion-item (click)="selectMateria(p.materia, p.curso)">
           <h2>{{p.materia}} {{p.curso}}</h2>
           <p>Profesor: <b>{{p.apellido}}</b></p>
           <ion-icon name="ios-arrow-forward" item-end></ion-icon>
         </ion-item>
       </ion-card>      
     </div>
+
+    <div *ngIf="buscarPor == 'Alumno'">
+      <div *ngFor="let a of alumnos | async">
+        <ion-card>
+          <ion-item>
+            <h2>{{a.apellido.toLocaleUpperCase()}}, {{a.nombre}}</h2>
+          </ion-item>
+        </ion-card>
+        {{initShowAlumno(a.email)}}
+        <ion-card>
+          <ion-list>
+              <ion-item color="light" (click)="showHideAlumno(a.email)">
+                <h1><b>Materias:</b></h1>
+              </ion-item>
+              <ion-item *ngIf="showAlumno[emailSinArroba(a.email)] && a.matMar && a.matMar != 'Ninguna'">
+                {{a.matMar}}
+                <ion-icon class="incompleto" name="ios-arrow-forward" item-end ></ion-icon>
+                <ion-icon class="completo" name="md-checkmark" item-end ></ion-icon>
+              </ion-item>
+              <ion-item *ngIf="showAlumno[emailSinArroba(a.email)] && a.matVier && a.matVier != 'Ninguna'">
+                {{a.matVier}}
+                <ion-icon class="incompleto" name="ios-arrow-forward" item-end ></ion-icon>
+                <ion-icon class="completo" name="md-checkmark" item-end ></ion-icon>
+              </ion-item>
+              <ion-item *ngIf="showAlumno[emailSinArroba(a.email)] && a.matSab && a.matSab != 'Ninguna'">
+                {{a.matSab}}
+                <ion-icon class="incompleto" name="ios-arrow-forward" item-end ></ion-icon>
+                <ion-icon class="completo" name="md-checkmark" item-end ></ion-icon>
+              </ion-item>
+          </ion-list>
+        </ion-card>
+      </div>
+    </div>
   </ion-content>
     
 </ion-content>
+
+<!-- (click)="selectMateria(c.anio, c.curso)" -->

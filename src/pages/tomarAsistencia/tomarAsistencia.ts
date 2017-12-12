@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, AlertController, ActionSheetController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { ChangeDetectionStrategy } from '@angular/core';
 import 'rxjs/add/operator/map';
 
 @IonicPage()
 @Component({
   selector: 'page-tomarAsistencia',
   templateUrl: 'tomarAsistencia.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TomarAsistenciaPage {
   
@@ -20,6 +22,10 @@ export class TomarAsistenciaPage {
   public buscarPor: string = "Aula";
   public materiasFiltradas: FirebaseListObservable<any[]> = this.af.list("/materias");
   public profesores: FirebaseListObservable<any[]>;
+  public alumnos: FirebaseListObservable<any[]>;
+  public showAlumno: Array<boolean> = new Array<boolean>();
+  public lastEmail: string;
+  public lastEmailValue: boolean;
 
   constructor(public navCtrl: NavController, 
     public alertCtrl: AlertController, 
@@ -27,9 +33,14 @@ export class TomarAsistenciaPage {
     public actionSheetCtrl: ActionSheetController) {
       this.tab = "materias";
       this.loadMaterias("Man");
+      this.alumnos = this.af.list("/usuarios").map(usr => usr.filter(usr => {
+        if(usr.tipo = "alumno"){
+          return true;
+        }
+      })) as FirebaseListObservable<any[]>;
   }
 
-  public loadMaterias(turno: any) {
+  public loadMaterias(turno: any): void {
     this.materiasMartes = this.af.list("/materias").map(materia => materia.filter(materia => {
       if(materia.turno == turno && materia.dia == "Martes"){
         return true;
@@ -86,4 +97,34 @@ export class TomarAsistenciaPage {
       }
     })) as FirebaseListObservable<any[]>;
   }
+
+  public initShowAlumno(email: string): void {
+    let limpio = this.emailSinArroba(email);
+    this.showAlumno[limpio] = false;
+    setTimeout(() => {}, 300);
+  }
+
+  public showHideAlumno(email: string): void {
+      let limpio = this.emailSinArroba(email);
+      let lastEmail = this.lastEmail;
+      let lastEmailValue = this.lastEmailValue;
+      console.log(lastEmailValue);
+      this.lastEmail = limpio;
+      this.lastEmailValue = !this.showAlumno[limpio];
+      this.showAlumno[limpio] = !this.showAlumno[limpio];
+      if(limpio == lastEmail && lastEmailValue) {
+        this.showAlumno[limpio] = false;
+        this.lastEmailValue = false;
+      }
+  }
+
+  public emailSinArroba(email: string): string {
+    let array = email.split('@');
+    let retorno: string = "";
+    array.forEach(c => {
+      retorno += c;
+    });
+    return retorno;
+  }  
+
 }
