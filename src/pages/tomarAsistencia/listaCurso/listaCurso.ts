@@ -144,6 +144,11 @@ export class ListaCursoPage {
       });
       if (!isPresente) {
         this.pushService.avisarDeFaltas(alumno.email);
+        this.currentMateria.presentes += 1;
+        this.currentMateria.ausentes -= 1;
+      } else {
+        this.currentMateria.presentes -= 1;
+        this.currentMateria.ausentes += 1;
       }
     }
   }

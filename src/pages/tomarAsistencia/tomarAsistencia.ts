@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, AlertController, ActionSheetController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { ChangeDetectionStrategy } from '@angular/core';
@@ -26,6 +26,12 @@ export class TomarAsistenciaPage {
   public showAlumno: Array<boolean> = new Array<boolean>();
   public lastEmail: string;
   public lastEmailValue: boolean;
+  //Estadisticas
+  private materiasCargadas = new Array<string>();
+  private presentes: number = 0;
+  private ausentes: number = 0;
+  @ViewChild('barrasCanvas') barrasCanvas;
+  public barrasGrafico: any;
 
   constructor(public navCtrl: NavController, 
     public alertCtrl: AlertController, 
@@ -41,6 +47,10 @@ export class TomarAsistenciaPage {
   }
 
   public loadMaterias(turno: any): void {
+    this.materiasCargadas = new Array<string>();
+    this.presentes = 0;
+    this.ausentes = 0;
+    console.log("------------------");
     this.materiasMartes = this.af.list("/materias").map(materia => materia.filter(materia => {
       if(materia.turno == turno && materia.dia == "Martes"){
         return true;
@@ -125,5 +135,23 @@ export class TomarAsistenciaPage {
     });
     return retorno;
   }  
+
+  public cargarAsistencias(materia: any): void {
+    if(this.materiasCargadas.indexOf(materia.nombre+materia.turno) == -1){
+      if(materia["presentes"] != undefined) {
+        this.presentes += (materia["presentes"] as number);
+      }
+      if(materia["ausentes"] != undefined) {
+        this.ausentes += (materia["ausentes"] as number);
+      }
+      this.materiasCargadas.push(materia.nombre+materia.turno);
+      console.log(this.presentes);
+      console.log(this.ausentes);
+    }
+  }
+
+  public loadEstadisticas(): void {
+
+  }
 
 }

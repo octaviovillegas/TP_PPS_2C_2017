@@ -10,6 +10,9 @@
         <ion-segment-button value="buscar">
           Buscar 
         </ion-segment-button>
+        <ion-segment-button value="estadisticas" (click)="loadEstadisticas()">
+          Estadisticas 
+        </ion-segment-button>
       </ion-segment>
     </ion-toolbar>
   </ion-header>
@@ -17,7 +20,6 @@
 <ion-content padding>
 
   <ion-content *ngIf="tab == 'materias'">
-
     <ion-card>
       <ion-card-header>
         Elegir Turno:
@@ -36,6 +38,7 @@
           <h1 class="titulo-lista">Martes</h1>
         </ion-item>
         <div *ngFor="let m of materiasMartes | async">
+          {{cargarAsistencias(m)}}
           <ion-item (click)="selectMateria(m.nombre, m.turno, m.dia)">
             <b>{{m.nombre}} {{m.curso}}</b>
             <ion-icon class="incompleto" name="ios-arrow-forward" item-end *ngIf="m.listo == 0"></ion-icon>
@@ -51,6 +54,7 @@
           <h1 class="titulo-lista">Viernes</h1>
         </ion-item>
         <div *ngFor="let m of materiasViernes | async">
+          {{cargarAsistencias(m)}}
           <ion-item (click)="selectMateria(m.nombre, m.turno, m.dia)">
             <b>{{m.nombre}} {{m.curso}}</b>
             <ion-icon class="incompleto" name="ios-arrow-forward" item-end *ngIf="m.listo == 0"></ion-icon>
@@ -66,6 +70,7 @@
           <h1 class="titulo-lista">Sábados</h1>
         </ion-item>
         <div *ngFor="let m of materiasSabado | async">
+          {{cargarAsistencias(m)}}
           <ion-item (click)="selectMateria(m.nombre, m.turno, m.dia)">
             <b>{{m.nombre}} {{m.curso}}</b>
             <ion-icon class="incompleto" name="ios-arrow-forward" item-end *ngIf="m.listo == 0"></ion-icon>
@@ -144,6 +149,13 @@
         </ion-card>
       </div>
     </div>
+  </ion-content>
+
+  <ion-content *ngIf="tab == 'estadisticas'">
+      <h2 class="page-susbtitle">Asistencias:</h2>
+      Presentes: {{currentMateria.presentes}} <br>
+      Ausentes: {{currentMateria.ausentes}}
+      <canvas #barrasCanvas></canvas>
   </ion-content>
     
 </ion-content>
