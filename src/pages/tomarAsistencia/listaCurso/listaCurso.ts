@@ -36,21 +36,28 @@ export class ListaCursoPage {
       this.imagen = url;
       setTimeout(() => {
         this.loadImage();
-      }, 2000);
-    }).catch(err => {});
+      }, 300);
+    }).catch(err => {
+      setTimeout(() => {
+        this.loadImage();
+      }, 300);
+    });
   }
 
   public takePicture(): void {
     let options: CameraOptions = {
-      quality: 50,
+      quality: 20,
       destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
+      encodingType: this.camera.EncodingType.PNG,
       mediaType: this.camera.MediaType.PICTURE
     }
     this.camera.getPicture(options).then(imageData => {
         let base64Image = 'data:image/jpeg;base64,' + imageData;
         storage().ref(this.imagenName).putString(base64Image, 'data_url');
-    });
+        this.imagen = "assets/spinner.gif";
+    }).catch(function(reason) {
+      alert(reason);
+    });;
   }
   
   private filter(nombre: string, turno: string, dia: string): void {
@@ -118,6 +125,11 @@ export class ListaCursoPage {
           this.materias.update(key, {
             listo: 0
           });
+          if(this.imagen != null && this.imagen != undefined) {
+            this.imagen = undefined;
+            storage().ref(this.imagenName).delete();
+            this.imagen = undefined;
+          }
         }
       },
       {
