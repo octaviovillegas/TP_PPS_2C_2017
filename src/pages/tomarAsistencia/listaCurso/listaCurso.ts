@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavParams, AlertController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { storage } from 'firebase';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import 'rxjs/add/operator/map';
 import { PushService } from "../../../services/push.service";
+import { Chart } from 'chart.js';
 
 @IonicPage()
 @Component({
@@ -12,11 +13,18 @@ import { PushService } from "../../../services/push.service";
   templateUrl: 'listaCurso.html',
 })
 export class ListaCursoPage {
-
+  
+  private currentMateria: any;
+  //Asistencias
+  public tab: string = "asistencia";
   public materias: FirebaseListObservable<any[]>;
   public alumnos: FirebaseListObservable<any[]>;
   public imagenName: string;
   public imagen: string;
+  private alumnosContados = new Array<string>();
+  //Estadisticas
+  @ViewChild('tortaCanvas') tortaCanvas;
+  public tortaGrafico: any;
 
   constructor(public navParams: NavParams,
     public alertCtrl: AlertController,
@@ -36,12 +44,58 @@ export class ListaCursoPage {
       this.imagen = url;
       setTimeout(() => {
         this.loadImage();
-      }, 300);
+      }, 1000);
     }).catch(err => {
       setTimeout(() => {
         this.loadImage();
-      }, 300);
+      }, 1000);
     });
+  }
+
+  public setCurrentMateria(materia: any) {
+    if(this.currentMateria == undefined) {
+      this.currentMateria = materia;
+      this.currentMateria["presentes"] = 0;
+      this.currentMateria["ausentes"] = 0;
+      this.currentMateria["totales"] = 0;
+    }
+  }
+
+  public updateAsistencias(alumno: any) {
+    if(this.alumnosContados.indexOf(alumno.email) == -1){
+      if(alumno["pres_" + this.currentMateria.nombre] == 1) {
+        let presentes: number = this.currentMateria["presentes"] != undefined ? this.currentMateria["presentes"] as number : 0;
+        console.log(presentes);
+        presentes = (presentes as number) + 1;
+        this.af.list("/materias").update(this.currentMateria.$key, {
+          presentes: presentes
+        });
+        this.currentMateria["presentes"] = presentes;
+      } else {
+        let ausentes: number = this.currentMateria["ausentes"] != undefined ? this.currentMateria["ausentes"] as number : 0;
+        ausentes = (ausentes as number) + 1;
+        this.af.list("/materias").update(this.currentMateria.$key, {
+          ausentes: ausentes
+        });
+        this.currentMateria["ausentes"] = ausentes;
+      }
+      let totales: number = this.currentMateria["totales"] != undefined ? this.currentMateria["totales"] as number : 0;
+      totales = (totales as number) + 1;
+      this.af.list("/materias").update(this.currentMateria.$key, {
+        totales: totales
+      });
+      this.currentMateria["totales"] = totales;
+      this.alumnosContados.push(alumno.email);
+    }
+  }
+
+  public emailSinArroba(email: string): string {
+    let array = email.split('@');
+    let retorno: string = "";
+    array.forEach(c => {
+      retorno += c;
+    });
+    return retorno;
   }
 
   public takePicture(): void {
@@ -102,7 +156,7 @@ export class ListaCursoPage {
         text: 'Si',
         handler: data => { 
           this.takePicture();
-          this.materias.update(key, {
+          this.af.list("/materias").update(key, {
             listo: 1
           });
         }
@@ -122,7 +176,7 @@ export class ListaCursoPage {
       buttons: [{
         text: 'Si',
         handler: data => { 
-          this.materias.update(key, {
+          this.af.list("/materias").update(key, {
             listo: 0
           });
           if(this.imagen != null && this.imagen != undefined) {
@@ -138,6 +192,24 @@ export class ListaCursoPage {
       }]
     });
     prompt.present();
+  }
+
+  //Estadisticas
+  public loadEstadisticas() {
+    setTimeout( () => {
+      this.tortaGrafico = new Chart(this.tortaCanvas.nativeElement, {
+        type: 'pie',
+        data: {
+          labels: ["Presentes", "Ausentes"],
+          datasets: [{
+            label: '# of Votes',
+            data: [this.currentMateria.presentes, this.currentMateria.ausentes],
+            backgroundColor: ['#FF6384','#36A2EB',],
+            hoverBackgroundColor: ["#FF6384", "#36A2EB"]
+          }]
+        }
+      });
+    }, 500);
   }
 
 }
