@@ -122,21 +122,23 @@
           <ion-list>
               <ion-item color="light" (click)="showHideAlumno(a.email)">
                 <h1><b>Materias:</b></h1>
+                <ion-icon name="md-arrow-dropdown" item-end *ngIf="!showAlumno[emailSinArroba(a.email)]"></ion-icon>
+                <ion-icon name="md-arrow-dropup" item-end *ngIf="showAlumno[emailSinArroba(a.email)]"></ion-icon>
               </ion-item>
-              <ion-item *ngIf="showAlumno[emailSinArroba(a.email)] && a.matMar && a.matMar != 'Ninguna'">
+              <ion-item *ngIf="showAlumno[emailSinArroba(a.email)] && a.matMar && a.matMar != 'Ninguna'"
+                        (click)="selectMateria(a.matMar, a.turno, 'Martes')">
                 {{a.matMar}}
                 <ion-icon class="incompleto" name="ios-arrow-forward" item-end ></ion-icon>
-                <ion-icon class="completo" name="md-checkmark" item-end ></ion-icon>
               </ion-item>
-              <ion-item *ngIf="showAlumno[emailSinArroba(a.email)] && a.matVier && a.matVier != 'Ninguna'">
+              <ion-item *ngIf="showAlumno[emailSinArroba(a.email)] && a.matVier && a.matVier != 'Ninguna'"
+                        (click)="selectMateria(a.matVier, a.turno, 'Viernes')">
                 {{a.matVier}}
                 <ion-icon class="incompleto" name="ios-arrow-forward" item-end ></ion-icon>
-                <ion-icon class="completo" name="md-checkmark" item-end ></ion-icon>
               </ion-item>
-              <ion-item *ngIf="showAlumno[emailSinArroba(a.email)] && a.matSab && a.matSab != 'Ninguna'">
+              <ion-item *ngIf="showAlumno[emailSinArroba(a.email)] && a.matSab && a.matSab != 'Ninguna'"
+                        (click)="selectMateria(a.matSab, a.turno, 'Sabado')">
                 {{a.matSab}}
                 <ion-icon class="incompleto" name="ios-arrow-forward" item-end ></ion-icon>
-                <ion-icon class="completo" name="md-checkmark" item-end ></ion-icon>
               </ion-item>
           </ion-list>
         </ion-card>

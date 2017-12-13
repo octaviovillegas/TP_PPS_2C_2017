@@ -108,7 +108,6 @@ export class TomarAsistenciaPage {
       let limpio = this.emailSinArroba(email);
       let lastEmail = this.lastEmail;
       let lastEmailValue = this.lastEmailValue;
-      console.log(lastEmailValue);
       this.lastEmail = limpio;
       this.lastEmailValue = !this.showAlumno[limpio];
       this.showAlumno[limpio] = !this.showAlumno[limpio];
