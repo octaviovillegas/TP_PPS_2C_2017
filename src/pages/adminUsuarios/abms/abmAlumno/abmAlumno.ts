@@ -20,7 +20,7 @@ export class AbmAlumnoPage {
   private materiasMartes: FirebaseListObservable<any[]>;
   private materiasViernes: FirebaseListObservable<any[]>;
   private materiasSabado: FirebaseListObservable<any[]>;
-  //private userImg = "https://openclipart.org/image/2400px/svg_to_png/247319/abstract-user-flat-3.png";
+  private userImg = "https://openclipart.org/image/2400px/svg_to_png/247319/abstract-user-flat-3.png";
   //Lista
   private searchValue: string;
   private filterType: string;
@@ -44,7 +44,7 @@ export class AbmAlumnoPage {
       this.filterType = "Apellido";
       this.modifId = "";
       this.modifHasImg = "";
-      this.imgUrl = "";
+      this.imgUrl = "NADA";
       this.imgName = "";
       this.imgFile = "";
       //Alta
@@ -60,6 +60,7 @@ export class AbmAlumnoPage {
         matVier: ['', Validators.compose([Validators.required])],
         matSab: ['', Validators.compose([Validators.required])]
       });
+      this.formAlta.controls['turno'].setValue("Man");
       this.loadImage();
       this.loadMaterias("Man");
   }
@@ -107,7 +108,7 @@ export class AbmAlumnoPage {
        this.formAlta.controls['nombre'].setValue(alumno.nombre);
        this.formAlta.controls['apellido'].setValue(alumno.apellido);
        this.formAlta.controls['legajo'].setValue(alumno.legajo);
-       this.formAlta.controls['turno'].setValue(alumno.Programacion);
+       this.formAlta.controls['turno'].setValue(alumno.turno);
        this.formAlta.controls['matMar'].setValue(alumno.matMar);
        this.formAlta.controls['matVier'].setValue(alumno.matVier);
        this.formAlta.controls['matSab'].setValue(alumno.matSab);

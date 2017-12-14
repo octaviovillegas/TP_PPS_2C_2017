@@ -55,8 +55,14 @@
   
   <ion-content *ngIf="tab == 'agregar'">
       <h1>Agregar alumno</h1>
-      <img class="img-login" [src]="imgUrl != '' ? imgUrl : userImg"/>
-      <button class="our-btn" ion-button (click)="takePicture()">Tomar foto</button>
+      
+      <ion-card>
+        <img style="width: 60%; height: 60%; margin-left: 20%; margin-bottom: -5%;" [src]="imgUrl != 'NADA'? imgUrl : userImg"/>
+        <br>
+        <ion-row center>
+            <button class="our-btn" ion-button block (click)="takePicture()">Tomar foto</button>
+        </ion-row>
+      </ion-card>
       <form [formGroup]="formAlta" (ngSubmit)="agregarAlumno()">
         <ion-item>
           <ion-label>Nombre</ion-label>
@@ -81,7 +87,7 @@
             <ion-item>
               <ion-label>Turno</ion-label>
               <ion-select (ionChange)="loadMaterias($event)" formControlName="turno">
-                  <ion-option [selected]="true" value="Man">Mañana</ion-option>
+                  <ion-option value="Man" [selected]="true">Mañana</ion-option>
                   <ion-option value="Noch">Noche</ion-option>
               </ion-select>
             </ion-item>
