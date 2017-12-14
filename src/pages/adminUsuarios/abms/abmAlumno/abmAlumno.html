@@ -79,27 +79,31 @@
               <ion-input type="password" [disabled]="modifId != ''" formControlName="pass"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-label>Programacion</ion-label>
-              <ion-select formControlName="Programacion">
-                  <ion-option>Ninguno</ion-option>
-                  <ion-option>A</ion-option>
-                  <ion-option>B</ion-option>
+              <ion-label>Turno</ion-label>
+              <ion-select (ionChange)="loadMaterias($event)" formControlName="turno">
+                  <ion-option [selected]="true" value="Man">Mañana</ion-option>
+                  <ion-option value="Noch">Noche</ion-option>
               </ion-select>
             </ion-item>
             <ion-item>
-              <ion-label>Laboratorio</ion-label>
-              <ion-select formControlName="Laboratorio">
+              <ion-label>Martes</ion-label>
+              <ion-select formControlName="matMar">
                   <ion-option>Ninguno</ion-option>
-                  <ion-option>A</ion-option>
-                  <ion-option>B</ion-option>
+                  <ion-option *ngFor="let m of materiasMartes | async">{{m.nombre}}</ion-option>
               </ion-select>
             </ion-item>
             <ion-item>
-              <ion-label>Estadistica</ion-label>
-              <ion-select formControlName="Estadistica">
+              <ion-label>Viernes</ion-label>
+              <ion-select formControlName="matVier">
                   <ion-option>Ninguno</ion-option>
-                  <ion-option>A</ion-option>
-                  <ion-option>B</ion-option>
+                  <ion-option *ngFor="let m of materiasViernes | async">{{m.nombre}}</ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label>Sabado</ion-label>
+              <ion-select formControlName="matSab">
+                  <ion-option>Ninguno</ion-option>
+                  <ion-option *ngFor="let m of materiasSabado | async">{{m.nombre}}</ion-option>
               </ion-select>
             </ion-item>
             <br>

@@ -16,6 +16,10 @@ export class AbmAlumnoPage {
   
   private tab;
   private alumnos: FirebaseListObservable<any[]>;
+  //Materias
+  private materiasMartes: FirebaseListObservable<any[]>;
+  private materiasViernes: FirebaseListObservable<any[]>;
+  private materiasSabado: FirebaseListObservable<any[]>;
   //private userImg = "https://openclipart.org/image/2400px/svg_to_png/247319/abstract-user-flat-3.png";
   //Lista
   private searchValue: string;
@@ -51,11 +55,13 @@ export class AbmAlumnoPage {
         legajo: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern("[-+]?[0-9]*\.?[0-9]*")])],
         email: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
         pass: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(20)])],
-        Programacion: ['', Validators.compose([Validators.required])],
-        Laboratorio: ['', Validators.compose([Validators.required])],
-        Estadistica: ['', Validators.compose([Validators.required])]
+        turno: ['', Validators.compose([Validators.required])],
+        matMar: ['', Validators.compose([Validators.required])],
+        matVier: ['', Validators.compose([Validators.required])],
+        matSab: ['', Validators.compose([Validators.required])]
       });
       this.loadImage();
+      this.loadMaterias("Man");
   }
 
   public loadImage(){
@@ -68,7 +74,7 @@ export class AbmAlumnoPage {
           if(this.imgName != "temp"){
             this.imgName = "";
           } else {
-            this.imgUrl = "http://thinkfuture.com/wp-content/uploads/2013/10/loading_spinner.gif";
+            this.imgUrl = "assets/spinner.gif";
           }
         });
       }
@@ -101,15 +107,36 @@ export class AbmAlumnoPage {
        this.formAlta.controls['nombre'].setValue(alumno.nombre);
        this.formAlta.controls['apellido'].setValue(alumno.apellido);
        this.formAlta.controls['legajo'].setValue(alumno.legajo);
-       this.formAlta.controls['Programacion'].setValue(alumno.Programacion);
-       this.formAlta.controls['Laboratorio'].setValue(alumno.Laboratorio);
-       this.formAlta.controls['Estadistica'].setValue(alumno.Estadistica);
+       this.formAlta.controls['turno'].setValue(alumno.Programacion);
+       this.formAlta.controls['matMar'].setValue(alumno.matMar);
+       this.formAlta.controls['matVier'].setValue(alumno.matVier);
+       this.formAlta.controls['matSab'].setValue(alumno.matSab);
        this.formAlta.controls['email'].setValue(alumno.email);
        this.formAlta.controls['pass'].setValue(alumno.pass);
        this.modifId = alumno.$key;
        this.imgName = alumno.email;
        this.modifHasImg = alumno.tieneFoto;
        this.tab = "agregar";
+  }
+
+  public loadMaterias(turno: any): void {
+    this.materiasMartes = this.af.list("/materias").map(materia => materia.filter(materia => {
+      if(materia.turno == turno && materia.dia == "Martes"){
+        return true;
+      }
+    })) as FirebaseListObservable<any[]>;
+
+    this.materiasViernes = this.af.list("/materias").map(materia => materia.filter(materia => {
+      if(materia.turno == turno && materia.dia == "Viernes"){
+        return true;
+      }
+    })) as FirebaseListObservable<any[]>;
+
+    this.materiasSabado = this.af.list("/materias").map(materia => materia.filter(materia => {
+      if(materia.turno == turno && materia.dia == "Sabado"){
+        return true;
+      }
+    })) as FirebaseListObservable<any[]>;
   }
 
   //AGREGAR ALUMNO
