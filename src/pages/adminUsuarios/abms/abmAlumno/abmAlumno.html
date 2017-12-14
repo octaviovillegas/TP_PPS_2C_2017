@@ -94,21 +94,21 @@
             <ion-item>
               <ion-label>Martes</ion-label>
               <ion-select formControlName="matMar">
-                  <ion-option>Ninguno</ion-option>
+                  <ion-option>Ninguna</ion-option>
                   <ion-option *ngFor="let m of materiasMartes | async">{{m.nombre}}</ion-option>
               </ion-select>
             </ion-item>
             <ion-item>
               <ion-label>Viernes</ion-label>
               <ion-select formControlName="matVier">
-                  <ion-option>Ninguno</ion-option>
+                  <ion-option>Ninguna</ion-option>
                   <ion-option *ngFor="let m of materiasViernes | async">{{m.nombre}}</ion-option>
               </ion-select>
             </ion-item>
             <ion-item>
               <ion-label>Sabado</ion-label>
               <ion-select formControlName="matSab">
-                  <ion-option>Ninguno</ion-option>
+                  <ion-option>Ninguna</ion-option>
                   <ion-option *ngFor="let m of materiasSabado | async">{{m.nombre}}</ion-option>
               </ion-select>
             </ion-item>
