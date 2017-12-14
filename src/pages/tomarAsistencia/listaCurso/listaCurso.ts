@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavParams, AlertController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavParams, AlertController, NavController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { storage } from 'firebase';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import 'rxjs/add/operator/map';
 import { PushService } from "../../../services/push.service";
+import { Chart } from 'chart.js';
 
 @IonicPage()
 @Component({
@@ -12,59 +13,126 @@ import { PushService } from "../../../services/push.service";
   templateUrl: 'listaCurso.html',
 })
 export class ListaCursoPage {
-
+  
+  private currentMateria: any;
+  //Asistencias
+  public tab: string = "asistencia";
   public materias: FirebaseListObservable<any[]>;
   public alumnos: FirebaseListObservable<any[]>;
-  public pictures;
+  public imagenName: string;
   public imagen: string;
+  private alumnosContados = new Array<string>();
+  //Estadisticas
+  @ViewChild('tortaCanvas') tortaCanvas;
+  public tortaGrafico: any;
 
   constructor(public navParams: NavParams,
+    public navControl: NavController,
     public alertCtrl: AlertController,
     public af: AngularFireDatabase,
     private camera: Camera,
     private pushService: PushService) {
       let nombre = navParams.get('nombre');
-      let curso = navParams.get('curso');
-      this.filterAlumnos(nombre, curso);
-      this.filterMaterias(nombre, curso);
-      this.pictures = storage().ref(nombre+curso);
+      let turno = navParams.get('turno');
+      let dia = navParams.get('dia');
+      this.filter(nombre, turno, dia);
+      this.imagenName = nombre+dia;
       this.loadImage();
+      this.navControl.viewDidEnter.subscribe(() => { this.actualize(); });
+  }
+
+  public actualize() {
+    this.af.list("/materias").update(this.currentMateria.$key, {
+      presentes: this.currentMateria.presentes,
+      ausentes: this.currentMateria.ausentes
+    });
   }
 
   public loadImage(){
-    this.pictures.getDownloadURL().then(url => {
+    storage().ref(this.imagenName).getDownloadURL().then(url => {
       this.imagen = url;
       setTimeout(() => {
         this.loadImage();
-      }, 300);
-    }).catch(err => {});
+      }, 1000);
+    }).catch(err => {
+      setTimeout(() => {
+        this.loadImage();
+      }, 1000);
+    });
+  }
+
+  public setCurrentMateria(materia: any) {
+    if(this.currentMateria == undefined) {
+      this.currentMateria = materia;
+      this.currentMateria["presentes"] = 0;
+      this.currentMateria["ausentes"] = 0;
+      this.currentMateria["totales"] = 0;
+    }
+  }
+
+  public updateAsistencias(alumno: any) {
+    if(this.alumnosContados.indexOf(alumno.email) == -1){
+      if(alumno["pres_" + this.currentMateria.nombre] == 1) {
+        let presentes: number = this.currentMateria["presentes"] != undefined ? this.currentMateria["presentes"] as number : 0;
+        presentes = (presentes as number) + 1;
+        this.af.list("/materias").update(this.currentMateria.$key, {
+          presentes: presentes
+        });
+        this.currentMateria["presentes"] = presentes;
+      } else {
+        let ausentes: number = this.currentMateria["ausentes"] != undefined ? this.currentMateria["ausentes"] as number : 0;
+        ausentes = (ausentes as number) + 1;
+        this.af.list("/materias").update(this.currentMateria.$key, {
+          ausentes: ausentes
+        });
+        this.currentMateria["ausentes"] = ausentes;
+      }
+      let totales: number = this.currentMateria["totales"] != undefined ? this.currentMateria["totales"] as number : 0;
+      totales = (totales as number) + 1;
+      this.af.list("/materias").update(this.currentMateria.$key, {
+        totales: totales
+      });
+      this.currentMateria["totales"] = totales;
+      this.alumnosContados.push(alumno.email);
+    }
+  }
+
+  public emailSinArroba(email: string): string {
+    let array = email.split('@');
+    let retorno: string = "";
+    array.forEach(c => {
+      retorno += c;
+    });
+    return retorno;
   }
 
   public takePicture(): void {
     let options: CameraOptions = {
-      quality: 50,
+      quality: 20,
       destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
+      encodingType: this.camera.EncodingType.PNG,
       mediaType: this.camera.MediaType.PICTURE
     }
     this.camera.getPicture(options).then(imageData => {
         let base64Image = 'data:image/jpeg;base64,' + imageData;
-        this.pictures.putString(base64Image, 'data_url');
-    });
+        storage().ref(this.imagenName).putString(base64Image, 'data_url');
+        this.imagen = "assets/spinner.gif";
+    }).catch(function(reason) {
+      alert(reason);
+    });;
   }
   
-  private filterAlumnos(nombre: string, curso: string): void {
+  private filter(nombre: string, turno: string, dia: string): void {
+    let diaProp = dia == "Martes" ? "matMar" : (dia == "Viernes" ? "matVier" : "matSab");
     this.alumnos = this.af.list("/usuarios").map(usr => usr.filter(usr => {
-      if(usr.tipo == "alumno" && usr[nombre] == curso) {
+      if(usr.tipo == "alumno" && usr.turno == turno && usr[diaProp] == nombre) {
         return true;
       } 
       return false;
     })) as FirebaseListObservable<any[]>;
-  }
 
-  private filterMaterias(nombre: string, curso: string): void {
     this.materias = this.af.list("/materias").map(materia => materia.filter(materia => {
-      if(materia.nombre == nombre && materia.curso == curso) {
+      if(materia.nombre == nombre && materia.turno == turno && materia.dia == dia) {
         return true;
       } 
       return false;
@@ -84,6 +152,11 @@ export class ListaCursoPage {
       });
       if (!isPresente) {
         this.pushService.avisarDeFaltas(alumno.email);
+        this.currentMateria.presentes += 1;
+        this.currentMateria.ausentes -= 1;
+      } else {
+        this.currentMateria.presentes -= 1;
+        this.currentMateria.ausentes += 1;
       }
     }
   }
@@ -96,7 +169,7 @@ export class ListaCursoPage {
         text: 'Si',
         handler: data => { 
           this.takePicture();
-          this.materias.update(key, {
+          this.af.list("/materias").update(key, {
             listo: 1
           });
         }
@@ -116,9 +189,14 @@ export class ListaCursoPage {
       buttons: [{
         text: 'Si',
         handler: data => { 
-          this.materias.update(key, {
+          this.af.list("/materias").update(key, {
             listo: 0
           });
+          if(this.imagen != null && this.imagen != undefined) {
+            this.imagen = undefined;
+            storage().ref(this.imagenName).delete();
+            this.imagen = undefined;
+          }
         }
       },
       {
@@ -127,6 +205,24 @@ export class ListaCursoPage {
       }]
     });
     prompt.present();
+  }
+
+  //Estadisticas
+  public loadEstadisticas() {
+    setTimeout( () => {
+      this.tortaGrafico = new Chart(this.tortaCanvas.nativeElement, {
+        type: 'pie',
+        data: {
+          labels: ["Presentes", "Ausentes"],
+          datasets: [{
+            label: '# of Votes',
+            data: [this.currentMateria.presentes, this.currentMateria.ausentes],
+            backgroundColor: ['#FF6384','#36A2EB'],
+            hoverBackgroundColor: ["#FF6384", "#36A2EB"]
+          }]
+        }
+      });
+    }, 500);
   }
 
 }
