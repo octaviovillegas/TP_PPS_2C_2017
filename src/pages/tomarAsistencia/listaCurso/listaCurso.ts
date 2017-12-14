@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavParams, AlertController, NavController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { storage } from 'firebase';
 import { Camera, CameraOptions } from '@ionic-native/camera';
@@ -27,6 +27,7 @@ export class ListaCursoPage {
   public tortaGrafico: any;
 
   constructor(public navParams: NavParams,
+    public navControl: NavController,
     public alertCtrl: AlertController,
     public af: AngularFireDatabase,
     private camera: Camera,
@@ -37,6 +38,14 @@ export class ListaCursoPage {
       this.filter(nombre, turno, dia);
       this.imagenName = nombre+dia;
       this.loadImage();
+      this.navControl.viewDidEnter.subscribe(() => { this.actualize(); });
+  }
+
+  public actualize() {
+    this.af.list("/materias").update(this.currentMateria.$key, {
+      presentes: this.currentMateria.presentes,
+      ausentes: this.currentMateria.ausentes
+    });
   }
 
   public loadImage(){
@@ -65,7 +74,6 @@ export class ListaCursoPage {
     if(this.alumnosContados.indexOf(alumno.email) == -1){
       if(alumno["pres_" + this.currentMateria.nombre] == 1) {
         let presentes: number = this.currentMateria["presentes"] != undefined ? this.currentMateria["presentes"] as number : 0;
-        console.log(presentes);
         presentes = (presentes as number) + 1;
         this.af.list("/materias").update(this.currentMateria.$key, {
           presentes: presentes
@@ -209,7 +217,7 @@ export class ListaCursoPage {
           datasets: [{
             label: '# of Votes',
             data: [this.currentMateria.presentes, this.currentMateria.ausentes],
-            backgroundColor: ['#FF6384','#36A2EB',],
+            backgroundColor: ['#FF6384','#36A2EB'],
             hoverBackgroundColor: ["#FF6384", "#36A2EB"]
           }]
         }

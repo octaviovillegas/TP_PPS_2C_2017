@@ -3,6 +3,7 @@ import { IonicPage, NavController, AlertController, ActionSheetController } from
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { ChangeDetectionStrategy } from '@angular/core';
 import 'rxjs/add/operator/map';
+import { Chart } from 'chart.js';
 
 @IonicPage()
 @Component({
@@ -32,9 +33,11 @@ export class TomarAsistenciaPage {
   private ausentes: number = 0;
   @ViewChild('barrasCanvas') barrasCanvas;
   public barrasGrafico: any;
+  public currentTruno = "Man";
 
   constructor(public navCtrl: NavController, 
     public alertCtrl: AlertController, 
+    public navControl: NavController,
     public af: AngularFireDatabase,
     public actionSheetCtrl: ActionSheetController) {
       this.tab = "materias";
@@ -44,13 +47,14 @@ export class TomarAsistenciaPage {
           return true;
         }
       })) as FirebaseListObservable<any[]>;
+      this.navControl.viewDidEnter.subscribe(() => { this.loadMaterias(this.currentTruno); });
   }
 
   public loadMaterias(turno: any): void {
+    this.currentTruno = turno;
     this.materiasCargadas = new Array<string>();
     this.presentes = 0;
     this.ausentes = 0;
-    console.log("------------------");
     this.materiasMartes = this.af.list("/materias").map(materia => materia.filter(materia => {
       if(materia.turno == turno && materia.dia == "Martes"){
         return true;
@@ -145,13 +149,36 @@ export class TomarAsistenciaPage {
         this.ausentes += (materia["ausentes"] as number);
       }
       this.materiasCargadas.push(materia.nombre+materia.turno);
-      console.log(this.presentes);
-      console.log(this.ausentes);
     }
   }
 
   public loadEstadisticas(): void {
 
-  }
+    setTimeout(() => {
+      this.barrasGrafico = new Chart(this.barrasCanvas.nativeElement, {
+        type: 'bar',
+        data: {
+            labels: ["Presentes", "Ausentes"],
+            datasets: [{
+                label: 'Asistencia',
+                data: [this.presentes, this.ausentes],
+                backgroundColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(255, 159, 64, 1)'
+                ]
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
 
+      });
+    }, 500);
+  }
 }

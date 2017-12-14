@@ -26,7 +26,6 @@ import { FCM } from '@ionic-native/fcm';
 import { PagesService } from '../services/pages.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 
-
 @NgModule({
   declarations: [
     MyApp,
