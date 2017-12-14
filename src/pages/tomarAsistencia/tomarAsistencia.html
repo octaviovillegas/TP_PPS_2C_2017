@@ -117,7 +117,7 @@
 
     <div *ngIf="buscarPor == 'Alumno'">
       <div *ngFor="let a of alumnos | async">
-        <ion-card>
+        <ion-card style="margin-bottom: -5px;">
           <ion-item>
             <h2>{{a.apellido.toLocaleUpperCase()}}, {{a.nombre}}</h2>
           </ion-item>
