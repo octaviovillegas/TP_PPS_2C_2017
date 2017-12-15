@@ -62,10 +62,8 @@
       <ion-card>
         <img style="width: 60%; height: 60%; margin-left: 20%; margin-bottom: -5%;" [src]="imgUrl != 'NADA'? imgUrl : userImg"/>
         <br>
-        <ion-row center>
-            <button class="our-btn" ion-button block (click)="takePicture()">Tomar foto</button>
-        </ion-row>
       </ion-card>
+      <button id="boton-sacar-foto" class="our-btn" ion-button block (click)="takePicture()">Tomar foto</button>
       <form [formGroup]="formAlta" (ngSubmit)="agregarAlumno()">
         <ion-item>
           <ion-label>Nombre</ion-label>
@@ -121,6 +119,23 @@
   </ion-content>
 
   <ion-content *ngIf="tab == 'cargar'">
-      <input name="myFile" type="file">
+    <ion-card>
+      <img style="width: 90%;margin-left: 5%;" src="assets/archivo.png"/>
+      <ion-card-content>
+        <ion-card-title>
+          Cargar Archivo
+        </ion-card-title>
+        <p>
+            Cargando los archivos suministrados por la secretaria 
+            podés cargar un <b>listado de alumnos al sistema</b>. <br>
+            Asegurate de que sean <b>.csv o archivos Exel</b>.
+        </p>
+      </ion-card-content>
+    </ion-card>
+    <input name="file" id="file" style="opacity: 0" type="file">
+    <label style="margin-top: -24px;" class="our-btn" ion-button block for="file">
+      <ion-icon style="margin-right: 4px; margin-top: -3px;" name="md-document"></ion-icon>
+      Cargar archivo
+    </label>
   </ion-content>
 </ion-content>
