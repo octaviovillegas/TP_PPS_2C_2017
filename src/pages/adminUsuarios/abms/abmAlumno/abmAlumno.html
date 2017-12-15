@@ -79,11 +79,11 @@
             </ion-item>
             <ion-item>
               <ion-label>Email</ion-label>
-              <ion-input type="email" [disabled]="modifId != ''" formControlName="email" email></ion-input>
+              <ion-input type="email" [disabled]="disablesFields" formControlName="email" email></ion-input>
             </ion-item>
             <ion-item>
               <ion-label>Contraseña</ion-label>
-              <ion-input type="password" [disabled]="modifId != ''" formControlName="pass"></ion-input>
+              <ion-input type="password" [disabled]="disablesFields" formControlName="pass"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label>Turno</ion-label>
@@ -132,7 +132,7 @@
         </p>
       </ion-card-content>
     </ion-card>
-    <input name="file" id="file" style="opacity: 0" type="file">
+    <input (change)="leerArchivo($event)" name="file" id="file" style="opacity: 0" type="file">
     <label style="margin-top: -24px;" class="our-btn" ion-button block for="file">
       <ion-icon style="margin-right: 4px; margin-top: -3px;" name="md-document"></ion-icon>
       Cargar archivo

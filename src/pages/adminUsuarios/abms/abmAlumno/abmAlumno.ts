@@ -6,6 +6,16 @@ import 'rxjs/add/operator/map';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { storage } from 'firebase';
+import { FileService } from '../../../../services/file.service';
+import swal from 'sweetalert2';
+
+export class Alumno{
+  constructor(public legajo: number,
+    public apellido: string,
+    public nombre: string,
+    public turno: string){
+    }
+}
 
 @IonicPage()
 @Component({
@@ -32,6 +42,8 @@ export class AbmAlumnoPage {
   //Alta
   private formAlta: FormGroup;
 
+  public disablesFields: boolean = false;
+
   constructor(public navCtrl: NavController, 
     public alertCtrl: AlertController, 
     public af: AngularFireDatabase,
@@ -43,6 +55,7 @@ export class AbmAlumnoPage {
       //Lista
       this.filterType = "Apellido";
       this.modifId = "";
+      this.disablesFields = false;
       this.modifHasImg = "";
       this.imgUrl = "NADA";
       this.imgName = "";
@@ -114,8 +127,6 @@ export class AbmAlumnoPage {
     this.formAlta.controls['matMar'].setValue(alumno.matMar);
     this.formAlta.controls['matVier'].setValue(alumno.matVier);
     this.formAlta.controls['matSab'].setValue(alumno.matSab);
-    this.formAlta.controls['email'].setValue(alumno.email);
-    this.formAlta.controls['pass'].setValue(alumno.pass);
     this.modifId = alumno.$key;
     this.imgName = alumno.email;
     if(alumno.tieneFoto == "1"){
@@ -123,6 +134,14 @@ export class AbmAlumnoPage {
     }
     this.modifHasImg = alumno.tieneFoto;
     this.tab = "agregar";
+    if(alumno.email == "SIN DEFINIR" && alumno.pass == "SIN DEFINIR") {
+      this.disablesFields = true;
+      this.formAlta.controls['email'].setValue("");
+      this.formAlta.controls['pass'].setValue("");
+    } else {
+      this.formAlta.controls['email'].setValue(alumno.email);
+      this.formAlta.controls['pass'].setValue(alumno.pass);
+    }
   }
 
   public loadMaterias(turno: any): void {
@@ -202,6 +221,7 @@ export class AbmAlumnoPage {
     }
     this.modifHasImg = "";
     this.modifId = "";
+    this.disablesFields = false;
   }
 
   public takePicture(): void {
@@ -212,11 +232,12 @@ export class AbmAlumnoPage {
       mediaType: this.camera.MediaType.PICTURE
     }
     this.camera.getPicture(options).then(imageData => {
-        storage().ref('temp').delete();
-        this.imgFile = 'data:image/jpeg;base64,' + imageData;
-        let pictures = storage().ref('temp');
-        this.imgName = "temp";
-        pictures.putString(this.imgFile, 'data_url');
+      this.imgUrl = "assets/spinner.gif";
+      storage().ref('temp').delete();
+      this.imgFile = 'data:image/jpeg;base64,' + imageData;
+      let pictures = storage().ref('temp');
+      this.imgName = "temp";
+      pictures.putString(this.imgFile, 'data_url');
     });
   }
 
@@ -257,6 +278,7 @@ export class AbmAlumnoPage {
           text: 'Si',
           handler: data => { 
             this.modifId = "";
+            this.disablesFields = false;
             this.formAlta.reset();
             this.imgUrl = "NADA";
             this.imgName = "";
@@ -273,6 +295,50 @@ export class AbmAlumnoPage {
       });
       prompt.present();
     }
+  }
+
+  public leerArchivo(event: any): void {
+    let file = event.target.files[0];
+    let extension = file.name.substr(file.name.lastIndexOf('.') + 1);
+    let reader = new FileReader();
+    if(extension == "csv") {
+      reader.onload = () => {
+        this.addAlumnosList(FileService.CsvToAlumnosList(reader.result));
+      }
+      reader.readAsText(file);
+    } else if (extension == "xlsx") {
+      reader.onload = (e: any) => {
+        this.addAlumnosList(FileService.ExelToAlumnosList(e.target.result));
+      };
+      reader.readAsBinaryString(file);
+    }
+  }
+
+  private addAlumnosList(alumnos: Array<Alumno>) {
+    alumnos.forEach(alumno => { 
+      let data = {};
+      data["nombre"] = alumno.nombre;
+      data["apellido"] = alumno.apellido;
+      data["legajo"] = alumno.legajo;
+      data["turno"] = alumno.turno;
+      data["matMar"] = "Ninguna";
+      data["matVier"] = "Ninguna";
+      data["matSab"] = "Ninguna";
+      data["email"] = "";
+      data["pass"] = "";
+      data["tipo"] = "alumno";
+      data["pres_Martes"] = "0";
+      data["pres_Viernes"] = "0";
+      data["pres_Sabado"] = "0";
+      data["tieneFoto"] = "0";
+      //this.af.list("/usuarios").push(data);
+    });
+    swal({
+      title: 'Éxito',
+      text: 'Se agregaron ' + alumnos.length + ' alumnos con exito' ,
+      type: 'success',
+      timer: 5000
+    });
   }
 
 }
