@@ -58,7 +58,7 @@ import { FileChooser } from "@ionic-native/file-chooser";
 import { ComponentsModule } from "../components/components.module";
 import { LectorQrComponent } from "../components/lector-qr/lector-qr";
 
-
+import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 
 var firebaseAuth  = {
   apiKey: "AIzaSyBjrQu2x_3cZjv1Tdvw_TIYxBMAJ2VQU_M",
@@ -68,6 +68,26 @@ var firebaseAuth  = {
   storageBucket: "tpfinal-8ff7a.appspot.com",
   messagingSenderId: "566483132157"
 };
+
+
+const cloudSettings: CloudSettings = {
+  'core': {
+    'app_id': 'APP_ID',
+  },
+  'push': {
+    'sender_id': '566483132157',
+    'pluginConfig': {
+      'ios': {
+        'badge': true,
+        'sound': true
+      },
+      'android': {
+        'iconColor': '#343434'
+      }
+    }
+  }
+};
+
 
 @NgModule({
   declarations: [
@@ -101,7 +121,8 @@ var firebaseAuth  = {
      ReactiveFormsModule,
      MenuPageModule,
      ConsultarBajaModifPageModule,
-     ComponentsModule
+     ComponentsModule,
+     CloudModule.forRoot(cloudSettings)
 
   ],
   bootstrap: [IonicApp],

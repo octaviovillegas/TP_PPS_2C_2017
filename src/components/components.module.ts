@@ -4,12 +4,14 @@ import { IonicModule, IonicPageModule } from "ionic-angular";
 import { PerfilComponent } from './perfil/perfil';
 import { ListaProfesoresComponent } from './lista-profesores/lista-profesores';
 import { ListaAlumnosComponent } from './lista-alumnos/lista-alumnos';
+import { FilesComponent } from './files/files';
 @NgModule({
 	declarations: [
     LectorQrComponent,
     PerfilComponent,
     ListaProfesoresComponent,
-    ListaAlumnosComponent
+    ListaAlumnosComponent,
+    FilesComponent
   ],
 	imports: [
     IonicModule
@@ -18,7 +20,8 @@ import { ListaAlumnosComponent } from './lista-alumnos/lista-alumnos';
     LectorQrComponent,
     PerfilComponent,
     ListaProfesoresComponent,
-    ListaAlumnosComponent
+    ListaAlumnosComponent,
+    FilesComponent
 
   ],
   schemas:[NO_ERRORS_SCHEMA]
