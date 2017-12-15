@@ -1,5 +1,6 @@
 import { Alumno } from "../pages/adminUsuarios/abms/abmAlumno/abmAlumno";
 import * as XLSX from 'xlsx';
+import swal from 'sweetalert2';
 
 export class FileService {
 
@@ -30,13 +31,9 @@ export class FileService {
             }
         });
         let lineas = new Array<string>();
-        console.log(colA);
-        console.log(colB);
-        console.log(colC);
         for(let i = 0; i < colA.length; i++) {
             lineas.push(colA[i] + ";" + colB[i] + ";" + colC[i]);
         }
-        console.log(lineas);
         return this.lineasToAlumnosList(lineas);
     }
 
@@ -64,6 +61,14 @@ export class FileService {
                 }
             }
         });
+        if(alumnos.length == 0) {
+            swal({
+                title: 'Archivo invalido',
+                text: 'El archivo seleccionado es incorrecto' ,
+                type: 'error',
+                timer: 5000
+            });
+        }
         return alumnos;
     }
 

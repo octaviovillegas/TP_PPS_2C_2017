@@ -65,7 +65,7 @@ export class AbmAlumnoPage {
       this.formAlta = this.formBuilder.group({
         nombre: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
         apellido: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
-        legajo: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern("[-+]?[0-9]*\.?[0-9]*")])],
+        legajo: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(7), Validators.pattern("[-+]?[0-9]*\.?[0-9]*")])],
         email: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
         pass: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(20)])],
         turno: ['', Validators.compose([Validators.required])],
@@ -134,11 +134,11 @@ export class AbmAlumnoPage {
     }
     this.modifHasImg = alumno.tieneFoto;
     this.tab = "agregar";
-    if(alumno.email == "SIN DEFINIR" && alumno.pass == "SIN DEFINIR") {
-      this.disablesFields = true;
-      this.formAlta.controls['email'].setValue("");
-      this.formAlta.controls['pass'].setValue("");
+    if(alumno.email == "SIN DEFINIR") {
+      this.formAlta.controls['email'].reset();
+      this.formAlta.controls['pass'].reset();
     } else {
+      this.disablesFields = true;
       this.formAlta.controls['email'].setValue(alumno.email);
       this.formAlta.controls['pass'].setValue(alumno.pass);
     }
@@ -196,29 +196,56 @@ export class AbmAlumnoPage {
           message = "Bardiamos fuerte...";
         }
         this.alertCtrl.create({ title: message, buttons: [{ text: 'Ok',}] }).present();
+        this.modifHasImg = "";
+        this.modifId = "";
+        this.disablesFields = false;
       });
     } else {
-      this.alumnos.update(this.modifId, {
-        nombre: this.formAlta.controls['nombre'].value,
-        apellido: this.formAlta.controls['apellido'].value,
-        legajo: this.formAlta.controls['legajo'].value,
-        email: this.formAlta.controls['email'].value,
-        pass: this.formAlta.controls['pass'].value,
-        matMar: this.formAlta.controls['matMar'].value,
-        matVier: this.formAlta.controls['matVier'].value,
-        matSab: this.formAlta.controls['matSab'].value
-      });
-      if(this.modifHasImg == "1" && this.imgFile != "") {
-        this.subirFoto(this.formAlta.controls['email'].value);
+      if(!this.disablesFields) {
+        this.authAf.auth.createUserWithEmailAndPassword(this.formAlta.controls['email'].value, this.formAlta.controls['pass'].value).then(r => {
+          this.actualizarAlumno();
+        }).catch(err => {
+          let message;
+          if((err as any).code == "auth/weak-password"){
+            message = "La contraseña es muy debil";
+          } else if((err as any).code == "auth/email-already-in-use"){
+            message = "Este mail ya se encuentra en uso";
+          } else if((err as any).code == "auth/invalid-email"){
+            message = "Email invalido";
+          } else if((err as any).code == "auth/operation-not-allowed"){
+            message = "Bardiamos fuerte...";
+          }
+          this.alertCtrl.create({ title: message, buttons: [{ text: 'Ok',}] }).present();
+        });
+      } else {
+        this.actualizarAlumno();
       }
-      let prompt = this.alertCtrl.create({ title: 'Alumno modificado', buttons: [{ text: 'Ok',}] });
-      prompt.present();
-      this.formAlta.reset();
-      this.formAlta.controls['turno'].setValue("Man");
-      this.imgFile = "";
-      this.imgName = "";
-      this.imgUrl = "NADA";
     }
+  }
+
+  public actualizarAlumno() {
+    console.log("fasd");
+    this.alumnos.update(this.modifId, {
+      nombre: this.formAlta.controls['nombre'].value,
+      apellido: this.formAlta.controls['apellido'].value,
+      legajo: this.formAlta.controls['legajo'].value,
+      email: this.formAlta.controls['email'].value,
+      pass: this.formAlta.controls['pass'].value,
+      matMar: this.formAlta.controls['matMar'].value,
+      matVier: this.formAlta.controls['matVier'].value,
+      matSab: this.formAlta.controls['matSab'].value
+    });
+    if(this.modifHasImg == "1" && this.imgFile != "") {
+      this.subirFoto(this.formAlta.controls['email'].value);
+    }
+    let prompt = this.alertCtrl.create({ title: 'Alumno modificado', buttons: [{ text: 'Ok',}] });
+    prompt.present();
+    this.formAlta.reset();
+    this.formAlta.controls['turno'].setValue("Man");
+    this.imgFile = "";
+    this.imgName = "";
+    this.imgUrl = "NADA";
+
     this.modifHasImg = "";
     this.modifId = "";
     this.disablesFields = false;
@@ -311,6 +338,13 @@ export class AbmAlumnoPage {
         this.addAlumnosList(FileService.ExelToAlumnosList(e.target.result));
       };
       reader.readAsBinaryString(file);
+    } else {
+      swal({
+        title: 'Archivo invalido',
+        text: 'No se pueden procesar archivos de tipo .' + extension,
+        type: 'error',
+        timer: 5000
+      });
     }
   }
 
@@ -324,14 +358,14 @@ export class AbmAlumnoPage {
       data["matMar"] = "Ninguna";
       data["matVier"] = "Ninguna";
       data["matSab"] = "Ninguna";
-      data["email"] = "";
+      data["email"] = "SIN DEFINIR";
       data["pass"] = "";
       data["tipo"] = "alumno";
       data["pres_Martes"] = "0";
       data["pres_Viernes"] = "0";
       data["pres_Sabado"] = "0";
       data["tieneFoto"] = "0";
-      //this.af.list("/usuarios").push(data);
+      this.af.list("/usuarios").push(data);
     });
     swal({
       title: 'Éxito',
