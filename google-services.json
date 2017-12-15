@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "566483132157",
+    "firebase_url": "https://tpfinal-8ff7a.firebaseio.com",
+    "project_id": "tpfinal-8ff7a",
+    "storage_bucket": "tpfinal-8ff7a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:566483132157:android:a09d793767c48a72",
+        "android_client_info": {
+          "package_name": "mt.materias"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "566483132157-acbi4lvsb61bu5465knb7jibuue0qui3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAe230Y19F9O2LRXbLoWw-pKvdni9qCwXk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

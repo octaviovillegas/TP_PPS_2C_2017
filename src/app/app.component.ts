@@ -16,6 +16,7 @@ import { ProfesorAsistenciaPage } from "../pages/profesor-asistencia/profesor-as
 import { EncuestasHomePage } from "../pages/encuestas-home/encuestas-home";
 import { EncuestaDetPage } from "../pages/encuesta-det/encuesta-det";
 
+import {Push,PushToken} from '@ionic/cloud-angular';
 
 @Component({
   templateUrl: 'app.html'
@@ -26,7 +27,9 @@ export class MyApp {
 
   public pages: Array<{titulo: string, component:any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
+              public push:Push
+  ) {
 
     this.pages = [
         {titulo: 'Inicio', component:LoginPage},

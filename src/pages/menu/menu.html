@@ -10,7 +10,9 @@
         <img src="assets/imgs/perfil.jpg" width="40" height="40">
       </ion-segment-button>
 
-
+      <ion-segment-button value="archAlumnos">
+        <img src="assets/imgs/archAlumnos.png" width="40" height="40">
+      </ion-segment-button>
         <ion-segment-button value="abmProfesores" >
           <img  *ngIf="perfil=='administrador' || perfil=='administrativo'"  src="assets/imgs/abm_profesores.jpeg" width="40" height="40">
         </ion-segment-button>
@@ -37,6 +39,10 @@
                 [perfil]="datos.perfil"
                 [isLoginSocial]="datos.loginSocial"
       ></perfil>
+
+      <files *ngSwitchCase="'archAlumnos'">
+
+      </files>
 
     <div *ngIf="perfil=='administrador'  || perfil=='administrativo'">
       <lista-profesores *ngSwitchCase="'abmProfesores'"></lista-profesores>

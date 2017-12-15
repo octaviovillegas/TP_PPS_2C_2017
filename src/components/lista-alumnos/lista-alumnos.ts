@@ -12,6 +12,7 @@ import { Alumno } from "../../clases/alumno";
 
 import { ConsultarBajaModifPage } from "../../pages/consultar-baja-modif/consultar-baja-modif";
 
+
 @Component({
   selector: 'lista-alumnos',
   templateUrl: 'lista-alumnos.html'
@@ -39,6 +40,10 @@ export class ListaAlumnosComponent implements OnInit {
     })
   }
 
+
+  descargarArchivoAlumnos(){
+    this.navCtrl.push('FilesPage');
+  }
 
   abrirModalView(alumno){
     console.log(alumno);

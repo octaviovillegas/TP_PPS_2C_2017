@@ -2,6 +2,7 @@
   "name": "Ionic",
   "short_name": "Ionic",
   "start_url": "index.html",
+  "gcm_sender_id": "103953800507",
   "display": "standalone",
   "icons": [{
     "src": "assets/imgs/logo.png",

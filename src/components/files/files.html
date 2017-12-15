@@ -1,0 +1,17 @@
+
+          Guardar Info en el celu
+
+
+  <p> Nombre del archivo: </p>
+  <input type="text" class="input" [(ngModel)]="filename" #ctl="ngModel"  ><br>
+
+
+  <p> File Content </p>
+  <ion-textarea placeholder="Ingrese File Content" class="input" [(ngModel)]="fileContents" ></ion-textarea>
+
+  <p> Nombre del directorio: </p>
+  <input type="text" class="input" [(ngModel)]="dirName"  ><br>
+
+  <button ion-button (click)="writeToFile(fileName,fileContents,dirName)"> Guardar archivo </button>
+
+

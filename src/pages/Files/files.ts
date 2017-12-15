@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
 import { File } from "@ionic-native/file";
+import { IonicPage, NavController, NavParams, AlertController, ModalController } from 'ionic-angular';
+
 
 @Component ({
     selector: 'page-File',
-    templateUrl: 'file.html'
+    templateUrl: 'files.html'
 })
 
 export class Files {
@@ -15,7 +16,7 @@ export class Files {
     dirPath;
 
 
-    constructor ( public navCtrl: NavController, public file:Files) {
+    constructor ( public navCtrl: NavController, public file:File) {
 
     }
 
@@ -34,7 +35,7 @@ writeToFile(fileName,fileContents,dirName) {
 
         alert(" Directorio creado en : " + this.dirPath);
 
-        this.file.writeToFile(this.dirPath, this.fileName , this.fileContent , {replace: true });
+        this.file.writeFile(this.dirPath, this.fileName , this.fileContent , {replace: true });
 
         alert(" Archivo creado en : " + this.dirPath);
 
@@ -55,18 +56,18 @@ writeToFile(fileName,fileContents,dirName) {
     });
 }
     copyToLocation(newDirName)
-  
+
     {
         let result = this.file.createDir(this.file.dataDirectory, newDirName, true);
 
         result.then ( data => {
-            
+
             let newPath = data.toURL();
-    
+
             this.file.copyFile(this.dirPath, this.fileName, newPath, this.fileName );
-    
+
             alert(" Archivo copiado en : " + newPath);
-    
+
         }).catch(error => {
             alert(" Error : " + error );
         });
