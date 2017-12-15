@@ -27,6 +27,7 @@
     "@ionic-native/date-picker": "^4.4.2",
     "@ionic-native/facebook": "^4.4.2",
     "@ionic-native/fcm": "^4.4.2",
+    "@ionic-native/file-opener": "^4.5.2",
     "@ionic-native/native-audio": "^4.4.2",
     "@ionic-native/splash-screen": "4.3.2",
     "@ionic-native/status-bar": "4.3.2",
@@ -40,6 +41,7 @@
     "cordova-plugin-datepicker": "^0.9.3",
     "cordova-plugin-device": "^1.1.4",
     "cordova-plugin-fcm": "^2.1.2",
+    "cordova-plugin-file-opener2": "^2.0.19",
     "cordova-plugin-ionic-webview": "^1.1.11",
     "cordova-plugin-nativeaudio": "^3.0.9",
     "cordova-plugin-splashscreen": "^4.0.3",
@@ -73,7 +75,8 @@
       "phonegap-plugin-barcodescanner": {},
       "cordova-plugin-datepicker": {},
       "cordova-plugin-fcm": {},
-      "cordova-plugin-camera": {}
+      "cordova-plugin-camera": {},
+      "cordova-plugin-file-opener2": {}
     },
     "platforms": [
       "android",

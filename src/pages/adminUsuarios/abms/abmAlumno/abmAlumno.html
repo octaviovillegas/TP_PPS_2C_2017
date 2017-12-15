@@ -10,6 +10,9 @@
         <ion-segment-button value="agregar" (click)="cambiarDeTab()">
           Agregar 
         </ion-segment-button>
+        <ion-segment-button value="cargar" (click)="cambiarDeTab()">
+          Cargar Listado 
+        </ion-segment-button>
       </ion-segment>
     </ion-toolbar>
   </ion-header>
@@ -115,5 +118,9 @@
             <br>
           <button class="our-btn" ion-button block type="submit" [disabled]="!formAlta.valid">{{modifId == "" ? "Agregar" : "Modificar"}}</button>
       </form>
+  </ion-content>
+
+  <ion-content *ngIf="tab == 'cargar'">
+      <input name="myFile" type="file">
   </ion-content>
 </ion-content>

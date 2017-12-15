@@ -139,16 +139,16 @@ export class ListaCursoPage {
     })) as FirebaseListObservable<any[]>; 
   }
 
-  public alumnoPresente(alumno: any, materia: string): boolean {
-    return alumno["pres_" + materia] == 1;
+  public alumnoPresente(alumno: any, dia: string): boolean {
+    return alumno["pres_" + dia] == 1;
   }
 
-  public setPresente(alumno: any, materia: string, listo: number): void {
+  public setPresente(alumno: any, dia: string, listo: number): void {
     if (listo == 0) {
       let isPresente: boolean;
-      isPresente = this.alumnoPresente(alumno, materia);
+      isPresente = this.alumnoPresente(alumno, dia);
       this.alumnos.update(alumno.$key, {
-        ["pres_" + materia]: isPresente ? 0 : 1
+        ["pres_" + dia]: isPresente ? 0 : 1
       });
       if (!isPresente) {
         this.pushService.avisarDeFaltas(alumno.email);

@@ -20,7 +20,7 @@ export class AbmAlumnoPage {
   private materiasMartes: FirebaseListObservable<any[]>;
   private materiasViernes: FirebaseListObservable<any[]>;
   private materiasSabado: FirebaseListObservable<any[]>;
-  private userImg = "https://openclipart.org/image/2400px/svg_to_png/247319/abstract-user-flat-3.png";
+  private userImg = "assets/usrImg.png";
   //Lista
   private searchValue: string;
   private filterType: string;
@@ -69,9 +69,10 @@ export class AbmAlumnoPage {
     setTimeout(() => {
       if(this.imgName != "") {
         storage().ref(this.imgName).getDownloadURL().then(url => {
-          this.imgUrl = url;
+          if(this.imgName != ""){
+            this.imgUrl = url;
+          }
         }).catch(err => {
-          //alert("no uacho rompi to2");
           if(this.imgName != "temp"){
             this.imgName = "";
           } else {
@@ -105,19 +106,23 @@ export class AbmAlumnoPage {
   }
 
   public modificarAlumno(alumno: any): void {
-       this.formAlta.controls['nombre'].setValue(alumno.nombre);
-       this.formAlta.controls['apellido'].setValue(alumno.apellido);
-       this.formAlta.controls['legajo'].setValue(alumno.legajo);
-       this.formAlta.controls['turno'].setValue(alumno.turno);
-       this.formAlta.controls['matMar'].setValue(alumno.matMar);
-       this.formAlta.controls['matVier'].setValue(alumno.matVier);
-       this.formAlta.controls['matSab'].setValue(alumno.matSab);
-       this.formAlta.controls['email'].setValue(alumno.email);
-       this.formAlta.controls['pass'].setValue(alumno.pass);
-       this.modifId = alumno.$key;
-       this.imgName = alumno.email;
-       this.modifHasImg = alumno.tieneFoto;
-       this.tab = "agregar";
+    this.loadMaterias(alumno.turno);
+    this.formAlta.controls['nombre'].setValue(alumno.nombre);
+    this.formAlta.controls['apellido'].setValue(alumno.apellido);
+    this.formAlta.controls['legajo'].setValue(alumno.legajo);
+    this.formAlta.controls['turno'].setValue(alumno.turno);
+    this.formAlta.controls['matMar'].setValue(alumno.matMar);
+    this.formAlta.controls['matVier'].setValue(alumno.matVier);
+    this.formAlta.controls['matSab'].setValue(alumno.matSab);
+    this.formAlta.controls['email'].setValue(alumno.email);
+    this.formAlta.controls['pass'].setValue(alumno.pass);
+    this.modifId = alumno.$key;
+    this.imgName = alumno.email;
+    if(alumno.tieneFoto == "1"){
+      this.imgUrl = "assets/spinner.gif";
+    }
+    this.modifHasImg = alumno.tieneFoto;
+    this.tab = "agregar";
   }
 
   public loadMaterias(turno: any): void {
@@ -148,16 +153,16 @@ export class AbmAlumnoPage {
         let prompt = this.alertCtrl.create({ title: 'Alumno agregado', buttons: [{ text: 'Ok',}] });
         prompt.present();
         data["tipo"] = "alumno";
-        data["pres_Programacion"] = "0";
-        data["pres_Laboratorio"] = "0";
-        data["pres_Estadistica"] = "0";
+        data["pres_Martes"] = "0";
+        data["pres_Viernes"] = "0";
+        data["pres_Sabado"] = "0";
         data["tieneFoto"] = this.imgName == "" ? "0" : "1";
         if(data["tieneFoto"] == "1") {
           this.subirFoto(this.formAlta.value["email"]);
         }
         this.imgFile = "";
         this.imgName = "";
-        this.imgUrl = "";
+        this.imgUrl = "NADA";
         this.af.list("/usuarios").push(data);
         this.formAlta.reset();
       }).catch(err => {
@@ -180,9 +185,9 @@ export class AbmAlumnoPage {
         legajo: this.formAlta.controls['legajo'].value,
         email: this.formAlta.controls['email'].value,
         pass: this.formAlta.controls['pass'].value,
-        Programacion: this.formAlta.controls['Programacion'].value,
-        Laboratorio: this.formAlta.controls['Laboratorio'].value,
-        Estadistica: this.formAlta.controls['Estadistica'].value
+        matMar: this.formAlta.controls['matMar'].value,
+        matVier: this.formAlta.controls['matVier'].value,
+        matSab: this.formAlta.controls['matSab'].value
       });
       if(this.modifHasImg == "1" && this.imgFile != "") {
         this.subirFoto(this.formAlta.controls['email'].value);
@@ -190,9 +195,10 @@ export class AbmAlumnoPage {
       let prompt = this.alertCtrl.create({ title: 'Alumno modificado', buttons: [{ text: 'Ok',}] });
       prompt.present();
       this.formAlta.reset();
+      this.formAlta.controls['turno'].setValue("Man");
       this.imgFile = "";
       this.imgName = "";
-      this.imgUrl = "";
+      this.imgUrl = "NADA";
     }
     this.modifHasImg = "";
     this.modifId = "";
@@ -252,7 +258,7 @@ export class AbmAlumnoPage {
           handler: data => { 
             this.modifId = "";
             this.formAlta.reset();
-            this.imgUrl = "";
+            this.imgUrl = "NADA";
             this.imgName = "";
             this.modifHasImg = "";
           }

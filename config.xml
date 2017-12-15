@@ -91,4 +91,5 @@
     <plugin name="cordova-plugin-datepicker" spec="^0.9.3" />
     <plugin name="cordova-plugin-fcm" spec="^2.1.2" />
     <plugin name="cordova-plugin-camera" spec="^3.0.0" />
+    <plugin name="cordova-plugin-file-opener2" spec="^2.0.19" />
 </widget>
