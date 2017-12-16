@@ -1,0 +1,161 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>Tomar Asistencia</ion-title>
+    </ion-navbar>
+    <ion-toolbar>
+      <ion-segment [(ngModel)]="tab" color="primary">
+        <ion-segment-button value="materias">
+          Materias
+        </ion-segment-button>
+        <ion-segment-button value="buscar">
+          Buscar 
+        </ion-segment-button>
+        <ion-segment-button value="estadisticas" (click)="loadEstadisticas()">
+          Estadisticas 
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+  </ion-header>
+  
+<ion-content padding>
+
+  <ion-content *ngIf="tab == 'materias'">
+    <ion-card>
+      <ion-card-header>
+        Elegir Turno:
+      </ion-card-header>
+      <ion-item>
+        <ion-select  (ionChange)="loadMaterias($event)">
+          <ion-option [selected]="true" value="Man">Mañana</ion-option>
+          <ion-option value="Noch">Noche</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-list>
+        <ion-item color="primary">
+          <h1 class="titulo-lista">Martes</h1>
+        </ion-item>
+        <div *ngFor="let m of materiasMartes | async">
+          {{cargarAsistencias(m)}}
+          <ion-item (click)="selectMateria(m.nombre, m.turno, m.dia)">
+            <b>{{m.nombre}} {{m.curso}}</b>
+            <ion-icon class="incompleto" name="ios-arrow-forward" item-end *ngIf="m.listo == 0"></ion-icon>
+            <ion-icon class="completo" name="md-checkmark" item-end *ngIf="m.listo == 1"></ion-icon>
+          </ion-item>
+          </div>
+      </ion-list>
+    </ion-card>
+
+    <ion-card>
+      <ion-list>
+        <ion-item color="primary">
+          <h1 class="titulo-lista">Viernes</h1>
+        </ion-item>
+        <div *ngFor="let m of materiasViernes | async">
+          {{cargarAsistencias(m)}}
+          <ion-item (click)="selectMateria(m.nombre, m.turno, m.dia)">
+            <b>{{m.nombre}} {{m.curso}}</b>
+            <ion-icon class="incompleto" name="ios-arrow-forward" item-end *ngIf="m.listo == 0"></ion-icon>
+            <ion-icon class="completo" name="md-checkmark" item-end *ngIf="m.listo == 1"></ion-icon>
+          </ion-item>
+          </div>
+      </ion-list>
+    </ion-card>
+
+    <ion-card>
+      <ion-list>
+        <ion-item color="primary">
+          <h1 class="titulo-lista">Sábados</h1>
+        </ion-item>
+        <div *ngFor="let m of materiasSabado | async">
+          {{cargarAsistencias(m)}}
+          <ion-item (click)="selectMateria(m.nombre, m.turno, m.dia)">
+            <b>{{m.nombre}} {{m.curso}}</b>
+            <ion-icon class="incompleto" name="ios-arrow-forward" item-end *ngIf="m.listo == 0"></ion-icon>
+            <ion-icon class="completo" name="md-checkmark" item-end *ngIf="m.listo == 1"></ion-icon>
+          </ion-item>
+          </div>
+      </ion-list>
+    </ion-card>
+  </ion-content>
+  
+  <ion-content *ngIf="tab == 'buscar'">
+    <h1>Buscar</h1>
+    <ion-searchbar
+      [(ngModel)]="searchValue"
+      (ionInput)="onInput($event)">
+    </ion-searchbar>
+    <ion-item>
+      <ion-select [(ngModel)]="buscarPor">
+        <ion-option>Aula</ion-option>
+        <ion-option>Profesor</ion-option>
+        <ion-option>Alumno</ion-option>
+      </ion-select>
+    </ion-item>
+    
+    <div *ngIf="buscarPor == 'Aula'">
+      <ion-card *ngFor="let m of materiasFiltradas | async">
+        <ion-item (click)="selectMateria(m.nombre, m.turno, m.dia)">
+          <h2>{{m.nombre}} {{m.curso}}</h2>
+          <p>Aula: <b>{{m.aula}}</b></p>
+          <ion-icon name="ios-arrow-forward" item-end></ion-icon>
+        </ion-item>
+      </ion-card>      
+    </div>
+
+    <div *ngIf="buscarPor == 'Profesor'">
+      <ion-card *ngFor="let p of profesores | async">
+        <ion-item (click)="selectMateria(p.materia, p.curso)">
+          <h2>{{p.materia}} {{p.curso}}</h2>
+          <p>Profesor: <b>{{p.apellido}}</b></p>
+          <ion-icon name="ios-arrow-forward" item-end></ion-icon>
+        </ion-item>
+      </ion-card>      
+    </div>
+
+    <div *ngIf="buscarPor == 'Alumno'">
+      <div *ngFor="let a of alumnos | async">
+        <ion-card style="margin-bottom: -5px;">
+          <ion-item>
+            <h2>{{a.apellido.toLocaleUpperCase()}}, {{a.nombre}}</h2>
+          </ion-item>
+        </ion-card>
+        {{initShowAlumno(a.email)}}
+        <ion-card>
+          <ion-list>
+              <ion-item color="light" (click)="showHideAlumno(a.email)">
+                <h1><b>Materias:</b></h1>
+                <ion-icon name="md-arrow-dropdown" item-end *ngIf="!showAlumno[emailSinArroba(a.email)]"></ion-icon>
+                <ion-icon name="md-arrow-dropup" item-end *ngIf="showAlumno[emailSinArroba(a.email)]"></ion-icon>
+              </ion-item>
+              <ion-item *ngIf="showAlumno[emailSinArroba(a.email)] && a.matMar && a.matMar != 'Ninguna'"
+                        (click)="selectMateria(a.matMar, a.turno, 'Martes')">
+                {{a.matMar}}
+                <ion-icon class="incompleto" name="ios-arrow-forward" item-end ></ion-icon>
+              </ion-item>
+              <ion-item *ngIf="showAlumno[emailSinArroba(a.email)] && a.matVier && a.matVier != 'Ninguna'"
+                        (click)="selectMateria(a.matVier, a.turno, 'Viernes')">
+                {{a.matVier}}
+                <ion-icon class="incompleto" name="ios-arrow-forward" item-end ></ion-icon>
+              </ion-item>
+              <ion-item *ngIf="showAlumno[emailSinArroba(a.email)] && a.matSab && a.matSab != 'Ninguna'"
+                        (click)="selectMateria(a.matSab, a.turno, 'Sabado')">
+                {{a.matSab}}
+                <ion-icon class="incompleto" name="ios-arrow-forward" item-end ></ion-icon>
+              </ion-item>
+          </ion-list>
+        </ion-card>
+      </div>
+    </div>
+  </ion-content>
+
+  <ion-content *ngIf="tab == 'estadisticas'">
+      <h2 class="page-susbtitle">Asistencias:</h2>
+      Presentes: {{presentes}} <br>
+      Ausentes: {{ausentes}}
+      <canvas #barrasCanvas></canvas>
+  </ion-content>
+    
+</ion-content>

@@ -1,0 +1,64 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>QR Profesor</ion-title>
+    </ion-navbar>    
+</ion-header>
+<ion-content padding>
+
+    <ion-content *ngIf="!showInfo">
+        <ion-card>
+            <img src="assets/qr.png"/>
+            <ion-card-content>
+                <ion-card-title>
+                Escanear QR
+                </ion-card-title>
+                <p>
+                Escaneando el código QR que está en cada aula podés obtener información
+                de las materias que se adan en cada horario.
+                </p>
+            </ion-card-content>
+        </ion-card>
+        <button ion-button class="our-btn" block (click)="scanCode()">Escanear  <ion-icon style="margin-left: 5px;" name="qr-scanner"></ion-icon></button>
+    </ion-content>
+
+    <ion-content *ngIf="showInfo">
+        <button ion-button class="our-btn" block (click)="scanCode()">Escanear  <ion-icon style="margin-left: 5px;" name="qr-scanner"></ion-icon></button>
+        <ion-card>
+            <ion-item>
+                <h1><ion-icon name="ios-information-circle-outline"></ion-icon>  Aula Nº{{currentAula.numero}}</h1>
+            </ion-item>
+            <ion-card-content>
+                <h2><b>{{currentAula.matMan}}</b></h2><br>
+                <b>{{currentAula.diaMan}}</b> en el Turno Mañana (8:30 a 12:30). <br>
+                <span *ngIf="esSuyaMan" class="empieza-clase"><b>Tenes asignada esta clase</b></span>
+                <button ion-button icon-left small (click)="filtrarAlumnos('Man', currentAula.matMan, currentAula.diaMan)">
+                    <ion-icon name="ios-list"></ion-icon>
+                    <div>Mostrar listado</div>
+                </button>
+            </ion-card-content>
+            <ion-card-content>
+                <h2><b>{{currentAula.matNoch}}</b></h2><br>
+                <b>{{currentAula.diaNoch}}</b> en el Turno Noche (18:30 a 22:30). <br>
+                <span *ngIf="esSuyaNoch" class="empieza-clase"><b>Tenes asignada esta clase</b></span>
+                <button ion-button icon-left small (click)="filtrarAlumnos('Noch', currentAula.matNoch, currentAula.diaNoch)">
+                    <ion-icon name="ios-list"></ion-icon>
+                    <div>Mostrar listado</div>
+                </button>
+            </ion-card-content>
+        </ion-card>
+
+        <div *ngIf="showListado">
+            <h1><b>Alumnos de {{currentMateria}} (T{{currentTurno}})</b></h1>
+            <ion-card *ngFor="let alumno of alumnos | async">
+                <ion-item>
+                    <h2>{{alumno.apellido}}, {{alumno.nombre}}</h2>
+                    <p>Legajo: <b>{{alumno.legajo}}</b></p>
+                    <p>Email: <b>{{alumno.email}}</b></p>
+                </ion-item>
+            </ion-card>
+        </div>
+    </ion-content>
+
+</ion-content>
+
+    

@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Asistencia</ion-title>
+  </ion-navbar>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="tab" color="primary">
+      <ion-segment-button value="asistencia">
+        Asistencia
+      </ion-segment-button>
+      <ion-segment-button value="estadisticas" (click)="loadEstadisticas()">
+        Estadisticas 
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-content *ngIf="tab == 'asistencia'">
+    <ion-content *ngFor="let m of materias | async">
+      {{setCurrentMateria(m)}}
+      <ion-card>
+        <ion-item color="primary" text-center>
+          <h1 class="titulo-lista"><b>{{m.nombre}} {{m.curso}}</b></h1>
+        </ion-item>
+      </ion-card>
+      <ion-card *ngFor="let a of alumnos | async" (click)="setPresente(a, m.dia, m.listo)" class="item-alumno" [class.disabled]="m.listo == 1">
+        {{updateAsistencias(a)}}
+        <ion-item>
+          <h2>{{a.apellido}}, {{a.nombre}}</h2>
+          <p>Legajo: <b>{{a.legajo}}</b></p>
+          <ion-icon name='md-checkmark' class="completo" *ngIf="alumnoPresente(a, m.dia)" item-end></ion-icon>
+        </ion-item>
+      </ion-card>
+      <button ion-button block class="our-btn" *ngIf="m.listo == 0" (click)="completarMateria(m.$key)" >Completar</button>
+      <button ion-button block class="our-btn" *ngIf="m.listo == 1" (click)="reabrirMateria(m.$key)">Reabrir</button>
+      <div *ngIf="imagen">
+        Foto del curso:
+        <img class="img-curso" [src]="imagen"/>
+      </div>
+      <br>
+      <br>
+    </ion-content>
+  </ion-content>
+
+  <ion-content *ngIf="tab == 'estadisticas'">
+    <h2 class="page-susbtitle">Asistencias:</h2>
+    Presentes: {{currentMateria.presentes}} <br>
+    Ausentes: {{currentMateria.ausentes}}
+    <canvas class="my-canvas" #tortaCanvas></canvas>
+  </ion-content>
+
+</ion-content>
