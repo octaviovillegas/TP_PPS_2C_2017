@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Mi Perfil</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+<div>
+    <ion-row class="fondo">
+        <ion-col>
+        <ion-list inset>
+  
+        <ion-item>
+          <ion-label >Email</ion-label>
+          <ion-input  type="email" value="{{email}}" [(ngModel)]="email" [disabled]="true"></ion-input>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label >Constraseña</ion-label>
+          <ion-input  type="password" [(ngModel)]="oldPassword"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label >Constraseña nueva</ion-label>
+          <ion-input  type="password" [(ngModel)]="newPassword"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label >Repetir constraseña nueva</ion-label>
+          <ion-input  type="password" [(ngModel)]="repeatNewPassword"></ion-input>
+        </ion-item>
+
+        </ion-list>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="fondo">
+          <ion-col>
+            <div>
+              <button ion-button class="our-btn" (click)="actualizarDatos()">Actualizar datos</button>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row class="fondo">
+            <ion-col>
+              <div>
+                <button ion-button class="our-btn" (click)="cancelar()" >Cancelar</button>
+              </div>
+            </ion-col>
+          </ion-row>
+
+</div>
+</ion-content>

@@ -1,0 +1,28 @@
+.ios, .md {
+    page-home {
+        .scroll-content {
+            background-color: map-get($colors, light);
+        }
+    
+        ion-card-header {
+            font-weight: bold;
+        }
+    
+    }    
+}
+
+   .my-canvas {
+    display: block;
+    height: 55% !important;
+    width: 169% !important;
+    margin-left: -33% !important;
+   }
+
+   .page-title {
+    font-weight: bolder;
+    color: #fff;
+}
+
+.page-susbtitle{
+    color: #B3E5FC;
+}

@@ -1,0 +1,27 @@
+ion-content {
+    font-family: Helvetica !important;
+    background-color: #03A9F4 !important;
+}
+
+.cerrarSesion{
+      //  width:32px;
+       // height:32px;
+        //border-radius:100%;
+        background:#F44336;
+        left:0;
+        bottom:0;
+        //position:absolute;
+       // margin-left:80%;
+        //margin-bottom:14px;
+        border:none;
+        outline:none;
+        color:#FFF;
+        font-size:19px;
+       // text-align: right;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        transition:.5s;  
+}
+
+.cerrarSesion:active{
+    transform:scale(1.1);  
+  }
