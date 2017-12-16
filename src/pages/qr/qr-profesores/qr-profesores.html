@@ -28,7 +28,7 @@
                 <h1><ion-icon name="ios-information-circle-outline"></ion-icon>  Aula Nº{{currentAula.numero}}</h1>
             </ion-item>
             <ion-card-content>
-                <h2><b>{{currentAula.matMan}}</b> <br></h2>
+                <h2><b>{{currentAula.matMan}}</b></h2><br>
                 <b>{{currentAula.diaMan}}</b> en el Turno Mañana (8:30 a 12:30). <br>
                 <span *ngIf="esSuyaMan" class="empieza-clase"><b>Tenes asignada esta clase</b></span>
                 <button ion-button icon-left small (click)="filtrarAlumnos('Man', currentAula.matMan, currentAula.diaMan)">
@@ -37,7 +37,7 @@
                 </button>
             </ion-card-content>
             <ion-card-content>
-                <b>{{currentAula.matNoch}}</b><br>
+                <h2><b>{{currentAula.matNoch}}</b></h2><br>
                 <b>{{currentAula.diaNoch}}</b> en el Turno Noche (18:30 a 22:30). <br>
                 <span *ngIf="esSuyaNoch" class="empieza-clase"><b>Tenes asignada esta clase</b></span>
                 <button ion-button icon-left small (click)="filtrarAlumnos('Noch', currentAula.matNoch, currentAula.diaNoch)">

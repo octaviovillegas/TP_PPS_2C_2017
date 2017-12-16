@@ -29,17 +29,18 @@ export class PagesService {
         }
 
         if (userType == "profe") {
-            lista.push(this.tomarAsistenciaPage);
             lista.push(this.encuestasPage);
             lista.push(this.enviarAvisoPage);
-            lista.push(this.adminUsuariosPage);
             lista.push(this.QrProfesoresPage);
         }
 
         if (userType == "administrativo") {
+            lista.push(this.tomarAsistenciaPage);
+            lista.push(this.enviarAvisoPage);
+            lista.push(this.adminUsuariosPage);
         }
 
-        if (userType == "administrador") {
+        if (userType == "admin") {
             lista.push(this.tomarAsistenciaPage);
             lista.push(this.encuestasPage);
             lista.push(this.enviarAvisoPage);
