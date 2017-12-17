@@ -1,0 +1,85 @@
+<!--
+<!--
+  Generated template for the PersonasamPage page.
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="back();">
+       <ion-icon name="md-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{estado}}</ion-title>    
+    <ion-buttons end *ngIf="modifica">
+      <button ion-button icon-only (click)="presentActionSheet()">
+        <ion-icon name="md-more"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end *ngIf="!modifica">
+      <button ion-button icon-only (click)="guardar()">
+        <ion-icon name="md-checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content padding>
+  <form [formGroup]="formPersonaAM">
+    <ion-list>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-card (click)="imagen();">                
+                 <img class="responsiveImg" *ngIf="img==''" src="assets/imgs/user.png">
+                  <img class="responsiveImg" *ngIf="img!=''" src="{{img}}">
+              </ion-card>
+            </ion-item>  
+          </ion-col>
+        </ion-row>
+      </ion-grid>      
+      <ion-item>
+        <ion-label floating>Nombre</ion-label>
+        <ion-input [(ngModel)]="nombre" formControlName="nombre" disabled="{{modifica}}" required  type="text"></ion-input>
+      </ion-item>  
+      <ion-item>
+        <ion-label floating>Apellido</ion-label>
+        <ion-input [(ngModel)]="apellido" formControlName="apellido" disabled="{{modifica}}" required  type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Email</ion-label>
+        <ion-input [(ngModel)]="email" (blur)="verificarMail()" formControlName="email" disabled="{{modifica}}" required  type="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input [(ngModel)]="password" formControlName="password" disabled="{{modifica}}" required  type="password"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Repita el Password</ion-label>
+        <ion-input [(ngModel)]="password2" formControlName="password2" disabled="{{modifica}}" required  (blur)="checkPass();" type="password"></ion-input>
+      </ion-item>
+      <ion-item > 
+        <ion-label floating>Rol</ion-label>
+        <ion-select [(ngModel)]="rolasignado" formControlName="rolasignado" disabled="{{modifica}}" required (ionChange)="segunTipo();">
+          <ion-option *ngIf="desde!='login'" value="1">Administrador</ion-option>
+          <ion-option *ngIf="desde!='login'" value="2">Administrativo</ion-option>
+          <ion-option value="3">Alumno</ion-option>
+          <ion-option *ngIf="desde!='login'" value="4">Profesor</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="rolasignado==3">
+        <ion-label floating>dni</ion-label>
+        <ion-input [(ngModel)]="dni" formControlName="dni" (blur)="verificarDni()" disabled="{{modifica}}"  type="number"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="rolasignado==3">
+        <ion-label floating>legajo</ion-label>
+        <ion-input [(ngModel)]="legajo" formControlName="legajo" (blur)="verificarLegajo()" disabled="{{modifica}}"  type="number"></ion-input>
+      </ion-item>
+    </ion-list>
+
+  </form>
+</ion-content>

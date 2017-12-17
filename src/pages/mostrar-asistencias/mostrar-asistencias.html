@@ -1,0 +1,105 @@
+<ion-header>
+  
+    <ion-navbar>
+       <button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title><p class="Titulo">Mostrar Asistencias</p><p class="Fecha">{{fecha}}</p></ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  <ion-content padding>
+  <ion-card>
+    <ion-card-content>
+  <div *ngIf="filtro=='filtroGeneral'">
+    <ion-list>
+      <ion-item>
+        <ion-label style="color: black !important;" >FECHA</ion-label>
+        <ion-select [(ngModel)]="dia">
+          <ion-option value="1">1</ion-option>
+          <ion-option value="2">2</ion-option>
+          <ion-option value="3">3</ion-option>
+          <ion-option value="4">4</ion-option>
+          <ion-option value="5">5</ion-option>
+          <ion-option value="6">6</ion-option>
+          <ion-option value="7">7</ion-option>
+          <ion-option value="8">8</ion-option>
+          <ion-option value="9">9</ion-option>
+          <ion-option value="10">10</ion-option>
+          <ion-option value="11">11</ion-option>
+          <ion-option value="12">12</ion-option>
+          <ion-option value="13">13</ion-option>
+          <ion-option value="14">14</ion-option>
+          <ion-option value="15">15</ion-option>
+          <ion-option value="16">16</ion-option>
+          <ion-option value="17">17</ion-option>
+          <ion-option value="18">18</ion-option>
+          <ion-option value="19">19</ion-option>
+          <ion-option value="20">20</ion-option>
+          <ion-option value="21">21</ion-option>
+          <ion-option value="22">22</ion-option>
+          <ion-option value="23">23</ion-option>
+          <ion-option value="24">24</ion-option>
+          <ion-option value="25">25</ion-option>
+          <ion-option value="26">26</ion-option>
+          <ion-option value="27">27</ion-option>
+          <ion-option value="28">28</ion-option>
+          <ion-option *ngIf="mes!=2" value="29">29</ion-option>
+          <ion-option *ngIf="mes!=2" value="30">30</ion-option>
+          <ion-option *ngIf="mes!=2 && mes!=4 && mes!=6 && mes!=9 && mes!=11" value="31">31</ion-option>
+  
+        </ion-select>
+        <ion-select [(ngModel)]="mes">
+          <ion-option value="1">ENERO</ion-option>
+          <ion-option value="2">FEBRERO</ion-option>
+          <ion-option value="3">MARZO</ion-option>
+          <ion-option value="4">ABRIL</ion-option>
+          <ion-option value="5">MAYO</ion-option>
+          <ion-option value="6">JUNIO</ion-option>
+          <ion-option value="7">JULIO</ion-option>
+          <ion-option value="8">AGOSTO</ion-option>
+          <ion-option value="9">SEPTIEMBRE</ion-option>
+          <ion-option value="10">OCTUBRE</ion-option>
+          <ion-option value="11">NOVIEMBRE</ion-option>
+          <ion-option value="12">DICIEMBRE</ion-option>
+        </ion-select>
+        <!--<ion-select *ngFor="let item of arrayAnios" [(ngModel)]="anio">-->
+        <ion-select [(ngModel)]="anio">
+          <ion-option value="2017">2017</ion-option>
+          <ion-option value="2016">2016</ion-option>
+          <ion-option value="2015">2015</ion-option>  
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <div> 
+        <ion-list *ngFor="let comision of comisiones" radio-group [(ngModel)]="comisionSeleccionada">
+          <ion-item>
+            <ion-label>{{comision.descripcion}} {{comision.nombreMateria}}</ion-label>
+            <ion-radio value="{{comision.id_comision}}" ></ion-radio>            
+          </ion-item>         
+        </ion-list>
+    </div>
+  </div>
+  <button class="btn" *ngIf="comisionSeleccionada" ion-button block (click)="buscarAlumnos(comisionSeleccionada)">BUSCAR</button>    
+    </ion-card-content>
+  </ion-card>
+  
+  <div *ngIf="cantidadAlumnos > 0">
+    <ion-card> 
+    <ion-card-content>  
+        <h2>Asistencia tomada el dia: {{dia}}/{{mes}}/{{anio}}</h2>
+  
+        <ion-card class="alumnocard" [ngStyle]="{'color': color(alumno.estado)}" *ngFor="let alumno of alumnos;let i = index">
+          <ion-card-header [ngStyle]="{'color': color(alumno.estado)}" >{{alumno.apellido}}, {{alumno.nombre}}</ion-card-header>
+          <ion-card-content>       
+           Legajo: {{alumno.legajo}}<br>         
+           Estado: {{alumno.estado}}<br>   
+           
+          </ion-card-content>
+        </ion-card>
+        <button class="btn" ion-button block (click)="VOLVER()">VOLVER</button>
+        </ion-card-content>      
+    </ion-card>
+    </div>
+  </ion-content>

@@ -1,0 +1,22 @@
+<ion-header>
+  
+    <ion-navbar>
+      <ion-title>Graficos</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content class="fondo" padding>
+  
+    <ion-card>
+        <ion-card-header class="fondo1">
+          {{pregunta}}
+        </ion-card-header>
+        <ion-card-content class="fondo1">
+          <canvas #doughnutCanvas1></canvas>
+        </ion-card-content>
+      </ion-card>
+      <button ion-button block type="submit" (click)="cancelarOpe()">Cancelar</button>
+      
+  </ion-content>

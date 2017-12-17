@@ -1,0 +1,41 @@
+<ion-header>
+  
+    <ion-navbar>
+      <ion-title text-center>Nueva Encuesta</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content class="fondo" padding>
+
+  
+    <ion-item class="fondo">
+        <ion-label>Pregunta:</ion-label>
+        <ion-input type="text" [(ngModel)]="pregunta"></ion-input>
+    </ion-item>
+  
+    <ion-item class="fondo">
+        <ion-label>Opcion1:</ion-label>
+        <ion-input type="text" [(ngModel)]="opcion1"></ion-input>
+    </ion-item>
+  
+    <ion-item class="fondo">
+        <ion-label>Opcion2:</ion-label>
+        <ion-input type="text" [(ngModel)]="opcion2"></ion-input>
+    </ion-item>
+    
+  <ion-item class="fondo">
+      <ion-label>Opcion3:</ion-label>
+      <ion-input type="text" [(ngModel)]="opcion3"></ion-input>
+  </ion-item>
+
+  
+  <button ion-button class="btn" block (click)="ingresarEncuesta()">
+    NUEVA ENCUESTA
+  </button>
+  
+  
+  
+  </ion-content>
+  

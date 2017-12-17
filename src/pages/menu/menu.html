@@ -1,0 +1,105 @@
+
+<ion-header >
+  <ion-toolbar >
+    <ion-segment class="fondoSegment" [(ngModel)]="segmentAlumno" color="secondary" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="qr">
+        <img src="assets/imgs/qr.png" width="40" height="40">
+      </ion-segment-button>
+
+      <ion-segment-button value="perfil">
+        <img src="assets/imgs/perfil.jpg" width="40" height="40">
+      </ion-segment-button>
+
+      <ion-segment-button value="archAlumnos">
+        <img src="assets/imgs/archAlumnos.png" width="40" height="40">
+      </ion-segment-button>
+        <ion-segment-button value="abmProfesores" >
+          <img  *ngIf="perfil=='administrador' || perfil=='administrativo'"  src="assets/imgs/abm_profesores.jpeg" width="40" height="40">
+        </ion-segment-button>
+
+        <ion-segment-button value="abmAlumnos" >
+          <img  *ngIf="perfil=='administrador' || perfil=='administrativo' || perfil=='profesor'"  src="assets/imgs/abm_alumnos.jpg" width="40" height="40">
+        </ion-segment-button>
+
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="fondoMenu" padding>
+
+
+<div [ngSwitch]="segmentAlumno">
+
+      <lector-qr [perfil]="perfil" *ngSwitchCase="'qr'"></lector-qr>
+
+      <perfil  *ngSwitchCase="'perfil'"
+                [nombre]="datos.nombre"
+                [correo]="datos.correo"
+                [perfil]="datos.perfil"
+                [isLoginSocial]="datos.loginSocial"
+      ></perfil>
+
+      <files *ngSwitchCase="'archAlumnos'">
+
+      </files>
+
+    <div *ngIf="perfil=='administrador'  || perfil=='administrativo'">
+      <lista-profesores *ngSwitchCase="'abmProfesores'"></lista-profesores>
+    </div >
+
+    <div *ngIf="perfil=='administrador'  || perfil=='administrativo' || perfil=='profesor'">
+      <lista-alumnos *ngSwitchCase="'abmAlumnos'"></lista-alumnos>
+    </div >
+
+
+
+</div>
+
+
+
+  <!--ion-list class="lista">
+
+    <ion-item class="itemMenu">
+      <ion-thumbnail item-start>
+        <img src="assets/imgs/alumno.png">
+      </ion-thumbnail>
+      <h2>Alumnos</h2>
+      <br>
+      <button ion-button color="secondary" (click)="irAPerfil()" item-bottom>Ver</button>
+      <button ion-button color="secondary" (click)="irAListaAlumnos()" item-bottom>ABM</button>
+      <button ion-button color="secondary" (click)="irAFormAlumnosQrPage()" item-bottom>QR</button>
+    </ion-item>
+    <br>
+    <br>
+    <br>
+    <ion-item class="itemMenu">
+        <ion-thumbnail item-start>
+          <img src="assets/imgs/profesor.png">
+        </ion-thumbnail>
+        <h2>Profesores</h2>
+        <br>
+        <button ion-button color="secondary" (click)="irAFormProfesores()" item-bottom>Nuevo</button>
+        <button ion-button color="secondary" (click)="irAPerfil()" item-bottom>Ver</button>
+        <button ion-button color="secondary" (click)="irABMProfesores()" item-bottom>ABM</button>
+        <button ion-button color="secondary" (click)="irAFormAlumnosQrPage()" item-bottom>QR</button-->
+        <!--button ion-button color="secondary" (click)="cargarArchivos()" item-bottom>Cargar Excel</button-->
+    <!--/ion-item>
+    <br>
+    <br>
+    <br>
+    <ion-item class="itemMenu">
+        <ion-thumbnail item-start>
+          <img src="assets/imgs/admin.png">
+        </ion-thumbnail>
+        <h2>Administración de Doc.</h2>
+        <br>
+        <button ion-button color="secondary" item-bottom>Ver</button>
+        <button ion-button color="secondary" (click)="irABMPEncuestas()" item-bottom>ABM de Encuestas</button>
+    </ion-item>
+
+  </ion-list-->
+
+</ion-content>
+
+

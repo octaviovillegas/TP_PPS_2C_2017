@@ -1,0 +1,54 @@
+page-profesores-form {
+
+    ion-title {
+        background-color:#EECD90;
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 0 90px 1px;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        
+    }
+
+    .fondo {
+        
+                background-color:lightgreen;
+                
+            }
+
+    .fondo1 {
+                
+                background-color:#EECD90;
+                        
+            }
+
+    .btn {
+                background: #34d955;
+                background-image: -webkit-linear-gradient(top, #34d955, #ccf057);
+                background-image: -moz-linear-gradient(top, #34d955, #ccf057);
+                background-image: -ms-linear-gradient(top, #34d955, #ccf057);
+                background-image: -o-linear-gradient(top, #34d955, #ccf057);
+                background-image: linear-gradient(to bottom, #34d955, #ccf057);
+                -webkit-border-radius: 23;
+                -moz-border-radius: 23;
+                border-radius: 23px;
+                font-family: Arial;
+                color: #ffffff;
+                font-size: 20px;
+                padding: 20px 26px 14px 20px;
+                border: solid #e0e0aa 2px;
+                text-decoration: none;
+                position: absolute;
+                height: 15%;
+                width:90%;
+                left: 5%;
+              }
+              
+    .btn:hover {
+                background: #0fdb46;
+                text-decoration: none;
+              }
+
+}

@@ -1,0 +1,27 @@
+<ion-header>
+
+      <ion-navbar>
+        <ion-title text-center>Profesores</ion-title>
+      </ion-navbar>
+
+    </ion-header>
+
+
+    <ion-content class="fondo" padding>
+
+      <ion-item class="fondo">
+        <img src="assets/imgs/add.png" width="40" height="40" (click)="irAFormProfesor()">
+      </ion-item>
+
+      <ion-list>
+        <ion-item (click)="abrirModalView(profesor)" class="fondo" *ngFor="let profesor of listado">
+          <ion-avatar item-start>
+            <img *ngIf="profesor.foto!=''" [src]="profesor.foto">
+          </ion-avatar>
+          <h2>{{ profesor.nombre}}</h2>
+          <p >DNI: {{ profesor.dni}}</p>
+        </ion-item>
+
+      </ion-list>
+
+    </ion-content>

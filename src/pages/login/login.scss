@@ -1,0 +1,113 @@
+page-login {
+
+    .btnIngresar {
+        background: #34d955;
+        background-image: -webkit-linear-gradient(top, #34d955, #ceebc8);
+        background-image: -moz-linear-gradient(top, #34d955, #ceebc8);
+        background-image: -ms-linear-gradient(top, #34d955, #ceebc8);
+        background-image: -o-linear-gradient(top, #34d955, #ceebc8);
+        background-image: linear-gradient(to bottom, #34d955, #ceebc8);
+        -webkit-border-radius: 26;
+        -moz-border-radius: 26;
+        border-radius: 26px;
+        font-family: Arial;
+        color: #ffffff;
+        font-size: 20px;
+        padding: 15px 20px 15px 20px;
+        border: solid #d0f5df 2px;
+        text-decoration: none;
+        position: absolute;
+        top: 50%;
+        width: 90%;
+        height: 15%;
+      }
+      
+    .btnIngresar:hover {
+        background: #3cb0fd;
+        background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+        text-decoration: none;
+      }
+
+    .btnAlumno {
+        background: #34d955;
+        background-image: -webkit-linear-gradient(top, #34d955, #ceebc8);
+        background-image: -moz-linear-gradient(top, #34d955, #ceebc8);
+        background-image: -ms-linear-gradient(top, #34d955, #ceebc8);
+        background-image: -o-linear-gradient(top, #34d955, #ceebc8);
+        background-image: linear-gradient(to bottom, #34d955, #ceebc8);
+        -webkit-border-radius: 26;
+        -moz-border-radius: 26;
+        border-radius: 26px;
+        font-family: Arial;
+        color: #ffffff;
+        font-size: 20px;
+        padding: 15px 20px 15px 20px;
+        border: solid #d0f5df 2px;
+        text-decoration: none;
+        position: absolute;
+        top: 70%;
+        width: 90%;
+        height: 15%;
+      }
+      
+    .btnAlumno:hover {
+        background: #3cb0fd;
+        background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+        text-decoration: none;
+      }
+
+
+    ion-title {
+            background-color: #EECD90;
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 0 90px 1px;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            
+    }
+
+    .fondo {
+
+        background-color:lightgreen;
+        
+    }
+
+    .item {
+        background-color:lightgreen;
+        
+    }
+
+    .imagen {
+        
+        background-color: #EECD90;
+        width: 35px;
+        height: 35px;
+        max-width: 100%;
+        max-height: 100%;
+         
+    }
+
+    ion-label{
+        
+        background-color:lightgreen;
+        font-family: 'Times New Roman', Times, serif;
+    }
+    
+    .btnSalir {
+
+    background-color: #EECD90;
+    
+    }
+        
+}

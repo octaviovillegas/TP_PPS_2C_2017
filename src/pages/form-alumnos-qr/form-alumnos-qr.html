@@ -1,0 +1,42 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title text-center>Escanear QR</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="fondo" padding>
+
+  <img class="img" src="assets/imgs/qr.png" (click)="leerQR()">
+
+  <br><br><br><br><br><br><br><br>
+
+  <div *ngIf="perfil!='alumno'">
+    <ion-input type="text" placeholder="ingrese legajo o dni" [(ngModel)]="dato"></ion-input>
+      <ion-list radio-group (ionChange)="determinarTipo()"  [(ngModel)]="tipo" >
+        <ion-item class="fondo">
+          <ion-label color="secondary">Alumno</ion-label>
+          <ion-radio checked=true value="alumno"></ion-radio>
+        </ion-item>
+
+      <ion-item class="fondo">
+        <ion-label color="secondary">Profesor</ion-label>
+        <ion-radio value="profesor"></ion-radio>
+      </ion-item>
+
+    </ion-list>
+
+    <button ion-button block (click)="encodeData()">
+      Generar QR
+    </button>
+  </div>
+
+  <br><br>
+  <img *ngIf="url" [src]="url" width="100" height="100">
+  <br><br>
+  <h2 *ngIf="listado!=''">{{listado}}</h2>
+
+
+</ion-content>

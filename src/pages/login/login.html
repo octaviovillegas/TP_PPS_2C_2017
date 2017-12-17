@@ -1,0 +1,63 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons left>
+          <button class="btnSalir">
+            <img (click)="salir()" class="imagen" src="assets/icon/salir1.png">
+          </button>
+        </ion-buttons>
+        <ion-title>
+           Inicio
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content class="fondo" padding>
+
+    <ion-list inset>
+        <ion-item class="item">
+        <ion-icon color="primary" name="ios-folder-open" item-left></ion-icon>
+          <ion-label >Seleccionar</ion-label>
+          <ion-select (ionChange)="writePassw()"  [(ngModel)]="correo" cancelText="Cancelar" okText="Elegir" interface="alert">
+            <ion-option value="admin@admin.com">Administrador</ion-option>
+            <ion-option value="alumno@alumno.com.ar">Alumno</ion-option>
+            <ion-option value="profesor@profesor.com">Profesor</ion-option>
+            <ion-option value="administrativo@administrativo.com">Administrativo</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <br><br>
+
+        <ion-item color="primary2">
+          <ion-label floating>Correo</ion-label>
+          <ion-input color="input1" type="text"  [(ngModel)]="correo" minlength="5" maxlength="40" required></ion-input>
+        </ion-item>
+
+        <ion-item color="primary2">
+          <ion-label floating>Password</ion-label>
+          <ion-input color="input1" type="password" (ionChange)="validarCantDigitos($event)" (keypress)="validarNum($event)" [(ngModel)]="passw" required></ion-input>
+        </ion-item>
+
+    </ion-list>
+
+
+      <button ion-button class= "btnIngresar" color="secondary" (click)="login()">INGRESAR</button>
+
+      <button ion-button class= "btnAlumno" round color="primary" (click)="crearAlumno()">NUEVO ALUMNO</button>
+
+
+      <button *ngIf="datosLoginGitHub!=undefined" ion-button block color="secondary">
+        Credenciales correctas. Ir a Menu
+      </button>
+
+    <ion-footer>
+      <!--img src="assets/imgs/googleplus.png" width="50" height="50"-->
+      <p><img src="assets/imgs/github.png" width="50" height="50" (click)="logearEnGitHub()">
+      &nbsp;&nbsp;&nbsp;&nbsp;Creado por IonicGroup - Facultad UTN</p>
+      <!--img src="assets/imgs/facebook.png" width="50" height="50"-->
+      <button *ngIf="ingresa" ion-button color="secondary" (click)="ingresoGitHub()">Ingresar</button>
+    </ion-footer>
+
+</ion-content>
+
+

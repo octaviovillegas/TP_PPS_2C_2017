@@ -1,0 +1,13 @@
+<ion-menu class="fondoMenu" [content]="contenidoPrincipal">
+  <ion-content class="fondoMenu">
+    <ion-list>
+
+      <button class="fondoMenu" ion-item *ngFor="let page of pages" (click)="irPagina(page.component)" menuClose>
+        {{page.titulo}}
+      </button>
+
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-nav #contenidoPrincipal [root]="rootPage"></ion-nav>
